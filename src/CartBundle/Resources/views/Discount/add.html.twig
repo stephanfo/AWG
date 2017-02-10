@@ -1,0 +1,33 @@
+{% extends "CartBundle::layout.html.twig" %}
+
+{% block title %}
+    ajouter un discount - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h4 class="page-header">Ajouter un discount</h4>
+    {{ include("CartBundle:Discount:form.html.twig") }}
+{% endblock %}
+
+{% block stylesheets %}
+    <link href="/web/resources/datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/web/resources/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="/web/resources/datetimepicker/js/locales/bootstrap-datetimepicker.fr.js"></script>
+    <script type="text/javascript">
+        $('.form_datetime').datetimepicker({
+            format: 'dd-mm-yyyy hh:ii:ss',
+            language: 'fr',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            forceParse: 0,
+            showMeridian: 0,
+            minuteStep: 5
+        });
+    </script>
+{% endblock %}

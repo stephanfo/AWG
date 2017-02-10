@@ -1,0 +1,67 @@
+{% extends "UserBundle::layout.html.twig" %}
+
+{% block title %}
+    Ma commande - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h4 class="page-header">Commande pour {{ order.user.firstname }} {{ order.user.lastname }} ({{ order.user.location }})</h4>
+    <p>
+        {% if order.canceled %}
+            <span class="order-canceled-intro">Cette commande  a été annulée.</span>
+        {% elseif order.printed or order.payed %}
+            Status de la commande:<br/>
+            {% if order.printed %}
+                -> La commande est en cours d'impression ou est déjà imprimée.<br/>
+            {% endif %}
+            {% if order.payed %}
+                -> La commande est payée.<br/>
+            {% endif %}
+        {% else %}
+            Status de votre commande:<br/>
+            -> La commande est en attente de traitement.<br/>
+        {% endif %}
+    </p>
+    <h4 class="page-header">Detail des impressions</h4>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th class="table-detail">Quantity</th>
+                <th class="table-detail">Format</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for detail in order.details %}
+                {% for quantity in detail.quantities %}
+                    <tr>
+                        <td>
+                            <img class="img-responsive img-thumbnail cart-img" src="{{ vich_uploader_asset(detail.photo, 'imageFile') }}"/>
+                            {{ detail.photo.title }}
+                        </td>
+                        <td class="table-detail">{{ quantity.quantity }}</td>
+                        <td class="table-detail">{{ quantity.format.size }}</td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            {% if order.discountValue > 0 %}
+                <tr class="info">
+                    <td colspan="1">Total</td>
+                    <td class="table-detail">{{ order.quantity }}</td>
+                    <td class="table-detail">{{ order.grossTotal | number_format(2, ",", " ")  }}€</td>
+                </tr>
+                <tr class="warning">
+                    <td colspan="1">Remise (€)</td>
+                    <td class="table-detail">{{ order.discountValue }}%</td>
+                    <td class="table-detail">-{{ order.discountSaving | number_format(2, ",", " ") }}€</td>
+                </tr>
+            {% endif %}
+            <tr class="success">
+                <th colspan="2">A payer</th>
+                <th class="table-detail">{{ order.total | number_format(2, ",", " ") }}€</th>
+            </tr>
+        </tfoot>
+    </table>
+{% endblock %}

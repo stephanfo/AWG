@@ -1,0 +1,32 @@
+{% extends "GalleryBundle::layout.html.twig" %}
+
+{% block title %}
+    Editer galerie - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h1 class="page-header">Editer la gallerie</h1>
+    {{ include("GalleryBundle:Gallery:form.html.twig") }}
+{% endblock %}
+
+{% block stylesheets %}
+    <link href="/web/resources/datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/web/resources/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="/web/resources/datetimepicker/js/locales/bootstrap-datetimepicker.fr.js"></script>
+    <script type="text/javascript">
+        $('.form_date').datetimepicker({
+            format: 'dd-mm-yyyy',
+            language: 'fr',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0,
+        });
+    </script>
+{% endblock %}

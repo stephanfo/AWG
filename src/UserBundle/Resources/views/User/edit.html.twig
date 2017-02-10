@@ -1,0 +1,10 @@
+{% extends "CartBundle::layout.html.twig" %}
+
+{% block title %}
+    Editer profil - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+        <h1 class="page-header">Editer le format</h1>
+        {{ include("CartBundle:Discount:form.html.twig") }}
+{% endblock %}

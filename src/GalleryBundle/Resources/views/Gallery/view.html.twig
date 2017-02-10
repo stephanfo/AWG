@@ -1,0 +1,53 @@
+{% extends "GalleryBundle::layout.html.twig" %}
+
+{% block title %}
+    Galerie - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h1 class="page-header">{{ gallery.title }} ({{ gallery.date | date('d-m-Y') }}) - {{ gallery.photos | length }} photos</h1>
+    <p>
+        &nbsp;
+        {{ gallery.detail | raw }}
+    </p>
+    <p>&nbsp;</p>
+    <div id="grid" data-columns>
+        {% if not gallery.photos is empty %}
+            {% for photo in gallery.photos %}
+                <div class="thumbnail">
+                    <div class="caption">
+                        <p class="caption-text">{{ photo.title }}</p>
+                    </div>
+                    <img class="img-responsive" src="{{ vich_uploader_asset(photo, 'imageFile') }}" alt="{{ photo.title }}"/>
+                    <div class="caption">
+                        <p class="caption-text">
+                            <a href="#"><button type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Mettre au panier"><i class="glyphicon glyphicon-shopping-cart"></i></button></a>
+                            &nbsp;
+                            <a href="#"><button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Aimer la photo"><i class="glyphicon glyphicon-thumbs-up"></i> 12</button></a>
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <hr>
+    <div>
+        <div class="bottom-block-left">
+            <a href="{{ path('photo_loader', { 'id': gallery.id }) }}"><button type="button" class="btn btn-success btn-xs bottom-button"><i class="glyphicon glyphicon glyphicon-plus"></i> Ajouter des photos</button></a>
+            <a href="{{ path('photo_clear', { 'id': gallery.id }) }}"><button type="button" class="btn btn-danger btn-xs bottom-button"><i class="glyphicon glyphicon glyphicon-trash"></i> Supprimer toutes les photos</button></a>
+        </div>
+        <div class="bottom-block-right">
+            {% if gallery.active %}
+                <a href="{{ path('gallery_toggle', { 'id': gallery.id }) }}"><button type="button" class="btn btn-success btn-xs bottom-button"><i class="glyphicon glyphicon-eye-open"></i> Desactiver</button></a>
+            {% else %}
+                <a href="{{ path('gallery_toggle', { 'id': gallery.id }) }}"><button type="button" class="btn btn-default btn-xs bottom-button"><i class="glyphicon glyphicon-eye-close"></i> Activer</button></a>
+            {% endif %}
+            <a href="{{ path('gallery_edit', { 'id': gallery.id }) }}"><button type="button" class="btn btn-warning btn-xs bottom-button"><i class="glyphicon glyphicon-edit"></i> Editer la galerie</button></a>
+            <a href="{{ path('gallery_delete', { 'id': gallery.id }) }}"><button type="button" class="btn btn-danger btn-xs bottom-button"><i class="glyphicon glyphicon-remove"></i> Supprimer la gallerie</button></a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/web/resources/salvattore/salvattore.min.js"></script>
+{% endblock %}

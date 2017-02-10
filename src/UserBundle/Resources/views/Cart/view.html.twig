@@ -1,0 +1,103 @@
+{% extends "UserBundle::layout.html.twig" %}
+
+{% block title %}
+    Ma sélection - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h4 class="page-header">Ma sélection</h4>
+    {% if userCarts.carts is not empty %}
+        <p>
+            &nbsp;
+        </p>
+        {% for cart in userCarts.carts %}
+            <div class="row">
+                <div class="col-sm-5 cart-header">
+                    <img class="img-responsive img-thumbnail cart-img" src="{{ vich_uploader_asset(cart.photo, 'imageFile') }}"/>
+                    <span class="cart-title">{{ cart.photo.title }}</span>
+                    <div style="float: right;"><a href="{{ path('cart_delete', { 'id': cart.photo.id }) }}"><button class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i></button></a></div>
+                </div>
+                <div class="col-sm-7 cart-detail">
+                    {% if formats is not empty %}
+                        {% for format in formats %}
+                            {% set currentQuantity = 0 %}
+                            {% if attribute(cartFormat, cart.id) is defined %}
+                                {% if attribute(attribute(cartFormat, cart.id), format.id) is defined %}
+                                    {% set currentQuantity = attribute(attribute(cartFormat, cart.id), format.id) %}
+                                {% endif %}
+                            {% endif %}
+                            <div class="form-group form-inline cart-detail-format">
+                                <label for="{{ cart.photo.id }}-{{ format.id }}" class="control-label">Format {{ format.size }} : </label>
+                                <div class="input-group">
+                                    <input type="number" min="0" class="form-control" cart-photo="{{ cart.photo.id }}" cart-format="{{ format.id }}" value="{{ currentQuantity }}" id="{{ cart.photo.id }}-{{ format.id }}">
+                                    <span class="input-group-addon btn btn-primary" cart-quantity-minus="{{ cart.photo.id }}-{{ format.id }}"><i class="glyphicon glyphicon-minus"></i></span>
+                                    <span class="input-group-addon btn btn-primary" cart-quantity-plus="{{ cart.photo.id }}-{{ format.id }}"><i class="glyphicon glyphicon-plus"></i></span>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>
+                            Aucun format d'impression n'a été définit.
+                        <p>
+                        {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+        <hr>
+        <div class="row bottom-block">
+            <div class="col-lg-12">
+                <div class="bottom-block-left">
+                    <h4>Total: <span cart-total>{{ total.overall.total | number_format(2, ',', ' ') }}</span>€</h4>
+                </div>
+                <div class="bottom-block-right">
+                    <a href="{{ path('cart_delete_all') }}"><button type="button" class="btn btn-warning bottom-button"><i class="glyphicon glyphicon-trash"></i> Vider ma sélection</button></a>
+                    <a href="{{ path('checkout') }}"><button type="button" class="btn btn-success bottom-button"><i class="glyphicon glyphicon-print"></i> Demander l'impression</button></a>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <p>
+            &nbsp;
+        </p>
+        <p>
+            Votre panier est vide. Rendez-vous dans la <a href="{{ path('home') }}">Gallerie photos</a> pour composer votre panier.
+        </p>
+    {% endif %}
+    {{ render(controller('UserBundle:Discount:bottomBar')) }}
+{% endblock %}
+
+{% block javascripts %}
+    {% if userCarts.carts is not empty %}
+        <script type="text/javascript">
+            $('[cart-quantity-minus]').click(function () {
+                quantityInput = $('#' + $(this).attr('cart-quantity-minus'));
+                updateQuantity(quantityInput, -1);
+            });
+
+            $('[cart-quantity-plus]').click(function () {
+                quantityInput = $('#' + $(this).attr('cart-quantity-plus'));
+                updateQuantity(quantityInput, +1);
+            });
+
+            $('input[cart-photo][cart-format]').change(function () {
+                quantityInput = $(this);
+                updateQuantity(quantityInput, 0);
+            });
+
+            function updateQuantity(quantityInput, increment)
+            {
+                quantityValue = quantityInput.val();
+
+                if ($.isNumeric(quantityValue) && (Math.ceil(quantityValue) + increment) > 0)
+                    quantityValue = Math.ceil(quantityValue) + increment;
+                else
+                    quantityValue = 0;
+
+                $.get('{{ path('cart_update_empty_link') }}' + quantityInput.attr('cart-photo') + "/" + quantityInput.attr('cart-format') + "/" + quantityValue, function (data) {
+                    quantityInput.val(data['quantity']);
+                    $('[cart-total]').text(data['total'].toFixed(2));
+                });
+            }
+        </script>
+    {% endif %}
+{% endblock %}

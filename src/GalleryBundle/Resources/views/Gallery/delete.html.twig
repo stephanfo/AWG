@@ -1,0 +1,22 @@
+{% extends "GalleryBundle::layout.html.twig" %}
+
+{% block title %}
+    Supprimer galerie - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h1 class="page-header">Supprimer la galerie</h1>
+
+    <p>
+        Voulez-vous vraiment supprimer la galerie {{ gallery.title }} ?
+    </p>
+
+    {{ form_start(form) }}
+    <a href="{{ path('gallery_index') }}" class="btn btn-default">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+        Retourner à la liste de galerie
+    </a>
+    <input type="submit" value="Supprimer" class="btn btn-danger" />
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
+{% endblock %}

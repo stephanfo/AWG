@@ -1,0 +1,24 @@
+root:
+    path: /admin
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: gallery_index
+        permanent: true
+
+frontend:
+    resource: "@UserBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+cart:
+    resource: "@CartBundle/Controller/"
+    type:     annotation
+    prefix:   /admin/cart
+
+gallery:
+    resource: "@GalleryBundle/Controller/"
+    type:     annotation
+    prefix:   /admin/gallery
+
+logout:
+    path: /logout

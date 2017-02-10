@@ -1,0 +1,4 @@
+services:
+    price_calculator:
+        class: CartBundle\Classes\PriceCalculator
+        arguments: [ "@doctrine.orm.entity_manager"]

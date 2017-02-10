@@ -1,0 +1,136 @@
+{% extends "CartBundle::layout.html.twig" %}
+
+{% block title %}
+    Liste des tarifs - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h4 class="page-header">Liste des tarifs</h4>
+
+    {% if not formats is empty %}
+        <h5 class="page-header">Formats</h5>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="table-detail">Taille</th>
+                            <th class="table-detail">Quantité</th>
+                            <th class="table-detail">Rattachement</th>
+                            <th class="table-detail">Prix unitaire</th>
+                            <th class="table-detail">Prix total</th>
+                            <th class="table-detail">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for format in formats %}
+                            <tr>
+                                <th style="vertical-align: middle;"  class="table-detail" rowspan="{{ format.prices | length + 1 }}">
+                                    {{ format.size }}
+                                </th>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td style="vertical-align: middle; white-space: nowrap;" class="table-detail">
+                                    <a href="{{ path('price_add', {'id': format.id }) }}"><button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Ajouter un prix à ce format"><i class="glyphicon glyphicon-plus"></i></button></a>
+                                    <a href="{{ path('format_edit', {'id': format.id }) }}"><button type="button" class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="Editer"><i class="glyphicon glyphicon-edit"></i></button></a>
+                                    <a href="{{ path('format_delete', {'id': format.id }) }}"><button type="button" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Supprimer"><i class="glyphicon glyphicon-trash"></i></button></a>
+                                </td>
+                            </tr>
+                            {% for price in format.prices %}
+                                <tr{% if price.discount is not empty %}{% if not price.discount.active %} class="order-canceled"{% endif %}{% endif %}>
+                                    <td style="vertical-align: middle;" class="table-detail">
+                                        {{ price.quantity }}
+                                    </td>
+                                    <td style="vertical-align: middle;" class="table-detail">
+                                        {% if price.discount is empty %}
+                                            Tarif permanent
+                                        {% else %}
+                                            {{ price.discount.title }} (#{{ price.discount.id }})
+                                        {% endif %}
+                                    </td>
+                                    <td style="vertical-align: middle;" class="table-detail">
+                                        {{ (price.price / price.quantity) | number_format(2, ',', ' ') }}€
+                                    </td>
+                                    <td style="vertical-align: middle;" class="table-detail">
+                                        {{ price.price | number_format(2, ',', ' ') }}€
+                                    </td>
+                                    <td style="vertical-align: middle; white-space: nowrap;" class="table-detail">
+                                        <a href="{{ path('price_edit', {'id': price.id }) }}"><button type="button" class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="Editer"><i class="glyphicon glyphicon-edit"></i></button></a>
+                                        <a href="{{ path('price_delete', {'id': price.id }) }}"><button type="button" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Supprimer"><i class="glyphicon glyphicon-trash"></i></button></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div>
+            <div class="bottom-block-right">
+                <a href="{{ path('format_add') }}"><button class="btn btn-success bottom-button btn-xs" data-toggle="modal" data-target="#addFormat"><i class="glyphicon glyphicon-plus"></i> Ajouter un format</button></a>
+            </div>
+        </div>
+        {% if not discounts is empty %}
+            <h5 class="page-header">Discounts</h5>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th class="table-detail">Titre</th>
+                                <th class="table-detail">Début</th>
+                                <th class="table-detail">Fin</th>
+                                <th class="table-detail">A partir de</th>
+                                <th class="table-detail">Jusqu'à</th>
+                                <th class="table-detail">Remise</th>
+                                <th class="table-detail">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for discount in discounts %}
+                                <tr{% if discount is not empty %}{% if not discount.active %} class="order-canceled"{% endif %}{% endif %}>
+                                    <td style="vertical-align: middle;">
+                                        {{ discount.id}}
+                                    </td>
+                                    <td style="vertical-align: middle;">
+                                        {{ discount.title}}
+                                    </td>
+                                    <td class="table-detail">{% if discount.startTime is not null %}{{ discount.startTime | date('H:i') }}{% endif %}</td>
+                                    <td class="table-detail">{% if discount.stopTime is not null %}{{ discount.stopTime | date('H:i') }}{% endif %}</td>
+                                    <td class="table-detail">{% if discount.discountStart is not null %}{{ discount.discountStart | number_format(2, ',', ' ')}}€{% else %}0€{% endif %}</td>
+                                    <td class="table-detail">{% if discount.discountStop is not null %}{{ discount.discountStop | number_format(2, ',', ' ')}}€{% else %}sans limite{% endif %}</td>
+                                    <td class="table-detail">{% if discount.discount is not null %}{{ discount.discount | number_format(0, ',', ' ')}}%{% endif %}</td>
+                                    <td style="vertical-align: middle; white-space: nowrap;" class="table-detail">
+                                        {% if discount.active %}
+                                            <a href="{{ path('discount_active_toggle', {'id': discount.id }) }}"><button type="button" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-check"></i></button></a>
+                                                {% else %}
+                                            <a href="{{ path('discount_active_toggle', {'id': discount.id }) }}"><button type="button" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-check"></i></button></a>
+                                                {% endif %}
+                                        <a href="{{ path('discount_edit', {'id': discount.id }) }}"><button type="button" class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="Editer"><i class="glyphicon glyphicon-edit"></i></button></a>
+                                        <a href="{{ path('discount_delete', {'id': discount.id }) }}"><button type="button" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Supprimer"><i class="glyphicon glyphicon-trash"></i></button></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div>
+                <div class="bottom-block-right">
+                    <a href="{{ path('discount_add') }}"><button class="btn btn-success bottom-button btn-xs"><i class="glyphicon glyphicon-plus"></i> Ajouter un discount</button></a>
+                </div>
+            </div>
+        {% endif %}
+    {% else %}
+        <p>
+            Il est nécessaire de définir au moins un format d'impression pour permettre d'ajouter des tarifications.
+        </p>
+    {% endif %}
+{% endblock %}

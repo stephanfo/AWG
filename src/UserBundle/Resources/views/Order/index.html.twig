@@ -1,0 +1,67 @@
+{% extends "UserBundle::layout.html.twig" %}
+
+{% block title %}
+    Vos impressions - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h4 class="page-header">Mes impressions</h4>
+    {% if not orders is empty %}
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th class="table-detail">Heure</th>
+                            <th class="table-detail">Montant</th>
+                            <th class="table-detail">Status</th>
+                            <th class="table-detail">Détail</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                            <tr{% if order.canceled %} class="order-canceled"{% endif %}>
+                                <td style="vertical-align: middle;">
+                                    {{ order.id}}
+                                </td>
+                                <td style="vertical-align: middle;" class="table-detail">
+                                    {{ order.created | date('H:i') }}
+                                </td>
+                                <td style="vertical-align: middle;" class="table-detail">
+                                    {{ order.total | number_format(2, ',', ' ')}}€
+                                </td>
+                                <td style="vertical-align: middle; white-space: nowrap;" class="table-detail">
+                                    {% if order.canceled == true %}
+                                        <button type="button" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Commande annulée"><i class="glyphicon glyphicon-remove"></i></button>
+                                        {% else %}
+                                            {% if order.payed == true %}
+                                            <button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Commande payée"><i class="glyphicon glyphicon-eur"></i></button>
+                                            {% else %}
+                                            <button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Commande non payée"><i class="glyphicon glyphicon-eur"></i></button>
+                                            {% endif %}
+                                            {% if order.printed == true %}
+                                            <button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Commande imprimée"><i class="glyphicon glyphicon-print"></i></button>
+                                            {% else %}
+                                            <button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Commande non imprimée"><i class="glyphicon glyphicon-print"></i></button>
+                                            {% endif %}
+                                        {% endif %}
+                                </td>
+                                <td style="vertical-align: middle; white-space: nowrap;" class="table-detail">
+                                    <a href="{{ path('order_view', { 'id': order.id }) }}"><button type="button" class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" title="Détail de la commande"><i class="glyphicon glyphicon-list"></i></button></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% else %}
+        <p>
+            &nbsp;
+        </p>
+        <p>
+            Vous n'avez pas de demandes d'impressions. Rendez-vous dans la <a href="{{ path('home') }}">Gallerie photos</a> pour composer votre panier.
+        </p>
+    {% endif %}
+{% endblock %}

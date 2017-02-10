@@ -1,0 +1,10 @@
+{% extends "CartBundle::layout.html.twig" %}
+
+{% block title %}
+    Ajouter un prix - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+        <h4 class="page-header">Ajouter un prix</h4>
+        {{ include("CartBundle:Price:form.html.twig") }}
+{% endblock %}

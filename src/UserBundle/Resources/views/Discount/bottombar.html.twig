@@ -1,0 +1,34 @@
+{% block footer %}
+    <nav id="discount-bar" class="navbar navbar-default navbar-fixed-bottom navbar-bottom-nospace">
+        <div class="container bottom-message bg-danger">
+            <strong>{{ discount.title }} se termine dans <span id="expire">--</span> secondes.</strong>
+        </div>
+    </nav>
+
+    <script type="text/javascript">
+
+        var expireTime = new Date();
+        expireTime.setSeconds(expireTime.getSeconds() + {{ expire }});
+
+        function updateExpire() {
+            currentTime = new Date();
+            diffTime = expireTime - currentTime;
+
+            if (diffTime > 0)
+            {
+                setTimeout(updateExpire, 1000);
+                countDown = new Date(diffTime);
+                countDown.setMinutes(countDown.getMinutes() + countDown.getTimezoneOffset());
+                $('#expire').text(countDown.toLocaleTimeString());
+            } else
+            {
+                $('#discount-bar').remove();
+                setTimeout(function(){ location.reload(); }, 1000);
+
+            }
+        }
+
+        updateExpire();
+
+    </script>
+{% endblock %}

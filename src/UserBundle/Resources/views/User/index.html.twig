@@ -1,0 +1,27 @@
+{% extends "UserBundle::layout.html.twig" %}
+
+{% block title %}
+    Profile - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h4 class="page-header">Mon profil</h4>
+    <p>
+        &nbsp;
+    </p>
+    <p>
+        <b>Prénom : </b>{{user.firstname}}<br/>
+        <b>Nom : </b>{{user.lastname}}<br/>
+        <b>Email : </b>{{user.email}}<br/>
+        {% if user.location is not empty %}
+            <b>Localisation : </b>{{user.location}}<br/>
+        {% endif %}
+    </p>
+    <hr>
+    <p>
+        <a href="{{ path('user_edit') }}" class="btn btn-warning btn-sm">
+            <i class="glyphicon glyphicon-pencil"></i>
+            &nbsp;Editer
+        </a>
+    </p>
+{% endblock %}

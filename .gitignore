@@ -1,0 +1,20 @@
+# Netbeans project folder
+/nbproject/
+
+# Protect Database information
+/app/config/parameters.yml
+
+# Remove Symfony directory unuseful
+/bin/
+/build/
+/phpunit.xml
+/var/
+/vendor/
+
+# Bundles generated
+/web/bundles/
+
+# Remove the pictures used for tests, but keep the directory
+!/web/gallery/photos
+/web/gallery/photos/*
+!web/gallery/photos/.gitkeep

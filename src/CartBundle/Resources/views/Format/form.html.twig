@@ -1,0 +1,20 @@
+{{ form_start(form) }}
+
+<div class="row">
+    <div class="col-lg-12">
+        {{ form_errors(form) }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="form-group">
+            {{ form_label(form.size, "Format") }}
+            {{ form_errors(form.size) }}
+            {{ form_widget(form.size, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+</div>
+
+{{ form_widget(form.save, {'attr': {'class': 'btn btn-primary bottom-button'}, 'label': 'Sauvegarder'}) }}
+{{ form_rest(form) }}
+{{ form_end(form) }}

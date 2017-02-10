@@ -1,0 +1,152 @@
+{% extends "UserBundle::layout.html.twig" %}
+
+{% block title %}
+    Vos impressions - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h4 class="page-header">Mes impressions</h4>
+
+    {{ form_start(filterForm) }}
+    <div class="row">
+        <div class="col-sm-12">
+            {{ form_errors(filterForm) }}
+        </div>
+    </div>
+    <div class="row form-inline">
+        <div class="col-sm-3">
+            <div class="form-group">
+                {{ form_label(filterForm.startDate, "Début") }}
+                {{ form_errors(filterForm.startDate) }}
+                {{ form_widget(filterForm.startDate, {'attr': {'class': 'form-control form_date'}}) }}
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                {{ form_label(filterForm.stopDate, "Fin") }}
+                {{ form_errors(filterForm.stopDate) }}
+                {{ form_widget(filterForm.stopDate, {'attr': {'class': 'form-control form_date'}}) }}
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                {{ form_label(filterForm.status, "Commandes") }}
+                {{ form_errors(filterForm.status) }}
+                {{ form_widget(filterForm.status, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="col-sm-3">
+            {{ form_widget(filterForm.submit, {'attr': {'class': 'btn btn-primary'}, 'label': 'Filtrer'}) }}
+        </div>
+    </div>
+    {{ form_rest(filterForm) }}
+    {{ form_end(filterForm) }}
+    <hr>
+    {% if not orders is empty %}
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th class="table-detail">Heure</th>
+                            <th class="table-detail">Contact</th>
+                            <th class="table-detail">Nombre de photos</th>
+                            <th class="table-detail">Montant</th>
+                            <th class="table-detail">Status</th>
+                            <th class="table-detail">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% set fullQuantity = 0 %}
+                        {% set fullTotal = 0 %}
+                        {% for order in orders %}
+                            <tr{% if order.canceled %} class="order-canceled active"{% elseif order.printed and order.payed %} class="success"{% elseif not order.printed and order.payed %} class="warning"{% elseif order.printed and not order.payed %} class="danger"{% endif %}>
+                                <td style="vertical-align: middle;">
+                                    {{ order.id }}
+                                </td>
+                                <td style="vertical-align: middle;" class="table-detail">
+                                    {{ order.created | date('d-m-Y H:i') }}
+                                </td>
+                                <td style="vertical-align: middle;" class="table-detail">
+                                    {{ order.user.firstname }} {{ order.user.lastname }} ({{ order.user.location }})
+                                </td>
+                                <td style="vertical-align: middle;" class="table-detail">
+                                    {{ order.quantity }}
+                                {% if not order.canceled %}{% set fullQuantity = fullQuantity + order.quantity %}{% endif %}
+                            </td>
+                            <td style="vertical-align: middle;" class="table-detail">
+                                {{ order.total | number_format(2, ',', ' ')}}€
+                            {% if not order.canceled %}{% set fullTotal = fullTotal + order.total %}{% endif %}
+                        </td>
+                        <td style="vertical-align: middle; white-space: nowrap;" class="table-detail">
+
+                            {% if order.canceled %}
+                                <button type="button" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Commande annulée"><i class="glyphicon glyphicon-remove"></i></button>
+                                {% elseif order.payed and order.printed %}
+                                <button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Commande imprimée"><i class="glyphicon glyphicon-print"></i></button>
+                                <button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Commande payée"><i class="glyphicon glyphicon-eur"></i></button>
+                                {% else %}
+                                    {% if not order.printed %}
+                                    <a href="{{ path('admin_order_printed', {'id': order.id}) }}"><button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Confirmer l'impression"><i class="glyphicon glyphicon-print"></i></button></a>
+                                        {% else %}
+                                    <button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Commande imprimée"><i class="glyphicon glyphicon-print"></i></button>
+                                    {% endif %}
+                                    {% if not order.payed %}
+                                    <a href="{{ path('admin_order_payed', {'id': order.id}) }}"><button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Confirmer le paiement"><i class="glyphicon glyphicon-eur"></i></button></a>
+                                        {% else %}
+                                    <button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Commande payée"><i class="glyphicon glyphicon-eur"></i></button>
+                                    {% endif %}
+                                <a href="{{ path('admin_order_cancel', {'id': order.id}) }}"><button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Annuler la commande"><i class="glyphicon glyphicon-remove"></i></button></a>
+                                    {% endif %}
+                        </td>
+                        <td style="vertical-align: middle; white-space: nowrap;" class="table-detail">
+                            <a href="{{ path('admin_order_view', { 'id': order.id }) }}"><button type="button" class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" title="Détail de la commande"><i class="glyphicon glyphicon-list"></i></button></a>
+                            <a href="#"><button type="button" class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Télécharger le script d'impression"><i class="glyphicon glyphicon-download-alt"></i></button></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="3">Total</th>
+                    <th class="table-detail">{{ fullQuantity }}</th>
+                    <th class="table-detail">{{ fullTotal | number_format(2, ',', ' ')}}€</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+{% else %}
+    <p>
+        &nbsp;
+    </p>
+    <p>
+        Vous n'avez pas de demandes d'impressions. Rendez-vous dans la <a href="{{ path('home') }}">Gallerie photos</a> pour composer votre panier.
+    </p>
+{% endif %}
+{% endblock %}
+
+{% block stylesheets %}
+    <link href="/web/resources/datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/web/resources/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="/web/resources/datetimepicker/js/locales/bootstrap-datetimepicker.fr.js"></script>
+    <script type="text/javascript">
+        $('.form_date').datetimepicker({
+            format: 'dd-mm-yyyy',
+            language: 'fr',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0,
+        });
+    </script>
+{% endblock %}

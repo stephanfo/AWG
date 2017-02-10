@@ -1,0 +1,94 @@
+{{ form_start(form) }}
+
+<div class="row">
+    <div class="col-lg-12">
+        {{ form_errors(form) }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="form-group">
+            {{ form_label(form.title, "Title") }}
+            {{ form_errors(form.title) }}
+            {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.detail, "Détail") }}
+            {{ form_errors(form.detail) }}
+            {{ form_widget(form.detail, {'attr': {'class': 'form-control tinymce'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.comment, "Commentaire") }}
+            {{ form_errors(form.comment) }}
+            {{ form_widget(form.comment, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="form-group">
+            {{ form_label(form.startTime, "Date de début de validité") }}
+            {{ form_errors(form.startTime) }}
+            {{ form_widget(form.startTime, {'attr': {'class': 'form-control form_datetime'}}) }}
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group">
+            {{ form_label(form.stopTime, "Date de fin de validité") }}
+            {{ form_errors(form.stopTime) }}
+            {{ form_widget(form.stopTime, {'attr': {'class': 'form-control form_datetime'}}) }}
+        </div>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-lg-4">
+        <div class="form-group">
+            {{ form_label(form.discount, "Niveau de discount") }}
+            {{ form_errors(form.discount) }}
+            <div class="input-group">
+                {{ form_widget(form.discount, {'attr': {'class': 'form-control'}}) }}
+                <div class="input-group-addon">%</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="form-group">
+            {{ form_label(form.discountStart, "A partir de") }}
+            {{ form_errors(form.discountStart) }}
+            <div class="input-group">
+                {{ form_widget(form.discountStart, {'attr': {'class': 'form-control'}}) }}
+                <div class="input-group-addon">€</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="form-group">
+            {{ form_label(form.discountStop, "Jusqu'à") }}
+            {{ form_errors(form.discountStop) }}
+            <div class="input-group">
+                {{ form_widget(form.discountStop, {'attr': {'class': 'form-control'}}) }}
+                <div class="input-group-addon">€</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="form-group">
+            {{ form_errors(form.active) }}
+            <div class="checkbox">
+                <label>
+                    {{ form_widget(form.active) }} Active
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{ form_widget(form.save, {'attr': {'class': 'btn btn-primary bottom-button'}, 'label': 'Sauvegarder'}) }}
+{{ form_rest(form) }}
+{{ form_end(form) }}
+
+{{ tinymce_init() }}
