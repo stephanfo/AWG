@@ -1,66 +1,71 @@
 {% extends "UserBundle::layout.html.twig" %}
 
 {% block title %}
-    Confirmation de votre impression - {{ parent() }}
+    Tarifs et Offres - {{ parent() }}
 {% endblock %}
 
 {% block body %}
-    <h4 class="page-header">Tarification et offres actives</h4>
-    {% for format in formats %}
+    <h4 class="page-header">Tarifs</h4>
+    {% if formats is not empty %}
+        {% for format in formats %}
 
-        <h5>Format {{ format.size }}</h3>
+            <h5>Format {{ format.size }}</h3>
 
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Quantité</th>
-                    <th class="table-detail">Expire</th>
-                    <th class="table-detail">Tarification unitaire</th>
-                    <th class="table-detail">Tarification total</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for price in format.prices %}
-                    <tr>
-                        <th scope="row">{{ price.quantity }}{% if price.discount is not null %} <span class="discount-quantity-title">({{ price.discount.title}})</span>{% endif %}</th>
-                        <td class="table-detail">{% if price.discount is not null %}{% if price.discount.stopTime is not null %}{{ price.discount.stopTime | date('H:i') }}{% endif %}{% endif %}</td>
-                        <td class="table-detail">~{{ (price.price / price.quantity) | number_format(2, ',', ' ')}}€</td>
-                        <td class="table-detail">{{ price.price }}€</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <p>&nbsp;</p>
-    {% endfor %}
-
-    {% if discounts is not empty %}
-
-        <h4>Remises applicables sur le total</h3>
-            <p>
-                Une seule remise s'applique sur la commande, par ordre des lignes ci-dessous.
-            </p>
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Nom</th>
+                        <th>Quantité</th>
                         <th class="table-detail">Expire</th>
-                        <th class="table-detail">Dès</th>
-                        <th class="table-detail">Jusqu'à</th>
-                        <th class="table-detail">Remise</th>
+                        <th class="table-detail">Tarification unitaire</th>
+                        <th class="table-detail">Tarification total</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for discount in discounts %}
+                    {% for price in format.prices %}
                         <tr>
-                            <th scope="row">{{ discount.title }}</th>
-                            <td class="table-detail">{% if discount.stopTime is not null %}{{ discount.stopTime | date('H:i') }}{% endif %}</td>
-                            <td class="table-detail">{% if discount.discountStart is not null %}{{ discount.discountStart | number_format(2, ',', ' ')}}€{% else %}0€{% endif %}</td>
-                            <td class="table-detail">{% if discount.discountStop is not null %}{{ discount.discountStop | number_format(2, ',', ' ')}}€{% else %}sans limite{% endif %}</td>
-                            <td class="table-detail">{{ discount.discount | number_format(0, ',', ' ')}}%</td>
+                            <th scope="row">{{ price.quantity }}{% if price.discount is not null %} <span class="discount-quantity-title">({{ price.discount.title}})</span>{% endif %}</th>
+                            <td class="table-detail">{% if price.discount is not null %}{% if price.discount.stopTime is not null %}{{ price.discount.stopTime | date('H:i') }}{% endif %}{% endif %}</td>
+                            <td class="table-detail">~{{ (price.price / price.quantity) | number_format(2, ',', ' ')}}€</td>
+                            <td class="table-detail">{{ price.price }}€</td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
-        {% endif %}
+            <p>&nbsp;</p>
+        {% endfor %}
 
+        {% if discounts is not empty %}
+
+            <h4>Remises</h3>
+                <p>
+                    Une seule remise s'applique sur la commande, par ordre des lignes ci-dessous. La remise peut s'appliquer en bas de commande et/ou activer des tarifs spéciaux par quantités (voir tableau ci-dessus).
+                </p>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th class="table-detail">Expire</th>
+                            <th class="table-detail">Dès</th>
+                            <th class="table-detail">Jusqu'à</th>
+                            <th class="table-detail">Remise</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for discount in discounts %}
+                            <tr>
+                                <th scope="row">{{ discount.title }}</th>
+                                <td class="table-detail">{% if discount.stopTime is not null %}{{ discount.stopTime | date('H:i') }}{% endif %}</td>
+                                <td class="table-detail">{% if discount.discountStart is not null %}{{ discount.discountStart | number_format(2, ',', ' ')}}€{% else %}0€{% endif %}</td>
+                                <td class="table-detail">{% if discount.discountStop is not null %}{{ discount.discountStop | number_format(2, ',', ' ')}}€{% else %}sans limite{% endif %}</td>
+                                <td class="table-detail">{{ discount.discount | number_format(0, ',', ' ')}}%</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        {% else %}
+            <p>
+                Aucune tarification n'est disponible.
+            </p>
+        {% endif %}
     {% endblock %}

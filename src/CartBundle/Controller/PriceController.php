@@ -67,12 +67,14 @@ class PriceController extends Controller
      * @Route("/prices/delete/{id}", requirements={"id" = "\d*"}, name="price_delete")
      * @ParamConverter("Price", options={"id" = "price"})
      */
-    public function deleteAction(Price $price)
+    public function deleteAction(Price $price, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
         $em->remove($price);
         $em->flush();
+
+        $request->getSession()->getFlashBag()->add('warning', 'Le prix a été supprimé.');
 
         return $this->redirectToRoute('tarif_index');
     }

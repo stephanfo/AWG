@@ -66,12 +66,14 @@ class DiscountController extends Controller
      * @Route("/discounts/delete/{id}", requirements={"id" = "\d*"}, name="discount_delete")
      * @ParamConverter("Discount", options={"id" = "discount"})
      */
-    public function deleteAction(Discount $discount)
+    public function deleteAction(Discount $discount, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
         $em->remove($discount);
         $em->flush();
+
+        $request->getSession()->getFlashBag()->add('warning', 'Le discount ' . $discount->getTitle() . ' a été supprimé.');
 
         return $this->redirectToRoute('tarif_index');
     }
@@ -80,16 +82,21 @@ class DiscountController extends Controller
      * @Route("/discounts/active/toggle/{id}", requirements={"id" = "\d*"}, name="discount_active_toggle")
      * @ParamConverter("Discount", options={"id" = "discount"})
      */
-    public function activeToggleAction(Discount $discount)
+    public function activeToggleAction(Discount $discount, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        if($discount->getActive())
-            $discount->setActive (false);
+        if ($discount->getActive())
+            $discount->setActive(false);
         else
-            $discount->setActive (true);
+            $discount->setActive(true);
 
         $em->flush();
+
+        if ($discount->getActive())
+            $request->getSession()->getFlashBag()->add('success', 'Le discount ' . $discount->getTitle() . ' a été activé.');
+        else
+            $request->getSession()->getFlashBag()->add('warning', 'Le discount ' . $discount->getTitle() . ' a été désactivé.');
 
         return $this->redirectToRoute('tarif_index');
     }

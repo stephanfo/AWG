@@ -64,12 +64,14 @@ class FormatController extends Controller
      * @Route("/formats/delete{id}", requirements={"id" = "\d*"}, name="format_delete")
      * @ParamConverter("Format", options={"id" = "format"})
      */
-    public function deleteAction(Format $format)
+    public function deleteAction(Format $format, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
         $em->remove($format);
         $em->flush();
+
+        $request->getSession()->getFlashBag()->add('warning', 'Le format ' . $format->getSize() . ' a été supprimé');
 
         return $this->redirectToRoute('tarif_index');
     }

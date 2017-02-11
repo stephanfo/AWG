@@ -5,7 +5,6 @@
 /app/config/parameters.yml
 
 # Remove Symfony directory unuseful
-/bin/
 /build/
 /phpunit.xml
 /var/
