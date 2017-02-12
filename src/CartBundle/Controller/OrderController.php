@@ -48,10 +48,12 @@ class OrderController extends Controller
      */
     public function viewAction($id)
     {
-        $order = $this->getDoctrine()->getRepository('CartBundle:Order')->getOrderDetail($id);
+        $orderHeader = $this->getDoctrine()->getRepository('CartBundle:Order')->getOrderUser($id);
+        $orderDetails = $this->getDoctrine()->getRepository('CartBundle:Format')->getOrderDetail($id);
 
         return $this->render('CartBundle:Order:view.html.twig', array(
-                    'order' => $order
+                    'orderHeader' => $orderHeader,
+                    'orderDetails' => $orderDetails
         ));
     }
 

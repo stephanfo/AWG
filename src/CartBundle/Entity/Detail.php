@@ -32,7 +32,7 @@ class Detail
     private $order;
 
     /**
-     * @ORM\ManytoOne(targetEntity="GalleryBundle\Entity\Photo", inversedBy="carts")
+     * @ORM\ManytoOne(targetEntity="GalleryBundle\Entity\Photo", inversedBy="details")
      * @ORM\JoinColumn(nullable=false)
      */
     private $photo;

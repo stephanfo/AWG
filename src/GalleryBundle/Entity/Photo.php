@@ -90,6 +90,11 @@ class Photo
     private $carts;
 
     /**
+     * @ORM\OneToMany(targetEntity="CartBundle\Entity\Detail", mappedBy="photo", cascade={"remove"})
+     */
+    private $details;
+
+    /**
      * @ORM\ManytoMany(targetEntity="UserBundle\Entity\User", inversedBy="likePhotos")
      */
     private $likeUsers;
@@ -402,4 +407,38 @@ class Photo
         return $this;
     }
 
+
+    /**
+     * Add detail
+     *
+     * @param \CartBundle\Entity\Detail $detail
+     *
+     * @return Photo
+     */
+    public function addDetail(\CartBundle\Entity\Detail $detail)
+    {
+        $this->details[] = $detail;
+
+        return $this;
+    }
+
+    /**
+     * Remove detail
+     *
+     * @param \CartBundle\Entity\Detail $detail
+     */
+    public function removeDetail(\CartBundle\Entity\Detail $detail)
+    {
+        $this->details->removeElement($detail);
+    }
+
+    /**
+     * Get details
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDetails()
+    {
+        return $this->details;
+    }
 }

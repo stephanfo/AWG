@@ -28,6 +28,17 @@ class OrderRepository extends \Doctrine\ORM\EntityRepository
                         ->getOneOrNullResult();
     }
 
+    public function getOrderUser($id)
+    {
+        return $this->createQueryBuilder('orderheader')
+                        ->leftjoin('orderheader.user', 'user')
+                        ->addSelect('user')
+                        ->where('orderheader.id = :id')
+                        ->setParameter('id', $id)
+                        ->getQuery()
+                        ->getOneOrNullResult();
+    }
+
     public function getOrderSearch($startDate = null, $stopDate = null, $status = null)
     {
         $query = $this->createQueryBuilder('orderheader')

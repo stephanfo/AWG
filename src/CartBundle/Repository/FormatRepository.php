@@ -36,17 +36,12 @@ class FormatRepository extends \Doctrine\ORM\EntityRepository
 
         $query->AndWhere(
                 $query->expr()->orX(
-                        $query->expr()->isNull('price.discount'),
-                        $query->expr()->andX(
+                        $query->expr()->isNull('price.discount'), $query->expr()->andX(
                                 $query->expr()->orX(
-                                        $query->expr()->lte('discount.startTime', ':now'),
-                                        $query->expr()->isNull('discount.startTime')
-                                ),
-                                $query->expr()->orX(
-                                        $query->expr()->gte('discount.stopTime', ':now'),
-                                        $query->expr()->isNull('discount.stopTime')
-                                ),
-                                $query->expr()->eq('discount.active', ':active')
+                                        $query->expr()->lte('discount.startTime', ':now'), $query->expr()->isNull('discount.startTime')
+                                ), $query->expr()->orX(
+                                        $query->expr()->gte('discount.stopTime', ':now'), $query->expr()->isNull('discount.stopTime')
+                                ), $query->expr()->eq('discount.active', ':active')
                         )
                 )
         );
@@ -61,15 +56,32 @@ class FormatRepository extends \Doctrine\ORM\EntityRepository
 
     public function getAllFormatPriceDiscount()
     {
-        return  $this->createQueryBuilder('format')
-                ->leftJoin('format.prices', 'price')
-                ->addSelect('price')
-                ->leftJoin('price.discount', 'discount')
-                ->addSelect('discount')
-                ->orderBy('format.size', 'ASC')
-                ->addOrderBy('price.quantity', 'ASC')
-                ->addOrderBy('price.price', 'ASC')
-                ->getQuery()
-                ->getResult();
+        return $this->createQueryBuilder('format')
+                        ->leftJoin('format.prices', 'price')
+                        ->addSelect('price')
+                        ->leftJoin('price.discount', 'discount')
+                        ->addSelect('discount')
+                        ->orderBy('format.size', 'ASC')
+                        ->addOrderBy('price.quantity', 'ASC')
+                        ->addOrderBy('price.price', 'ASC')
+                        ->getQuery()
+                        ->getResult();
     }
+
+    public function getOrderDetail($id)
+    {
+        return $this->createQueryBuilder('format')
+                        ->join('format.orderQuantities', 'quantity')
+                        ->addSelect('quantity')
+                        ->join('quantity.detail', 'detail')
+                        ->addSelect('detail')
+                        ->join('detail.photo', 'photo')
+                        ->addSelect('photo')
+                        ->join('detail.order', 'orderheader')
+                        ->where('orderheader.id = :id')
+                        ->setParameter('id', $id)
+                        ->getQuery()
+                        ->getResult();
+    }
+
 }
