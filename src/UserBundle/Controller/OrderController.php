@@ -74,9 +74,18 @@ class OrderController extends Controller
                 }
             }
 
-            $em->flush();
-
             $request->getSession()->getFlashBag()->add('success', 'Votre commande a bien été enregistrée.');
+
+            $carts = $em->getRepository('CartBundle:Cart')->findBy(array(
+                'user' => $user
+            ));
+
+            foreach ($carts as $cart)
+            {
+                $em->remove($cart);
+            }
+
+            $em->flush();
 
             return $this->redirectToRoute('order_list');
         }

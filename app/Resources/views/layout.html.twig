@@ -49,11 +49,15 @@
                         <a href="{{ path('user_edit') }}">Mon profil</a>
                     </li>
                     {% if is_granted('ROLE_ADMIN') %}
+                        <li><a href="#">|</a></li>
                         <li>
                             <a href="{{ path('gallery_index') }}">Galeries</a>
                         </li>
                         <li>
                             <a href="{{ path('tarif_index') }}">Tarifs</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_cart_current') }}">Selections</a>
                         </li>
                         <li>
                             <a href="{{ path('admin_order_list') }}">Commandes</a>

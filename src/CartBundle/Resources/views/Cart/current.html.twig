@@ -1,0 +1,59 @@
+{% extends "CartBundle::layout.html.twig" %}
+
+{% block title %}
+    Selections actives - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h4 class="page-header">Selections actives</h4>
+
+    {% if not usersPrice is empty %}
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Contact</th>
+                        <th class="table-detail">Heure</th>
+                        <th class="table-detail">Nombre de photos</th>
+                        <th class="table-detail">Montant</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% set fullQuantity = 0 %}
+                    {% set fullTotal = 0 %}
+                    {% for userPrice in usersPrice %}
+                        <tr>
+                            <td style="vertical-align: middle;">
+                                {{ userPrice.user.firstname }} {{ userPrice.user.lastname }} ({{ userPrice.user.location }})
+                            </td>
+                            <td style="vertical-align: middle;" class="table-detail">
+                                {{ userPrice.user.created | date('d-m-Y H:i') }}
+                            </td>
+                            <td style="vertical-align: middle;" class="table-detail">
+                                {{ userPrice.price.overall.quantity }}
+                                {% set fullQuantity = fullQuantity + userPrice.price.overall.quantity %}
+                            </td>
+                            <td style="vertical-align: middle;" class="table-detail">
+                                {{ userPrice.price.overall.total | number_format(2, ',', ' ')}}€
+                                {% set fullTotal = fullTotal + userPrice.price.overall.total %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th colspan="2">Total</th>
+                        <th class="table-detail">{{ fullQuantity }}</th>
+                        <th class="table-detail">{{ fullTotal | number_format(2, ',', ' ')}}€</th>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    {% else %}
+        <p>
+            Aucun panier actif.
+        </p>
+    {% endif %}
+{% endblock %}

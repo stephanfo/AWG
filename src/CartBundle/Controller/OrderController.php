@@ -70,6 +70,18 @@ class OrderController extends Controller
     }
 
     /**
+     * @Route("/order/activate/{id}", requirements={"id" = "\d*"}, name="admin_order_activate")
+     * @ParamConverter("Order", options={"id" = "order"})
+     */
+    public function activateAction(Request $request, Order $order)
+    {
+        $order->setCanceled(false);
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirectToRoute('admin_order_list');
+    }
+
+    /**
      * @Route("/order/printed/{id}", requirements={"id" = "\d*"}, name="admin_order_printed")
      * @ParamConverter("Order", options={"id" = "order"})
      */

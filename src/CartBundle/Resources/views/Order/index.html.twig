@@ -1,11 +1,11 @@
-{% extends "UserBundle::layout.html.twig" %}
+{% extends "CartBundle::layout.html.twig" %}
 
 {% block title %}
-    Vos impressions - {{ parent() }}
+    Les impressions - {{ parent() }}
 {% endblock %}
 
 {% block body %}
-    <h4 class="page-header">Mes impressions</h4>
+    <h4 class="page-header">Les impressions</h4>
 
     {{ form_start(filterForm) }}
     <div class="row">
@@ -82,7 +82,7 @@
                         <td style="vertical-align: middle; white-space: nowrap;" class="table-detail">
 
                             {% if order.canceled %}
-                                <button type="button" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Commande annulée"><i class="glyphicon glyphicon-remove"></i></button>
+                                <a href="{{ path('admin_order_activate', {'id': order.id}) }}"><button type="button" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Annuler la commande"><i class="glyphicon glyphicon-remove"></i></button></a>
                                 {% elseif order.payed and order.printed %}
                                 <button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Commande imprimée"><i class="glyphicon glyphicon-print"></i></button>
                                 <button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Commande payée"><i class="glyphicon glyphicon-eur"></i></button>
@@ -124,7 +124,7 @@
         &nbsp;
     </p>
     <p>
-        Vous n'avez pas de demandes d'impressions. Rendez-vous dans la <a href="{{ path('home') }}">Gallerie photos</a> pour composer votre panier.
+        Vous n'avez pas commandes enregistrées.
     </p>
 {% endif %}
 {% endblock %}

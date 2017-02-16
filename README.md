@@ -11,9 +11,11 @@ Thanks to this web gallery, as a photographer, you can:
   - upload your pictures to sell the prints
   - show these pictures to the guests
   - receive orders from the guests
+  - check the current value of the carts in progress
   - manage pricing per format and quantity
   - define special discount/pricing, that can time limited
-  - manage prints & paiements
+  - manage prints & payments
+  - cancel (if not already printed/payed) and reactivate orders
 
 Guests can:
   - manage their account (first/lastname, email, location)
@@ -23,6 +25,7 @@ Guests can:
   - the price is calculated in realtime
   - confirm the orders (and cancel any order if the print has not been done)
   - track the orders (pending, printed, payed, canceled, completed)
+  - cancel orders not printed
 
 More features will come in the future.
 
