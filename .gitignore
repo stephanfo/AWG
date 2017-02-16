@@ -1,6 +1,9 @@
 # Netbeans project folder
 /nbproject/
 
+# PhpStorm project folder
+/.idea/
+
 # Protect Database information
 /app/config/parameters.yml
 
