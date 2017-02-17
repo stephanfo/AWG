@@ -81,7 +81,7 @@ class User
     private $orders;
 
     /**
-     * @ORM\ManytoMany(targetEntity="GalleryBundle\Entity\Photo", mappedBy="likeUsers")
+     * @ORM\ManyToMany(targetEntity="GalleryBundle\Entity\Photo", mappedBy="likeUsers")
      */
     private $likePhotos;
 
