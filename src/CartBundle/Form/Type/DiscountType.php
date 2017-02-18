@@ -1,6 +1,6 @@
 <?php
 
-namespace CartBundle\Form;
+namespace CartBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

@@ -4,10 +4,9 @@ namespace GalleryBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use GalleryBundle\Entity\Gallery;
 use Symfony\Component\HttpFoundation\Request;
-use GalleryBundle\Form\GalleryType;
+use GalleryBundle\Form\Type\GalleryType;
 
 class GalleryController extends Controller
 {

@@ -1,14 +1,13 @@
 <?php
 
-namespace GalleryBundle\Form;
+namespace UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 
-class GalleryType extends AbstractType
+class UserType extends AbstractType
 {
 
     /**
@@ -18,14 +17,10 @@ class GalleryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-                ->add('title')
-                ->add('detail')
-                ->add('comment')
-                ->add('date', DateType::class, array(
-                    'widget' => 'single_text',
-                    'format' => 'dd-MM-yyyy'
-                ))
-                ->add('active')
+                ->add('firstname')
+                ->add('lastname')
+                ->add('email')
+                ->add('location')
                 ->add('save', SubmitType::class)
         ;
     }
@@ -36,7 +31,7 @@ class GalleryType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'GalleryBundle\Entity\Gallery'
+            'data_class' => 'UserBundle\Entity\User'
         ));
     }
 

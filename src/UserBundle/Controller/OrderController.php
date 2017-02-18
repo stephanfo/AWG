@@ -93,7 +93,7 @@ class OrderController extends Controller
         return $this->json(array());
     }
 
-    public function getCheckoutForm()
+    private function getCheckoutForm()
     {
         return $this->createFormBuilder()
                         ->setAction($this->generateUrl('order_add_current'))

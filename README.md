@@ -56,17 +56,7 @@ parameters:
     database_name: your_database_name
     database_user: your_database_user
     database_password: your_database_password
-```
-Edit the file app/config/security.yml to update the password.
-```sh
-security:
-    providers:
-        in_memory:
-            memory:
-                users:
-                    admin:
-                        password: admin
-                        roles: 'ROLE_ADMIN'
+    admin_password: your_admin_password
 ```
 Update MySQL database and clear cache:
 ```sh

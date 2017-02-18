@@ -1,13 +1,14 @@
 <?php
 
-namespace CartBundle\Form;
+namespace CartBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-class FormatType extends AbstractType
+class PriceType extends AbstractType
 {
 
     /**
@@ -17,7 +18,15 @@ class FormatType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-                ->add('size')
+                ->add('quantity')
+                ->add('price')
+                ->add('discount', EntityType::class, array(
+                    'class' => 'CartBundle:Discount',
+                    'choice_label' => 'title',
+                    'multiple' => false,
+                    'expanded' => false,
+                    'placeholder' => 'Permanent',
+                ))
                 ->add('save', SubmitType::class)
         ;
     }
@@ -28,7 +37,7 @@ class FormatType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'CartBundle\Entity\Format'
+            'data_class' => 'CartBundle\Entity\Price'
         ));
     }
 

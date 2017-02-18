@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use CartBundle\Entity\Format;
-use CartBundle\Form\FormatType;
+use CartBundle\Form\Type\FormatType;
 use Symfony\Component\HttpFoundation\Request;
 
 class FormatController extends Controller

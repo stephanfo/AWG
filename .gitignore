@@ -1,22 +1,32 @@
-# Netbeans project folder
-/nbproject/
-
-# PhpStorm project folder
-/.idea/
-
 # Protect Database information
 /app/config/parameters.yml
 
 # Remove Symfony directory unuseful
 /build/
 /phpunit.xml
-/var/
+/var/*
+!/var/cache
+/var/cache/*
+!var/cache/.gitkeep
+!/var/logs
+/var/logs/*
+!var/logs/.gitkeep
+!/var/sessions
+/var/sessions/*
+!var/sessions/.gitkeep
+!var/SymfonyRequirements.php
 /vendor/
-
-# Bundles generated
 /web/bundles/
 
 # Remove the pictures used for tests, but keep the directory
 !/web/gallery/photos
 /web/gallery/photos/*
 !web/gallery/photos/.gitkeep
+
+# Remove config.php. Only used to boostrap the project
+/web/config.php
+
+# Remove the todolist
+/todo.php
+
+

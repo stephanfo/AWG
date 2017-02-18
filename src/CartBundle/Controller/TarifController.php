@@ -4,7 +4,7 @@ namespace CartBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use CartBundle\Form\FormatType;
+use CartBundle\Form\Type\FormatType;
 use CartBundle\Entity\Format;
 
 class TarifController extends Controller

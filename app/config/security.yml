@@ -11,7 +11,7 @@ security:
             memory:
                 users:
                     admin:
-                        password: admin
+                        password: %admin_password%
                         roles: 'ROLE_ADMIN'
 
     firewalls:

@@ -199,8 +199,6 @@ class CartController extends Controller
         if (is_null($user))
             return $this->redirectToRoute('user_add');
 
-        $em = $this->getDoctrine()->getManager();
-
         $total = $this->container->get('price_calculator')->getPricing($user);
 
         $confirmationForm = $this->getCheckoutForm($total['overall']['total']);
@@ -211,7 +209,7 @@ class CartController extends Controller
         ));
     }
 
-    public function getCheckoutForm($total)
+    private function getCheckoutForm($total)
     {
         return $this->createFormBuilder()
                         ->setAction($this->generateUrl('order_add_current'))

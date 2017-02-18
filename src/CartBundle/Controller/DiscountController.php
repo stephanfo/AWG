@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use CartBundle\Entity\Discount;
-use CartBundle\Form\DiscountType;
+use CartBundle\Form\Type\DiscountType;
 use Symfony\Component\HttpFoundation\Request;
 
 class DiscountController extends Controller

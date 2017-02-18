@@ -4,9 +4,6 @@ namespace UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use UserBundle\Entity\User;
-use UserBundle\Form\UserType;
-use Symfony\Component\HttpFoundation\Request;
 
 class HomeController extends Controller
 {

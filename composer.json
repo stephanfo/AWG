@@ -1,5 +1,6 @@
 {
-    "name": "stephanfo/photos.lifeinpix.install",
+    "name": "stephanfo/awg",
+    "description": "json file to update the install after github clone",
     "license": "proprietary",
     "type": "project",
     "autoload": {
@@ -28,8 +29,8 @@
         "sensio/distribution-bundle": "^5.0",
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "^2.0",
-        "stof/doctrine-extensions-bundle": "dev-master",
-        "symfony/var-dumper": "dev-master",
+        "stof/doctrine-extensions-bundle": "^1.2",
+        "symfony/var-dumper": "^3.2",
         "vich/uploader-bundle": "^1.4",
         "stfalcon/tinymce-bundle": "^2.1"
     },

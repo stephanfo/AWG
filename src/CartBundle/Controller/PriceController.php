@@ -7,7 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use CartBundle\Entity\Price;
 use CartBundle\Entity\Format;
-use CartBundle\Form\PriceType;
+use CartBundle\Form\Type\PriceType;
 use Symfony\Component\HttpFoundation\Request;
 
 class PriceController extends Controller
