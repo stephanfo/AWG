@@ -5,6 +5,7 @@
         </div>
     </nav>
 
+    <script src="/web/resources/dateFormat/jquery-dateFormat.min.js"></script>
     <script type="text/javascript">
 
         var expireTime = new Date();
@@ -19,7 +20,7 @@
                 setTimeout(updateExpire, 1000);
                 countDown = new Date(diffTime);
                 countDown.setMinutes(countDown.getMinutes() + countDown.getTimezoneOffset());
-                $('#expire').text(countDown.toLocaleTimeString());
+                $('#expire').text($.format.date(countDown.getTime(), 'HH:mm:ss'));
             } else
             {
                 $('#discount-bar').remove();
