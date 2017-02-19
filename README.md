@@ -31,36 +31,47 @@ More features will come in the future.
 
 ### Screenshots
 Guest login
+
 ![Alt Guest login](http://stephane.ratelet.fr/other/AWG/profil.png)
 
 Guest gallery
+
 ![Alt Guest gallery](http://stephane.ratelet.fr/other/AWG/gallery.png)
 
 Guest order confirmation
+
 ![Alt Guest order confirmation](http://stephane.ratelet.fr/other/AWG/confirmation.png)
 
 Guest pricing information
+
 ![Alt Guest pricing information](http://stephane.ratelet.fr/other/AWG/tarifs.png)
 
 Guest orders list
+
 ![Alt Guest orders list](http://stephane.ratelet.fr/other/AWG/orders.png)
 
 Guest order details
+
 ![Alt Guest order details](http://stephane.ratelet.fr/other/AWG/order-details.png)
 
 Admin gallery
+
 ![Alt Admin gallery](http://stephane.ratelet.fr/other/AWG/admin_gallery.png)
 
 Admin upload
+
 ![Alt Admin upload](http://stephane.ratelet.fr/other/AWG/admin_upload.png)
 
 Admin pricing
+
 ![Alt Admin pricing](http://stephane.ratelet.fr/other/AWG/admin_pricing.png)
 
 Admin orders list
+
 ![Alt Admin orders list](http://stephane.ratelet.fr/other/AWG/admin_orders.png)
 
 Admin order details
+
 ![Alt Admin order details](http://stephane.ratelet.fr/other/AWG/admin_order-details.png)
 
 ### Installation
