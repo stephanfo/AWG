@@ -18,7 +18,7 @@
                         <div class="thumbnail">
                             <img class="img-responsive" src="{{ vich_uploader_asset(photo, 'imageFile') }}" alt="{{ photo.title }}"/>
                             <div class="caption">
-                                <p class="caption-text">
+                                <p class="text-center">
                                     {{ photo.title }} &nbsp;
                                     <a href="{{ path('photo_delete', { 'id': photo.id }) }}"><button type="button" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Supprimer"><i class="glyphicon glyphicon-trash"></i></button></a>
                                 </p>

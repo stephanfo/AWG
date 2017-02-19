@@ -1,41 +1,15 @@
-p.caption-text {
-    margin-bottom: 5px;
-    text-align: center;
-}
-
 div.thumbnail {
     margin-left: 10px;
     margin-right: 10px;
 }
 
+
 div.cart-header {
-    background: #DDD;
-    padding-top: 15px;
     padding-bottom: 15px;
-}
-div.cart-detail {
-    background: #EEE;
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
-
-div.cart-detail-format {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-p.cart-format-title {
-    font-size: 16px;
-    margin-bottom: 0px;
 }
 
 img.cart-img {
     height: 78px;
-}
-
-span.cart-title {
-    font-size: 16px;
 }
 
 .bottom-message {
@@ -86,10 +60,6 @@ span.cart-title {
 
 .bottom-block-right {
     float: right;
-}
-
-div.table .file-row:nth-child(odd){
-    background: #4e5d6c;
 }
 
 @media screen and (max-width: 350px){

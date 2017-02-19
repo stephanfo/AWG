@@ -77,11 +77,11 @@ Admin order details
 ### Installation
 
 AWG requires:
-  - [Composer](https://getcomposer.org/download/) to run.
-  - you may also use [Git](https://git-scm.com/downloads) to clone the project and contribute.
-  - a working Apache/PHP/MySQL:
-    - example: WAMP/MAMP/LAMP Stack
-  - php in command line
+  - [Composer](https://getcomposer.org/download/).
+  - [Git](https://git-scm.com/downloads) to clone the project and contribute.
+  - Apache/PHP/MySQL:
+    - example: WAMP/MAMP/LAMP stacks
+  - PHP in command line
 
 Install with Git:
 ```sh
@@ -89,11 +89,11 @@ $ cd yourdirectory
 $ git clone https://github.com/stephanfo/AWG
 $ cd AWG
 ```
-Install all required dependencies as well as Symfony:
+Install all required dependencies:
 ```sh
 $ php composer.phar update
 ```
-Edit the file app/config/parameters.yml the parameters according to your MYSQL setup.
+If not already done at the previous step, edit parameters in the file app/config/parameters.yml.
 ```sh
 parameters:
     database_host: your_database_host_IP_or_Host
@@ -108,7 +108,7 @@ Update MySQL database and clear cache:
 $ php bin/console doctrine:schema:update --force
 $ php bin/console cache:clear --env prod ; php bin/console cache:clear
 ```
-You will also need to update your server configuration (vhost, DNS, ...) to allow guests to access the gallery.
+You will also need to update your server configuration (Vhost, DNS, ...) to allow guests to access the gallery.
 
 ### Assistance
 For any assistance, issue, please post on the [AWG](https://github.com/stephanfo/AWG) Github repository.

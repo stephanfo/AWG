@@ -20,10 +20,10 @@
                                 <div class="thumbnail">
                                     <img class="img-responsive" src="{{ vich_uploader_asset(photo, 'imageFile') }}" alt="{{ photo.title }}"/>
                                     <div class="caption">
-                                        <p class="caption-text">
+                                        <p class="text-center">
                                             {{ photo.title }}
                                         </p>
-                                        <p class="caption-text">
+                                        <p class="text-center">
                                             <button type="button" photo-like="{{ photo.id }}" class="btn {% if attribute(likes, photo.id) is defined %}btn-success{% else %}btn-default{% endif %} btn-xs"><i class="glyphicon glyphicon-thumbs-up"></i> <span photo-like-count="{{ photo.id }}">{{ photo.likeCount }}</span></button>
                                             &nbsp;
                                             <button type="button" photo-cart="{{ photo.id }}" class="btn {% if attribute(carts, photo.id) is defined %}btn-primary{% else %}btn-default{% endif %} btn-xs"><i class="glyphicon glyphicon-print"></i></button>
