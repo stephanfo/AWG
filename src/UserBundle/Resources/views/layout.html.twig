@@ -3,3 +3,8 @@
 {% block title %}
   Page utilisateur - {{ parent() }}
 {% endblock %}
+
+{% block stylesheets %}
+  <link href="/web/resources/photos.lifeinpix/css/template/superhero.min.css" rel="stylesheet">
+  {{ parent() }}
+{% endblock %}

@@ -29,6 +29,30 @@ Guests can:
 
 More features will come in the future.
 
+### Screenshots
+Guest login
+![Alt Guest login](http://stephane.ratelet.fr/other/AWG/profil.png)
+Guest gallery
+![Alt Guest gallery](http://stephane.ratelet.fr/other/AWG/gallery.png)
+Guest order confirmation
+![Alt Guest order confirmation](http://stephane.ratelet.fr/other/AWG/confirmation.png)
+Guest pricing information
+![Alt Guest pricing information](http://stephane.ratelet.fr/other/AWG/tarifs.png)
+Guest orders list
+![Alt Guest orders list](http://stephane.ratelet.fr/other/AWG/orders.png)
+Guest order details
+![Alt Guest order details](http://stephane.ratelet.fr/other/AWG/order-details.png)
+Admin gallery
+![Alt Admin gallery](http://stephane.ratelet.fr/other/AWG/admin_gallery.png)
+Admin upload
+![Alt Admin upload](http://stephane.ratelet.fr/other/AWG/admin_upload.png)
+Admin pricing
+![Alt Admin pricing](http://stephane.ratelet.fr/other/AWG/admin_pricing.png)
+Admin orders list
+![Alt Admin orders list](http://stephane.ratelet.fr/other/AWG/admin_orders.png)
+Admin order details
+![Alt Admin order details](http://stephane.ratelet.fr/other/AWG/admin_order-details.png)
+
 ### Installation
 
 AWG requires:
@@ -63,5 +87,7 @@ Update MySQL database and clear cache:
 $ php bin/console doctrine:schema:update --force
 $ php bin/console cache:clear --env prod ; php bin/console cache:clear
 ```
+You will also need to update your server configuration (vhost, DNS, ...) to allow guests to access the gallery.
+
 ### Assistance
 For any assistance, issue, please post on the [AWG](https://github.com/stephanfo/AWG) Github repository.

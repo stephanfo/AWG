@@ -88,6 +88,10 @@ span.cart-title {
     float: right;
 }
 
+div.table .file-row:nth-child(odd){
+    background: #4e5d6c;
+}
+
 @media screen and (max-width: 350px){
     #grid[data-columns]::before {
         content: '1 .column.size-1of1';
