@@ -26,6 +26,7 @@ class PriceType extends AbstractType
                     'multiple' => false,
                     'expanded' => false,
                     'placeholder' => 'Permanent',
+                    'required' => false,
                 ))
                 ->add('save', SubmitType::class)
         ;

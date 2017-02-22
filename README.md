@@ -93,6 +93,11 @@ Install all required dependencies:
 ```sh
 $ php composer.phar update
 ```
+or depending on your installation of composer
+```sh
+$ composer update
+```
+
 If not already done at the previous step, edit parameters in the file app/config/parameters.yml.
 ```sh
 parameters:
