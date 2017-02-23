@@ -24,7 +24,7 @@
 !web/gallery/photos/.gitkeep
 
 # Remove config.php. Only used to boostrap the project
-/web/config.php
+#/web/config.php
 
 # Remove the todolist
 /todo.php
