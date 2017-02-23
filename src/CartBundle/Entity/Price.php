@@ -70,7 +70,7 @@ class Price
     private $price;
 
     /**
-     * @ORM\ManytoOne(targetEntity="CartBundle\Entity\Format", inversedBy="prices")
+     * @ORM\ManyToOne(targetEntity="CartBundle\Entity\Format", inversedBy="prices")
      * @ORM\JoinColumn(nullable=false)
      *
      * @Assert\NotNull(message= "Please select a format.")
@@ -78,7 +78,7 @@ class Price
     private $format;
 
     /**
-     * @ORM\ManytoOne(targetEntity="CartBundle\Entity\Discount", inversedBy="prices")
+     * @ORM\ManyToOne(targetEntity="CartBundle\Entity\Discount", inversedBy="prices")
      */
     private $discount;
 

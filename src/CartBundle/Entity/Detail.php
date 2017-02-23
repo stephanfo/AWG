@@ -25,13 +25,13 @@ class Detail
     private $id;
 
     /**
-     * @ORM\ManytoOne(targetEntity="CartBundle\Entity\Order", inversedBy="details")
+     * @ORM\ManyToOne(targetEntity="CartBundle\Entity\Order", inversedBy="details")
      * @ORM\JoinColumn(nullable=false)
      */
     private $order;
 
     /**
-     * @ORM\ManytoOne(targetEntity="GalleryBundle\Entity\Photo", inversedBy="details")
+     * @ORM\ManyToOne(targetEntity="GalleryBundle\Entity\Photo", inversedBy="details")
      * @ORM\JoinColumn(nullable=false)
      */
     private $photo;

@@ -55,13 +55,13 @@ class CartQuantity
     private $deleted;
 
     /**
-     * @ORM\ManytoOne(targetEntity="CartBundle\Entity\Format", inversedBy="quantities")
+     * @ORM\ManyToOne(targetEntity="CartBundle\Entity\Format", inversedBy="quantities")
      * @ORM\JoinColumn(nullable=false)
      */
     private $format;
 
     /**
-     * @ORM\ManytoOne(targetEntity="CartBundle\Entity\Cart", inversedBy="quantities")
+     * @ORM\ManyToOne(targetEntity="CartBundle\Entity\Cart", inversedBy="quantities")
      * @ORM\JoinColumn(nullable=false)
      */
     private $cart;

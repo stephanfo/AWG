@@ -26,7 +26,7 @@ class Order
     private $id;
 
     /**
-     * @ORM\ManytoOne(targetEntity="UserBundle\Entity\User", inversedBy="orders")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="orders")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;

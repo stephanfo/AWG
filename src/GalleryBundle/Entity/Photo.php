@@ -95,7 +95,7 @@ class Photo
     private $details;
 
     /**
-     * @ORM\ManytoMany(targetEntity="UserBundle\Entity\User", inversedBy="likePhotos")
+     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\User", inversedBy="likePhotos")
      */
     private $likeUsers;
 

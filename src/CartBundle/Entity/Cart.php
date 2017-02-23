@@ -54,13 +54,13 @@ class Cart
     private $quantities;
 
     /**
-     * @ORM\ManytoOne(targetEntity="GalleryBundle\Entity\Photo", inversedBy="carts")
+     * @ORM\ManyToOne(targetEntity="GalleryBundle\Entity\Photo", inversedBy="carts")
      * @ORM\JoinColumn(nullable=false)
      */
     private $photo;
 
     /**
-     * @ORM\ManytoOne(targetEntity="UserBundle\Entity\User", inversedBy="carts")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="carts")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
