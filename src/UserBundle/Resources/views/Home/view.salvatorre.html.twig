@@ -49,7 +49,7 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="/web/resources/salvattore/salvattore.min.js"></script>
+    <script src="/resources/salvattore/salvattore.min.js"></script>
     <script type="text/javascript">
         $('[photo-cart]').click(function () {
             $.get('{{ path('cart_toggle_empty_link') }}' + $(this).attr('photo-cart'), function (data) {
