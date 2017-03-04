@@ -57,7 +57,9 @@
                         <tr>
                         {% endif %}
                         <td>
-                            <img class="img-responsive img-thumbnail cart-img" src="{{ vich_uploader_asset(quantity.detail.photo, 'imageFile') | imagine_filter('gallery_thumb') }}"/>
+                            <a href="{{ vich_uploader_asset(quantity.detail.photo, 'imageFile') }}" data-lightbox="gallery" data-title="Photo {{ quantity.detail.photo.title }}, Taille {{ quantity.detail.photo.imageWidth }}x{{ quantity.detail.photo.imageHeight }}">
+                                <img class="img-responsive img-thumbnail cart-img" src="{{ vich_uploader_asset(quantity.detail.photo, 'imageFile') | imagine_filter('gallery_thumb') }}"/>
+                            </a>
                             {{ quantity.detail.photo.title }}
                         </td>
                         <td class="table-detail">
@@ -76,7 +78,7 @@
                                     {% set PrintCommands = PrintCommands ~ PrintCommand %}
                                 {% endif %}
                                 <a href="">
-                                    <button class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="{{ PrintCommand }}"><li class="glyphicon glyphicon-print"></li></button>
+                                    <button class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="{{ PrintCommand }}"><li class="glyphicon glyphicon-print"></li> x1</button>
                                 </a>
                             {% endif %}
                         </td>
@@ -111,7 +113,7 @@
                 </th>
                 <td class="table-detail" data-toggle="modal" data-target="#print-all">
                     {% if PrintCommands is not empty %}
-                        <button class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Imprimer toutes les photos"><li class="glyphicon glyphicon-print"></li></button>
+                        <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Imprimer toutes les photos"><li class="glyphicon glyphicon-print"></li> tout</button>
                     {% endif %}
                 </td>
             </tr>
@@ -196,4 +198,12 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/resources/lightbox/js/lightbox.min.js"></script>
+{% endblock %}
+
+{% block stylesheets %}
+    <link href="/resources/lightbox/css/lightbox.min.css" rel="stylesheet">
 {% endblock %}
