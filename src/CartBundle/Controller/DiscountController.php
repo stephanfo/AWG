@@ -41,7 +41,7 @@ class DiscountController extends Controller
 
     /**
      * @Route("/discounts/edit/{id}", requirements={"id" = "\d*"}, name="discount_edit")
-     * @ParamConverter("Discount", options={"id" = "discount"})
+     * @ParamConverter("discount", class="CartBundle:Discount", options={"id" = "id"})
      */
     public function editAction(Discount $discount, Request $request)
     {
@@ -64,7 +64,7 @@ class DiscountController extends Controller
 
     /**
      * @Route("/discounts/delete/{id}", requirements={"id" = "\d*"}, name="discount_delete")
-     * @ParamConverter("Discount", options={"id" = "discount"})
+     * @ParamConverter("discount", class="CartBundle:Discount", options={"id" = "id"})
      */
     public function deleteAction(Discount $discount, Request $request)
     {
@@ -80,7 +80,7 @@ class DiscountController extends Controller
 
     /**
      * @Route("/discounts/active/toggle/{id}", requirements={"id" = "\d*"}, name="discount_active_toggle")
-     * @ParamConverter("Discount", options={"id" = "discount"})
+     * @ParamConverter("discount", class="CartBundle:Discount", options={"id" = "id"})
      */
     public function activeToggleAction(Discount $discount, Request $request)
     {

@@ -9,7 +9,6 @@ use CartBundle\Entity\Format;
 use CartBundle\Form\Type\FormatType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Process\Process;
-use Symfony\Component\Process\Exception\ProcessFailedException;
 
 
 class FormatController extends Controller
@@ -43,7 +42,7 @@ class FormatController extends Controller
 
     /**
      * @Route("/formats/edit/{id}", requirements={"id" = "\d*"}, name="format_edit")
-     * @ParamConverter("Format", options={"id" = "format"})
+     * @ParamConverter("format", class="CartBundle:Format", options={"id" = "id"})
      */
     public function editAction(Format $format, Request $request)
     {
@@ -67,7 +66,7 @@ class FormatController extends Controller
 
     /**
      * @Route("/formats/delete{id}", requirements={"id" = "\d*"}, name="format_delete")
-     * @ParamConverter("Format", options={"id" = "format"})
+     * @ParamConverter("format", class="CartBundle:Format", options={"id" = "id"})
      */
     public function deleteAction(Format $format, Request $request)
     {

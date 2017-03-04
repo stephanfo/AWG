@@ -67,18 +67,8 @@
                         </td>
                         <td class="table-detail">
                             {%  if format.print is not empty %}
-                                {% if (quantity.detail.photo.imageWidth == quantity.detail.photo.imageHeight) and (format.printSquare is not empty) %}
-                                    {% set PrintCommand = format.printSquare | replace({'{quantity}': quantity.quantity, '{file}': vich_uploader_asset(quantity.detail.photo, 'imageFile') }) %}
-                                {% else %}
-                                    {% set PrintCommand = format.print | replace({'{quantity}': quantity.quantity, '{file}': vich_uploader_asset(quantity.detail.photo, 'imageFile') }) %}
-                                {% endif %}
-                                {% if PrintCommands is not empty %}
-                                    {% set PrintCommands = PrintCommands ~ "<br>" ~ PrintCommand%}
-                               {%  else %}
-                                    {% set PrintCommands = PrintCommands ~ PrintCommand %}
-                                {% endif %}
-                                <a href="">
-                                    <button class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="{{ PrintCommand }}"><li class="glyphicon glyphicon-print"></li> x1</button>
+                                <a href="{{ path('admin_print_single', { 'photo_id': quantity.detail.photo.id, 'format_id': format.id }) }}">
+                                    <button class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="imprimer un tirage au format {{ format.size }}"><li class="glyphicon glyphicon-print"></li> x1</button>
                                 </a>
                             {% endif %}
                         </td>
@@ -111,10 +101,10 @@
                 <th class="table-detail">
                     {{ quantityTotal }}
                 </th>
-                <td class="table-detail" data-toggle="modal" data-target="#print-all">
-                    {% if PrintCommands is not empty %}
+                <td class="table-detail">
+                    <a href="{{ path('admin_print_order', { 'id': orderHeader.id }) }}">
                         <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Imprimer toutes les photos"><li class="glyphicon glyphicon-print"></li> tout</button>
-                    {% endif %}
+                    </a>
                 </td>
             </tr>
         </tfoot>
@@ -124,7 +114,7 @@
             <div class="bottom-block-right">
                 {% if not orderHeader.printed %}
                     <a href="{{ path('admin_order_printed', {'id': orderHeader.id}) }}"><button type="button" class="btn btn-default"><i class="glyphicon glyphicon-print"></i> Confirmer l'impression</button></a>
-                        {% else %}
+                {% else %}
                     <button type="button" class="btn btn-success disabled"><i class="glyphicon glyphicon-print"></i> Impression confirmée</button>
                 {% endif %}
             </div>
@@ -178,26 +168,6 @@
             });
         </script>
     {% endif %}
-    <div class="modal fade" id="print-all" tabindex="-1" role="dialog" aria-labelledby="Print all pictures" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Confirmation d'impression</h4>
-                </div>
-                <div class="modal-body">
-                    <p>
-                        Confirmez vous l'impression de toutes les photos ? Les commandes suivantes seront exécutées :
-                    </p>
-                    <pre>{{ PrintCommands | raw }}</pre>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
 {% endblock %}
 
 {% block javascripts %}
