@@ -36,7 +36,7 @@
                 {% for quantity in detail.quantities %}
                     <tr>
                         <td>
-                            <img class="img-responsive img-thumbnail cart-img" src="{{ vich_uploader_asset(detail.photo, 'imageFile') }}"/>
+                            <img class="img-responsive img-thumbnail cart-img" src="{{ vich_uploader_asset(detail.photo, 'imageFile') | imagine_filter('gallery_thumb') }}"/>
                         </td>
                         <td class="table-detail">{{ quantity.quantity }}</td>
                         <td class="table-detail">{{ quantity.format.size }}</td>

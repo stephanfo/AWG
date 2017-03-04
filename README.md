@@ -14,7 +14,7 @@ Thanks to this web gallery, as a photographer, you can:
   - check the current value of the carts in progress
   - manage pricing per format and quantity
   - define special discount/pricing, that can time limited
-  - manage prints & payments
+  - manage prints (using LP & CUPS on Unix OS) & payments
   - cancel (if not already printed/payed) and reactivate orders
 
 Guests can:

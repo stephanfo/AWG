@@ -37,10 +37,14 @@ class PhotoController extends Controller
         if ($extension !== "jpeg")
             return new Response("Seul les fichiers jpg et png sont autorisés (pas les " . $extension . ").", Response::HTTP_BAD_REQUEST);
 
+        $size = getimagesize($file);
+
         $em = $this->getDoctrine()->getManager();
 
         $photo = new Photo();
 
+        $photo->setImageWidth($size[0]);
+        $photo->setImageHeight($size[1]);
         $photo->setGallery($gallery);
         $photo->setImageFile($file);
         $photo->setTitle($file->getClientOriginalName());

@@ -18,7 +18,7 @@
                         <div id="grid" data-columns>
                             {% for photo in gallery.photos %}
                                 <div class="thumbnail">
-                                    <img class="img-responsive" src="{{ vich_uploader_asset(photo, 'imageFile') }}" alt="{{ photo.title }}"/>
+                                    <img class="img-responsive" src="{{ vich_uploader_asset(photo, 'imageFile') | imagine_filter('gallery_thumb') }}" alt="{{ photo.title }}"/>
                                     <div class="caption">
                                         <p class="text-center">
                                             {{ photo.title }}

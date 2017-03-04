@@ -13,7 +13,7 @@
         {% for cart in userCarts.carts %}
             <div class="row well">
                 <div class="col-sm-5 cart-header">
-                    <img class="img-responsive img-thumbnail cart-img" src="{{ vich_uploader_asset(cart.photo, 'imageFile') }}"/>
+                    <img class="img-responsive img-thumbnail cart-img" src="{{ vich_uploader_asset(cart.photo, 'imageFile') | imagine_filter('gallery_thumb') }}"/>
                     {{ cart.photo.title }}
                     <div style="float: right;"><a href="{{ path('cart_delete', { 'id': cart.photo.id }) }}"><button class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i></button></a></div>
                 </div>

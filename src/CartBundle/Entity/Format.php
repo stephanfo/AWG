@@ -36,6 +36,22 @@ class Format
     private $size;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Type(type="string")
+     */
+    private $print;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Type(type="string")
+     */
+    private $printSquare;
+
+    /**
      * @var \DateTime $created
      *
      * @ORM\Column(type="datetime", nullable=true)
@@ -289,5 +305,53 @@ class Format
     public function getPrices()
     {
         return $this->prices;
+    }
+
+    /**
+     * Set print
+     *
+     * @param string $print
+     *
+     * @return Format
+     */
+    public function setPrint($print)
+    {
+        $this->print = $print;
+
+        return $this;
+    }
+
+    /**
+     * Get print
+     *
+     * @return string
+     */
+    public function getPrint()
+    {
+        return $this->print;
+    }
+
+    /**
+     * Set printSquare
+     *
+     * @param string $printSquare
+     *
+     * @return Format
+     */
+    public function setPrintSquare($printSquare)
+    {
+        $this->printSquare = $printSquare;
+
+        return $this;
+    }
+
+    /**
+     * Get printSquare
+     *
+     * @return string
+     */
+    public function getPrintSquare()
+    {
+        return $this->printSquare;
     }
 }

@@ -40,11 +40,13 @@
                 <th>Format</th>
                 <th>Image</th>
                 <th class="table-detail">Quantity</th>
+                <th class="table-detail">Imprimer</th>
             </tr>
         </thead>
         <tbody>
             {% set quantityTotal = 0 %}
             {% set NbImages = 0 %}
+            {% set PrintCommands = "" %}
             {% for format in orderDetails %}
                 {% set quantityFormat = 0 %}
                 <tr>
@@ -55,10 +57,29 @@
                         <tr>
                         {% endif %}
                         <td>
-                            <img class="img-responsive img-thumbnail cart-img" src="{{ vich_uploader_asset(quantity.detail.photo, 'imageFile') }}"/>
+                            <img class="img-responsive img-thumbnail cart-img" src="{{ vich_uploader_asset(quantity.detail.photo, 'imageFile') | imagine_filter('gallery_thumb') }}"/>
                             {{ quantity.detail.photo.title }}
                         </td>
-                        <td class="table-detail">{{ quantity.quantity }}</td>
+                        <td class="table-detail">
+                            {{ quantity.quantity }}
+                        </td>
+                        <td class="table-detail">
+                            {%  if format.print is not empty %}
+                                {% if (quantity.detail.photo.imageWidth == quantity.detail.photo.imageHeight) and (format.printSquare is not empty) %}
+                                    {% set PrintCommand = format.printSquare | replace({'{quantity}': quantity.quantity, '{file}': vich_uploader_asset(quantity.detail.photo, 'imageFile') }) %}
+                                {% else %}
+                                    {% set PrintCommand = format.print | replace({'{quantity}': quantity.quantity, '{file}': vich_uploader_asset(quantity.detail.photo, 'imageFile') }) %}
+                                {% endif %}
+                                {% if PrintCommands is not empty %}
+                                    {% set PrintCommands = PrintCommands ~ "<br>" ~ PrintCommand%}
+                               {%  else %}
+                                    {% set PrintCommands = PrintCommands ~ PrintCommand %}
+                                {% endif %}
+                                <a href="">
+                                    <button class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="{{ PrintCommand }}"><li class="glyphicon glyphicon-print"></li></button>
+                                </a>
+                            {% endif %}
+                        </td>
                         {% if not loop.last %}
                         </tr>
                     {% endif %}
@@ -73,6 +94,7 @@
                         {{ quantityFormat }}
                         {% set quantityTotal = quantityTotal + quantityFormat %}
                     </th>
+                    <td></td>
                 <tr>
                 {% endfor %}
         </tbody>
@@ -87,6 +109,11 @@
                 <th class="table-detail">
                     {{ quantityTotal }}
                 </th>
+                <td class="table-detail" data-toggle="modal" data-target="#print-all">
+                    {% if PrintCommands is not empty %}
+                        <button class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Imprimer toutes les photos"><li class="glyphicon glyphicon-print"></li></button>
+                    {% endif %}
+                </td>
             </tr>
         </tfoot>
     </table>
@@ -149,4 +176,24 @@
             });
         </script>
     {% endif %}
+    <div class="modal fade" id="print-all" tabindex="-1" role="dialog" aria-labelledby="Print all pictures" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Confirmation d'impression</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Confirmez vous l'impression de toutes les photos ? Les commandes suivantes seront exécutées :
+                    </p>
+                    <pre>{{ PrintCommands | raw }}</pre>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -54,6 +54,20 @@ class Photo
     private $imageName;
 
     /**
+     * @ORM\Column(type="integer")
+     *
+     * @var int
+     */
+    private $imageWidth;
+
+    /**
+     * @ORM\Column(type="integer")
+     *
+     * @var int
+     */
+    private $imageHeight;
+
+    /**
      * @var \DateTime $created
      *
      * @ORM\Column(type="datetime", nullable=true)
@@ -440,5 +454,53 @@ class Photo
     public function getDetails()
     {
         return $this->details;
+    }
+
+    /**
+     * Set imageWidth
+     *
+     * @param integer $imageWidth
+     *
+     * @return Photo
+     */
+    public function setImageWidth($imageWidth)
+    {
+        $this->imageWidth = $imageWidth;
+
+        return $this;
+    }
+
+    /**
+     * Get imageWidth
+     *
+     * @return integer
+     */
+    public function getImageWidth()
+    {
+        return $this->imageWidth;
+    }
+
+    /**
+     * Set imageHeight
+     *
+     * @param integer $imageHeight
+     *
+     * @return Photo
+     */
+    public function setImageHeight($imageHeight)
+    {
+        $this->imageHeight = $imageHeight;
+
+        return $this;
+    }
+
+    /**
+     * Get imageHeight
+     *
+     * @return integer
+     */
+    public function getImageHeight()
+    {
+        return $this->imageHeight;
     }
 }
