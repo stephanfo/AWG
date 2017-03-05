@@ -15,28 +15,28 @@
     </div>
     <div class="row form-inline">
         <div class="col-sm-3">
-            <div class="form-group">
+            <div class="form-group form-group-sm">
                 {{ form_label(filterForm.startDate, "Début") }}
                 {{ form_errors(filterForm.startDate) }}
                 {{ form_widget(filterForm.startDate, {'attr': {'class': 'form-control form_date'}}) }}
             </div>
         </div>
         <div class="col-sm-3">
-            <div class="form-group">
+            <div class="form-group form-group-sm">
                 {{ form_label(filterForm.stopDate, "Fin") }}
                 {{ form_errors(filterForm.stopDate) }}
                 {{ form_widget(filterForm.stopDate, {'attr': {'class': 'form-control form_date'}}) }}
             </div>
         </div>
         <div class="col-sm-3">
-            <div class="form-group">
+            <div class="form-group form-group-sm">
                 {{ form_label(filterForm.status, "Commandes") }}
                 {{ form_errors(filterForm.status) }}
                 {{ form_widget(filterForm.status, {'attr': {'class': 'form-control'}}) }}
             </div>
         </div>
         <div class="col-sm-3">
-            {{ form_widget(filterForm.submit, {'attr': {'class': 'btn btn-primary'}, 'label': 'Filtrer'}) }}
+            {{ form_widget(filterForm.submit, {'attr': {'class': 'btn btn-primary btn-sm bottom-button'}, 'label': 'Filtrer'}) }}
         </div>
     </div>
     {{ form_rest(filterForm) }}

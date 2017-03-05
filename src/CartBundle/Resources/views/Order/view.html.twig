@@ -26,9 +26,9 @@
         <div class="bottom-block">
             <div class="bottom-block-right">
                 {% if not orderHeader.canceled %}
-                    <a href="{{ path('admin_order_cancel', {'id': orderHeader.id}) }}"><button type="button" class="btn btn-default"><i class="glyphicon glyphicon-remove"></i> Annuler la commande</button></a>
+                    <a href="{{ path('admin_order_cancel', {'id': orderHeader.id}) }}"><button type="button" class="btn btn-default btn-sm bottom-button"><i class="glyphicon glyphicon-remove"></i> Annuler la commande</button></a>
                 {% else %}
-                    <button type="button" class="btn btn-danger disabled"><i class="glyphicon glyphicon-remove"></i> Commande annulée</button>
+                    <button type="button" class="btn btn-danger btn-sm disabled bottom-button"><i class="glyphicon glyphicon-remove"></i> Commande annulée</button>
                 {% endif %}
             </div>
         </div>
@@ -113,9 +113,9 @@
         <div class="bottom-block">
             <div class="bottom-block-right">
                 {% if not orderHeader.printed %}
-                    <a href="{{ path('admin_order_printed', {'id': orderHeader.id}) }}"><button type="button" class="btn btn-default"><i class="glyphicon glyphicon-print"></i> Confirmer l'impression</button></a>
+                    <a href="{{ path('admin_order_printed', {'id': orderHeader.id}) }}"><button type="button" class="btn btn-default btn-sm bottom-button"><i class="glyphicon glyphicon-print"></i> Confirmer l'impression</button></a>
                 {% else %}
-                    <button type="button" class="btn btn-success disabled"><i class="glyphicon glyphicon-print"></i> Impression confirmée</button>
+                    <button type="button" class="btn btn-success btn-sm disabled bottom-button"><i class="glyphicon glyphicon-print"></i> Impression confirmée</button>
                 {% endif %}
             </div>
         </div>
@@ -154,9 +154,9 @@
         <div class="bottom-block">
             <div class="bottom-block-right">
                 {% if not orderHeader.payed %}
-                    <a href="{{ path('admin_order_payed', {'id': orderHeader.id}) }}"><button type="button" class="btn btn-default"><i class="glyphicon glyphicon-eur"></i> Confirmer le paiement</button></a>
+                    <a href="{{ path('admin_order_payed', {'id': orderHeader.id}) }}"><button type="button" class="btn btn-default btn-sm bottom-button"><i class="glyphicon glyphicon-eur"></i> Confirmer le paiement</button></a>
                 {% else %}
-                    <button type="button" class="btn btn-success disabled"><i class="glyphicon glyphicon-eur"></i> Paiement confirmée</button>
+                    <button type="button" class="btn btn-success btn-sm disabled bottom-button"><i class="glyphicon glyphicon-eur"></i> Paiement confirmée</button>
                 {% endif %}
             </div>
         </div>

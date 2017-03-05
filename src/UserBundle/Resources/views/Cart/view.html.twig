@@ -26,9 +26,9 @@
                                     {% set currentQuantity = attribute(attribute(cartFormat, cart.id), format.id) %}
                                 {% endif %}
                             {% endif %}
-                            <div class="form-group form-inline text-center">
+                            <div class="form-group form-group-sm form-inline text-center">
                                 <label for="{{ cart.photo.id }}-{{ format.id }}" class="control-label">Format {{ format.size }} : </label>
-                                <div class="input-group">
+                                <div class="input-group input-group-sm">
                                     <span class="input-group-addon btn btn-primary" cart-quantity-minus="{{ cart.photo.id }}-{{ format.id }}"><i class="glyphicon glyphicon-minus"></i></span>
                                     <input type="number" min="0" class="form-control" cart-photo="{{ cart.photo.id }}" cart-format="{{ format.id }}" value="{{ currentQuantity }}" id="{{ cart.photo.id }}-{{ format.id }}">
                                     <span class="input-group-addon btn btn-primary" cart-quantity-plus="{{ cart.photo.id }}-{{ format.id }}"><i class="glyphicon glyphicon-plus"></i></span>
@@ -60,7 +60,7 @@
             &nbsp;
         </p>
         <p>
-            Votre panier est vide. Rendez-vous dans la <a href="{{ path('home') }}">Gallerie photos</a> pour composer votre panier.
+            Votre panier sélection est vide. Rendez-vous dans la <a href="{{ path('home') }}">Gallerie photos</a> pour composer votre panier.
         </p>
     {% endif %}
     {{ render(controller('UserBundle:Discount:bottomBar')) }}
