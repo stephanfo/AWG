@@ -57,50 +57,50 @@ class OrderController extends Controller
 
     /**
      * @Route("/order/canceled/{id}", requirements={"id" = "\d*"}, name="admin_order_cancel")
-     * @ParamConverter("Order", options={"id" = "order"})
+     * @ParamConverter("order", class="CartBundle:Order", options={"id" = "id"})
      */
     public function canceledAction(Request $request, Order $order)
     {
         $order->setCanceled(true);
         $this->getDoctrine()->getManager()->flush();
 
-        return $this->redirectToRoute('admin_order_list');
+        return $this->redirect($request->headers->get('referer'));
     }
 
     /**
      * @Route("/order/activate/{id}", requirements={"id" = "\d*"}, name="admin_order_activate")
-     * @ParamConverter("Order", options={"id" = "order"})
+     * @ParamConverter("order", class="CartBundle:Order", options={"id" = "id"})
      */
     public function activateAction(Request $request, Order $order)
     {
         $order->setCanceled(false);
         $this->getDoctrine()->getManager()->flush();
 
-        return $this->redirectToRoute('admin_order_list');
+        return $this->redirect($request->headers->get('referer'));
     }
 
     /**
      * @Route("/order/printed/{id}", requirements={"id" = "\d*"}, name="admin_order_printed")
-     * @ParamConverter("Order", options={"id" = "order"})
+     * @ParamConverter("order", class="CartBundle:Order", options={"id" = "id"})
      */
     public function printedAction(Request $request, Order $order)
     {
         $order->setPrinted(true);
         $this->getDoctrine()->getManager()->flush();
 
-        return $this->redirectToRoute('admin_order_list');
+        return $this->redirect($request->headers->get('referer'));
     }
 
     /**
      * @Route("/order/payed/{id}", requirements={"id" = "\d*"}, name="admin_order_payed")
-     * @ParamConverter("Order", options={"id" = "order"})
+     * @ParamConverter("order", class="CartBundle:Order", options={"id" = "id"})
      */
     public function payedAction(Request $request, Order $order)
     {
         $order->setPayed(true);
         $this->getDoctrine()->getManager()->flush();
 
-        return $this->redirectToRoute('admin_order_list');
+        return $this->redirect($request->headers->get('referer'));
     }
 
     private function searchForm()

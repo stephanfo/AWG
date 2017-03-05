@@ -17,11 +17,9 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
+/web/gallery/
+/web/media/
 
-# Remove the pictures used for tests, but keep the directory
-!/web/gallery/photos
-/web/gallery/photos/*
-!web/gallery/photos/.gitkeep
 
 # Remove config.php. Only used to boostrap the project
 #/web/config.php

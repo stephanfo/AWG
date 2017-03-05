@@ -15,28 +15,28 @@
     </div>
     <div class="row form-inline">
         <div class="col-sm-3">
-            <div class="form-group">
+            <div class="form-group form-group-sm">
                 {{ form_label(filterForm.startDate, "Début") }}
                 {{ form_errors(filterForm.startDate) }}
                 {{ form_widget(filterForm.startDate, {'attr': {'class': 'form-control form_date'}}) }}
             </div>
         </div>
         <div class="col-sm-3">
-            <div class="form-group">
+            <div class="form-group form-group-sm">
                 {{ form_label(filterForm.stopDate, "Fin") }}
                 {{ form_errors(filterForm.stopDate) }}
                 {{ form_widget(filterForm.stopDate, {'attr': {'class': 'form-control form_date'}}) }}
             </div>
         </div>
         <div class="col-sm-3">
-            <div class="form-group">
+            <div class="form-group form-group-sm">
                 {{ form_label(filterForm.status, "Commandes") }}
                 {{ form_errors(filterForm.status) }}
                 {{ form_widget(filterForm.status, {'attr': {'class': 'form-control'}}) }}
             </div>
         </div>
         <div class="col-sm-3">
-            {{ form_widget(filterForm.submit, {'attr': {'class': 'btn btn-primary'}, 'label': 'Filtrer'}) }}
+            {{ form_widget(filterForm.submit, {'attr': {'class': 'btn btn-primary btn-sm bottom-button'}, 'label': 'Filtrer'}) }}
         </div>
     </div>
     {{ form_rest(filterForm) }}
@@ -102,7 +102,7 @@
                         </td>
                         <td style="vertical-align: middle; white-space: nowrap;" class="table-detail">
                             <a href="{{ path('admin_order_view', { 'id': order.id }) }}"><button type="button" class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" title="Détail de la commande"><i class="glyphicon glyphicon-list"></i></button></a>
-                            <a href="#"><button type="button" class="btn btn-warning btn-xs disabled" data-toggle="tooltip" data-placement="top" title="Télécharger le script d'impression (a développer)"><i class="glyphicon glyphicon-download-alt"></i></button></a>
+                            <a href="{{ path('admin_print_order', { 'id': order.id }) }}"><button type="button" class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Imprimer toute la commande"><i class="glyphicon glyphicon-print"></i></button></a>
                         </td>
                     </tr>
                 {% endfor %}

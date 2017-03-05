@@ -14,7 +14,80 @@
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="form-group">
+            {{ form_label(form.print, "Commande d'impression (par défaut)") }}
+            {{ form_errors(form.print) }}
+            {{ form_widget(form.print, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="form-group">
+            {{ form_label(form.printSquare, "Commande d'impression (si photo carrée)") }}
+            {{ form_errors(form.printSquare) }}
+            {{ form_widget(form.printSquare, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <p>
+            Laisser vide si non applicable.
+        </p>
+    </div>
+</div>
 
-{{ form_widget(form.save, {'attr': {'class': 'btn btn-primary bottom-button'}, 'label': 'Sauvegarder'}) }}
+{{ form_widget(form.save, {'attr': {'class': 'btn btn-primary btn-sm bottom-button'}, 'label': 'Sauvegarder'}) }}
 {{ form_rest(form) }}
 {{ form_end(form) }}
+
+<hr>
+
+<div class="row">
+    <div class="col-lg-12">
+        <p>
+            Vous pouvez renseigner une ligne de commande pour démarer l'impression. Les champs {quantity} et {file}
+            seront remplacés par la quantité et le chemin relatif de l'image chargée initialement.
+        </p>
+        <p>
+            Ci-dessous un exemple de ligne de commande pour un lancement d'impresion depuis Linux:
+        </p>
+        <pre>/usr/bin/lp -d Dai_Nippon_Printing_DP_DS620 -o PageSize=dnp4x6 -o Finish=Glossy -n {quantity} /var/www/awg/web{file}</pre>
+        <p>
+            Ci-dessous un exemple de ligne de commande pour un lancement d'impresion depuis Mac:
+        </p>
+        <pre>/usr/bin/lp -d Dai_Nippon_Printing_DP_DS620 -o PageSize=dnp4x6 -o Finish=Glossy -n {quantity} /Applications/AMPPS/www/awg/web{file}</pre>
+        <p>
+            Ci-dessous, la liste des imprimantes détectées par le système. Cliquez sur le bouton pour obtenir la liste des
+            options disponibles.
+        </p>
+        {% if printersDetails is iterable %}
+            <p>
+                {% for printerDetail in printersDetails %}
+                    <button class="btn btn-default" data-toggle="modal" data-target="#printer-{{ loop.index }}">{{ printerDetail.name }}</button>
+                {% endfor %}
+            </p>
+        {% else %}
+            <p class="bg-danger">
+                {{ printersDetails }}
+            </p>
+        {%  endif %}
+    </div>
+</div>
+
+{% if printersDetails is iterable %}
+    {% for printerDetail in printersDetails %}
+        <div id="printer-{{ loop.index }}" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">{{ printerDetail.name }}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>{{ printerDetail.details | raw }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{%  endif %}

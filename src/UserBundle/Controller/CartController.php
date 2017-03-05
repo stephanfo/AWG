@@ -144,8 +144,8 @@ class CartController extends Controller
     /**
      * @Route("/cart/ajax/update/{photo}/{format}/{quantity}", requirements={"photo" = "\d*", "format" = "\d*", "quantity" = "\d*"}, name="cart_update")
      * @Route("/cart/ajax/update/", name="cart_update_empty_link")
-     * @ParamConverter("Photo", options={"id" = "photo"})
-     * @ParamConverter("Format", options={"id" = "format"})
+     * @ParamConverter("photo", class="GalleryBundle:Photo", options={"id" = "photo"})
+     * @ParamConverter("format", class="CartBundle:Format", options={"id" = "format"})
      */
     public function updateCartAction(Photo $photo, Format $format, $quantity)
     {

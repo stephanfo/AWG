@@ -108,3 +108,16 @@ stfalcon_tinymce:
             autosave_ask_before_unload: true
             autosave_restore_when_empty: true
             autosave_retention: "20m"
+
+liip_imagine:
+    resolvers:
+        default:
+            web_path: ~
+
+    filter_sets:
+        cache: ~
+        gallery_thumb:
+            quality: 75
+            filters:
+                relative_resize:
+                  widen: 255

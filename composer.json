@@ -32,7 +32,9 @@
         "stof/doctrine-extensions-bundle": "^1.2",
         "symfony/var-dumper": "^3.2",
         "vich/uploader-bundle": "^1.4",
-        "stfalcon/tinymce-bundle": "^2.1"
+        "stfalcon/tinymce-bundle": "^2.1",
+        "liip/imagine-bundle": "^1.7",
+        "symfony/process": "^3.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

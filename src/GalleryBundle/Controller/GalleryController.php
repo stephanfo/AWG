@@ -157,7 +157,7 @@ class GalleryController extends Controller
 
         $this->getDoctrine()->getManager()->flush();
 
-        return $this->redirectToRoute('gallery_index');
+        return $this->redirect($request->headers->get('referer'));
     }
 
 }

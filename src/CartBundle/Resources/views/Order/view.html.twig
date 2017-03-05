@@ -26,9 +26,9 @@
         <div class="bottom-block">
             <div class="bottom-block-right">
                 {% if not orderHeader.canceled %}
-                    <a href="{{ path('admin_order_cancel', {'id': orderHeader.id}) }}"><button type="button" class="btn btn-default"><i class="glyphicon glyphicon-remove"></i> Annuler la commande</button></a>
+                    <a href="{{ path('admin_order_cancel', {'id': orderHeader.id}) }}"><button type="button" class="btn btn-default btn-sm bottom-button"><i class="glyphicon glyphicon-remove"></i> Annuler la commande</button></a>
                 {% else %}
-                    <button type="button" class="btn btn-danger disabled"><i class="glyphicon glyphicon-remove"></i> Commande annulée</button>
+                    <button type="button" class="btn btn-danger btn-sm disabled bottom-button"><i class="glyphicon glyphicon-remove"></i> Commande annulée</button>
                 {% endif %}
             </div>
         </div>
@@ -40,11 +40,13 @@
                 <th>Format</th>
                 <th>Image</th>
                 <th class="table-detail">Quantity</th>
+                <th class="table-detail">Imprimer</th>
             </tr>
         </thead>
         <tbody>
             {% set quantityTotal = 0 %}
             {% set NbImages = 0 %}
+            {% set PrintCommands = "" %}
             {% for format in orderDetails %}
                 {% set quantityFormat = 0 %}
                 <tr>
@@ -55,10 +57,21 @@
                         <tr>
                         {% endif %}
                         <td>
-                            <img class="img-responsive img-thumbnail cart-img" src="{{ vich_uploader_asset(quantity.detail.photo, 'imageFile') }}"/>
+                            <a href="{{ vich_uploader_asset(quantity.detail.photo, 'imageFile') }}" data-lightbox="gallery" data-title="Photo {{ quantity.detail.photo.title }}, Taille {{ quantity.detail.photo.imageWidth }}x{{ quantity.detail.photo.imageHeight }}">
+                                <img class="img-responsive img-thumbnail cart-img" src="{{ vich_uploader_asset(quantity.detail.photo, 'imageFile') | imagine_filter('gallery_thumb') }}"/>
+                            </a>
                             {{ quantity.detail.photo.title }}
                         </td>
-                        <td class="table-detail">{{ quantity.quantity }}</td>
+                        <td class="table-detail">
+                            {{ quantity.quantity }}
+                        </td>
+                        <td class="table-detail">
+                            {%  if format.print is not empty %}
+                                <a href="{{ path('admin_print_single', { 'photo_id': quantity.detail.photo.id, 'format_id': format.id }) }}">
+                                    <button class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="imprimer un tirage au format {{ format.size }}"><li class="glyphicon glyphicon-print"></li> x1</button>
+                                </a>
+                            {% endif %}
+                        </td>
                         {% if not loop.last %}
                         </tr>
                     {% endif %}
@@ -73,6 +86,7 @@
                         {{ quantityFormat }}
                         {% set quantityTotal = quantityTotal + quantityFormat %}
                     </th>
+                    <td></td>
                 <tr>
                 {% endfor %}
         </tbody>
@@ -87,6 +101,11 @@
                 <th class="table-detail">
                     {{ quantityTotal }}
                 </th>
+                <td class="table-detail">
+                    <a href="{{ path('admin_print_order', { 'id': orderHeader.id }) }}">
+                        <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Imprimer toutes les photos"><li class="glyphicon glyphicon-print"></li> tout</button>
+                    </a>
+                </td>
             </tr>
         </tfoot>
     </table>
@@ -94,9 +113,9 @@
         <div class="bottom-block">
             <div class="bottom-block-right">
                 {% if not orderHeader.printed %}
-                    <a href="{{ path('admin_order_printed', {'id': orderHeader.id}) }}"><button type="button" class="btn btn-default"><i class="glyphicon glyphicon-print"></i> Confirmer l'impression</button></a>
-                        {% else %}
-                    <button type="button" class="btn btn-success disabled"><i class="glyphicon glyphicon-print"></i> Impression confirmée</button>
+                    <a href="{{ path('admin_order_printed', {'id': orderHeader.id}) }}"><button type="button" class="btn btn-default btn-sm bottom-button"><i class="glyphicon glyphicon-print"></i> Confirmer l'impression</button></a>
+                {% else %}
+                    <button type="button" class="btn btn-success btn-sm disabled bottom-button"><i class="glyphicon glyphicon-print"></i> Impression confirmée</button>
                 {% endif %}
             </div>
         </div>
@@ -135,9 +154,9 @@
         <div class="bottom-block">
             <div class="bottom-block-right">
                 {% if not orderHeader.payed %}
-                    <a href="{{ path('admin_order_payed', {'id': orderHeader.id}) }}"><button type="button" class="btn btn-default"><i class="glyphicon glyphicon-eur"></i> Confirmer le paiement</button></a>
+                    <a href="{{ path('admin_order_payed', {'id': orderHeader.id}) }}"><button type="button" class="btn btn-default btn-sm bottom-button"><i class="glyphicon glyphicon-eur"></i> Confirmer le paiement</button></a>
                 {% else %}
-                    <button type="button" class="btn btn-success disabled"><i class="glyphicon glyphicon-eur"></i> Paiement confirmée</button>
+                    <button type="button" class="btn btn-success btn-sm disabled bottom-button"><i class="glyphicon glyphicon-eur"></i> Paiement confirmée</button>
                 {% endif %}
             </div>
         </div>
@@ -149,4 +168,12 @@
             });
         </script>
     {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/resources/lightbox/js/lightbox.min.js"></script>
+{% endblock %}
+
+{% block stylesheets %}
+    <link href="/resources/lightbox/css/lightbox.min.css" rel="stylesheet">
 {% endblock %}

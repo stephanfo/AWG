@@ -139,7 +139,7 @@ class OrderController extends Controller
 
     /**
      * @Route("/order/canceled/{id}", requirements={"id" = "\d*"}, name="order_cancel")
-     * @ParamConverter("Order", options={"id" = "order"})
+     * @ParamConverter("order", class="CartBundle:Order", options={"id" = "id"})
      */
     public function canceledAction(Request $request, Order $order)
     {

@@ -15,7 +15,7 @@ class PriceController extends Controller
 
     /**
      * @Route("/prices/add/format/{id}", requirements={"id" = "\d*"}, name="price_add")
-     * @ParamConverter("Format", options={"id" = "format"})
+     * @ParamConverter("format", class="CartBundle:Format", options={"id" = "id"})
      */
     public function addAction(Format $format, Request $request)
     {
@@ -42,7 +42,7 @@ class PriceController extends Controller
 
     /**
      * @Route("/prices/edit/{id}", requirements={"id" = "\d*"}, name="price_edit")
-     * @ParamConverter("Price", options={"id" = "price"})
+     * @ParamConverter("price", class="CartBundle:Price", options={"id" = "id"})
      */
     public function editAction(Price $price, Request $request)
     {
@@ -65,7 +65,7 @@ class PriceController extends Controller
 
     /**
      * @Route("/prices/delete/{id}", requirements={"id" = "\d*"}, name="price_delete")
-     * @ParamConverter("Price", options={"id" = "price"})
+     * @ParamConverter("price", class="CartBundle:Price", options={"id" = "id"})
      */
     public function deleteAction(Price $price, Request $request)
     {
