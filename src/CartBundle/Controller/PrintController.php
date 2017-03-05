@@ -23,7 +23,7 @@ class PrintController extends Controller
         $helper = $this->get('vich_uploader.templating.helper.uploader_helper');
         $imagePath = $helper->asset($photo, 'imageFile');
 
-        if($photo->getImageWidth() === $photo->getImageHeight() && $format->getPrintSquare() !== "")
+        if($photo->getImageWidth() === $photo->getImageHeight() && !is_null($format->getPrintSquare()))
             $printCommand = str_replace(array("{quantity}", "{file}"), array(1, $imagePath), $format->getPrintSquare());
         else
             $printCommand = str_replace(array("{quantity}", "{file}"), array(1, $imagePath), $format->getPrint());
@@ -62,7 +62,7 @@ class PrintController extends Controller
                 $helper = $this->get('vich_uploader.templating.helper.uploader_helper');
                 $imagePath = $helper->asset($photo, 'imageFile');
 
-                if($photo->getImageWidth() === $photo->getImageHeight() && $format->getPrintSquare() !== "")
+                if($photo->getImageWidth() === $photo->getImageHeight() && !is_null($format->getPrintSquare()))
                     $printCommand = str_replace(array("{quantity}", "{file}"), array($quantity->getQuantity(), $imagePath), $format->getPrintSquare());
                 else
                     $printCommand = str_replace(array("{quantity}", "{file}"), array($quantity->getQuantity(), $imagePath), $format->getPrint());
