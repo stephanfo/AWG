@@ -77,8 +77,30 @@ class UserController extends Controller
         }
 
         return $this->render('UserBundle:User:edit.html.twig', array(
-                    'form' => $form->createView(),
+            'form' => $form->createView(),
         ));
+    }
+
+    /**
+     * @Route("/user/logout", name="user_logout")
+     */
+    public function logoutAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $this->container->get('user_profile')->getUser();
+
+        if (is_null($user))
+            return $this->redirectToRoute('user_add');
+
+        $user->setSession($user->getSession() . "-killed");
+        $em->flush();
+
+        $request->getSession()->invalidate();
+
+        $request->getSession()->getFlashBag()->add('success', 'Vous avez bien été déconnecté.');
+
+        return $this->redirectToRoute('user_add');
     }
 
 }
