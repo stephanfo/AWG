@@ -49,6 +49,14 @@ class Format
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Type(type="string")
      */
+    private $printCrop;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Type(type="string")
+     */
     private $printSquare;
 
     /**
@@ -353,5 +361,29 @@ class Format
     public function getPrintSquare()
     {
         return $this->printSquare;
+    }
+
+    /**
+     * Set printCrop
+     *
+     * @param string $printCrop
+     *
+     * @return Format
+     */
+    public function setPrintCrop($printCrop)
+    {
+        $this->printCrop = $printCrop;
+
+        return $this;
+    }
+
+    /**
+     * Get printCrop
+     *
+     * @return string
+     */
+    public function getPrintCrop()
+    {
+        return $this->printCrop;
     }
 }

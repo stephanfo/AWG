@@ -68,6 +68,15 @@ class Photo
     private $imageHeight;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean")
+     *
+     * @Assert\Type(type="bool")
+     */
+    private $doNotCrop;
+    
+    /**
      * @var \DateTime $created
      *
      * @ORM\Column(type="datetime", nullable=true)
@@ -502,5 +511,29 @@ class Photo
     public function getImageHeight()
     {
         return $this->imageHeight;
+    }
+
+    /**
+     * Set doNotCrop
+     *
+     * @param boolean $doNotCrop
+     *
+     * @return Photo
+     */
+    public function setDoNotCrop($doNotCrop)
+    {
+        $this->doNotCrop = $doNotCrop;
+
+        return $this;
+    }
+
+    /**
+     * Get doNotCrop
+     *
+     * @return boolean
+     */
+    public function getDoNotCrop()
+    {
+        return $this->doNotCrop;
     }
 }

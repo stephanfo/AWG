@@ -17,10 +17,22 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="form-group">
-            {{ form_label(form.print, "Commande d'impression (par défaut)") }}
+            {{ form_label(form.print, "Commande d'impression (sans adaptation au format papier)") }}
             {{ form_errors(form.print) }}
             {{ form_widget(form.print, {'attr': {'class': 'form-control'}}) }}
         </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="form-group">
+            {{ form_label(form.printCrop, "Commande d'impression (avec adaptation au format papier)") }}
+            {{ form_errors(form.printCrop) }}
+            {{ form_widget(form.printCrop, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <p>
+            Laisser vide si non applicable.
+        </p>
     </div>
 </div>
 <div class="row">
@@ -42,20 +54,29 @@
 
 <hr>
 
+<h4 class="page-header">Complément d'information</h4>
+
 <div class="row">
     <div class="col-lg-12">
         <p>
-            Vous pouvez renseigner une ligne de commande pour démarer l'impression. Les champs {quantity} et {file}
-            seront remplacés par la quantité et le chemin relatif de l'image chargée initialement.
+            Vous pouvez renseigner les champs <u><i>Commande d'impression</i></u> avec la ligne de commande permettant
+            de lancer l'impression en CLI. Les champs {quantity} et {file} seront remplacés par la quantité et le chemin
+            absolu de l'image chargée initialement.
         </p>
         <p>
-            Ci-dessous un exemple de ligne de commande pour un lancement d'impresion depuis Linux:
+            Ci-dessous un exemple de ligne de commande pour un lancement d'impresion depuis UNIX (Linux/Mac):
         </p>
-        <pre>/usr/bin/lp -d Dai_Nippon_Printing_DP_DS620 -o PageSize=dnp4x6 -o Finish=Glossy -n {quantity} /var/www/awg/web{file}</pre>
+        <pre>/usr/bin/lp -d Dai_Nippon_Printing_DP_DS620 -o PageSize=dnp4x6 -o Finish=Glossy -n {quantity} {file}</pre>
         <p>
-            Ci-dessous un exemple de ligne de commande pour un lancement d'impresion depuis Mac:
+            L'option ci-dessous permet d'adapter la taille de l'image pour remplir le papier (sans déformation).
+            Utilisez cette option pour la ligne de commande <u><i>avec adaptation au format papier</i></u>
+            (cette option peut ne pas fonctionner avec certaines imprimantes).
         </p>
-        <pre>/usr/bin/lp -d Dai_Nippon_Printing_DP_DS620 -o PageSize=dnp4x6 -o Finish=Glossy -n {quantity} /Applications/AMPPS/www/awg/web{file}</pre>
+        <pre>-o fit-to-page</pre>
+        <p>
+            Dans tous les cas, l'impression <u><i>si photo carrée</i></u> sera prioritaire si la condition est remplie
+            et que la ligne de commande est renseignée.
+        </p>
         <p>
             Ci-dessous, la liste des imprimantes détectées par le système. Cliquez sur le bouton pour obtenir la liste des
             options disponibles.

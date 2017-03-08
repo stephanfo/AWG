@@ -26,6 +26,13 @@
             </button>
         </div>
         <div class="col-lg-5">
+            <a href="{{ path('gallery_view', { 'id': gallery.id }) }}">
+                <button class="btn btn-default">Créer les miniatures</button>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
             <!-- The global file processing state -->
             <span class="fileupload-process">
                 <div id="total-progress" class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" style="opacity: 0;">
@@ -139,13 +146,14 @@
             padding: 8px;
         }
         div.table .file-row:nth-child(odd) {
-            background: #f9f9f9;
+            background: #7F7F7F;
         }
 
         /* The total progress gets shown by event listeners */
         #total-progress {
             opacity: 0;
             transition: opacity 0.3s linear;
+            margin-top: 20px;
         }
 
         /* Hide the progress bar when finished */

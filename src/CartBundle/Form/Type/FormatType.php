@@ -19,6 +19,7 @@ class FormatType extends AbstractType
         $builder
             ->add('size')
             ->add('print')
+            ->add('printCrop')
             ->add('printSquare')
             ->add('save', SubmitType::class)
         ;

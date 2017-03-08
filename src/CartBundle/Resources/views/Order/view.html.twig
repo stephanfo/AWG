@@ -58,14 +58,18 @@
                         {% endif %}
                         <td>
                             <a href="{{ vich_uploader_asset(quantity.detail.photo, 'imageFile') }}" data-lightbox="gallery" data-title="Photo {{ quantity.detail.photo.title }}, Taille {{ quantity.detail.photo.imageWidth }}x{{ quantity.detail.photo.imageHeight }}">
-                                <img class="img-responsive img-thumbnail cart-img" src="{{ vich_uploader_asset(quantity.detail.photo, 'imageFile') | imagine_filter('gallery_thumb') }}"/>
-                            </a>
+                                <img class="img-responsive img-thumbnail cart-img" src="{{ vich_uploader_asset(quantity.detail.photo, 'imageFile') | imagine_filter('gallery_thumb') }}"/></a>
                             {{ quantity.detail.photo.title }}
                         </td>
                         <td class="table-detail">
                             {{ quantity.quantity }}
                         </td>
                         <td class="table-detail">
+                            {% if quantity.detail.photo.doNotCrop %}
+                                <a href="{{ path('photo_toogle_crop', { 'id': quantity.detail.photo.id }) }}"><button type="button" class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Autoriser le recadrage"><i class="glyphicon glyphicon-fullscreen"></i></button></a>
+                            {%  else %}
+                                <a href="{{ path('photo_toogle_crop', { 'id': quantity.detail.photo.id }) }}"><button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Interdire le recadrage"><i class="glyphicon glyphicon-fullscreen"></i></button></a>
+                            {%  endif %}
                             {%  if format.print is not empty %}
                                 <a href="{{ path('admin_print_single', { 'photo_id': quantity.detail.photo.id, 'format_id': format.id }) }}">
                                     <button class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="imprimer un tirage au format {{ format.size }}"><li class="glyphicon glyphicon-print"></li> x1</button>
@@ -103,7 +107,7 @@
                 </th>
                 <td class="table-detail">
                     <a href="{{ path('admin_print_order', { 'id': orderHeader.id }) }}">
-                        <button class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Imprimer toutes les photos"><li class="glyphicon glyphicon-print"></li> tout</button>
+                        <button class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" title="Imprimer toutes les photos"><li class="glyphicon glyphicon-print"></li> tout</button>
                     </a>
                 </td>
             </tr>

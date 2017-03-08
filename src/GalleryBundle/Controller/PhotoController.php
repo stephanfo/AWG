@@ -48,6 +48,7 @@ class PhotoController extends Controller
         $photo->setGallery($gallery);
         $photo->setImageFile($file);
         $photo->setTitle($file->getClientOriginalName());
+        $photo->setDoNotCrop(false);
 
         $em->persist($photo);
         $em->flush();
@@ -96,4 +97,18 @@ class PhotoController extends Controller
         return $this->redirectToRoute('gallery_view', array('id' => $photo->getGallery()->getId()));
     }
 
+    /**
+     * @Route("/photo/crop/toggle/{id}", requirements={"id" = "\d*"}, name="photo_toogle_crop")
+     */
+    public function cropToggleAction(Photo $photo, Request $request)
+    {
+        if ($photo->getDoNotCrop())
+            $photo->setDoNotCrop(false);
+        else
+            $photo->setDoNotCrop(true);
+
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirect($request->headers->get('referer'));
+    }
 }

@@ -20,14 +20,20 @@ class PrintController extends Controller
      */
     public function printSingleAction(Request $request, Photo $photo, Format $format)
     {
+        $appPath = $this->container->getParameter('kernel.root_dir');
+        $webPath = realpath($appPath . '/../web');
+
         $helper = $this->get('vich_uploader.templating.helper.uploader_helper');
         $imagePath = $helper->asset($photo, 'imageFile');
+        $absoluteImagePath = $webPath . $imagePath;
 
         if($photo->getImageWidth() === $photo->getImageHeight() && !is_null($format->getPrintSquare()))
-            $printCommand = str_replace(array("{quantity}", "{file}"), array(1, $imagePath), $format->getPrintSquare());
+            $printCommand = str_replace(array("{quantity}", "{file}"), array(1, $absoluteImagePath), $format->getPrintSquare());
         else
-            $printCommand = str_replace(array("{quantity}", "{file}"), array(1, $imagePath), $format->getPrint());
-
+            if($photo->getDoNotCrop())
+                $printCommand = str_replace(array("{quantity}", "{file}"), array(1, $absoluteImagePath), $format->getPrint());
+            else
+                $printCommand = str_replace(array("{quantity}", "{file}"), array(1, $absoluteImagePath), $format->getPrintCrop());
 
         $printProcess = new Process($printCommand);
         $printProcess->run();
@@ -48,6 +54,9 @@ class PrintController extends Controller
      */
     public function printOrderContainer(Request $request, $id)
     {
+        $appPath = $this->container->getParameter('kernel.root_dir');
+        $webPath = realpath($appPath . '/../web');
+
         $formats = $this->getDoctrine()->getRepository('CartBundle:Format')->getOrderDetail($id);
 
         $error = false;
@@ -61,11 +70,15 @@ class PrintController extends Controller
 
                 $helper = $this->get('vich_uploader.templating.helper.uploader_helper');
                 $imagePath = $helper->asset($photo, 'imageFile');
+                $absoluteImagePath = $webPath . $imagePath;
 
                 if($photo->getImageWidth() === $photo->getImageHeight() && !is_null($format->getPrintSquare()))
-                    $printCommand = str_replace(array("{quantity}", "{file}"), array($quantity->getQuantity(), $imagePath), $format->getPrintSquare());
+                    $printCommand = str_replace(array("{quantity}", "{file}"), array($quantity->getQuantity(), $absoluteImagePath), $format->getPrintSquare());
                 else
-                    $printCommand = str_replace(array("{quantity}", "{file}"), array($quantity->getQuantity(), $imagePath), $format->getPrint());
+                    if($photo->getDoNotCrop())
+                        $printCommand = str_replace(array("{quantity}", "{file}"), array($quantity->getQuantity(), $absoluteImagePath), $format->getPrint());
+                    else
+                        $printCommand = str_replace(array("{quantity}", "{file}"), array($quantity->getQuantity(), $absoluteImagePath), $format->getPrintCrop());
 
                 $nbPrint += $quantity->getQuantity();
 

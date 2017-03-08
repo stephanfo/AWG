@@ -22,6 +22,12 @@
                 <div class="caption">
                     <p class="text-center">
                         {{ photo.title }} &nbsp;
+                        {% if photo.doNotCrop %}
+                            <a href="{{ path('photo_toogle_crop', { 'id': photo.id }) }}"><button type="button" class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Autoriser le recadrage"><i class="glyphicon glyphicon-fullscreen"></i></button></a>
+                        {%  else %}
+                            <a href="{{ path('photo_toogle_crop', { 'id': photo.id }) }}"><button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Interdire le recadrage"><i class="glyphicon glyphicon-fullscreen"></i></button></a>
+                        {%  endif %}
+                        &nbsp;
                         <a href="{{ path('photo_delete', { 'id': photo.id }) }}"><button type="button" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Supprimer"><i class="glyphicon glyphicon-trash"></i></button></a>
                     </p>
                 </div>
