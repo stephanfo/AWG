@@ -49,7 +49,7 @@ class GalleryRepository extends \Doctrine\ORM\EntityRepository
                         ->addSelect("photo")
                         ->where('gallery.active = :active')
                         ->setParameter('active', true)
-                        ->orderBy("gallery.id", "ASC")
+                        ->orderBy("gallery.date", "DESC")
                         ->addOrderBy("photo.id", "ASC")
                         ->getQuery()
                         ->getResult()

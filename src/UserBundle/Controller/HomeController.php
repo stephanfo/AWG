@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     public function viewAction()
     {
-        $user = $this->container->get('user_profile')->getUser();
+        $user = $this->get('user_profile')->getUser();
 
         if (is_null($user))
             return $this->redirectToRoute('user_add');
@@ -35,9 +35,9 @@ class HomeController extends Controller
         }
 
         return $this->render('UserBundle:Home:view.salvatorre.html.twig', array(
-                    'galleries' => $galleries,
-                    'likes' => $likesArray,
-                    'carts' => $cartArray
+            'galleries' => $galleries,
+            'likes' => $likesArray,
+            'carts' => $cartArray
         ));
     }
 

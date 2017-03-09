@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new UserBundle\UserBundle(),
             new GalleryBundle\GalleryBundle(),
             new CartBundle\CartBundle(),
+            new AppBundle\AppBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),

@@ -1,0 +1,10 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}
+    Configuration - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+        <h4 class="page-header">Configurer l'application</h4>
+        {{ include("AppBundle:Config:form.html.twig") }}
+{% endblock %}

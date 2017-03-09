@@ -19,7 +19,6 @@ class DiscountType extends AbstractType
     {
         $builder
                 ->add('title')
-                ->add('detail')
                 ->add('comment')
                 ->add('startTime', DateTimeType::class, array(
                     'widget' => 'single_text',

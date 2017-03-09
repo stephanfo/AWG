@@ -15,7 +15,7 @@
         <meta name="theme-color" content="#ffffff">
         <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="/resources/thumbnail-gallery/thumbnail-gallery.css" rel="stylesheet">
-        <link href="/resources/photos.lifeinpix/css/template/darkly.min.css" rel="stylesheet">
+        <link href="/resources/photos.lifeinpix/css/template/{{ app_config.getConfig.applicationTheme }}.min.css" rel="stylesheet">
         {% block stylesheets %}{% endblock %}
         <link href="/resources/photos.lifeinpix/css/style.css" rel="stylesheet">
     <script src="/resources/jquery/jquery-3.1.1.min.js"></script>
@@ -66,16 +66,24 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">Administration <span class="caret"></span></a>
                             <ul class="dropdown-menu" aria-labelledby="admin">
                                 <li>
+                                    <a href="{{ path('app_intro') }}" target="_blank">Instructions</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="{{ path('admin_cart_current') }}">Selections</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('admin_order_list') }}">Commandes</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
                                     <a href="{{ path('gallery_index') }}">Galeries</a>
                                 </li>
                                 <li>
                                     <a href="{{ path('tarif_index') }}">Formats et Tarifs</a>
                                 </li>
                                 <li>
-                                    <a href="{{ path('admin_cart_current') }}">Selections</a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('admin_order_list') }}">Commandes</a>
+                                    <a href="{{ path('app_config_edit') }}">Configuration</a>
                                 </li>
                             </ul>
                         </li>

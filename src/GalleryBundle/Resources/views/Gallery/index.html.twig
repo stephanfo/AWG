@@ -28,7 +28,7 @@
                                     </a>
                                 </td>
                                 <td style="vertical-align: middle;">
-                                    {{ gallery.date | date('d-m-Y') }}
+                                    {{ gallery.date | date('d-m-Y H:m') }}
                                 </td>
                                 <td style="vertical-align: middle;">
                                     <a href="{{ path('photo_loader', { 'id': gallery.id }) }}"><button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Ajouter des photos"><i class="glyphicon glyphicon glyphicon-plus"></i></button></a>

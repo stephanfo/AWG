@@ -17,7 +17,7 @@ class LikeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $user = $this->container->get('user_profile')->getUser();
+        $user = $this->get('user_profile')->getUser();
 
         if (!$photo->getLikeUsers()->contains($user))
         {

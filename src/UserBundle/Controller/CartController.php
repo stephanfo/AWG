@@ -20,7 +20,7 @@ class CartController extends Controller
      */
     public function cartAction()
     {
-        $user = $this->container->get('user_profile')->getUser();
+        $user = $this->get('user_profile')->getUser();
 
         if (is_null($user))
             return $this->redirectToRoute('user_add');
@@ -41,7 +41,7 @@ class CartController extends Controller
             }
         }
 
-        $total = $this->container->get('price_calculator')->getPricing($user);
+        $total = $this->get('price_calculator')->getPricing($user);
 
         return $this->render('UserBundle:Cart:view.html.twig', array(
                     'userCarts' => $cart,
@@ -59,7 +59,7 @@ class CartController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $user = $this->container->get('user_profile')->getUser();
+        $user = $this->get('user_profile')->getUser();
 
         $cart = $em->getRepository('CartBundle:Cart')->findOneBy(array(
             'photo' => $photo,
@@ -96,7 +96,7 @@ class CartController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $user = $this->container->get('user_profile')->getUser();
+        $user = $this->get('user_profile')->getUser();
 
         $cart = $em->getRepository('CartBundle:Cart')->findOneBy(array(
             'photo' => $photo,
@@ -124,7 +124,7 @@ class CartController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $user = $this->container->get('user_profile')->getUser();
+        $user = $this->get('user_profile')->getUser();
 
         $carts = $em->getRepository('CartBundle:Cart')->findBy(array(
             'user' => $user
@@ -149,7 +149,7 @@ class CartController extends Controller
      */
     public function updateCartAction(Photo $photo, Format $format, $quantity)
     {
-        $user = $this->container->get('user_profile')->getUser();
+        $user = $this->get('user_profile')->getUser();
 
         $em = $this->getDoctrine()->getManager();
 
@@ -178,7 +178,7 @@ class CartController extends Controller
             $em->flush();
         }
 
-        $pricing = $this->container->get('price_calculator')->getPricing($user);
+        $pricing = $this->get('price_calculator')->getPricing($user);
         $total = $pricing["overall"]["total"];
 
         return $this->json(array(
@@ -194,12 +194,12 @@ class CartController extends Controller
      */
     public function checkoutAction()
     {
-        $user = $this->container->get('user_profile')->getUser();
+        $user = $this->get('user_profile')->getUser();
 
         if (is_null($user))
             return $this->redirectToRoute('user_add');
 
-        $total = $this->container->get('price_calculator')->getPricing($user);
+        $total = $this->get('price_calculator')->getPricing($user);
 
         $confirmationForm = $this->getCheckoutForm($total['overall']['total']);
 

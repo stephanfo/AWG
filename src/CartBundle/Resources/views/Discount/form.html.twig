@@ -13,11 +13,6 @@
             {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
         </div>
         <div class="form-group">
-            {{ form_label(form.detail, "Détail") }}
-            {{ form_errors(form.detail) }}
-            {{ form_widget(form.detail, {'attr': {'class': 'form-control tinymce'}}) }}
-        </div>
-        <div class="form-group">
             {{ form_label(form.comment, "Commentaire") }}
             {{ form_errors(form.comment) }}
             {{ form_widget(form.comment, {'attr': {'class': 'form-control'}}) }}
@@ -87,8 +82,6 @@
     </div>
 </div>
 
-{{ form_widget(form.save, {'attr': {'class': 'btn btn-primary btn-sm bottom-button'}, 'label': 'Sauvegarder'}) }}
+{{ form_widget(form.save, {'attr': {'class': 'btn btn-primary bottom-button'}, 'label': 'Sauvegarder'}) }}
 {{ form_rest(form) }}
 {{ form_end(form) }}
-
-{{ tinymce_init() }}

@@ -53,10 +53,10 @@ class Gallery
     private $comment;
 
     /**
-     * @var \Date $date
+     * @var \DateTime $date
      *
-     * @ORM\Column(type="date")
-     * @Assert\Date
+     * @ORM\Column(type="datetime")
+     * @Assert\DateTime
      * @Assert\NotBlank
      */
     private $date;

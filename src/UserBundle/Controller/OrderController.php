@@ -20,7 +20,7 @@ class OrderController extends Controller
     public function addAction(Request $request)
     {
 
-        $user = $this->container->get('user_profile')->getUser();
+        $user = $this->get('user_profile')->getUser();
 
         if (is_null($user))
             return $this->redirectToRoute('user_add');
@@ -29,7 +29,7 @@ class OrderController extends Controller
 
         if ($confirmationForm->handleRequest($request)->isValid())
         {
-            $total = $this->container->get('price_calculator')->getPricing($user);
+            $total = $this->get('price_calculator')->getPricing($user);
             $totalCalculated = (float) $total['overall']['total'];
 
             $resultArray = $confirmationForm->getData();
@@ -107,7 +107,7 @@ class OrderController extends Controller
      */
     public function listAction(Request $request)
     {
-        $user = $this->container->get('user_profile')->getUser();
+        $user = $this->get('user_profile')->getUser();
 
         if (is_null($user))
             return $this->redirectToRoute('user_add');

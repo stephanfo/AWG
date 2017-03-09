@@ -62,6 +62,12 @@ img.cart-img {
     float: right;
 }
 
+
+.gallery-quick-link {
+    float: right;
+    padding-top: 15px;
+}
+
 @media screen and (max-width: 350px){
     #grid[data-columns]::before {
         content: '1 .column.size-1of1';
@@ -79,6 +85,12 @@ img.cart-img {
         width: 100%;
         margin-top: 10px;
     }
+
+    .gallery-quick-link {
+        float: none;
+        padding-top: 15px;
+    }
+
 }
 
 @media screen and (min-width: 351px) and (max-width: 600px) {
@@ -102,6 +114,12 @@ img.cart-img {
         line-height: 1.42857143;
         border-radius: 4px
     }
+
+    .gallery-quick-link {
+        float: none;
+        padding-top: 15px;
+    }
+
 }
 
 @media screen and (min-width: 601px) and (max-width: 1000px)  {

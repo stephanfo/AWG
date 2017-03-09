@@ -60,14 +60,6 @@ class Discount
     private $title;
 
     /**
-     * @var text
-     *
-     * @ORM\Column(type="text", nullable=true)
-     * @Assert\Type(type="string")
-     */
-    private $detail;
-
-    /**
      * @var string
      *
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -239,30 +231,6 @@ class Discount
     public function getTitle()
     {
         return $this->title;
-    }
-
-    /**
-     * Set detail
-     *
-     * @param string $detail
-     *
-     * @return Discount
-     */
-    public function setDetail($detail)
-    {
-        $this->detail = $detail;
-
-        return $this;
-    }
-
-    /**
-     * Get detail
-     *
-     * @return string
-     */
-    public function getDetail()
-    {
-        return $this->detail;
     }
 
     /**

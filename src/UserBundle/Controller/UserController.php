@@ -16,7 +16,7 @@ class UserController extends Controller
      */
     public function indexAction()
     {
-        $user = $this->container->get('user_profile')->getUser();
+        $user = $this->get('user_profile')->getUser();
 
         if (is_null($user))
             return $this->redirectToRoute('user_add');
@@ -35,7 +35,7 @@ class UserController extends Controller
 
         $form = $this->createForm(UserType::class, $user);
 
-        $user->setSession($this->container->get('user_profile')->getUserSession());
+        $user->setSession($this->get('user_profile')->getUserSession());
 
         if ($form->handleRequest($request)->isValid())
         {
@@ -60,7 +60,7 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $user = $this->container->get('user_profile')->getUser();
+        $user = $this->get('user_profile')->getUser();
 
         if (is_null($user))
             return $this->redirectToRoute('user_add');
@@ -88,7 +88,7 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $user = $this->container->get('user_profile')->getUser();
+        $user = $this->get('user_profile')->getUser();
 
         if (is_null($user))
             return $this->redirectToRoute('user_add');
