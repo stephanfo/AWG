@@ -73,6 +73,10 @@
             </div>
         </div>
     </div>
+    <p>
+        <mark>La taille maximale des images est limitée à {{ maxFileSize }}.</mark><br/>
+        Cette limite est fixée par PHP, dans le fichier configuration : {{ phpIniFile }}. Modifez les directives 'upload_max_filesize' et 'post_max_size' au besoin, puis redémarez Apache.
+    </p>
 {% endblock %}
 
 {% block javascripts %}
@@ -174,6 +178,9 @@
         }
         #previews .file-row.dz-success .delete {
             display: block;
+        }
+        #actions {
+            margin-top: 25px;
         }
     </style>
 {% endblock %}

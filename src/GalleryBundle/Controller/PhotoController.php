@@ -18,7 +18,9 @@ class PhotoController extends Controller
     public function addAction(Gallery $gallery)
     {
         return $this->render('GalleryBundle:Photo:loader.html.twig', array(
-                    'gallery' => $gallery,
+            'gallery' => $gallery,
+            'maxFileSize' => ini_get('upload_max_filesize'),
+            'phpIniFile' => php_ini_loaded_file()
         ));
     }
 
@@ -80,8 +82,8 @@ class PhotoController extends Controller
         }
 
         return $this->render('GalleryBundle:Photo:delete.html.twig', array(
-                    'form' => $form->createView(),
-                    'gallery' => $gallery
+            'form' => $form->createView(),
+            'gallery' => $gallery
         ));
     }
 
