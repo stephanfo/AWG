@@ -65,6 +65,52 @@ class Config
      *
      * @Assert\Type(type="bool")
      */
+    private $applicationSellFiles;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean")
+     *
+     * @Assert\Type(type="bool")
+     */
+    private $applicationSellFilesForceDownload;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Email
+     * @Assert\Type(type="string")
+     */
+    private $applicationSellFilesEmailSender;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\NotBlank
+     * @Assert\Type(type="string")
+     */
+    private $applicationSellFilesEmailSubject;
+
+    /**
+     * @var text
+     *
+     * @ORM\Column(type="text", nullable=true)
+     * @Assert\Type(type="string")
+     */
+    private $applicationSellFilesEmailBody;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean")
+     *
+     * @Assert\Type(type="bool")
+     */
     private $galleryQuickLink;
 
     /**
@@ -195,5 +241,125 @@ class Config
     public function getGalleryQuickLink()
     {
         return $this->galleryQuickLink;
+    }
+
+    /**
+     * Set applicationSellFiles
+     *
+     * @param boolean $applicationSellFiles
+     *
+     * @return Config
+     */
+    public function setApplicationSellFiles($applicationSellFiles)
+    {
+        $this->applicationSellFiles = $applicationSellFiles;
+
+        return $this;
+    }
+
+    /**
+     * Get applicationSellFiles
+     *
+     * @return boolean
+     */
+    public function getApplicationSellFiles()
+    {
+        return $this->applicationSellFiles;
+    }
+
+    /**
+     * Set applicationSellFilesEmailBody
+     *
+     * @param string $applicationSellFilesEmailBody
+     *
+     * @return Config
+     */
+    public function setApplicationSellFilesEmailBody($applicationSellFilesEmailBody)
+    {
+        $this->applicationSellFilesEmailBody = $applicationSellFilesEmailBody;
+
+        return $this;
+    }
+
+    /**
+     * Get applicationSellFilesEmailBody
+     *
+     * @return string
+     */
+    public function getApplicationSellFilesEmailBody()
+    {
+        return $this->applicationSellFilesEmailBody;
+    }
+
+    /**
+     * Set applicationSellFilesEmailSubject
+     *
+     * @param string $applicationSellFilesEmailSubject
+     *
+     * @return Config
+     */
+    public function setApplicationSellFilesEmailSubject($applicationSellFilesEmailSubject)
+    {
+        $this->applicationSellFilesEmailSubject = $applicationSellFilesEmailSubject;
+
+        return $this;
+    }
+
+    /**
+     * Get applicationSellFilesEmailSubject
+     *
+     * @return string
+     */
+    public function getApplicationSellFilesEmailSubject()
+    {
+        return $this->applicationSellFilesEmailSubject;
+    }
+
+    /**
+     * Set applicationSellFilesEmailSender
+     *
+     * @param string $applicationSellFilesEmailSender
+     *
+     * @return Config
+     */
+    public function setApplicationSellFilesEmailSender($applicationSellFilesEmailSender)
+    {
+        $this->applicationSellFilesEmailSender = $applicationSellFilesEmailSender;
+
+        return $this;
+    }
+
+    /**
+     * Get applicationSellFilesEmailSender
+     *
+     * @return string
+     */
+    public function getApplicationSellFilesEmailSender()
+    {
+        return $this->applicationSellFilesEmailSender;
+    }
+
+    /**
+     * Set applicationSellFilesForceDownload
+     *
+     * @param boolean $applicationSellFilesForceDownload
+     *
+     * @return Config
+     */
+    public function setApplicationSellFilesForceDownload($applicationSellFilesForceDownload)
+    {
+        $this->applicationSellFilesForceDownload = $applicationSellFilesForceDownload;
+
+        return $this;
+    }
+
+    /**
+     * Get applicationSellFilesForceDownload
+     *
+     * @return boolean
+     */
+    public function getApplicationSellFilesForceDownload()
+    {
+        return $this->applicationSellFilesForceDownload;
     }
 }

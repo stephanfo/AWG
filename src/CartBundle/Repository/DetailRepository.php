@@ -10,4 +10,18 @@ namespace CartBundle\Repository;
  */
 class DetailRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getDetailPhotoUser($id)
+    {
+        return $this->createQueryBuilder('detail')
+            ->join('detail.order', 'orderheader')
+            ->addSelect('orderheader')
+            ->join('orderheader.user', 'user')
+            ->addSelect('user')
+            ->join('detail.photo', 'photo')
+            ->addSelect('photo')
+            ->where('detail.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

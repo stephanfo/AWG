@@ -29,6 +29,9 @@
                 <th>Image</th>
                 <th class="table-detail">Quantity</th>
                 <th class="table-detail">Format</th>
+                {% if order.payed and not order.canceled and app_config.getConfig.applicationSellFiles %}
+                    <th class="table-detail">Action</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -40,6 +43,13 @@
                         </td>
                         <td class="table-detail">{{ quantity.quantity }}</td>
                         <td class="table-detail">{{ quantity.format.size }}</td>
+                        {% if order.payed and not order.canceled and app_config.getConfig.applicationSellFiles %}
+                            <td class="table-detail">
+                                <a href="{{ path("order_download_detail", { "id": detail.id }) }}">
+                                    <button type="button" class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Télécharger le fichier original"><i class="glyphicon glyphicon-download-alt"></i></button>
+                                </a>
+                            </td>
+                        {% endif %}
                     </tr>
                 {% endfor %}
             {% endfor %}
@@ -58,7 +68,7 @@
                 </tr>
             {% endif %}
             <tr class="success">
-                <th colspan="2">A payer</th>
+                <th colspan="{% if order.payed and not order.canceled and app_config.getConfig.applicationSellFiles %}3{% else %}2{% endif %}">Total</th>
                 <th class="table-detail">{{ order.total | number_format(2, ",", " ") }}€</th>
             </tr>
         </tfoot>

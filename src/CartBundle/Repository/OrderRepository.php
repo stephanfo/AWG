@@ -22,6 +22,8 @@ class OrderRepository extends \Doctrine\ORM\EntityRepository
                         ->addSelect('quantity')
                         ->leftjoin('quantity.format', 'format')
                         ->addSelect('format')
+                        ->leftjoin('orderheader.user', 'user')
+                        ->addSelect('user')
                         ->where('orderheader.id = :id')
                         ->setParameter('id', $id)
                         ->getQuery()
