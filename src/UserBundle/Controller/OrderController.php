@@ -11,7 +11,6 @@ use CartBundle\Entity\Order;
 use CartBundle\Entity\Detail;
 use CartBundle\Entity\OrderQuantity;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
-use Symfony\Component\HttpFoundation\File\File;
 
 class OrderController extends Controller
 {
@@ -223,12 +222,10 @@ class OrderController extends Controller
         $imagePath = $helper->asset($photo, 'imageFile');
         $absoluteImagePath = $webPath . $imagePath;
 
-        $file = new File($absoluteImagePath);
-
-        if ($config->getApplicationSellFilesForceDownload() === true)
-            return $this->file($file, $photo->getTitle());
+        if ($config->getApplicationSellFilesForceDownload())
+            return $this->file($absoluteImagePath, $photo->getTitle());
         else
-            return $this->file($file, $photo->getTitle(), ResponseHeaderBag::DISPOSITION_INLINE);
-    }
+            return $this->file($absoluteImagePath, $photo->getTitle(), ResponseHeaderBag::DISPOSITION_INLINE);
 
+    }
 }
