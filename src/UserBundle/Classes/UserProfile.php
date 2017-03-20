@@ -52,6 +52,3 @@ class UserProfile
         return $this->session->getId();
     }
 }
-
-?>
-
