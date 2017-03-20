@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use CartBundle\Entity\Order;
 use CartBundle\Entity\Detail;
 use CartBundle\Entity\OrderQuantity;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 class OrderController extends Controller
 {
@@ -105,7 +106,7 @@ class OrderController extends Controller
     /**
      * @Route("/order/list", name="order_list")
      */
-    public function listAction(Request $request)
+    public function listAction()
     {
         $user = $this->get('user_profile')->getUser();
 
@@ -128,9 +129,26 @@ class OrderController extends Controller
     /**
      * @Route("/order/view/{id}", requirements={"id" = "\d*"}, name="order_view")
      */
-    public function viewAction($id)
+    public function viewAction(Request $request, $id)
     {
+        $user = $this->get('user_profile')->getUser();
+
+        if (is_null($user))
+            return $this->redirectToRoute('user_add');
+
         $order = $this->getDoctrine()->getRepository('CartBundle:Order')->getOrderDetail($id);
+
+        if (is_null($order))
+        {
+            $request->getSession()->getFlashBag()->add('warning', "Cette commande n'existe pas");
+            return $this->redirectToRoute('order_list');
+        }
+
+        if ($order->getUser() !== $user)
+        {
+            $request->getSession()->getFlashBag()->add('danger', "Vous n'êtes pas autorisé à acceder à cette commande");
+            return $this->redirectToRoute('order_list');
+        }
 
         return $this->render('UserBundle:Order:view.html.twig', array(
                     'order' => $order
@@ -139,10 +157,22 @@ class OrderController extends Controller
 
     /**
      * @Route("/order/canceled/{id}", requirements={"id" = "\d*"}, name="order_cancel")
-     * @ParamConverter("order", class="CartBundle:Order", options={"id" = "id"})
      */
-    public function canceledAction(Request $request, Order $order)
+    public function canceledAction(Request $request, $id)
     {
+        $user = $this->get('user_profile')->getUser();
+
+        if (is_null($user))
+            return $this->redirectToRoute('user_add');
+
+        $order = $this->getDoctrine()->getRepository('CartBundle:Order')->getOrderUser($id);
+
+        if ($order->getUser() !== $user)
+        {
+            $request->getSession()->getFlashBag()->add('danger', "Vous n'êtes pas autorisé à modifier cette commande");
+            return $this->redirectToRoute('order_list');
+        }
+
         $order->setCanceled(true);
         $this->getDoctrine()->getManager()->flush();
 
@@ -151,4 +181,51 @@ class OrderController extends Controller
         return $this->redirectToRoute('order_list');
     }
 
+    /**
+     * @Route("/order/download/detail/{id}", requirements={"id" = "\d*"}, name="order_download_detail")
+     */
+    public function downloadPhotoAction(Request $request, $id)
+    {
+        $config = $this->get('app_config')->getConfig();
+
+        $user = $this->get('user_profile')->getUser();
+
+        if (is_null($user))
+            return $this->redirectToRoute('user_add');
+
+        $detail = $this->getDoctrine()->getRepository('CartBundle:Detail')->getDetailPhotoUser($id);
+
+        if (is_null($detail))
+        {
+            $request->getSession()->getFlashBag()->add('warning', "Le detail de la commande n'existe pas");
+            return $this->redirectToRoute('order_list');
+        }
+
+        if ($detail->getOrder()->getUser() !== $user)
+        {
+            $request->getSession()->getFlashBag()->add('danger', "Vous n'êtes pas autorisé à télécharger cette photo");
+            return $this->redirectToRoute('order_list');
+        }
+
+        if (!$detail->getOrder()->getPayed() || $detail->getOrder()->getCanceled() || !$config->getApplicationSellFiles())
+        {
+            $request->getSession()->getFlashBag()->add('danger', "Vous n'êtes pas autorisé à télécharger cette photo");
+            return $this->redirectToRoute('order_list');
+        }
+
+        $photo = $detail->getPhoto();
+
+        $appPath = $this->container->getParameter('kernel.root_dir');
+        $webPath = realpath($appPath . '/../web');
+
+        $helper = $this->get('vich_uploader.templating.helper.uploader_helper');
+        $imagePath = $helper->asset($photo, 'imageFile');
+        $absoluteImagePath = $webPath . $imagePath;
+
+        if ($config->getApplicationSellFilesForceDownload())
+            return $this->file($absoluteImagePath, $photo->getTitle());
+        else
+            return $this->file($absoluteImagePath, $photo->getTitle(), ResponseHeaderBag::DISPOSITION_INLINE);
+
+    }
 }

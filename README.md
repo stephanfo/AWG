@@ -16,6 +16,7 @@ Thanks to this web gallery, as a photographer, you can:
   - define special discount/pricing, that can time limited
   - manage prints (using LP & CUPS on Unix OS) & payments
   - cancel (if not already printed/payed) and reactivate orders
+  - send the files paid by email to the user (can be disable via config)
 
 Guests can:
   - manage their account (first/lastname, email, location)
@@ -26,6 +27,7 @@ Guests can:
   - confirm the orders (and cancel any order if the print has not been done)
   - track the orders (pending, printed, payed, canceled, completed)
   - cancel orders not printed
+  - download the photo file if the order is paid (can be disable via config)
 
 More features will come in the future.
 
@@ -114,6 +116,15 @@ $ php bin/console doctrine:schema:update --force
 $ php bin/console cache:clear --env prod ; php bin/console cache:clear
 ```
 You will also need to update your server configuration (Vhost, DNS, ...) to allow guests to access the gallery.
+
+### Emails
+If you activate this functionality to offer your files (check the config menu), the user will be able to download the paid photos through the order page, and admin can send the photos by email in the order page.
+If you use the emailing feature, all emails will be spooled, waiting for one of these 3 following command lines to send the queue.
+```sh
+$ php bin/console swiftmailer:spool:send --env=prod
+$ php bin/console swiftmailer:spool:send --message-limit=10 --env=prod
+$ php bin/console swiftmailer:spool:send --time-limit=10 --env=prod
+```
 
 ### Assistance
 For any assistance, issue, please post on the [AWG](https://github.com/stephanfo/AWG) Github repository.

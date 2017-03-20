@@ -116,6 +116,9 @@
     {% if not orderHeader.canceled %}
         <div class="bottom-block">
             <div class="bottom-block-right">
+                {% if app_config.getConfig.applicationSellFiles %}
+                    <a href="{{ path('admin_email_order', { 'order_id': orderHeader.id }) }}"><button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Envoyer les photos par email"><i class="glyphicon glyphicon-envelope"></i> Envoyer les photos par email</button></a>
+                {% endif %}
                 {% if not orderHeader.printed %}
                     <a href="{{ path('admin_order_printed', {'id': orderHeader.id}) }}"><button type="button" class="btn btn-default btn-sm bottom-button"><i class="glyphicon glyphicon-print"></i> Confirmer l'impression</button></a>
                 {% else %}

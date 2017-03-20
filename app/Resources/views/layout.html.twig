@@ -66,6 +66,16 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">Administration <span class="caret"></span></a>
                             <ul class="dropdown-menu" aria-labelledby="admin">
                                 <li>
+                                    <a href="{{ path('gallery_index') }}">Galeries</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('tarif_index') }}">Formats et Tarifs</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('app_config_edit') }}">Configuration</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
                                     <a href="{{ path('app_intro') }}" target="_blank">Instructions</a>
                                 </li>
                                 <li class="divider"></li>
@@ -74,16 +84,6 @@
                                 </li>
                                 <li>
                                     <a href="{{ path('admin_order_list') }}">Commandes</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="{{ path('gallery_index') }}">Galeries</a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('tarif_index') }}">Formats et Tarifs</a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('app_config_edit') }}">Configuration</a>
                                 </li>
                             </ul>
                         </li>

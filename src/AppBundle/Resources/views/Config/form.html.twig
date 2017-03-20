@@ -7,16 +7,43 @@
 </div>
 <div class="row">
     <div class="col-lg-12">
-        <div class="form-group">
+        <div class="form-group form-group-sm">
             {{ form_label(form.applicationTheme, "Theme de la gallery") }}
             {{ form_errors(form.applicationTheme) }}
             {{ form_widget(form.applicationTheme, {'attr': {'class': 'form-control'}}) }}
         </div>
-        <div class="form-group">
+        <div class="form-group form-group-sm">
             {{ form_label(form.galleryQuickLink, "Ajout du menu d'accès rapide aux galeries") }}
             {{ form_errors(form.galleryQuickLink) }}
             {{ form_widget(form.galleryQuickLink, {'attr': {'class': 'form-control'}}) }}
         </div>
+        <hr>
+        <div class="form-group form-group-sm">
+            {{ form_label(form.applicationSellFiles, "Activer la vente des originaux") }}
+            {{ form_errors(form.applicationSellFiles) }}
+            {{ form_widget(form.applicationSellFiles, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group form-group-sm">
+            {{ form_label(form.applicationSellFilesForceDownload, "Forcer le téléchargement des fichiers depuis les commandes utilisateurs") }}
+            {{ form_errors(form.applicationSellFilesForceDownload) }}
+            {{ form_widget(form.applicationSellFilesForceDownload, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group form-group-sm">
+            {{ form_label(form.applicationSellFilesEmailSender, "Email de l'expéditeur des emails") }}
+            {{ form_errors(form.applicationSellFilesEmailSender) }}
+            {{ form_widget(form.applicationSellFilesEmailSender, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group form-group-sm">
+            {{ form_label(form.applicationSellFilesEmailSubject, "Sujet des emails contenant les originaux") }}
+            {{ form_errors(form.applicationSellFilesEmailSubject) }}
+            {{ form_widget(form.applicationSellFilesEmailSubject, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.applicationSellFilesEmailBody, "Message à joindre aux emails lors de l'envoi des originaux") }}
+            {{ form_errors(form.applicationSellFilesEmailBody) }}
+            {{ form_widget(form.applicationSellFilesEmailBody, {'attr': {'class': 'form-control tinymce'}}) }}
+        </div>
+        <hr>
         <div class="form-group">
             {{ form_label(form.applicationIntroMessage, "Message d'introduction à la galerie") }}
             {{ form_errors(form.applicationIntroMessage) }}

@@ -98,11 +98,14 @@
                                     <button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Commande payée"><i class="glyphicon glyphicon-eur"></i></button>
                                     {% endif %}
                                 <a href="{{ path('admin_order_cancel', {'id': order.id}) }}"><button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Annuler la commande"><i class="glyphicon glyphicon-remove"></i></button></a>
-                                    {% endif %}
+                            {% endif %}
                         </td>
                         <td style="vertical-align: middle; white-space: nowrap;" class="table-detail">
-                            <a href="{{ path('admin_order_view', { 'id': order.id }) }}"><button type="button" class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" title="Détail de la commande"><i class="glyphicon glyphicon-list"></i></button></a>
+                            <a href="{{ path('admin_order_view', { 'id': order.id }) }}"><button type="button" class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="Détail de la commande"><i class="glyphicon glyphicon-list"></i></button></a>
                             <a href="{{ path('admin_print_order', { 'id': order.id }) }}"><button type="button" class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Imprimer toute la commande"><i class="glyphicon glyphicon-print"></i></button></a>
+                            {% if app_config.getConfig.applicationSellFiles %}
+                                <a href="{{ path('admin_email_order', { 'order_id': order.id }) }}"><button type="button" class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" title="Envoyer les originaux par email"><i class="glyphicon glyphicon-envelope"></i></button></a>
+                            {% endif %}
                         </td>
                     </tr>
                 {% endfor %}

@@ -10,4 +10,13 @@ namespace GalleryBundle\Repository;
  */
 class PhotoRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getOrderPhotos($order_id)
+    {
+        return $this->createQueryBuilder('photo')
+            ->leftjoin('photo.details', 'detail')
+            ->where('detail.order = :order_id')
+            ->setParameter('order_id', $order_id)
+            ->getQuery()
+            ->getResult();
+    }
 }
