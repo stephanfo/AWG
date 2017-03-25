@@ -1,4 +1,11 @@
-root:
+homeredirect:
+    path: /
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: home
+        permanent: true
+
+adminredirect:
     path: /admin
     defaults:
         _controller: FrameworkBundle:Redirect:redirect
@@ -8,7 +15,9 @@ root:
 frontend:
     resource: "@UserBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /{_locale}/
+    requirements:
+        _locale: en|fr
 
 app:
     resource: "@AppBundle/Controller/"

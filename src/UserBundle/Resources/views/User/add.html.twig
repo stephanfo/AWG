@@ -1,10 +1,10 @@
 {% extends "UserBundle::layout.html.twig" %}
 
 {% block title %}
-    Création profil - {{ parent() }}
+    {{ 'Créer mon profil' | trans }} - {{ parent() }}
 {% endblock %}
 
 {% block body %}
-        <h1 class="page-header">Créer mon profil</h1>
+        <h1 class="page-header">{{ 'Créer mon profil' | trans }}</h1>
         {{ include("UserBundle:User:form.html.twig") }}
 {% endblock %}

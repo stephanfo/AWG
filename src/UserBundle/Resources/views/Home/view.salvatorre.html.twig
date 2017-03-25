@@ -1,7 +1,7 @@
 {% extends "UserBundle::layout.html.twig" %}
 
 {% block title %}
-    Galerie - {{ parent() }}
+    {{ 'Galerie' | trans }} - {{ parent() }}
 {% endblock %}
 
 {% block body %}
@@ -9,7 +9,7 @@
         {% if app_config.getConfig.galleryQuickLink and galleries | length > 1 %}
             <div class="form-group form-group-sm form-inline gallery-quick-link">
                 <select id="quickLink" class="form-control">
-                    <option value="0">Accès rapide</option>
+                    <option value="0">{{ 'Accès rapide' | trans }}</option>
                     {% for gallery in galleries %}
                         <option value="quickLink-{{ loop.index }}">{{ gallery.title }}</option>
                     {% endfor %}
@@ -17,7 +17,7 @@
             </div>
         {% endif %}
         {% for gallery in galleries %}
-            <h4 id="quickLink-{{ loop.index }}" class="page-header">{{ gallery.title }} <small>(<i>{{ gallery.photos | length }} photos)</i></small></h4>
+            <h4 id="quickLink-{{ loop.index }}" class="page-header">{{ gallery.title }} <small>(<i>{{ gallery.photos | length }} {{ 'photos' | trans }})</i></small></h4>
             <p>
                 {{ gallery.detail | raw }}
             </p>
@@ -48,12 +48,12 @@
             <hr>
             <div class="bottom-block">
                 <div class="bottom-block-right">
-                    <a href="{{ path('cart') }}"><button type="button" class="btn btn-success bottom-button"><i class="glyphicon glyphicon-print"></i> Définir les formats</button></a>
+                    <a href="{{ path('cart') }}"><button type="button" class="btn btn-success bottom-button"><i class="glyphicon glyphicon-print"></i> {{ 'Définir les formats' | trans }}</button></a>
                 </div>
             </div>
         {% endfor %}
     {% else %}
-        Aucune galerie accessible
+        {{ 'Aucune galerie accessible' | trans }}
     {% endif %}
     {{ render(controller('UserBundle:Discount:bottomBar')) }}
 {% endblock %}

@@ -38,7 +38,7 @@ class OrderController extends Controller
 
             if (abs($totalSent - $totalCalculated) > 0.001)
             {
-                $request->getSession()->getFlashBag()->add('danger', 'Votre commande a echoué (la tarification a expiré). Merci de contrôler le total avant de reconfirmer la commande.');
+                $request->getSession()->getFlashBag()->add('danger', $this->get('translator')->trans('Votre commande a echoué (la tarification a expiré). Merci de contrôler le total avant de reconfirmer la commande.'));
 
                 return $this->redirectToRoute('checkout');
             }
@@ -75,7 +75,7 @@ class OrderController extends Controller
                 }
             }
 
-            $request->getSession()->getFlashBag()->add('success', 'Votre commande a bien été enregistrée.');
+            $request->getSession()->getFlashBag()->add('success', $this->get('translator')->trans('Votre commande a bien été enregistrée.'));
 
             $carts = $em->getRepository('CartBundle:Cart')->findBy(array(
                 'user' => $user
@@ -140,13 +140,13 @@ class OrderController extends Controller
 
         if (is_null($order))
         {
-            $request->getSession()->getFlashBag()->add('warning', "Cette commande n'existe pas");
+            $request->getSession()->getFlashBag()->add('warning', $this->get('translator')->trans("Cette commande n'existe pas"));
             return $this->redirectToRoute('order_list');
         }
 
         if ($order->getUser() !== $user)
         {
-            $request->getSession()->getFlashBag()->add('danger', "Vous n'êtes pas autorisé à acceder à cette commande");
+            $request->getSession()->getFlashBag()->add('danger', $this->get('translator')->trans("Vous n'êtes pas autorisé à acceder à cette commande"));
             return $this->redirectToRoute('order_list');
         }
 
@@ -169,14 +169,14 @@ class OrderController extends Controller
 
         if ($order->getUser() !== $user)
         {
-            $request->getSession()->getFlashBag()->add('danger', "Vous n'êtes pas autorisé à modifier cette commande");
+            $request->getSession()->getFlashBag()->add('danger', $this->get('translator')->trans("Vous n'êtes pas autorisé à modifier cette commande"));
             return $this->redirectToRoute('order_list');
         }
 
         $order->setCanceled(true);
         $this->getDoctrine()->getManager()->flush();
 
-        $request->getSession()->getFlashBag()->add('success', 'Votre commande a bien été annulée.');
+        $request->getSession()->getFlashBag()->add('success', $this->get('translator')->trans('Votre commande a bien été annulée.'));
 
         return $this->redirectToRoute('order_list');
     }
@@ -197,19 +197,19 @@ class OrderController extends Controller
 
         if (is_null($detail))
         {
-            $request->getSession()->getFlashBag()->add('warning', "Le detail de la commande n'existe pas");
+            $request->getSession()->getFlashBag()->add('warning', $this->get('translator')->trans("Le detail de la commande n'existe pas"));
             return $this->redirectToRoute('order_list');
         }
 
         if ($detail->getOrder()->getUser() !== $user)
         {
-            $request->getSession()->getFlashBag()->add('danger', "Vous n'êtes pas autorisé à télécharger cette photo");
+            $request->getSession()->getFlashBag()->add('danger', $this->get('translator')->trans("Vous n'êtes pas autorisé à télécharger cette photo"));
             return $this->redirectToRoute('order_list');
         }
 
         if (!$detail->getOrder()->getPayed() || $detail->getOrder()->getCanceled() || !$config->getApplicationSellFiles())
         {
-            $request->getSession()->getFlashBag()->add('danger', "Vous n'êtes pas autorisé à télécharger cette photo");
+            $request->getSession()->getFlashBag()->add('danger', $this->get('translator')->trans("Vous n'êtes pas autorisé à télécharger cette photo"));
             return $this->redirectToRoute('order_list');
         }
 

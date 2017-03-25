@@ -43,7 +43,7 @@ class UserController extends Controller
             $em->persist($user);
             $em->flush();
 
-            $request->getSession()->getFlashBag()->add('success', 'Votre profil a été créé.');
+            $request->getSession()->getFlashBag()->add('success', $this->get('translator')->trans('Votre profil a été créé.'));
 
             return $this->redirectToRoute('home');
         }
@@ -71,7 +71,7 @@ class UserController extends Controller
         {
             $em->flush();
 
-            $request->getSession()->getFlashBag()->add('success', 'Votre profil est mis à jour.');
+            $request->getSession()->getFlashBag()->add('success', $this->get('translator')->trans('Votre profil est mis à jour.'));
 
             return $this->redirectToRoute('home');
         }
@@ -98,7 +98,7 @@ class UserController extends Controller
 
         $request->getSession()->invalidate();
 
-        $request->getSession()->getFlashBag()->add('success', 'Vous avez bien été déconnecté.');
+        $request->getSession()->getFlashBag()->add('success', $this->get('translator')->trans('Vous avez bien été déconnecté.'));
 
         return $this->redirectToRoute('user_add');
     }

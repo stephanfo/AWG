@@ -1,11 +1,11 @@
 {% extends "UserBundle::layout.html.twig" %}
 
 {% block title %}
-    Vos impressions - {{ parent() }}
+    {{ 'Mes impressions' | trans }} - {{ parent() }}
 {% endblock %}
 
 {% block body %}
-    <h4 class="page-header">Mes impressions</h4>
+    <h4 class="page-header">{{ 'Mes impressions' | trans }}</h4>
     {% if not orders is empty %}
         <div class="row">
             <div class="col-md-12">
@@ -13,10 +13,10 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th class="table-detail">Heure</th>
-                            <th class="table-detail">Montant</th>
-                            <th class="table-detail">Status</th>
-                            <th class="table-detail">Détail</th>
+                            <th class="table-detail">{{ 'Heure' | trans }}</th>
+                            <th class="table-detail">{{ 'Montant' | trans }}</th>
+                            <th class="table-detail">{{ 'Status' | trans }}</th>
+                            <th class="table-detail">{{ 'Détail' | trans }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,22 +33,22 @@
                                 </td>
                                 <td style="vertical-align: middle; white-space: nowrap;" class="table-detail">
                                     {% if order.canceled == true %}
-                                        <button type="button" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Commande annulée"><i class="glyphicon glyphicon-remove"></i></button>
+                                        <button type="button" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="{{ 'Commande annulée' | trans }}"><i class="glyphicon glyphicon-remove"></i></button>
                                         {% else %}
                                             {% if order.payed == true %}
-                                            <button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Commande payée"><i class="glyphicon glyphicon-eur"></i></button>
+                                            <button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="{{ 'Commande payée' | trans }}"><i class="glyphicon glyphicon-eur"></i></button>
                                             {% else %}
-                                            <button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Commande non payée"><i class="glyphicon glyphicon-eur"></i></button>
+                                            <button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="{{ 'Commande non payée' | trans }}"><i class="glyphicon glyphicon-eur"></i></button>
                                             {% endif %}
                                             {% if order.printed == true %}
-                                            <button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Commande imprimée"><i class="glyphicon glyphicon-print"></i></button>
+                                            <button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="{{ 'Commande imprimée' | trans }}"><i class="glyphicon glyphicon-print"></i></button>
                                             {% else %}
-                                            <button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Commande non imprimée"><i class="glyphicon glyphicon-print"></i></button>
+                                            <button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="{{ 'Commande non imprimée' | trans }}"><i class="glyphicon glyphicon-print"></i></button>
                                             {% endif %}
                                         {% endif %}
                                 </td>
                                 <td style="vertical-align: middle; white-space: nowrap;" class="table-detail">
-                                    <a href="{{ path('order_view', { 'id': order.id }) }}"><button type="button" class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" title="Détail de la commande"><i class="glyphicon glyphicon-list"></i></button></a>
+                                    <a href="{{ path('order_view', { 'id': order.id }) }}"><button type="button" class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" title="{{ 'Détail de la commande' | trans }}"><i class="glyphicon glyphicon-list"></i></button></a>
                                 </td>
                             </tr>
                         {% endfor %}
@@ -61,7 +61,7 @@
             &nbsp;
         </p>
         <p>
-            Vous n'avez pas de demandes d'impressions. Rendez-vous dans la <a href="{{ path('home') }}">Gallerie photos</a> pour composer votre panier.
+            {% trans %}Vous n'avez pas de demandes d'impressions. Rendez-vous dans la{% endtrans %} <a href="{{ path('home') }}">{{ 'Gallerie photos' | trans }}</a> {% trans %}pour composer votre panier.{% endtrans %}
         </p>
     {% endif %}
 {% endblock %}

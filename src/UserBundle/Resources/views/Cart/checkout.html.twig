@@ -1,15 +1,15 @@
 {% extends "UserBundle::layout.html.twig" %}
 
 {% block title %}
-    Confirmation de votre impression - {{ parent() }}
+    {{ 'Confirmation de votre impression' | trans }} - {{ parent() }}
 {% endblock %}
 
 {% block body %}
-    <h4 class="page-header">Confirmation d'impression</h4>
+    <h4 class="page-header">{{ 'Confirmation de votre impression' | trans }}</h4>
     {% if total.details is not empty %}
         <p>
             <br/>
-            Vous trouverez ci-dessous la synthèse des tirages que vous allez commander. Merci de bien contrôler le montant total avant de valider l'impression.
+            {% trans %}Vous trouverez ci-dessous la synthèse des tirages que vous allez commander. Merci de bien contrôler le montant total avant de valider l'impression.{% endtrans %}
             <br/>
             <br/>
         </p>
@@ -17,9 +17,9 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Format</th>
-                    <th>Quantity</th>
-                    <th>Montant</th>
+                    <th>{{ 'Format' | trans }}</th>
+                    <th>{{ 'Quantity' | trans }}</th>
+                    <th>{{ 'Montant' | trans }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,7 +34,7 @@
             </tbody>
             <tfoot>
                 <tr class="info">
-                    <td colspan="2">Total</td>
+                    <td colspan="2">{{ 'Total' | trans }}</td>
                     <td>{{ total.overall.quantity }}</td>
                     <td>{{ total.overall.grossTotal | number_format(2, ",", " ")  }}€</td>
                 </tr>
@@ -46,7 +46,7 @@
                     </tr>
                 {% endif %}
                 <tr class="success">
-                    <th colspan="3">A payer</th>
+                    <th colspan="3">{{ 'A payer' | trans }}</th>
                     <th>{{ total.overall.total | number_format(2, ",", " ") }}€</th>
                 </tr>
             </tfoot>
@@ -57,12 +57,12 @@
             <div class="col-lg-12">
                 <div class="bottom-block-left">
                     <p>
-                        En cliquant sur le bouton "Confirmer", vous vous engagez à payer la commande dans son intégralité à la remise des tirages.
+                        {% trans %}En cliquant sur le bouton "Confirmer", vous vous engagez à payer la commande dans son intégralité à la remise des tirages.{% endtrans %}
                     </p>
                 </div>
                 <div class="bottom-block-right">
-                    <a href="{{ path('cart') }}"><button type="button" class="btn btn-primary bottom-button"><i class="glyphicon glyphicon-backward"></i> Modifier ma sélection</button></a>
-                    <a href="{{ path('order_add_current') }}"><button type="submit" class="btn btn-success bottom-button"><i class="glyphicon glyphicon-print"></i> Confirmer</button></a>
+                    <a href="{{ path('cart') }}"><button type="button" class="btn btn-primary bottom-button"><i class="glyphicon glyphicon-backward"></i> {{ 'Modifier ma sélection' | trans }}</button></a>
+                    <a href="{{ path('order_add_current') }}"><button type="submit" class="btn btn-success bottom-button"><i class="glyphicon glyphicon-print"></i> {{ 'Confirmer' | trans }}</button></a>
                 </div>
             </div>
         </div>
@@ -73,7 +73,7 @@
             &nbsp;
         </p>
         <p>
-            Votre panier est vide. Rendez-vous dans la <a href="{{ path('home') }}">Gallerie photos</a> pour composer votre panier.
+            {% trans %}Votre panier est vide. Rendez-vous dans la{% endtrans %} <a href="{{ path('home') }}">{{ 'Gallerie photos' | trans }}</a> {% trans %}pour composer votre panier.{% endtrans %}
         </p>
     {% endif %}
     {{ render(controller('UserBundle:Discount:bottomBar')) }}

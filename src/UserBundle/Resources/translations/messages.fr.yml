@@ -1,0 +1,90 @@
+Prénom: Prénom
+'Votre prénom': 'Votre prénom'
+Nom: Nom
+'Votre nom': 'Votre nom'
+Email: Email
+'Votre email': 'Votre email'
+Localisation: Localisation
+'Nom de table, Emplacement, ...': 'Nom de table, Emplacement, ...'
+Sauvegarder: Sauvegarder
+'Confirmation de votre impression': 'Confirmation de votre impression'
+'Vous trouverez ci-dessous la synthèse des tirages que vous allez commander. Merci de bien contrôler le montant total avant de valider l''impression.': 'Vous trouverez ci-dessous la synthèse des tirages que vous allez commander. Merci de bien contrôler le montant total avant de valider l''impression.'
+Format: Format
+Quantity: Quantity
+Montant: Montant
+Total: Total
+'A payer': 'A payer'
+'En cliquant sur le bouton "Confirmer", vous vous engagez à payer la commande dans son intégralité à la remise des tirages.': 'En cliquant sur le bouton "Confirmer", vous vous engagez à payer la commande dans son intégralité à la remise des tirages.'
+'Modifier ma sélection': 'Modifier ma sélection'
+Confirmer: Confirmer
+'Votre panier est vide. Rendez-vous dans la': 'Votre panier est vide. Rendez-vous dans la'
+'Gallerie photos': 'Gallerie photos'
+'pour composer votre panier.': 'pour composer votre panier.'
+'Ma sélection': 'Ma sélection'
+'Aucun format d''impression n''a été définit.': 'Aucun format d''impression n''a été définit.'
+'Vider ma sélection': 'Vider ma sélection'
+'Demander l''impression': 'Demander l''impression'
+'Votre panier sélection est vide. Rendez-vous dans la': 'Votre panier sélection est vide. Rendez-vous dans la'
+'se termine dans': 'se termine dans'
+secondes.: secondes.
+'Tarifs et Offres': 'Tarifs et Offres'
+Tarifs: Tarifs
+Quantité: Quantité
+Expire: Expire
+'Tarification unitaire': 'Tarification unitaire'
+'Tarification total': 'Tarification total'
+Remises: Remises
+'Une seule remise s''applique sur la commande, par ordre des lignes ci-dessous. La remise peut s''appliquer en bas de commande et/ou activer des tarifs spéciaux par quantités (voir tableau ci-dessus).': 'Une seule remise s''applique sur la commande, par ordre des lignes ci-dessous. La remise peut s''appliquer en bas de commande et/ou activer des tarifs spéciaux par quantités (voir tableau ci-dessus).'
+Dès: Dès
+'Jusqu''à': 'Jusqu''à'
+Remise: Remise
+'Aucune tarification n''est disponible.': 'Aucune tarification n''est disponible.'
+Galerie: Galerie
+'Accès rapide': 'Accès rapide'
+photos: photos
+'Définir les formats': 'Définir les formats'
+'Aucune galerie accessible': 'Aucune galerie accessible'
+'Mes impressions': 'Mes impressions'
+Heure: Heure
+Status: Status
+Détail: Détail
+'Commande annulée': 'Commande annulée'
+'Commande payée': 'Commande payée'
+'Commande non payée': 'Commande non payée'
+'Commande imprimée': 'Commande imprimée'
+'Commande non imprimée': 'Commande non imprimée'
+'Détail de la commande': 'Détail de la commande'
+'Vous n''avez pas de demandes d''impressions. Rendez-vous dans la': 'Vous n''avez pas de demandes d''impressions. Rendez-vous dans la'
+'Ma commande': 'Ma commande'
+'Cette commande a été annulée, et ne sera donc pas imprimée. Si vous désirez la réactiver, merci de contacter le photographe.': 'Cette commande a été annulée, et ne sera donc pas imprimée. Si vous désirez la réactiver, merci de contacter le photographe.'
+'Status de votre commande :': 'Status de votre commande :'
+'Votre commande est en cours d''impression ou est déjà imprimée.': 'Votre commande est en cours d''impression ou est déjà imprimée.'
+'Votre commande est payée.': 'Votre commande est payée.'
+'Votre commande est en attente, patience.': 'Votre commande est en attente, patience.'
+'Detail des impressions': 'Detail des impressions'
+Image: Image
+Action: Action
+'Télécharger le fichier original': 'Télécharger le fichier original'
+'Annuler mes impressions': 'Annuler mes impressions'
+'Créer mon profil': 'Créer mon profil'
+'Editer mon profil': 'Editer mon profil'
+'Mon profil': 'Mon profil'
+Editer: Editer
+'La photo %title% a bien été retiré du panier.': 'La photo %title% a bien été retiré du panier.'
+'La photo %title% est introuvable dans votre panier': 'La photo %title% est introuvable dans votre panier'
+'Votre panier a bien été vidé.': 'Votre panier a bien été vidé.'
+'Votre commande a echoué (la tarification a expiré). Merci de contrôler le total avant de reconfirmer la commande.': 'Votre commande a echoué (la tarification a expiré). Merci de contrôler le total avant de reconfirmer la commande.'
+'Votre commande a bien été enregistrée.': 'Votre commande a bien été enregistrée.'
+'Cette commande n''existe pas': 'Cette commande n''existe pas'
+'Vous n''êtes pas autorisé à acceder à cette commande': 'Vous n''êtes pas autorisé à acceder à cette commande'
+'Vous n''êtes pas autorisé à modifier cette commande': 'Vous n''êtes pas autorisé à modifier cette commande'
+'Votre commande a bien été annulée.': 'Votre commande a bien été annulée.'
+'Le detail de la commande n''existe pas': 'Le detail de la commande n''existe pas'
+'Vous n''êtes pas autorisé à télécharger cette photo': 'Vous n''êtes pas autorisé à télécharger cette photo'
+'Votre profil a été créé.': 'Votre profil a été créé.'
+'Votre profil est mis à jour.': 'Votre profil est mis à jour.'
+'Vous avez bien été déconnecté.': 'Vous avez bien été déconnecté.'
+'Prénom :': 'Prénom :'
+'Nom :': 'Nom :'
+'Email :': 'Email :'
+'Localisation :': 'Localisation :'

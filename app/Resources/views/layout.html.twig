@@ -32,62 +32,66 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ path('home') }}">La galerie photos</a>
+                <a class="navbar-brand" href="{{ path('home') }}">{{ 'La galerie photos' | trans }}</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="{{ path('cart') }}">Ma selection</a>
+                        <a href="{{ path('cart') }}">{{ 'Ma selection' | trans }}</a>
                     </li>
                     <li>
-                        <a href="{{ path('order_list') }}">Mes impressions</a>
+                        <a href="{{ path('order_list') }}">{{ 'Mes impressions' | trans }}</a>
                     </li>
                     <li>
-                        <a href="{{ path('offers') }}">Les offres</a>
+                        <a href="{{ path('offers') }}">{{ 'Les offres' | trans }}</a>
                     </li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">Mon profil <span class="caret"></span></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">{{ 'Mon profil' | trans }} <span class="caret"></span></a>
                         <ul class="dropdown-menu" aria-labelledby="profil">
                             <li>
-                                <a href="{{ path('user_edit') }}">Editer</a>
+                                <a href="{{ path('user_edit') }}">{{ 'Editer' | trans }}</a>
                             </li>
                             <li>
-                                <a href="{{ path('user_logout') }}">Déconnecter</a>
+                                <a href="{{ path('user_logout') }}">{{ 'Déconnecter' | trans }}</a>
                             </li>
                         </ul>
                     </li>
                     {% if not is_granted('ROLE_ADMIN') %}
                         <li>
-                            <a href="{{ path('gallery_index') }}">Administration&nbsp;&nbsp;<i class="glyphicon glyphicon-lock"></i></a>
+                            <a href="{{ path('gallery_index') }}">{{ 'Administration' | trans }} <i class="glyphicon glyphicon-lock"></i></a>
                         </li>
                     {% else %}
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">Administration <span class="caret"></span></a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">{{ 'Administration' | trans }} <span class="caret"></span></a>
                             <ul class="dropdown-menu" aria-labelledby="admin">
                                 <li>
-                                    <a href="{{ path('gallery_index') }}">Galeries</a>
+                                    <a href="{{ path('gallery_index') }}">{{ 'Galeries' | trans }}</a>
                                 </li>
                                 <li>
-                                    <a href="{{ path('tarif_index') }}">Formats et Tarifs</a>
+                                    <a href="{{ path('tarif_index') }}">{{ 'Formats et Tarifs' | trans }}</a>
                                 </li>
                                 <li>
-                                    <a href="{{ path('app_config_edit') }}">Configuration</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="{{ path('app_intro') }}" target="_blank">Instructions</a>
+                                    <a href="{{ path('app_config_edit') }}">{{ 'Configuration' | trans }}</a>
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="{{ path('admin_cart_current') }}">Selections</a>
+                                    <a href="{{ path('app_intro') }}" target="_blank">{{ 'Instructions' | trans }}</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="{{ path('admin_cart_current') }}">{{ 'Selections' | trans }}</a>
                                 </li>
                                 <li>
-                                    <a href="{{ path('admin_order_list') }}">Commandes</a>
+                                    <a href="{{ path('admin_order_list') }}">{{ 'Commandes' | trans }}</a>
                                 </li>
                             </ul>
                         </li>
                     {% endif %}
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params') | merge({'_locale': 'fr'})) }}"><img src="/resources/flags/fr.png" height="18"> FR</a></li>
+                    <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params') | merge({'_locale': 'en'})) }}"><img src="/resources/flags/en.png" height="18"> EN</a></li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

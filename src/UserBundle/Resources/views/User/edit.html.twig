@@ -1,10 +1,10 @@
 {% extends "UserBundle::layout.html.twig" %}
 
 {% block title %}
-    Editer profil - {{ parent() }}
+    {{ 'Editer mon profil' | trans }} - {{ parent() }}
 {% endblock %}
 
 {% block body %}
-        <h1 class="page-header">Editer mon profil</h1>
+        <h1 class="page-header">{{ 'Editer mon profil' | trans }}</h1>
         {{ include("UserBundle:User:form.html.twig") }}
 {% endblock %}

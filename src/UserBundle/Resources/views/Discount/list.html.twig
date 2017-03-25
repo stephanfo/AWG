@@ -1,23 +1,23 @@
 {% extends "UserBundle::layout.html.twig" %}
 
 {% block title %}
-    Tarifs et Offres - {{ parent() }}
+    {{ 'Tarifs et Offres' | trans }} - {{ parent() }}
 {% endblock %}
 
 {% block body %}
-    <h4 class="page-header">Tarifs</h4>
+    <h4 class="page-header">{{ 'Tarifs' | trans }}</h4>
     {% if formats is not empty %}
         {% for format in formats %}
 
-            <h5>Format {{ format.size }}</h5>
+            <h5>{{ 'Format' | trans }} {{ format.size }}</h5>
 
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th>Quantité</th>
-                    <th class="table-detail">Expire</th>
-                    <th class="table-detail">Tarification unitaire</th>
-                    <th class="table-detail">Tarification total</th>
+                    <th>{{ 'Quantité' | trans }}</th>
+                    <th class="table-detail">{{ 'Expire' | trans }}</th>
+                    <th class="table-detail">{{ 'Tarification unitaire' | trans }}</th>
+                    <th class="table-detail">{{ 'Tarification total' | trans }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -36,18 +36,18 @@
 
         {% if discounts is not empty %}
 
-            <h4>Remises</h4>
+            <h4>{{ 'Remises' | trans }}</h4>
             <p>
-                Une seule remise s'applique sur la commande, par ordre des lignes ci-dessous. La remise peut s'appliquer en bas de commande et/ou activer des tarifs spéciaux par quantités (voir tableau ci-dessus).
+                {% trans %}Une seule remise s'applique sur la commande, par ordre des lignes ci-dessous. La remise peut s'appliquer en bas de commande et/ou activer des tarifs spéciaux par quantités (voir tableau ci-dessus).{% endtrans %}
             </p>
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th>Nom</th>
-                    <th class="table-detail">Expire</th>
-                    <th class="table-detail">Dès</th>
-                    <th class="table-detail">Jusqu'à</th>
-                    <th class="table-detail">Remise</th>
+                    <th>{{ 'Nom' | trans }}</th>
+                    <th class="table-detail">{{ 'Expire' | trans }}</th>
+                    <th class="table-detail">{{ 'Dès' | trans }}</th>
+                    <th class="table-detail">{{ 'Jusqu\'à' | trans }}</th>
+                    <th class="table-detail">{{ 'Remise' | trans }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -65,7 +65,7 @@
         {% endif %}
     {% else %}
         <p>
-            Aucune tarification n'est disponible.
+            {{ 'Aucune tarification n\'est disponible.' | trans }}
         </p>
     {% endif %}
 {% endblock %}

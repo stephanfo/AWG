@@ -108,10 +108,10 @@ class CartController extends Controller
             $em->remove($cart);
             $em->flush();
 
-            $request->getSession()->getFlashBag()->add('success', 'La photo ' . $photo->getTitle() . ' a bien été retiré du panier.');
+            $request->getSession()->getFlashBag()->add('success', $this->get('translator')->trans('La photo %title% a bien été retiré du panier.', array('%title%' => $photo->getTitle())));
         }
         else
-            $request->getSession()->getFlashBag()->add('danger', 'La photo ' . $photo->getTitle() . ' est introuvable dans votre panier');
+            $request->getSession()->getFlashBag()->add('danger', $this->get('translator')->trans('La photo %title% est introuvable dans votre panier', array('%title%' => $photo->getTitle())));
 
 
         return $this->redirectToRoute('cart');
@@ -136,7 +136,7 @@ class CartController extends Controller
         }
         $em->flush();
 
-        $request->getSession()->getFlashBag()->add('success', 'Votre panier a bien été vidé.');
+        $request->getSession()->getFlashBag()->add('success', $this->get('translator')->trans('Votre panier a bien été vidé.'));
 
         return $this->redirectToRoute('cart');
     }
