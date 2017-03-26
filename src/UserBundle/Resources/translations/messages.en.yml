@@ -10,7 +10,7 @@ Sauvegarder: Save
 'Confirmation de votre impression': 'Confirmation of your printing'
 'Vous trouverez ci-dessous la synthèse des tirages que vous allez commander. Merci de bien contrôler le montant total avant de valider l''impression.': 'You will find hereafter the sum-up of the prints you are ordering. Please carefully check the total amount before validating the printing.'
 Format: Size
-Quantity: Quantity
+Quantité: Quantity
 Montant: Amount
 Total: Total
 'A payer': 'To pay'
@@ -18,7 +18,7 @@ Total: Total
 'Modifier ma sélection': 'Modify my selection'
 Confirmer: Confirm
 'Votre panier est vide. Rendez-vous dans la': 'Your cart is empty. Please go to the'
-'Gallerie photos': 'photo gallery'
+'Galerie photos': 'photo gallery'
 'pour composer votre panier.': 'to compose your cart.'
 'Ma sélection': 'My selection'
 'Aucun format d''impression n''a été définit.': '__Aucun format d''impression n''a été définit.'
@@ -46,7 +46,7 @@ photos: pictures
 'Aucune galerie accessible': 'No accessible gallery'
 'Mes impressions': 'My prints'
 Heure: Hour
-Status: Status
+Statut: Status
 Détail: Detail
 'Commande annulée': 'Cancelled order'
 'Commande payée': 'Paid order'
@@ -57,7 +57,7 @@ Détail: Detail
 'Vous n''avez pas de demandes d''impressions. Rendez-vous dans la': 'You have no print requests. Please go to the'
 'Ma commande': 'My order'
 'Cette commande a été annulée, et ne sera donc pas imprimée. Si vous désirez la réactiver, merci de contacter le photographe.': 'This order has been cancelled, and will not be printed. If you want to reactivate it, please contact the photographer.'
-'Status de votre commande :': 'Status of your order :'
+'Statut de votre commande :': 'Status of your order:'
 'Votre commande est en cours d''impression ou est déjà imprimée.': 'Your order is printing or already printed.'
 'Votre commande est payée.': 'Your order is paid.'
 'Votre commande est en attente, patience.': 'Your order is awaiting, please wait.'
@@ -84,7 +84,7 @@ Editer: Edit
 'Votre profil a été créé.': 'Your profile has been created.'
 'Votre profil est mis à jour.': 'Your profile is updated.'
 'Vous avez bien été déconnecté.': 'You have been successfully log off.'
-'Prénom :': 'First name :'
-'Nom :': 'Last name :'
-'Email :': 'Email :'
-'Localisation :': 'Location :'
+'Prénom :': 'First name:'
+'Nom :': 'Last name:'
+'Email :': 'Email:'
+'Localisation :': 'Location:'

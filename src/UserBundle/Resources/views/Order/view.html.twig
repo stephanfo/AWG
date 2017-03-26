@@ -10,7 +10,7 @@
         {% if order.canceled %}
             <span class="order-canceled-intro">{% trans %}Cette commande a été annulée, et ne sera donc pas imprimée. Si vous désirez la réactiver, merci de contacter le photographe.{% endtrans %}</span>
         {% elseif order.printed or order.payed %}
-            {{ 'Status de votre commande :' | trans }}<br/>
+            {{ 'Statut de votre commande :' | trans }}<br/>
             {% if order.printed %}
                 -> {{ 'Votre commande est en cours d\'impression ou est déjà imprimée.' | trans }}<br/>
             {% endif %}
@@ -18,7 +18,7 @@
                 -> {{ 'Votre commande est payée.' | trans }}<br/>
             {% endif %}
         {% else %}
-            {{ 'Status de votre commande :' | trans }}<br/>
+            {{ 'Statut de votre commande :' | trans }}<br/>
             -> {{ 'Votre commande est en attente, patience.' | trans }}<br/>
         {% endif %}
     </p>
@@ -27,7 +27,7 @@
         <thead>
             <tr>
                 <th>{{ 'Image' | trans }}</th>
-                <th class="table-detail">{{ 'Quantity' | trans }}</th>
+                <th class="table-detail">{{ 'Quantité' | trans }}</th>
                 <th class="table-detail">{{ 'Format' | trans }}</th>
                 {% if order.payed and not order.canceled and app_config.getConfig.applicationSellFiles %}
                     <th class="table-detail">{{ 'Action' | trans }}</th>

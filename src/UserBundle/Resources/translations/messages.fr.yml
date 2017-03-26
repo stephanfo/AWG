@@ -10,7 +10,7 @@ Sauvegarder: Sauvegarder
 'Confirmation de votre impression': 'Confirmation de votre impression'
 'Vous trouverez ci-dessous la synthèse des tirages que vous allez commander. Merci de bien contrôler le montant total avant de valider l''impression.': 'Vous trouverez ci-dessous la synthèse des tirages que vous allez commander. Merci de bien contrôler le montant total avant de valider l''impression.'
 Format: Format
-Quantity: Quantity
+Quantité: Quantité
 Montant: Montant
 Total: Total
 'A payer': 'A payer'
@@ -18,7 +18,7 @@ Total: Total
 'Modifier ma sélection': 'Modifier ma sélection'
 Confirmer: Confirmer
 'Votre panier est vide. Rendez-vous dans la': 'Votre panier est vide. Rendez-vous dans la'
-'Gallerie photos': 'Gallerie photos'
+'Galerie photos': 'Galerie photos'
 'pour composer votre panier.': 'pour composer votre panier.'
 'Ma sélection': 'Ma sélection'
 'Aucun format d''impression n''a été définit.': 'Aucun format d''impression n''a été définit.'
@@ -46,7 +46,7 @@ photos: photos
 'Aucune galerie accessible': 'Aucune galerie accessible'
 'Mes impressions': 'Mes impressions'
 Heure: Heure
-Status: Status
+Statut: Statut
 Détail: Détail
 'Commande annulée': 'Commande annulée'
 'Commande payée': 'Commande payée'
@@ -57,7 +57,7 @@ Détail: Détail
 'Vous n''avez pas de demandes d''impressions. Rendez-vous dans la': 'Vous n''avez pas de demandes d''impressions. Rendez-vous dans la'
 'Ma commande': 'Ma commande'
 'Cette commande a été annulée, et ne sera donc pas imprimée. Si vous désirez la réactiver, merci de contacter le photographe.': 'Cette commande a été annulée, et ne sera donc pas imprimée. Si vous désirez la réactiver, merci de contacter le photographe.'
-'Status de votre commande :': 'Status de votre commande :'
+'Statut de votre commande :': 'Statut de votre commande :'
 'Votre commande est en cours d''impression ou est déjà imprimée.': 'Votre commande est en cours d''impression ou est déjà imprimée.'
 'Votre commande est payée.': 'Votre commande est payée.'
 'Votre commande est en attente, patience.': 'Votre commande est en attente, patience.'

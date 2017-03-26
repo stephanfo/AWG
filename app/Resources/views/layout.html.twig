@@ -90,8 +90,12 @@
                     {% endif %}
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params') | merge({'_locale': 'fr'})) }}"><img src="/resources/flags/fr.png" height="18"> FR</a></li>
-                    <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params') | merge({'_locale': 'en'})) }}"><img src="/resources/flags/en.png" height="18"> EN</a></li>
+                    {% if app.request.locale != 'fr' %}
+                        <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params') | merge({'_locale': 'fr'})) }}"><img src="/resources/flags/fr.png" height="18"> French</a></li>
+                    {%  endif %}
+                    {% if app.request.locale != 'en' %}
+                        <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params') | merge({'_locale': 'en'})) }}"><img src="/resources/flags/en.png" height="18"> English</a></li>
+                    {%  endif %}
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
