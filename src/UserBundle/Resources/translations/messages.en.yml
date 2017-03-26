@@ -7,84 +7,84 @@ Email: Email
 Localisation: Location
 'Nom de table, Emplacement, ...': 'Table name, location, ...'
 Sauvegarder: Save
-'Confirmation de votre impression': '__Confirmation de votre impression'
-'Vous trouverez ci-dessous la synthèse des tirages que vous allez commander. Merci de bien contrôler le montant total avant de valider l''impression.': '__Vous trouverez ci-dessous la synthèse des tirages que vous allez commander. Merci de bien contrôler le montant total avant de valider l''impression.'
-Format: __Format
-Quantity: __Quantity
-Montant: __Montant
-Total: __Total
-'A payer': '__A payer'
-'En cliquant sur le bouton "Confirmer", vous vous engagez à payer la commande dans son intégralité à la remise des tirages.': '__En cliquant sur le bouton "Confirmer", vous vous engagez à payer la commande dans son intégralité à la remise des tirages.'
-'Modifier ma sélection': '__Modifier ma sélection'
-Confirmer: __Confirmer
-'Votre panier est vide. Rendez-vous dans la': '__Votre panier est vide. Rendez-vous dans la'
-'Gallerie photos': '__Gallerie photos'
-'pour composer votre panier.': '__pour composer votre panier.'
-'Ma sélection': '__Ma sélection'
+'Confirmation de votre impression': 'Confirmation of your printing'
+'Vous trouverez ci-dessous la synthèse des tirages que vous allez commander. Merci de bien contrôler le montant total avant de valider l''impression.': 'You will find hereafter the sum-up of the prints you are ordering. Please carefully check the total amount before validating the printing.'
+Format: Size
+Quantity: Quantity
+Montant: Amount
+Total: Total
+'A payer': 'To pay'
+'En cliquant sur le bouton "Confirmer", vous vous engagez à payer la commande dans son intégralité à la remise des tirages.': 'By cliquing "Confirm", you agree to pay the total order upon delivery of the prints.'
+'Modifier ma sélection': 'Modify my selection'
+Confirmer: Confirme
+'Votre panier est vide. Rendez-vous dans la': 'Your cart is empty. Please go to the'
+'Gallerie photos': 'photo gallery'
+'pour composer votre panier.': 'to compose your cart.'
+'Ma sélection': 'My selection'
 'Aucun format d''impression n''a été définit.': '__Aucun format d''impression n''a été définit.'
-'Vider ma sélection': '__Vider ma sélection'
-'Demander l''impression': '__Demander l''impression'
-'Votre panier sélection est vide. Rendez-vous dans la': '__Votre panier sélection est vide. Rendez-vous dans la'
-'se termine dans': '__se termine dans'
-secondes.: __secondes.
-'Tarifs et Offres': '__Tarifs et Offres'
-Tarifs: __Tarifs
-Quantité: __Quantité
-Expire: __Expire
-'Tarification unitaire': '__Tarification unitaire'
-'Tarification total': '__Tarification total'
-Remises: __Remises
-'Une seule remise s''applique sur la commande, par ordre des lignes ci-dessous. La remise peut s''appliquer en bas de commande et/ou activer des tarifs spéciaux par quantités (voir tableau ci-dessus).': '__Une seule remise s''applique sur la commande, par ordre des lignes ci-dessous. La remise peut s''appliquer en bas de commande et/ou activer des tarifs spéciaux par quantités (voir tableau ci-dessus).'
-Dès: __Dès
-'Jusqu''à': '__Jusqu''à'
-Remise: __Remise
-'Aucune tarification n''est disponible.': '__Aucune tarification n''est disponible.'
-Galerie: __Galerie
-'Accès rapide': '__Accès rapide'
-photos: __photos
-'Définir les formats': '__Définir les formats'
-'Aucune galerie accessible': '__Aucune galerie accessible'
-'Mes impressions': '__Mes impressions'
-Heure: __Heure
-Status: __Status
-Détail: __Détail
-'Commande annulée': '__Commande annulée'
-'Commande payée': '__Commande payée'
-'Commande non payée': '__Commande non payée'
-'Commande imprimée': '__Commande imprimée'
-'Commande non imprimée': '__Commande non imprimée'
-'Détail de la commande': '__Détail de la commande'
-'Vous n''avez pas de demandes d''impressions. Rendez-vous dans la': '__Vous n''avez pas de demandes d''impressions. Rendez-vous dans la'
-'Ma commande': '__Ma commande'
-'Cette commande a été annulée, et ne sera donc pas imprimée. Si vous désirez la réactiver, merci de contacter le photographe.': '__Cette commande a été annulée, et ne sera donc pas imprimée. Si vous désirez la réactiver, merci de contacter le photographe.'
-'Status de votre commande :': '__Status de votre commande :'
-'Votre commande est en cours d''impression ou est déjà imprimée.': '__Votre commande est en cours d''impression ou est déjà imprimée.'
-'Votre commande est payée.': '__Votre commande est payée.'
-'Votre commande est en attente, patience.': '__Votre commande est en attente, patience.'
-'Detail des impressions': '__Detail des impressions'
-Image: __Image
-Action: __Action
-'Télécharger le fichier original': '__Télécharger le fichier original'
-'Annuler mes impressions': '__Annuler mes impressions'
-'Créer mon profil': '__Créer mon profil'
-'Editer mon profil': '__Editer mon profil'
-'Mon profil': '__Mon profil'
-Editer: __Editer
-'La photo %title% a bien été retiré du panier.': '__La photo %title% a bien été retiré du panier.'
-'La photo %title% est introuvable dans votre panier': '__La photo %title% est introuvable dans votre panier'
-'Votre panier a bien été vidé.': '__Votre panier a bien été vidé.'
-'Votre commande a echoué (la tarification a expiré). Merci de contrôler le total avant de reconfirmer la commande.': '__Votre commande a echoué (la tarification a expiré). Merci de contrôler le total avant de reconfirmer la commande.'
-'Votre commande a bien été enregistrée.': '__Votre commande a bien été enregistrée.'
-'Cette commande n''existe pas': '__Cette commande n''existe pas'
-'Vous n''êtes pas autorisé à acceder à cette commande': '__Vous n''êtes pas autorisé à acceder à cette commande'
-'Vous n''êtes pas autorisé à modifier cette commande': '__Vous n''êtes pas autorisé à modifier cette commande'
-'Votre commande a bien été annulée.': '__Votre commande a bien été annulée.'
-'Le detail de la commande n''existe pas': '__Le detail de la commande n''existe pas'
-'Vous n''êtes pas autorisé à télécharger cette photo': '__Vous n''êtes pas autorisé à télécharger cette photo'
-'Votre profil a été créé.': '__Votre profil a été créé.'
-'Votre profil est mis à jour.': '__Votre profil est mis à jour.'
-'Vous avez bien été déconnecté.': '__Vous avez bien été déconnecté.'
-'Prénom :': '__Prénom :'
-'Nom :': '__Nom :'
-'Email :': '__Email :'
-'Localisation :': '__Localisation :'
+'Vider ma sélection': 'Empty my selection'
+'Demander l''impression': 'Request printing'
+'Votre panier sélection est vide. Rendez-vous dans la': 'Your selection cart is empty. Please got to the'
+'se termine dans': 'is finishing in'
+secondes.: secondes.
+'Tarifs et Offres': 'Price list and Offers'
+Tarifs: Price list
+Quantité: Quantity
+Expire: Expire
+'Tarification unitaire': 'Unit price'
+'Tarification total': 'Total price'
+Remises: Discounts
+'Une seule remise s''applique sur la commande, par ordre des lignes ci-dessous. La remise peut s''appliquer en bas de commande et/ou activer des tarifs spéciaux par quantités (voir tableau ci-dessus).': 'Only one discount is possible per order, by order of the lines hereafter. The discount can be applied at the bottom of the order and/ or activate special price list by quantity (see table hereafter).'
+Dès: from
+'Jusqu''à': 'to'
+Remise: Discount
+'Aucune tarification n''est disponible.': 'No price is available.'
+Galerie: Gallery
+'Accès rapide': 'Quick access'
+photos: pictures
+'Définir les formats': 'Define the sizes'
+'Aucune galerie accessible': 'No accessible gallery'
+'Mes impressions': 'My prints'
+Heure: Hour
+Status: Status
+Détail: Detail
+'Commande annulée': 'Cancelled order'
+'Commande payée': 'Paid order'
+'Commande non payée': 'Unpaid order'
+'Commande imprimée': 'Printed order'
+'Commande non imprimée': 'Unprinted order'
+'Détail de la commande': 'Details of the order'
+'Vous n''avez pas de demandes d''impressions. Rendez-vous dans la': 'You have no print requests. Please go to the'
+'Ma commande': 'My order'
+'Cette commande a été annulée, et ne sera donc pas imprimée. Si vous désirez la réactiver, merci de contacter le photographe.': 'This order has been cancelled, and will not be printed. If you want to reactivate it, please contact the photographer.'
+'Status de votre commande :': 'Status of your order :'
+'Votre commande est en cours d''impression ou est déjà imprimée.': 'Your order is printing or already printed.'
+'Votre commande est payée.': 'Your order is paid.'
+'Votre commande est en attente, patience.': 'Your order is awaiting, please wait.'
+'Detail des impressions': 'Detail of the printings'
+Image: Image
+Action: Action
+'Télécharger le fichier original': 'Download the original file'
+'Annuler mes impressions': 'Cancel all the printings'
+'Créer mon profil': 'Create my profile'
+'Editer mon profil': 'Edit my profile'
+'Mon profil': 'My profile'
+Editer: Edit
+'La photo %title% a bien été retiré du panier.': 'The picture %title% has been successfully removed from your cart.'
+'La photo %title% est introuvable dans votre panier': 'The picture %title% is not found in your cart'
+'Votre panier a bien été vidé.': 'Your cart has been successfully emptied.'
+'Votre commande a echoué (la tarification a expiré). Merci de contrôler le total avant de reconfirmer la commande.': 'Your order has failed (the price has expire). Please check the total amount before confirming the order.'
+'Votre commande a bien été enregistrée.': 'Your order has been successfully saved.'
+'Cette commande n''existe pas': 'This order does not exist'
+'Vous n''êtes pas autorisé à acceder à cette commande': 'You are not allowed to access this order'
+'Vous n''êtes pas autorisé à modifier cette commande': 'You are not allowed to modify this order'
+'Votre commande a bien été annulée.': 'Your order has been successfully cancelled.'
+'Le detail de la commande n''existe pas': 'The detail of your order does not exist'
+'Vous n''êtes pas autorisé à télécharger cette photo': 'You are not allowed to download this picture'
+'Votre profil a été créé.': 'Your profile has been created.'
+'Votre profil est mis à jour.': 'Your profile is updated.'
+'Vous avez bien été déconnecté.': 'You have been successfully log off.'
+'Prénom :': 'First name :'
+'Nom :': 'Last name :'
+'Email :': 'Email :'
+'Localisation :': 'Location :'
