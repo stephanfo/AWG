@@ -28,6 +28,7 @@ Guests can:
   - track the orders (pending, printed, payed, canceled, completed)
   - cancel orders not printed
   - download the photo file if the order is paid (can be disable via config)
+  - change the language of the user interface (French/English)
 
 More features will come in the future.
 
