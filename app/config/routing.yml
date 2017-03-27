@@ -22,17 +22,23 @@ frontend:
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
-    prefix:   /admin/app
+    prefix:   /{_locale}/admin/app
+    requirements:
+        _locale: en|fr
 
 cart:
     resource: "@CartBundle/Controller/"
     type:     annotation
-    prefix:   /admin/cart
+    prefix:   /{_locale}/admin/cart
+    requirements:
+        _locale: en|fr
 
 gallery:
     resource: "@GalleryBundle/Controller/"
     type:     annotation
-    prefix:   /admin/gallery
+    prefix:   /{_locale}/admin/gallery
+    requirements:
+        _locale: en|fr
 
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"

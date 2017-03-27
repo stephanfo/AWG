@@ -24,6 +24,11 @@
             {{ form_widget(form.applicationSellFiles, {'attr': {'class': 'form-control'}}) }}
         </div>
         <div class="form-group form-group-sm">
+            {{ form_label(form.applicationSellFilesAllowDownload, "Autoriser le téléchargement des fichiers depuis les commandes utilisateurs payées") }}
+            {{ form_errors(form.applicationSellFilesAllowDownload) }}
+            {{ form_widget(form.applicationSellFilesAllowDownload, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group form-group-sm">
             {{ form_label(form.applicationSellFilesForceDownload, "Forcer le téléchargement des fichiers depuis les commandes utilisateurs") }}
             {{ form_errors(form.applicationSellFilesForceDownload) }}
             {{ form_widget(form.applicationSellFilesForceDownload, {'attr': {'class': 'form-control'}}) }}

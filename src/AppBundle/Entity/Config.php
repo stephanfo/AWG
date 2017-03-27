@@ -74,6 +74,15 @@ class Config
      *
      * @Assert\Type(type="bool")
      */
+    private $applicationSellFilesAllowDownload;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean")
+     *
+     * @Assert\Type(type="bool")
+     */
     private $applicationSellFilesForceDownload;
 
     /**
@@ -361,5 +370,29 @@ class Config
     public function getApplicationSellFilesForceDownload()
     {
         return $this->applicationSellFilesForceDownload;
+    }
+
+    /**
+     * Set applicationSellFilesAllowDownload
+     *
+     * @param boolean $applicationSellFilesAllowDownload
+     *
+     * @return Config
+     */
+    public function setApplicationSellFilesAllowDownload($applicationSellFilesAllowDownload)
+    {
+        $this->applicationSellFilesAllowDownload = $applicationSellFilesAllowDownload;
+
+        return $this;
+    }
+
+    /**
+     * Get applicationSellFilesAllowDownload
+     *
+     * @return boolean
+     */
+    public function getApplicationSellFilesAllowDownload()
+    {
+        return $this->applicationSellFilesAllowDownload;
     }
 }

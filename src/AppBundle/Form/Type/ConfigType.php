@@ -33,6 +33,12 @@ class ConfigType extends AbstractType
                     'Non' => false,
                 ),
             ))
+            ->add('applicationSellFilesAllowDownload', ChoiceType::class, array(
+                'choices'  => array(
+                    'Oui' => true,
+                    'Non' => false,
+                ),
+            ))
             ->add('applicationSellFilesForceDownload', ChoiceType::class, array(
                 'choices'  => array(
                     'Oui' => true,

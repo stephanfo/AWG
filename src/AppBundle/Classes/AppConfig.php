@@ -41,6 +41,7 @@ class AppConfig
 <p style=\"text-align: center;\">Connecter vous au r&eacute;seau wifi : <span style=\"text-decoration: underline;\"><strong>Blabla</strong></span>.</p>
 <p style=\"text-align: center;\">Saisissez l'adresse <span style=\"text-decoration: underline;\"><strong>blabla/</strong></span>&nbsp;ou <span style=\"text-decoration: underline;\"><strong>http://blabla</strong></span>&nbsp;dans votre navigateur.</p>");
         $config->setApplicationSellFiles(false);
+        $config->setApplicationSellFilesAllowDownload(false);
         $config->setApplicationSellFilesForceDownload(false);
         $config->setApplicationSellFilesEmailSubject("Vos photos Life in PIX");
         $config->setApplicationSellFilesEmailBody("<p>Bonjour</p>

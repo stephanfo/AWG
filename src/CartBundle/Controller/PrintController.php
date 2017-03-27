@@ -52,7 +52,7 @@ class PrintController extends Controller
     /**
      * @Route("/print/order/{id}", name="admin_print_order")
      */
-    public function printOrderContainer(Request $request, $id)
+    public function printOrderAction(Request $request, $id)
     {
         $appPath = $this->container->getParameter('kernel.root_dir');
         $webPath = realpath($appPath . '/../web');
