@@ -30,7 +30,7 @@ class AppConfig
         $config = new Config();
 
         // Default configuration of the App
-        $config->setApplicationTheme("darkly");
+        $config->setApplicationTheme(null);
         $config->setApplicationIntroMessage("<p style=\"text-align: center;\">&nbsp;</p>
 <hr />
 <p style=\"text-align: center;\"><strong>Acc&egrave;s &agrave; la galerie</strong></p>

@@ -20,11 +20,27 @@ class ConfigType extends AbstractType
         $builder
             ->add('applicationTheme', ChoiceType::class, array(
                 'choices'  => array(
-                    'Amelia' => 'amelia',
+                    'Cerulean' => 'cerulean',
+                    'Cosmo' => 'cosmo',
+                    'Cyborg' => 'cyborg',
                     'Darkly' => 'darkly',
-                    'Super Hero' => 'superhero',
+                    'Flatly' => 'flatly',
+                    'Journal' => 'journal',
+                    'Lumen' => 'lumen',
+                    'Paper' => 'paper',
+                    'Readable' => 'readable',
+                    'Sandstone' => 'sandstone',
+                    'Simplex' => 'simplex',
+                    'Slate' => 'slate',
+                    'Solar' => 'solar',
+                    'Spacelab' => 'spacelab',
+                    'Superhero' => 'superhero',
                     'United' => 'united',
+                    'Yeti' => 'yeti',
                 ),
+                'required' => false,
+                'empty_data' => null,
+                'placeholder' => 'Sélectionez un theme'
             ))
             ->add('applicationIntroMessage')
             ->add('applicationSellFiles', ChoiceType::class, array(

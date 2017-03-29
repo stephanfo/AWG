@@ -5,6 +5,32 @@
 {% endblock %}
 
 {% block body %}
-        <h4 class="page-header">Configurer l'application</h4>
-        {{ include("AppBundle:Config:form.html.twig") }}
+    <h4 class="page-header">Configurer l'application</h4>
+    {{ include("AppBundle:Config:form.html.twig") }}
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            updateThemePreview();
+
+            $('#config_applicationTheme').change(updateThemePreview);
+
+        });
+
+        function updateThemePreview(){
+
+            var theme = $('#config_applicationTheme').val();
+
+            if(theme !== "")
+            {
+                $('img#theme-preview').removeAttr('class');
+                $('img#theme-preview').attr('src', '/resources/photos.lifeinpix/css/template/' + theme + '/thumbnail.png');
+            }
+            else
+                $('img#theme-preview').attr('class', 'hide');
+        }
+
+    </script>
 {% endblock %}

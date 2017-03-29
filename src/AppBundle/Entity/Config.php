@@ -43,9 +43,7 @@ class Config
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255)
-     *
-     * @Assert\NotBlank
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Type(type="string")
      */
     private $applicationTheme;
