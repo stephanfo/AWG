@@ -2,6 +2,8 @@
 
 namespace GalleryBundle\Repository;
 
+use Doctrine\ORM\Tools\Pagination\Paginator;
+
 /**
  * PhotoRepository
  *
@@ -18,5 +20,22 @@ class PhotoRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter('order_id', $order_id)
             ->getQuery()
             ->getResult();
+    }
+
+    public function getActivePhotos($page = null, $nbPerPage = null)
+    {
+        $query = $this->createQueryBuilder('photo')
+            ->leftJoin('photo.gallery', 'gallery')
+            ->addSelect('gallery')
+            ->where('gallery.active = :true')
+            ->setParameter('true', true)
+            ;
+
+        if (!is_null($page) && !is_null($nbPerPage))
+            $query
+                ->setFirstResult(($page - 1) * $nbPerPage)
+                ->setMaxResults($nbPerPage);
+
+        return new Paginator($query, true);
     }
 }

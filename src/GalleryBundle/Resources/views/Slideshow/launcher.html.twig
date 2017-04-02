@@ -1,0 +1,75 @@
+{% extends "GalleryBundle::layout.html.twig" %}
+
+{% block title %}
+    Slideshow - {{ parent() }}
+{% endblock %}
+
+{% block footer %}
+    {% if photos is not empty %}
+        <div class="container-fluid">
+            <div class="row">
+                {% for photo in photos %}
+                    <div class="col-lg-{{ 12 / imageX }} thumb" style="margin-bottom: 19px;">
+                        <div class="thumbnail" style="position: relative;">
+                            <img class="img-responsive" src="{{ vich_uploader_asset(photo, 'imageFile') | imagine_filter('slideshow_thumb') }}" alt="{{ photo.title }}" style="height: {{ imageH }}px;">
+                            <div style="position: absolute; top: -14px; left: -20px; width: 100%;">
+                                {% if photo.likeCount > 0 %}
+                                    <button type="button" class="btn btn-success btn-xs" style="width: 40px;"><i class="glyphicon glyphicon-thumbs-up"></i> {{ photo.likeCount }}</button>
+                                {% endif %}
+                            </div>
+                            <div class="caption">
+                                <p class="text-center">
+                                    {{ photo.gallery.title }} - {{ photo.title }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                {%  endfor %}
+            </div>
+        </div>
+        <nav class="navbar navbar-default navbar-fixed-bottom">
+            <div class="container">
+                <p class="navbar-pagecount">
+                    Page {{ page }} sur {{ nbPages }}
+                </p>
+                <div class="progress">
+                    <div id="delayProgressBar" class="progress-bar progress-bar-warning" aria-valuemin="0" aria-valuemax="100" role="progressbar" style="width: 0%;"></div>
+                </div>
+            </div>
+        </nav>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {% if photos is empty %}
+        <h1>Slideshow</h1>
+        <p>Il n'existe pas de photos à afficher dans le slideshow. Veuillez préalablement envoyer des photos ou activer au moins une galerie en <a href="{{ path('gallery_index') }}">cliquant ici</a>.</p>
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    {% if photos is not empty %}
+        <script type="text/javascript">
+
+            var valueProgressBar = 0;
+
+            $(document).ready(function () {
+                setTimeout(function() {
+                    location.href = "{% if page < nbPages %}{{ path('slideshow_launcher', {'page': page + 1, 'delay': delay, 'imageX': imageX, 'imageY': imageY, 'imageH': imageH}) }}{% else %}{{ path('slideshow_launcher', {'page': 1, 'delay': delay, 'imageX': imageX, 'imageY': imageY, 'imageH': imageH}) }}{% endif %}";
+                }, {{ delay }} * 1000);
+
+                incrementProgressBar();
+            });
+
+            function incrementProgressBar() {
+                valueProgressBar++;
+                var pourcentProgressBar = Math.round(valueProgressBar * 100 / 1000 * 1000 / {{ delay }});
+                console.log(pourcentProgressBar);
+                $('#delayProgressBar').attr('style', 'width: ' + pourcentProgressBar + '%;');
+
+                setTimeout(incrementProgressBar, 1000);
+            }
+        </script>
+    {% endif %}
+{% endblock %}
+

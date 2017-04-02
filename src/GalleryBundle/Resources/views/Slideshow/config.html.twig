@@ -1,0 +1,86 @@
+{% extends "GalleryBundle::layout.html.twig" %}
+
+{% block title %}
+    Slideshow Config - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h1 class="page-header">Configuration du slideshow.</h1>
+    <p>La taille de l'affichage est de <span id="viewportWidth"></span> x <span id="viewportHeight"></span>. La hauteur des images recommandées est de <span id="imageH"></span> pixels.</p>
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label for="select-imageX" class="required">Nombre d'images à l'horizontal</label>
+                <select id="select-imageX" class="form-control">
+                    <option value="1">1 photo</option>
+                    <option value="2">2 photos</option>
+                    <option value="3">3 photos</option>
+                    <option value="4" Selected>4 photos</option>
+                    <option value="6">6 photos</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label for="select-imageY" class="required">Nombre d'images à la vertical</label>
+                <select id="select-imageY" class="form-control">
+                    <option value="1">1 photo</option>
+                    <option value="2">2 photos</option>
+                    <option value="3" Selected>3 photos</option>
+                    <option value="4">4 photos</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label for="input-imageH" class="required">Hauteur des images</label>
+                <input type="text" id="input-imageH" required="required" maxlength="255" class="form-control" value="320">
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label for="input-delay" class="required">Delai entre les changements</label>
+                <input type="text" id="input-delay" required="required" maxlength="255" class="form-control" value="10">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <button id="button-launch" class="btn btn-primary">Lancer le slideshow</button>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready( function () {
+            calculImageSize();
+
+            $('#select-imageY').change(calculImageSize);
+
+            $('#button-launch').click(function() {
+                location.href = "{{ path('slideshow_launcher_empty') }}1/" + $('#input-delay').val() + "/" + $('#select-imageX').val() + "/" + $('#select-imageY').val() + "/" + $('#input-imageH').val();
+            });
+
+        });
+
+        $(window).resize(function() {
+            calculImageSize();
+        });
+
+        function calculImageSize(){
+
+            var viewportWidth = $(window).width();
+            var viewportHeight = $(window).height();
+            var imageY = $('#select-imageY').val();
+            var imageH = Math.round(((viewportHeight - 155) / imageY) - 96);
+
+            $('#viewportWidth').text(viewportWidth);
+            $('#viewportHeight').text(viewportHeight);
+            $('#imageH').text(imageH);
+            $('#input-imageH').val(imageH);
+
+        }
+    </script>
+{% endblock %}
+

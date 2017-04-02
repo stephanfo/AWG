@@ -41,7 +41,7 @@ class FormatController extends Controller
     }
 
     /**
-     * @Route("/formats/edit/{id}", requirements={"id" = "\d*"}, name="format_edit")
+     * @Route("/formats/edit/{id}", requirements={"id": "\d*"}, name="format_edit")
      * @ParamConverter("format", class="CartBundle:Format", options={"id" = "id"})
      */
     public function editAction(Format $format, Request $request)
@@ -65,7 +65,7 @@ class FormatController extends Controller
     }
 
     /**
-     * @Route("/formats/delete{id}", requirements={"id" = "\d*"}, name="format_delete")
+     * @Route("/formats/delete{id}", requirements={"id": "\d*"}, name="format_delete")
      * @ParamConverter("format", class="CartBundle:Format", options={"id" = "id"})
      */
     public function deleteAction(Format $format, Request $request)

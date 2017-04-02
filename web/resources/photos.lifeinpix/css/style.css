@@ -68,6 +68,11 @@ img.cart-img {
     padding-top: 15px;
 }
 
+.navbar-pagecount {
+    text-align: center;
+    margin-top: 10px;
+}
+
 @media screen and (max-width: 350px){
     #grid[data-columns]::before {
         content: '1 .column.size-1of1';
