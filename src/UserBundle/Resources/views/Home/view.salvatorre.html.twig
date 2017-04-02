@@ -30,10 +30,10 @@
                     <div class="thumbnail">
                         <img class="img-responsive" src="{{ vich_uploader_asset(photo, 'imageFile') | imagine_filter('gallery_thumb') }}" alt="{{ photo.title }}"/>
                         <div class="caption">
-                            <p class="text-center">
+                            <p class="image-caption">
                                 {{ photo.title }}
                             </p>
-                            <p class="text-center">
+                            <p class="image-caption">
                                 <button type="button" photo-like="{{ photo.id }}" class="btn {% if attribute(likes, photo.id) is defined %}btn-success{% else %}btn-default{% endif %} btn-xs"><i class="glyphicon glyphicon-thumbs-up"></i> <span photo-like-count="{{ photo.id }}">{{ photo.likeCount }}</span></button>
                                 &nbsp;
                                 <button type="button" photo-cart="{{ photo.id }}" class="btn {% if attribute(carts, photo.id) is defined %}btn-primary{% else %}btn-default{% endif %} btn-xs"><i class="glyphicon glyphicon-print"></i></button>

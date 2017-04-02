@@ -18,7 +18,7 @@ class HomeController extends Controller
         if (is_null($user))
             return $this->redirectToRoute('user_add');
 
-        $galleries = $this->getDoctrine()->getRepository('GalleryBundle:Gallery')->getActiveGalleries($user->getId());
+        $galleries = $this->getDoctrine()->getRepository('GalleryBundle:Gallery')->getActiveGalleries();
         $likes = $this->getDoctrine()->getRepository('UserBundle:User')->getUserLikes($user);
         $carts = $this->getDoctrine()->getRepository('UserBundle:User')->getUserCart($user);
 

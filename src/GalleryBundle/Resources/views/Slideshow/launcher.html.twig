@@ -12,14 +12,14 @@
                     <div class="col-lg-{{ 12 / imageX }} thumb" style="margin-bottom: 19px;">
                         <div class="thumbnail" style="position: relative;">
                             <img class="img-responsive" src="{{ vich_uploader_asset(photo, 'imageFile') | imagine_filter('slideshow_thumb') }}" alt="{{ photo.title }}" style="height: {{ imageH }}px;">
-                            <div style="position: absolute; top: -14px; left: -20px; width: 100%;">
+                            <div style="position: absolute; top: -15px; right: -15px;">
                                 {% if photo.likeCount > 0 %}
-                                    <button type="button" class="btn btn-success btn-xs" style="width: 40px;"><i class="glyphicon glyphicon-thumbs-up"></i> {{ photo.likeCount }}</button>
+                                    <button type="button" class="btn btn-success"><i class="glyphicon glyphicon-thumbs-up"><strong></i> {{ photo.likeCount }}</strong></button>
                                 {% endif %}
                             </div>
                             <div class="caption">
-                                <p class="text-center">
-                                    {{ photo.gallery.title }} - {{ photo.title }}
+                                <p class="image-caption">
+                                    <nobr>{{ photo.gallery.title }} - {{ photo.title }}</nobr>
                                 </p>
                             </div>
                         </div>
@@ -28,10 +28,12 @@
             </div>
         </div>
         <nav class="navbar navbar-default navbar-fixed-bottom">
-            <div class="container">
-                <p class="navbar-pagecount">
-                    Page {{ page }} sur {{ nbPages }}
-                </p>
+            <div class="container navbar-slideshow">
+                {% if endPage != 1 %}
+                    <p>
+                        Page {{ page }} sur {{ nbPages }}
+                    </p>
+                {% endif %}
                 <div class="progress">
                     <div id="delayProgressBar" class="progress-bar progress-bar-warning" aria-valuemin="0" aria-valuemax="100" role="progressbar" style="width: 0%;"></div>
                 </div>
@@ -55,7 +57,7 @@
 
             $(document).ready(function () {
                 setTimeout(function() {
-                    location.href = "{% if page < nbPages %}{{ path('slideshow_launcher', {'page': page + 1, 'delay': delay, 'imageX': imageX, 'imageY': imageY, 'imageH': imageH}) }}{% else %}{{ path('slideshow_launcher', {'page': 1, 'delay': delay, 'imageX': imageX, 'imageY': imageY, 'imageH': imageH}) }}{% endif %}";
+                    location.href = "{{ path('slideshow_launcher', {'page': nextPage, 'delay': delay, 'imageX': imageX, 'imageY': imageY, 'imageH': imageH, 'endPage': endPage, 'sort': sort}) }}";
                 }, {{ delay }} * 1000);
 
                 incrementProgressBar();

@@ -22,13 +22,21 @@ class PhotoRepository extends \Doctrine\ORM\EntityRepository
             ->getResult();
     }
 
-    public function getActivePhotos($page = null, $nbPerPage = null)
+    public function getActivePhotos($page = null, $nbPerPage = null, $sortLike = false)
     {
         $query = $this->createQueryBuilder('photo')
             ->leftJoin('photo.gallery', 'gallery')
             ->addSelect('gallery')
             ->where('gallery.active = :true')
             ->setParameter('true', true)
+            ;
+        
+        if ($sortLike)
+            $query->orderBy('photo.likeCount', "DESC");
+        
+        $query
+            ->addOrderBy("gallery.date", "ASC")
+            ->addOrderBy("photo.id", "ASC")
             ;
 
         if (!is_null($page) && !is_null($nbPerPage))
