@@ -17,6 +17,7 @@ Thanks to this web gallery, as a photographer, you can:
   - manage prints (using LP & CUPS on Unix OS) & payments
   - cancel (if not already printed/payed) and reactivate orders
   - send the files paid by email to the user (can be disable via config)
+  - Start slideshows of photos or most liked ones (fully customisable: size, nb pages, nb photos per page)
 
 Guests can:
   - manage their account (first/lastname, email, location)
