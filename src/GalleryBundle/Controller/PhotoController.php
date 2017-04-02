@@ -13,7 +13,7 @@ class PhotoController extends Controller
 {
 
     /**
-     * @Route("/photo/loader/{id}", requirements={"id" = "\d*"}, name="photo_loader")
+     * @Route("/photo/loader/{id}", requirements={"id": "\d*"}, name="photo_loader")
      */
     public function addAction(Gallery $gallery)
     {
@@ -25,7 +25,7 @@ class PhotoController extends Controller
     }
 
     /**
-     * @Route("/photo/add/{id}", requirements={"id" = "\d*"}, name="photo_add")
+     * @Route("/photo/add/{id}", requirements={"id": "\d*"}, name="photo_add")
      */
     public function loaderAction(Request $request, Gallery $gallery)
     {
@@ -59,7 +59,7 @@ class PhotoController extends Controller
     }
 
     /**
-     * @Route("/photo/clear/{id}", requirements={"id" = "\d*"}, name="photo_clear")
+     * @Route("/photo/clear/{id}", requirements={"id": "\d*"}, name="photo_clear")
      */
     public function clearAction(Gallery $gallery, Request $request)
     {
@@ -88,7 +88,7 @@ class PhotoController extends Controller
     }
 
     /**
-     * @Route("/photo/delete/{id}", requirements={"id" = "\d*"}, name="photo_delete")
+     * @Route("/photo/delete/{id}", requirements={"id": "\d*"}, name="photo_delete")
      */
     public function deleteAction(Photo $photo)
     {
@@ -100,7 +100,7 @@ class PhotoController extends Controller
     }
 
     /**
-     * @Route("/photo/crop/toggle/{id}", requirements={"id" = "\d*"}, name="photo_toogle_crop")
+     * @Route("/photo/crop/toggle/{id}", requirements={"id": "\d*"}, name="photo_toogle_crop")
      */
     public function cropToggleAction(Photo $photo, Request $request)
     {

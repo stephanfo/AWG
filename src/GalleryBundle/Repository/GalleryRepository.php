@@ -42,14 +42,14 @@ class GalleryRepository extends \Doctrine\ORM\EntityRepository
         ;
     }
 
-    public function getActiveGalleries($user)
+    public function getActiveGalleries()
     {
         return $this->createQueryBuilder("gallery")
                         ->join("gallery.photos", "photo")
                         ->addSelect("photo")
                         ->where('gallery.active = :active')
                         ->setParameter('active', true)
-                        ->orderBy("gallery.date", "DESC")
+                        ->orderBy("gallery.date", "ASC")
                         ->addOrderBy("photo.id", "ASC")
                         ->getQuery()
                         ->getResult()

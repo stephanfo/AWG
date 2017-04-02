@@ -127,7 +127,7 @@ class OrderController extends Controller
     }
 
     /**
-     * @Route("/order/view/{id}", requirements={"id" = "\d*"}, name="order_view")
+     * @Route("/order/view/{id}", requirements={"id": "\d*"}, name="order_view")
      */
     public function viewAction(Request $request, $id)
     {
@@ -156,7 +156,7 @@ class OrderController extends Controller
     }
 
     /**
-     * @Route("/order/canceled/{id}", requirements={"id" = "\d*"}, name="order_cancel")
+     * @Route("/order/canceled/{id}", requirements={"id": "\d*"}, name="order_cancel")
      */
     public function canceledAction(Request $request, $id)
     {
@@ -182,7 +182,7 @@ class OrderController extends Controller
     }
 
     /**
-     * @Route("/order/download/detail/{id}", requirements={"id" = "\d*"}, name="order_download_detail")
+     * @Route("/order/download/detail/{id}", requirements={"id": "\d*"}, name="order_download_detail")
      */
     public function downloadPhotoAction(Request $request, $id)
     {

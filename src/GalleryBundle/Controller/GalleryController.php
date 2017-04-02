@@ -12,7 +12,7 @@ class GalleryController extends Controller
 {
 
     /**
-     * @Route("/list/{page}", requirements={"page" = "\d*"}, defaults={"page": 1}, name="gallery_index")
+     * @Route("/list/{page}", requirements={"page": "\d*"}, defaults={"page": 1}, name="gallery_index")
      */
     public function indexAction($page)
     {
@@ -45,7 +45,7 @@ class GalleryController extends Controller
     }
 
     /**
-     * @Route("/view/{id}", requirements={"id" = "\d*"}, name="gallery_view")
+     * @Route("/view/{id}", requirements={"id": "\d*"}, name="gallery_view")
      */
     public function viewAction($id)
     {
@@ -91,7 +91,7 @@ class GalleryController extends Controller
     }
 
     /**
-     * @Route("/edit/{id}", requirements={"id" = "\d*"}, name="gallery_edit")
+     * @Route("/edit/{id}", requirements={"id": "\d*"}, name="gallery_edit")
      */
     public function editAction(Gallery $gallery, Request $request)
     {
@@ -115,7 +115,7 @@ class GalleryController extends Controller
     }
 
     /**
-     * @Route("/delete/{id}", requirements={"id" = "\d*"}, name="gallery_delete")
+     * @Route("/delete/{id}", requirements={"id": "\d*"}, name="gallery_delete")
      */
     public function deleteAction(Gallery $gallery, Request $request)
     {
@@ -139,7 +139,7 @@ class GalleryController extends Controller
     }
 
     /**
-     * @Route("/toggle/{id}", requirements={"id" = "\d*"}, name="gallery_toggle")
+     * @Route("/toggle/{id}", requirements={"id": "\d*"}, name="gallery_toggle")
      */
     public function toggleAction(Gallery $gallery, Request $request)
     {

@@ -52,7 +52,7 @@ class CartController extends Controller
     }
 
     /**
-     * @Route("/cart/ajax/toggle/{id}", requirements={"id" = "\d*"}, name="cart_toggle")
+     * @Route("/cart/ajax/toggle/{id}", requirements={"id": "\d*"}, name="cart_toggle")
      * @Route("/cart/ajax/toggle/", name="cart_toggle_empty_link")
      */
     public function toogleCartAction(Photo $photo)
@@ -90,7 +90,7 @@ class CartController extends Controller
     }
 
     /**
-     * @Route("/cart/ajax/delete/{id}", requirements={"id" = "\d*"}, name="cart_delete")
+     * @Route("/cart/ajax/delete/{id}", requirements={"id": "\d*"}, name="cart_delete")
      */
     public function deleteCartAction(Photo $photo, Request $request)
     {
@@ -142,7 +142,7 @@ class CartController extends Controller
     }
 
     /**
-     * @Route("/cart/ajax/update/{photo}/{format}/{quantity}", requirements={"photo" = "\d*", "format" = "\d*", "quantity" = "\d*"}, name="cart_update")
+     * @Route("/cart/ajax/update/{photo}/{format}/{quantity}", requirements={"photo": "\d*", "format": "\d*", "quantity": "\d*"}, name="cart_update")
      * @Route("/cart/ajax/update/", name="cart_update_empty_link")
      * @ParamConverter("photo", class="GalleryBundle:Photo", options={"id" = "photo"})
      * @ParamConverter("format", class="CartBundle:Format", options={"id" = "format"})

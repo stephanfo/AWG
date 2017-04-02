@@ -42,7 +42,7 @@ class OrderController extends Controller
     }
 
     /**
-     * @Route("/order/view/{id}", requirements={"id" = "\d*"}, name="admin_order_view")
+     * @Route("/order/view/{id}", requirements={"id": "\d*"}, name="admin_order_view")
      */
     public function viewAction($id)
     {
@@ -56,7 +56,7 @@ class OrderController extends Controller
     }
 
     /**
-     * @Route("/order/canceled/{id}", requirements={"id" = "\d*"}, name="admin_order_cancel")
+     * @Route("/order/canceled/{id}", requirements={"id": "\d*"}, name="admin_order_cancel")
      * @ParamConverter("order", class="CartBundle:Order", options={"id" = "id"})
      */
     public function canceledAction(Request $request, Order $order)
@@ -68,7 +68,7 @@ class OrderController extends Controller
     }
 
     /**
-     * @Route("/order/activate/{id}", requirements={"id" = "\d*"}, name="admin_order_activate")
+     * @Route("/order/activate/{id}", requirements={"id": "\d*"}, name="admin_order_activate")
      * @ParamConverter("order", class="CartBundle:Order", options={"id" = "id"})
      */
     public function activateAction(Request $request, Order $order)
@@ -80,7 +80,7 @@ class OrderController extends Controller
     }
 
     /**
-     * @Route("/order/printed/{id}", requirements={"id" = "\d*"}, name="admin_order_printed")
+     * @Route("/order/printed/{id}", requirements={"id": "\d*"}, name="admin_order_printed")
      * @ParamConverter("order", class="CartBundle:Order", options={"id" = "id"})
      */
     public function printedAction(Request $request, Order $order)
@@ -92,7 +92,7 @@ class OrderController extends Controller
     }
 
     /**
-     * @Route("/order/payed/{id}", requirements={"id" = "\d*"}, name="admin_order_payed")
+     * @Route("/order/payed/{id}", requirements={"id": "\d*"}, name="admin_order_payed")
      * @ParamConverter("order", class="CartBundle:Order", options={"id" = "id"})
      */
     public function payedAction(Request $request, Order $order)

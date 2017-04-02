@@ -10,7 +10,7 @@ class LikeController extends Controller
 {
 
     /**
-     * @Route("/ajax/like/toggle/{id}", requirements={"id" = "\d*"}, name="like_toggle")
+     * @Route("/ajax/like/toggle/{id}", requirements={"id": "\d*"}, name="like_toggle")
      * @Route("/ajax/like/toggle/", name="like_toggle_empty_link")
      */
     public function toogleLikeAction(Photo $photo)
