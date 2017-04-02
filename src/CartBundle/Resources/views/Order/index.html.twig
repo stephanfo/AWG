@@ -82,7 +82,7 @@
                         <td style="vertical-align: middle; white-space: nowrap;" class="table-detail">
 
                             {% if order.canceled %}
-                                <a href="{{ path('admin_order_activate', {'id': order.id}) }}"><button type="button" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Annuler la commande"><i class="glyphicon glyphicon-remove"></i></button></a>
+                                <a href="{{ path('admin_order_activate', {'id': order.id}) }}"><button type="button" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Réactiver la commande"><i class="glyphicon glyphicon-remove"></i></button></a>
                                 {% elseif order.payed and order.printed %}
                                 <button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Commande imprimée"><i class="glyphicon glyphicon-print"></i></button>
                                 <button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Commande payée"><i class="glyphicon glyphicon-eur"></i></button>
