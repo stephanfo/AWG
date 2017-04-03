@@ -29,7 +29,7 @@
                 <th>{{ 'Image' | trans }}</th>
                 <th class="table-detail">{{ 'Quantité' | trans }}</th>
                 <th class="table-detail">{{ 'Format' | trans }}</th>
-                {% if order.payed and not order.canceled and app_config.getConfig.applicationSellFiles and app_config.getConfig.applicationSellFilesAllowDownload %}
+                {% if order.payed and not order.canceled and appConfig.applicationSellFiles and appConfig.applicationSellFilesAllowDownload %}
                     <th class="table-detail">{{ 'Action' | trans }}</th>
                 {% endif %}
             </tr>
@@ -43,7 +43,7 @@
                         </td>
                         <td class="table-detail">{{ quantity.quantity }}</td>
                         <td class="table-detail">{{ quantity.format.size }}</td>
-                        {% if order.payed and not order.canceled and app_config.getConfig.applicationSellFiles and app_config.getConfig.applicationSellFilesAllowDownload %}
+                        {% if order.payed and not order.canceled and appConfig.applicationSellFiles and appConfig.applicationSellFilesAllowDownload %}
                             <td class="table-detail">
                                 <a href="{{ path("order_download_detail", { "id": detail.id }) }}">
                                     <button type="button" class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="{{ 'Télécharger le fichier original' | trans }}"><i class="glyphicon glyphicon-download-alt"></i></button>
@@ -68,7 +68,7 @@
                 </tr>
             {% endif %}
             <tr class="success">
-                <th colspan="{% if order.payed and not order.canceled and app_config.getConfig.applicationSellFiles and app_config.getConfig.applicationSellFilesAllowDownload %}3{% else %}2{% endif %}">Total</th>
+                <th colspan="{% if order.payed and not order.canceled and appConfig.applicationSellFiles and appConfig.applicationSellFilesAllowDownload %}3{% else %}2{% endif %}">Total</th>
                 <th class="table-detail">{{ order.total | number_format(2, ",", " ") }}€</th>
             </tr>
         </tfoot>

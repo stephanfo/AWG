@@ -1,3 +1,4 @@
+{% set appConfig = app_config.getConfig %}
 <!DOCTYPE html>
 <html lang="{{ app.request.locale }}">
     <head>
@@ -13,8 +14,8 @@
         <link rel="manifest" href="/manifest.json">
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
         <meta name="theme-color" content="#ffffff">
-        {% if app_config.getConfig.applicationTheme is not null %}
-            <link href="/resources/photos.lifeinpix/css/template/{{ app_config.getConfig.applicationTheme }}/bootstrap.min.css" rel="stylesheet">
+        {% if appConfig.applicationTheme is not null %}
+            <link href="/resources/photos.lifeinpix/css/template/{{ appConfig.applicationTheme }}/bootstrap.min.css" rel="stylesheet">
         {% else %}
             <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         {% endif %}
