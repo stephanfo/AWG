@@ -122,7 +122,7 @@ liip_imagine:
     filter_sets:
         cache: ~
         gallery_thumb:
-            quality: 40
+            quality: 70
             filters:
                 relative_resize:
                   widen: 255

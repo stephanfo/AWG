@@ -4,7 +4,8 @@ security:
         Symfony\Component\Security\Core\User\User: plaintext
 
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
+        ROLE_BIGPICTURE:  ROLE_USER
+        ROLE_ADMIN:       ROLE_USER, ROLE_BIGPICTURE
 
     providers:
         in_memory:

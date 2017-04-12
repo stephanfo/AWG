@@ -16,9 +16,13 @@
         <div id="grid" data-columns>
         {% for photo in gallery.photos %}
             <div class="thumbnail">
-                <a href="{{ vich_uploader_asset(photo, 'imageFile') }}" data-lightbox="gallery" data-title="Photo {{ photo.title }}, Taille {{ photo.imageWidth }}x{{ photo.imageHeight }}">
+                {% if is_granted('ROLE_BIGPICTURE') %}
+                    <a href="{{ vich_uploader_asset(photo, 'imageFile') }}" data-lightbox="gallery" data-title="Photo {{ photo.title }}, Taille {{ photo.imageWidth }}x{{ photo.imageHeight }}">
+                        <img class="img-responsive" src="{{ vich_uploader_asset(photo, 'imageFile') | imagine_filter('gallery_thumb') }}" alt="{{ photo.title }}"/>
+                    </a>
+                {% else %}
                     <img class="img-responsive" src="{{ vich_uploader_asset(photo, 'imageFile') | imagine_filter('gallery_thumb') }}" alt="{{ photo.title }}"/>
-                </a>
+                {% endif %}
                 <div class="caption">
                     <p class="image-caption">
                         {{ photo.title }}
@@ -62,9 +66,13 @@
 
 {% block javascripts %}
     <script src="/resources/salvattore/salvattore.min.js"></script>
-    <script src="/resources/lightbox/js/lightbox.min.js"></script>
+    {% if is_granted('ROLE_BIGPICTURE') %}
+        <script src="/resources/lightbox/js/lightbox.min.js"></script>
+    {% endif %}
 {% endblock %}
 
 {% block stylesheets %}
-    <link href="/resources/lightbox/css/lightbox.min.css" rel="stylesheet">
+    {% if is_granted('ROLE_BIGPICTURE') %}
+        <link href="/resources/lightbox/css/lightbox.min.css" rel="stylesheet">
+    {% endif %}
 {% endblock %}

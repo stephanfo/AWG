@@ -28,7 +28,13 @@
                 <div id="grid" data-columns>
                 {% for photo in gallery.photos %}
                     <div class="thumbnail">
-                        <img class="img-responsive" src="{{ vich_uploader_asset(photo, 'imageFile') | imagine_filter('gallery_thumb') }}" alt="{{ photo.title }}"/>
+                        {% if is_granted('ROLE_BIGPICTURE') %}
+                            <a href="{{ vich_uploader_asset(photo, 'imageFile') }}" data-lightbox="gallery" data-title="Photo {{ photo.title }}, Taille {{ photo.imageWidth }}x{{ photo.imageHeight }}">
+                                <img class="img-responsive" src="{{ vich_uploader_asset(photo, 'imageFile') | imagine_filter('gallery_thumb') }}" alt="{{ photo.title }}"/>
+                            </a>
+                        {% else %}
+                            <img class="img-responsive" src="{{ vich_uploader_asset(photo, 'imageFile') | imagine_filter('gallery_thumb') }}" alt="{{ photo.title }}"/>
+                        {% endif %}
                         <div class="caption">
                             <p class="image-caption">
                                 {{ photo.title }}
@@ -95,4 +101,13 @@
                 $('html, body').animate({scrollTop: $('#' + this.value).offset().top }, 1000);
         });
     </script>
+    {% if is_granted('ROLE_BIGPICTURE') %}
+        <script src="/resources/lightbox/js/lightbox.min.js"></script>
+    {% endif %}
+{% endblock %}
+
+{% block stylesheets %}
+    {% if is_granted('ROLE_BIGPICTURE') %}
+        <link href="/resources/lightbox/css/lightbox.min.css" rel="stylesheet">
+    {% endif %}
 {% endblock %}
