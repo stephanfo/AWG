@@ -46,17 +46,17 @@
     <hr>
     <div>
         <div class="bottom-block-left">
-            <a href="{{ path('photo_loader', { 'id': gallery.id }) }}"><button type="button" class="btn btn-success btn-sm bottom-button"><i class="glyphicon glyphicon glyphicon-plus"></i> Ajouter des photos</button></a>
-            <a href="{{ path('photo_clear', { 'id': gallery.id }) }}"><button type="button" class="btn btn-danger btn-sm bottom-button"><i class="glyphicon glyphicon glyphicon-trash"></i> Supprimer toutes les photos</button></a>
+            <a href="{{ path('photo_loader', { 'id': gallery.id }) }}"><button type="button" class="btn btn-success bottom-button"><i class="glyphicon glyphicon glyphicon-plus"></i> Ajouter des photos</button></a>
+            <a href="{{ path('photo_clear', { 'id': gallery.id }) }}"><button type="button" class="btn btn-danger bottom-button"><i class="glyphicon glyphicon glyphicon-trash"></i> Supprimer toutes les photos</button></a>
         </div>
         <div class="bottom-block-right">
             {% if gallery.active %}
-                <a href="{{ path('gallery_toggle', { 'id': gallery.id }) }}"><button type="button" class="btn btn-success btn-sm bottom-button"><i class="glyphicon glyphicon-eye-open"></i> Desactiver</button></a>
+                <a href="{{ path('gallery_toggle', { 'id': gallery.id }) }}"><button type="button" class="btn btn-success bottom-button"><i class="glyphicon glyphicon-eye-open"></i> Desactiver</button></a>
             {% else %}
-                <a href="{{ path('gallery_toggle', { 'id': gallery.id }) }}"><button type="button" class="btn btn-default btn-sm bottom-button"><i class="glyphicon glyphicon-eye-close"></i> Activer</button></a>
+                <a href="{{ path('gallery_toggle', { 'id': gallery.id }) }}"><button type="button" class="btn btn-default bottom-button"><i class="glyphicon glyphicon-eye-close"></i> Activer</button></a>
             {% endif %}
-            <a href="{{ path('gallery_edit', { 'id': gallery.id }) }}"><button type="button" class="btn btn-warning btn-sm bottom-button"><i class="glyphicon glyphicon-edit"></i> Editer la galerie</button></a>
-            <a href="{{ path('gallery_delete', { 'id': gallery.id }) }}"><button type="button" class="btn btn-danger btn-sm bottom-button"><i class="glyphicon glyphicon-remove"></i> Supprimer la gallerie</button></a>
+            <a href="{{ path('gallery_edit', { 'id': gallery.id }) }}"><button type="button" class="btn btn-warning bottom-button"><i class="glyphicon glyphicon-edit"></i> Editer la galerie</button></a>
+            <a href="{{ path('gallery_delete', { 'id': gallery.id }) }}"><button type="button" class="btn btn-danger bottom-button"><i class="glyphicon glyphicon-remove"></i> Supprimer la gallerie</button></a>
         </div>
     </div>
     <p>

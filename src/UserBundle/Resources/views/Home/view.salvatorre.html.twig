@@ -7,7 +7,7 @@
 {% block body %}
     {% if not galleries is empty %}
         {% if appConfig.galleryQuickLink and galleries | length > 1 %}
-            <div class="form-group form-group-sm form-inline gallery-quick-link">
+            <div class="form-group form-inline gallery-quick-link">
                 <select id="quickLink" class="form-control">
                     <option value="0">{{ 'Accès rapide' | trans }}</option>
                     {% for gallery in galleries %}

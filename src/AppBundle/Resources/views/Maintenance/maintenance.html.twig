@@ -1,0 +1,51 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}
+    Maintenance - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h4 class="page-header">Maintenance de l'application</h4>
+    <p>
+        <a href="{{ path('app_print_index') }}"><button class="btn btn-primary"><i class="glyphicon glyphicon-print"></i> Travaux d'impression</button></a>
+        &nbsp;&nbsp;-&nbsp;&nbsp;
+        Accéder aux travaux d'impressions en attente. Vous pourrez les supprimer si nécessaire.<br/>
+    </p>
+    <p>
+        <a href="{{ path('app_maintenance_thumbs_clear') }}"><button class="btn btn-warning"><i class="glyphicon glyphicon-trash"></i> Supprimer les images en cache</button></a>
+        &nbsp;&nbsp;-&nbsp;&nbsp;
+        A l'affichage des miniatures, les images en cache seront regénérées automatiquement.<br/>
+    </p>
+    <p>
+        <a href="{{ path('app_maintenance_cache_clear') }}"><button class="btn btn-warning"><i class="glyphicon glyphicon-retweet"></i> Vider le cache de l'application</button></a>
+        &nbsp;&nbsp;-&nbsp;&nbsp;
+        Cela rafraichira l'ensemble des pages en cache de l'application.<br/>
+    </p>
+    <p>
+        <a href="#" data-toggle="modal" data-target="#warning-reset"><button class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Réinitialiser l'application</button></a>
+        &nbsp;&nbsp;-&nbsp;&nbsp;
+        Cette commande supprimera les commandes, les paniers, les galeries et les utilisateurs. Cette action est irréversible.<br/>
+    </p>
+
+    <div class="modal fade" id="warning-reset" tabindex="-1" role="dialog" aria-labelledby="warning-reset" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="warning-reset">Confirmer la ré-initialisation</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="erase-warning-text">
+                        Attention, vous allez supprimer l'ensemble des galeries et des photos, ainsi que les commandes, les utilisateurs et le contenu des paniers.<br>
+                    </p>
+                    <p>
+                        Êtes-vous bien sur de vouloir faire celà ?
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <a href="{{ path('app_maintenance_reset_app') }}"><button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Oui je supprime tout</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

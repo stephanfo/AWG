@@ -30,19 +30,19 @@ class PrintController extends Controller
         if($photo->getImageWidth() === $photo->getImageHeight() && !is_null($format->getPrintSquare()))
             $printCommand = str_replace(array("{quantity}", "{file}"), array(1, $absoluteImagePath), $format->getPrintSquare());
         else
-            if($photo->getDoNotCrop())
-                $printCommand = str_replace(array("{quantity}", "{file}"), array(1, $absoluteImagePath), $format->getPrint());
-            else
+            if(!$photo->getDoNotCrop() && !is_null($format->getPrintCrop()))
                 $printCommand = str_replace(array("{quantity}", "{file}"), array(1, $absoluteImagePath), $format->getPrintCrop());
+            else
+                $printCommand = str_replace(array("{quantity}", "{file}"), array(1, $absoluteImagePath), $format->getPrint());
 
         $printProcess = new Process($printCommand);
         $printProcess->run();
 
         if (!$printProcess->isSuccessful()) {
-            $request->getSession()->getFlashBag()->add('danger', 'Le commande : ' . $printCommand . ' a échouée (message d\'erreur : '. $printProcess->getErrorOutput() . ').');
+            $request->getSession()->getFlashBag()->add('danger', 'La commande : ' . $printCommand . ' a échouée (message d\'erreur : '. $printProcess->getErrorOutput() . ').');
         }
         else {
-            $request->getSession()->getFlashBag()->add('success', 'Le commande : ' . $printCommand . ' a réussi (message de confirmation : ' . $printProcess->getOutput() . ').');
+            $request->getSession()->getFlashBag()->add('success', 'La commande : ' . $printCommand . ' a réussi (message de confirmation : ' . $printProcess->getOutput() . ').');
         }
 
         return $this->redirect($request->headers->get('referer'));
@@ -75,18 +75,21 @@ class PrintController extends Controller
                 if($photo->getImageWidth() === $photo->getImageHeight() && !is_null($format->getPrintSquare()))
                     $printCommand = str_replace(array("{quantity}", "{file}"), array($quantity->getQuantity(), $absoluteImagePath), $format->getPrintSquare());
                 else
-                    if($photo->getDoNotCrop())
-                        $printCommand = str_replace(array("{quantity}", "{file}"), array($quantity->getQuantity(), $absoluteImagePath), $format->getPrint());
-                    else
+                    if(!$photo->getDoNotCrop() && !is_null($format->getPrintCrop()))
                         $printCommand = str_replace(array("{quantity}", "{file}"), array($quantity->getQuantity(), $absoluteImagePath), $format->getPrintCrop());
+                    else
+                        $printCommand = str_replace(array("{quantity}", "{file}"), array($quantity->getQuantity(), $absoluteImagePath), $format->getPrint());
 
-                $nbPrint += $quantity->getQuantity();
+                if($printCommand != "")
+                {
+                    $nbPrint += $quantity->getQuantity();
 
-                $printProcess = new Process($printCommand);
-                $printProcess->run();
+                    $printProcess = new Process($printCommand);
+                    $printProcess->run();
 
-                if (!$printProcess->isSuccessful()) {
-                    $error = true;
+                    if (!$printProcess->isSuccessful()) {
+                        $error = true;
+                    }
                 }
             }
         }

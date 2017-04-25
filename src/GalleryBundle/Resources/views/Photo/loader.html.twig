@@ -12,22 +12,22 @@
     <div id="actions" class="row">
         <div class="col-lg-7">
             <!-- The fileinput-button span is used to style the file input field as button -->
-            <span class="btn btn-success fileinput-button btn-sm dz-clickable">
+            <span class="btn btn-success fileinput-button dz-clickable">
                 <i class="glyphicon glyphicon-plus"></i>
                 <span>Ajouter des photos</span>
             </span>
-            <button type="submit" class="btn btn-primary btn-sm start">
+            <button type="submit" class="btn btn-primary start">
                 <i class="glyphicon glyphicon-upload"></i>
                 <span>Commencer l'envoi</span>
             </button>
-            <button type="reset" class="btn btn-warning btn-sm cancel">
+            <button type="reset" class="btn btn-warning cancel">
                 <i class="glyphicon glyphicon-ban-circle"></i>
                 <span>Effacer la liste</span>
             </button>
         </div>
         <div class="col-lg-5">
             <a href="{{ path('gallery_view', { 'id': gallery.id }) }}">
-                <button class="btn btn-default btn-sm">Créer les miniatures</button>
+                <button class="btn btn-default">Créer les miniatures</button>
             </a>
         </div>
     </div>
@@ -58,15 +58,15 @@
                 </div>
             </div>
             <div>
-                <button class="btn btn-primary btn-sm start">
+                <button class="btn btn-primary start">
                     <i class="glyphicon glyphicon-upload"></i>
                     <span>Start</span>
                 </button>
-                <button data-dz-remove class="btn btn-warning btn-sm cancel">
+                <button data-dz-remove class="btn btn-warning cancel">
                     <i class="glyphicon glyphicon-ban-circle"></i>
                     <span>Cancel</span>
                 </button>
-                <button data-dz-remove class="btn btn-danger btn-sm delete">
+                <button data-dz-remove class="btn btn-danger delete">
                     <i class="glyphicon glyphicon-trash"></i>
                     <span>Delete</span>
                 </button>
