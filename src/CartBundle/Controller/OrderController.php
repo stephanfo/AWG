@@ -19,25 +19,52 @@ class OrderController extends Controller
      */
     public function listAction(Request $request)
     {
+        $filterFormDefault = array (
+            'startDate' => new \DateTime('now - 1 day midnight'),
+            'stopDate' => new \DateTime('now + 1 day midnight'),
+            'status' => 'Ouvertes',
+        );
+
         $filterForm = $this->searchForm();
+        $filterForm->handleRequest($request);
 
-        if ($filterForm->handleRequest($request)->isValid())
+        $session = $request->getSession();
+
+        if ($filterForm->isSubmitted() && $filterForm->isValid())
         {
-            $resultArray = $filterForm->getData();
-            $startDate = $resultArray["startDate"];
-            $stopDate = $resultArray["stopDate"];
-            $status = $resultArray["status"];
-
-            $orders = $this->getDoctrine()->getRepository('CartBundle:Order')->getOrderSearch($startDate, $stopDate, $status);
+            if(!$filterForm->get('reset')->isClicked())
+            {
+                $session->set("admin_order_list", $filterForm->getData());
+            }
+            else
+            {
+                $filterForm = $this->searchForm();
+                $filterForm->setData($filterFormDefault);
+                $session->set("admin_order_list", $filterFormDefault);
+            }
+        }
+        else if($session->has("admin_order_list") && !is_null($session->get("admin_order_list")))
+        {
+            $filterForm = $this->searchForm();
+            $filterForm->setData($session->get("admin_order_list"));
         }
         else
         {
-            $orders = $this->getDoctrine()->getRepository('CartBundle:Order')->getOrderSearch(new \DateTime('now - 1 day midnight'), new \DateTime('now + 1 day midnight'), "Ouvertes");
+            $filterForm = $this->searchForm();
+            $filterForm->setData($filterFormDefault);
+            $session->set("admin_order_list", $filterFormDefault);
         }
 
+        $resultArray = $filterForm->getData();
+        $startDate = $resultArray["startDate"];
+        $stopDate = $resultArray["stopDate"];
+        $status = $resultArray["status"];
+
+        $orders = $this->getDoctrine()->getRepository('CartBundle:Order')->getOrderSearch($startDate, $stopDate, $status);
+
         return $this->render('CartBundle:Order:index.html.twig', array(
-                    'orders' => $orders,
-                    'filterForm' => $filterForm->createView()
+            'orders' => $orders,
+            'filterForm' => $filterForm->createView()
         ));
     }
 
@@ -50,8 +77,8 @@ class OrderController extends Controller
         $orderDetails = $this->getDoctrine()->getRepository('CartBundle:Format')->getOrderDetail($id);
 
         return $this->render('CartBundle:Order:view.html.twig', array(
-                    'orderHeader' => $orderHeader,
-                    'orderDetails' => $orderDetails
+            'orderHeader' => $orderHeader,
+            'orderDetails' => $orderDetails
         ));
     }
 
@@ -106,28 +133,26 @@ class OrderController extends Controller
     private function searchForm()
     {
         return $this->createFormBuilder()
-                        ->add('startDate', DateType::class, array(
-                            'widget' => 'single_text',
-                            'format' => 'dd-MM-yyyy',
-                            'data' => new \DateTime('now - 1 day')
-                        ))
-                        ->add('stopDate', DateType::class, array(
-                            'widget' => 'single_text',
-                            'format' => 'dd-MM-yyyy',
-                            'data' => new \DateTime('now + 1 day')
-                        ))
-                        ->add('status', ChoiceType::class, array(
-                            'choices' => array(
-                                'Ouvertes' => 'Ouvertes',
-                                'Terminées' => 'Terminées',
-                                'Annulées' => 'Annulées'
-                            ),
-                            'placeholder' => 'Toutes',
-                            'required' => false,
-                            'data' => 'Ouvertes'
-                        ))
-                        ->add('submit', SubmitType::class)
-                        ->getForm();
+            ->add('startDate', DateType::class, array(
+                'widget' => 'single_text',
+                'format' => 'dd-MM-yyyy',
+            ))
+            ->add('stopDate', DateType::class, array(
+                'widget' => 'single_text',
+                'format' => 'dd-MM-yyyy',
+            ))
+            ->add('status', ChoiceType::class, array(
+                'choices' => array(
+                    'Ouvertes' => 'Ouvertes',
+                    'Terminées' => 'Terminées',
+                    'Annulées' => 'Annulées'
+                ),
+                'placeholder' => 'Toutes',
+                'required' => false,
+            ))
+            ->add('filter', SubmitType::class)
+            ->add('reset', SubmitType::class)
+            ->getForm();
     }
 
 }

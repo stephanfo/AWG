@@ -93,10 +93,8 @@ class UserController extends Controller
         if (is_null($user))
             return $this->redirectToRoute('user_add');
 
-        $user->setSession($user->getSession() . "-killed");
+        $user->setSession($user->getSession() . "-logout:" . time());
         $em->flush();
-
-        $request->getSession()->invalidate();
 
         $request->getSession()->getFlashBag()->add('success', $this->get('translator')->trans('Vous avez bien été déconnecté.'));
 

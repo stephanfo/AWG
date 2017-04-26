@@ -36,7 +36,8 @@
             </div>
         </div>
         <div class="col-sm-3">
-            {{ form_widget(filterForm.submit, {'attr': {'class': 'btn btn-primary bottom-button'}, 'label': 'Filtrer'}) }}
+            {{ form_widget(filterForm.filter, {'attr': {'class': 'btn btn-primary bottom-button'}, 'label': 'Filtrer'}) }}
+            {{ form_widget(filterForm.reset, {'attr': {'class': 'btn btn-default bottom-button'}, 'label': 'Effacer'}) }}
         </div>
     </div>
     {{ form_rest(filterForm) }}
