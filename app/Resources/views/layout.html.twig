@@ -1,117 +1,118 @@
 {% set appConfig = app_config.getConfig %}
 <!DOCTYPE html>
 <html lang="{{ app.request.locale }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <title>{% block title %}Galerie de mariage éphémère{% endblock %}</title>
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-        <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
-        <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
-        <link rel="manifest" href="/manifest.json">
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-        <meta name="theme-color" content="#ffffff">
-        {% if appConfig.applicationTheme is not null %}
-            <link href="/resources/photos.lifeinpix/css/template/{{ appConfig.applicationTheme }}/bootstrap.min.css" rel="stylesheet">
-        {% else %}
-            <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        {% endif %}
-        <link href="/resources/thumbnail-gallery/thumbnail-gallery.css" rel="stylesheet">
-        {% block stylesheets %}{% endblock %}
-        <link href="/resources/photos.lifeinpix/css/style.css" rel="stylesheet">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>{% block title %}Galerie de mariage éphémère{% endblock %}</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+    {% if appConfig.applicationTheme is not null %}
+        <link href="/resources/photos.lifeinpix/css/template/{{ appConfig.applicationTheme }}/bootstrap.min.css" rel="stylesheet">
+    {% else %}
+        <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    {% endif %}
+    <link href="/resources/thumbnail-gallery/thumbnail-gallery.css" rel="stylesheet">
+    {% block stylesheets %}{% endblock %}
+    <link href="/resources/photos.lifeinpix/css/style.css" rel="stylesheet">
     <script src="/resources/jquery/jquery-3.1.1.min.js"></script>
 </head>
 
 <body>
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{{ path('home') }}">{{ 'La galerie photos' | trans }}</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ path('home') }}">{{ 'La galerie photos' | trans }}</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="{{ path('cart') }}">{{ 'Ma selection' | trans }}</a>
+                </li>
+                <li>
+                    <a href="{{ path('order_list') }}">{{ 'Mes impressions' | trans }}</a>
+                </li>
+                <li>
+                    <a href="{{ path('offers') }}">{{ 'Les offres' | trans }}</a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">{{ 'Mon profil' | trans }} <span class="caret"></span></a>
+                    <ul class="dropdown-menu" aria-labelledby="profil">
+                        <li>
+                            <a href="{{ path('user_edit') }}">{{ 'Editer' | trans }}</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('user_logout') }}">{{ 'Déconnecter' | trans }}</a>
+                        </li>
+                    </ul>
+                </li>
+                {% if not is_granted('ROLE_ADMIN') %}
                     <li>
-                        <a href="{{ path('cart') }}">{{ 'Ma selection' | trans }}</a>
+                        <a href="{{ path('gallery_index') }}">{{ 'Administration' | trans }} <i class="glyphicon glyphicon-lock"></i></a>
                     </li>
-                    <li>
-                        <a href="{{ path('order_list') }}">{{ 'Mes impressions' | trans }}</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('offers') }}">{{ 'Les offres' | trans }}</a>
-                    </li>
+                {% else %}
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">{{ 'Mon profil' | trans }} <span class="caret"></span></a>
-                        <ul class="dropdown-menu" aria-labelledby="profil">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">{{ 'Administration' | trans }} <span class="caret"></span></a>
+                        <ul class="dropdown-menu" aria-labelledby="admin">
                             <li>
-                                <a href="{{ path('user_edit') }}">{{ 'Editer' | trans }}</a>
+                                <a href="{{ path('app_config_edit') }}">{{ 'Configuration' | trans }}</a>
                             </li>
                             <li>
-                                <a href="{{ path('user_logout') }}">{{ 'Déconnecter' | trans }}</a>
+                                <a href="{{ path('app_maintenance') }}">{{ 'Maintenance' | trans }}</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="{{ path('gallery_index') }}">{{ 'Galeries' | trans }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('tarif_index') }}">{{ 'Formats et Tarifs' | trans }}</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="{{ path('app_intro') }}" target="_blank">{{ 'Instructions' | trans }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('slideshow_config') }}">{{ 'Slideshow' | trans }}</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="{{ path('admin_cart_current') }}">{{ 'Selections' | trans }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('admin_order_list') }}">{{ 'Commandes' | trans }}</a>
                             </li>
                         </ul>
                     </li>
-                    {% if not is_granted('ROLE_ADMIN') %}
-                        <li>
-                            <a href="{{ path('gallery_index') }}">{{ 'Administration' | trans }} <i class="glyphicon glyphicon-lock"></i></a>
-                        </li>
-                    {% else %}
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">{{ 'Administration' | trans }} <span class="caret"></span></a>
-                            <ul class="dropdown-menu" aria-labelledby="admin">
-                                <li>
-                                    <a href="{{ path('gallery_index') }}">{{ 'Galeries' | trans }}</a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('tarif_index') }}">{{ 'Formats et Tarifs' | trans }}</a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('app_config_edit') }}">{{ 'Configuration' | trans }}</a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('app_maintenance') }}">{{ 'Maintenance' | trans }}</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="{{ path('app_intro') }}" target="_blank">{{ 'Instructions' | trans }}</a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('slideshow_config') }}">{{ 'Slideshow' | trans }}</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="{{ path('admin_cart_current') }}">{{ 'Selections' | trans }}</a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('admin_order_list') }}">{{ 'Commandes' | trans }}</a>
-                                </li>
-                            </ul>
-                        </li>
-                    {% endif %}
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    {% if app.request.locale != 'fr' %}
-                        <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params') | merge({'_locale': 'fr'})) }}"><img src="/resources/flags/fr.png" height="18"> French</a></li>
-                    {%  endif %}
-                    {% if app.request.locale != 'en' %}
-                        <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params') | merge({'_locale': 'en'})) }}"><img src="/resources/flags/en.png" height="18"> English</a></li>
-                    {%  endif %}
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
+                {% endif %}
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if app.request.locale != 'fr' %}
+                    <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params') | merge({'_locale': 'fr'})) }}"><img src="/resources/flags/fr.png" height="18"> French</a></li>
+                {%  endif %}
+                {% if app.request.locale != 'en' %}
+                    <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params') | merge({'_locale': 'en'})) }}"><img src="/resources/flags/en.png" height="18"> English</a></li>
+                {%  endif %}
+            </ul>
         </div>
-        <!-- /.container -->
-    </nav>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
 {% block header %}{% endblock %}
 <div class="container main-container">
     <div class="row">

@@ -36,4 +36,14 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
                         ->getOneOrNullResult()
         ;
     }
+    
+    public function getAllUserArray()
+    {
+        return $this->createQueryBuilder('user')
+            ->select('user.created, user.firstname, user.lastname, user.email, user.location')
+            ->orderBy('user.created')
+            ->getQuery()
+            ->getScalarResult()
+            ;
+    }
 }

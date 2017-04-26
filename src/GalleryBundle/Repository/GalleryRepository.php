@@ -45,15 +45,27 @@ class GalleryRepository extends \Doctrine\ORM\EntityRepository
     public function getActiveGalleries()
     {
         return $this->createQueryBuilder("gallery")
-                        ->join("gallery.photos", "photo")
-                        ->addSelect("photo")
-                        ->where('gallery.active = :active')
-                        ->setParameter('active', true)
-                        ->orderBy("gallery.date", "ASC")
-                        ->addOrderBy("photo.id", "ASC")
-                        ->getQuery()
-                        ->getResult()
-        ;
+            ->join("gallery.photos", "photo")
+            ->addSelect("photo")
+            ->where('gallery.active = :active')
+            ->setParameter('active', true)
+            ->orderBy("gallery.date", "ASC")
+            ->addOrderBy("photo.id", "ASC")
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function getGalleriesArray()
+    {
+        return $this->createQueryBuilder("gallery")
+            ->join("gallery.photos", "photo")
+            ->select('gallery.title, gallery.detail, gallery.comment, gallery.date, gallery.active, photo.title AS picture, photo.doNotCrop, photo.likeCount')
+            ->orderBy("gallery.created", "ASC")
+            ->addOrderBy("photo.created", "ASC")
+            ->getQuery()
+            ->getScalarResult()
+            ;
     }
 
 }

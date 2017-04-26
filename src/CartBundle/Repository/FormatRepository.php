@@ -84,4 +84,11 @@ class FormatRepository extends \Doctrine\ORM\EntityRepository
                         ->getResult();
     }
 
+    public function getFormatArray()
+    {
+        return $this->createQueryBuilder('format')
+            ->select('format.size, format.print, format.printCrop, format.printSquare')
+            ->getQuery()
+            ->getScalarResult();
+    }
 }

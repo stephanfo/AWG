@@ -34,6 +34,7 @@
         "vich/uploader-bundle": "^1.4",
         "stfalcon/tinymce-bundle": "^2.1",
         "liip/imagine-bundle": "^1.7",
+        "liuggio/excelbundle": "^2.1",
         "symfony/process": "^3.2"
     },
     "require-dev": {

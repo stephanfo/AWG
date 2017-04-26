@@ -48,89 +48,89 @@
             <div class="col-md-12">
                 <table class="table table-striped">
                     <thead>
-                        <tr>
-                            <th>#</th>
-                            <th class="table-detail">Heure</th>
-                            <th class="table-detail">Contact</th>
-                            <th class="table-detail">Nombre de photos</th>
-                            <th class="table-detail">Montant</th>
-                            <th class="table-detail">Status</th>
-                            <th class="table-detail">Actions</th>
-                        </tr>
+                    <tr>
+                        <th>#</th>
+                        <th class="table-detail">Heure</th>
+                        <th class="table-detail">Contact</th>
+                        <th class="table-detail">Nombre de photos</th>
+                        <th class="table-detail">Montant</th>
+                        <th class="table-detail">Status</th>
+                        <th class="table-detail">Actions</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        {% set fullQuantity = 0 %}
-                        {% set fullTotal = 0 %}
-                        {% for order in orders %}
-                            <tr{% if order.canceled %} class="order-canceled active"{% elseif order.printed and order.payed %} class="success"{% elseif not order.printed and order.payed %} class="warning"{% elseif order.printed and not order.payed %} class="danger"{% endif %}>
-                                <td style="vertical-align: middle;">
-                                    {{ order.id }}
-                                </td>
-                                <td style="vertical-align: middle;" class="table-detail">
-                                    {{ order.created | date('d-m-Y H:i') }}
-                                </td>
-                                <td style="vertical-align: middle;" class="table-detail">
-                                    {{ order.user.firstname }} {{ order.user.lastname }} ({{ order.user.location }})
-                                </td>
-                                <td style="vertical-align: middle;" class="table-detail">
-                                    {{ order.quantity }}
+                    {% set fullQuantity = 0 %}
+                    {% set fullTotal = 0 %}
+                    {% for order in orders %}
+                        <tr{% if order.canceled %} class="order-canceled active"{% elseif order.printed and order.payed %} class="success"{% elseif not order.printed and order.payed %} class="warning"{% elseif order.printed and not order.payed %} class="danger"{% endif %}>
+                            <td style="vertical-align: middle;">
+                                {{ order.id }}
+                            </td>
+                            <td style="vertical-align: middle;" class="table-detail">
+                                {{ order.created | date('d-m-Y H:i') }}
+                            </td>
+                            <td style="vertical-align: middle;" class="table-detail">
+                                {{ order.user.firstname }} {{ order.user.lastname }} ({{ order.user.location }})
+                            </td>
+                            <td style="vertical-align: middle;" class="table-detail">
+                                {{ order.quantity }}
                                 {% if not order.canceled %}{% set fullQuantity = fullQuantity + order.quantity %}{% endif %}
                             </td>
                             <td style="vertical-align: middle;" class="table-detail">
                                 {{ order.total | number_format(2, ',', ' ')}}€
-                            {% if not order.canceled %}{% set fullTotal = fullTotal + order.total %}{% endif %}
-                        </td>
-                        <td style="vertical-align: middle; white-space: nowrap;" class="table-detail">
+                                {% if not order.canceled %}{% set fullTotal = fullTotal + order.total %}{% endif %}
+                            </td>
+                            <td style="vertical-align: middle; white-space: nowrap;" class="table-detail">
 
-                            {% if order.canceled %}
-                                <a href="{{ path('admin_order_activate', {'id': order.id}) }}"><button type="button" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Réactiver la commande"><i class="glyphicon glyphicon-remove"></i></button></a>
+                                {% if order.canceled %}
+                                    <a href="{{ path('admin_order_activate', {'id': order.id}) }}"><button type="button" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Réactiver la commande"><i class="glyphicon glyphicon-remove"></i></button></a>
                                 {% elseif order.payed and order.printed %}
-                                <button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Commande imprimée"><i class="glyphicon glyphicon-print"></i></button>
-                                <button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Commande payée"><i class="glyphicon glyphicon-eur"></i></button>
+                                    <button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Commande imprimée"><i class="glyphicon glyphicon-print"></i></button>
+                                    <button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Commande payée"><i class="glyphicon glyphicon-eur"></i></button>
                                 {% else %}
                                     {% if not order.printed %}
-                                    <a href="{{ path('admin_order_printed', {'id': order.id}) }}"><button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Confirmer l'impression"><i class="glyphicon glyphicon-print"></i></button></a>
-                                        {% else %}
-                                    <button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Commande imprimée"><i class="glyphicon glyphicon-print"></i></button>
+                                        <a href="{{ path('admin_order_printed', {'id': order.id}) }}"><button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Confirmer l'impression"><i class="glyphicon glyphicon-print"></i></button></a>
+                                    {% else %}
+                                        <button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Commande imprimée"><i class="glyphicon glyphicon-print"></i></button>
                                     {% endif %}
                                     {% if not order.payed %}
-                                    <a href="{{ path('admin_order_payed', {'id': order.id}) }}"><button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Confirmer le paiement"><i class="glyphicon glyphicon-eur"></i></button></a>
-                                        {% else %}
-                                    <button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Commande payée"><i class="glyphicon glyphicon-eur"></i></button>
+                                        <a href="{{ path('admin_order_payed', {'id': order.id}) }}"><button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Confirmer le paiement"><i class="glyphicon glyphicon-eur"></i></button></a>
+                                    {% else %}
+                                        <button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Commande payée"><i class="glyphicon glyphicon-eur"></i></button>
                                     {% endif %}
-                                <a href="{{ path('admin_order_cancel', {'id': order.id}) }}"><button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Annuler la commande"><i class="glyphicon glyphicon-remove"></i></button></a>
-                            {% endif %}
-                        </td>
-                        <td style="vertical-align: middle; white-space: nowrap;" class="table-detail">
-                            <a href="{{ path('admin_order_view', { 'id': order.id }) }}"><button type="button" class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="Détail de la commande"><i class="glyphicon glyphicon-list"></i></button></a>
-                            <a href="{{ path('admin_print_order', { 'id': order.id }) }}"><button type="button" class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Imprimer toute la commande"><i class="glyphicon glyphicon-print"></i></button></a>
-                            {% if appConfig.applicationSellFiles %}
-                                <a href="{{ path('admin_email_order', { 'order_id': order.id }) }}"><button type="button" class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" title="Envoyer les originaux par email"><i class="glyphicon glyphicon-envelope"></i></button></a>
-                            {% endif %}
-                        </td>
+                                    <a href="{{ path('admin_order_cancel', {'id': order.id}) }}"><button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Annuler la commande"><i class="glyphicon glyphicon-remove"></i></button></a>
+                                {% endif %}
+                            </td>
+                            <td style="vertical-align: middle; white-space: nowrap;" class="table-detail">
+                                <a href="{{ path('admin_order_view', { 'id': order.id }) }}"><button type="button" class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="Détail de la commande"><i class="glyphicon glyphicon-list"></i></button></a>
+                                <a href="{{ path('admin_print_order', { 'id': order.id }) }}"><button type="button" class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Imprimer toute la commande"><i class="glyphicon glyphicon-print"></i></button></a>
+                                {% if appConfig.applicationSellFiles %}
+                                    <a href="{{ path('admin_email_order', { 'order_id': order.id }) }}"><button type="button" class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" title="Envoyer les originaux par email"><i class="glyphicon glyphicon-envelope"></i></button></a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th colspan="3">Total</th>
+                        <th class="table-detail">{{ fullQuantity }}</th>
+                        <th class="table-detail">{{ fullTotal | number_format(2, ',', ' ')}}€</th>
+                        <th></th>
+                        <th></th>
                     </tr>
-                {% endfor %}
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th colspan="3">Total</th>
-                    <th class="table-detail">{{ fullQuantity }}</th>
-                    <th class="table-detail">{{ fullTotal | number_format(2, ',', ' ')}}€</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
-</div>
-{% else %}
-    <p>
-        &nbsp;
-    </p>
-    <p>
-        Vous n'avez pas commandes enregistrées.
-    </p>
-{% endif %}
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    {% else %}
+        <p>
+            &nbsp;
+        </p>
+        <p>
+            Vous n'avez pas commandes enregistrées.
+        </p>
+    {% endif %}
 {% endblock %}
 
 {% block stylesheets %}

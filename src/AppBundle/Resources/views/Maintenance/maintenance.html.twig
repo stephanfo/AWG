@@ -12,6 +12,11 @@
         Accéder aux travaux d'impressions en attente. Vous pourrez les supprimer si nécessaire.<br/>
     </p>
     <p>
+        <a href="{{ path('admin_order_export') }}"><button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-export"></i> Exporter le contenu</button></a>
+        &nbsp;&nbsp;-&nbsp;&nbsp;
+        Exporter tout le contenu de l'application au format Excel.<br/>
+    </p>
+    <p>
         <a href="{{ path('app_maintenance_thumbs_clear') }}"><button class="btn btn-warning"><i class="glyphicon glyphicon-trash"></i> Supprimer les images en cache</button></a>
         &nbsp;&nbsp;-&nbsp;&nbsp;
         A l'affichage des miniatures, les images en cache seront regénérées automatiquement.<br/>

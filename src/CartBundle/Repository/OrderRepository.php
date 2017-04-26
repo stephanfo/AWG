@@ -14,54 +14,54 @@ class OrderRepository extends \Doctrine\ORM\EntityRepository
     public function getOrderDetail($id)
     {
         return $this->createQueryBuilder('orderheader')
-                        ->leftjoin('orderheader.details', 'detail')
-                        ->addSelect('detail')
-                        ->leftjoin('detail.photo', 'photo')
-                        ->addSelect('photo')
-                        ->leftjoin('detail.quantities', 'quantity')
-                        ->addSelect('quantity')
-                        ->leftjoin('quantity.format', 'format')
-                        ->addSelect('format')
-                        ->leftjoin('orderheader.user', 'user')
-                        ->addSelect('user')
-                        ->where('orderheader.id = :id')
-                        ->setParameter('id', $id)
-                        ->getQuery()
-                        ->getOneOrNullResult();
+            ->leftjoin('orderheader.details', 'detail')
+            ->addSelect('detail')
+            ->leftjoin('detail.photo', 'photo')
+            ->addSelect('photo')
+            ->leftjoin('detail.quantities', 'quantity')
+            ->addSelect('quantity')
+            ->leftjoin('quantity.format', 'format')
+            ->addSelect('format')
+            ->leftjoin('orderheader.user', 'user')
+            ->addSelect('user')
+            ->where('orderheader.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
     public function getOrderUser($id)
     {
         return $this->createQueryBuilder('orderheader')
-                        ->leftjoin('orderheader.user', 'user')
-                        ->addSelect('user')
-                        ->where('orderheader.id = :id')
-                        ->setParameter('id', $id)
-                        ->getQuery()
-                        ->getOneOrNullResult();
+            ->leftjoin('orderheader.user', 'user')
+            ->addSelect('user')
+            ->where('orderheader.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
     public function getOrderSearch($startDate = null, $stopDate = null, $status = null)
     {
         $query = $this->createQueryBuilder('orderheader')
-                ->join('orderheader.user', 'user')
-                ->addSelect('user')
-                ->orderBy('orderheader.created', 'DESC')
+            ->join('orderheader.user', 'user')
+            ->addSelect('user')
+            ->orderBy('orderheader.created', 'DESC')
         ;
 
         if (!is_null($startDate))
         {
             $query
-                    ->andWhere('orderheader.created >= :startDate')
-                    ->setParameter('startDate', $startDate)
+                ->andWhere('orderheader.created >= :startDate')
+                ->setParameter('startDate', $startDate)
             ;
         }
 
         if (!is_null($stopDate))
         {
             $query
-                    ->andWhere('orderheader.created <= :stopDate')
-                    ->setParameter('stopDate', $stopDate)
+                ->andWhere('orderheader.created <= :stopDate')
+                ->setParameter('stopDate', $stopDate)
             ;
         }
 
@@ -71,41 +71,41 @@ class OrderRepository extends \Doctrine\ORM\EntityRepository
             {
                 case ("Ouvertes"):
                     $query
-                            ->andWhere(
-                                    $query->expr()->andX(
-                                        $query->expr()->orX(
-                                                $query->expr()->eq('orderheader.printed', ':false'),
-                                                $query->expr()->isNull('orderheader.printed'),
-                                                $query->expr()->eq('orderheader.payed', ':false'),
-                                                $query->expr()->isNull('orderheader.payed')
-                                        ),
-                                        $query->expr()->orX(
-                                                $query->expr()->eq('orderheader.canceled', ':false'),
-                                                $query->expr()->isNull('orderheader.canceled')
-                                        )
-                                    )
+                        ->andWhere(
+                            $query->expr()->andX(
+                                $query->expr()->orX(
+                                    $query->expr()->eq('orderheader.printed', ':false'),
+                                    $query->expr()->isNull('orderheader.printed'),
+                                    $query->expr()->eq('orderheader.payed', ':false'),
+                                    $query->expr()->isNull('orderheader.payed')
+                                ),
+                                $query->expr()->orX(
+                                    $query->expr()->eq('orderheader.canceled', ':false'),
+                                    $query->expr()->isNull('orderheader.canceled')
+                                )
                             )
-                            ->setParameter('false', false);
+                        )
+                        ->setParameter('false', false);
                     break;
                 case ("Terminées"):
                     $query
-                            ->andWhere(
-                                    $query->expr()->andX(
-                                        $query->expr()->eq('orderheader.printed', ':true'),
-                                        $query->expr()->eq('orderheader.payed', ':true'),
-                                        $query->expr()->orX(
-                                                $query->expr()->eq('orderheader.canceled', ':false'),
-                                                $query->expr()->isNull('orderheader.canceled')
-                                        )
-                                    )
+                        ->andWhere(
+                            $query->expr()->andX(
+                                $query->expr()->eq('orderheader.printed', ':true'),
+                                $query->expr()->eq('orderheader.payed', ':true'),
+                                $query->expr()->orX(
+                                    $query->expr()->eq('orderheader.canceled', ':false'),
+                                    $query->expr()->isNull('orderheader.canceled')
+                                )
                             )
-                            ->setParameter('true', true)
-                            ->setParameter('false', false);
+                        )
+                        ->setParameter('true', true)
+                        ->setParameter('false', false);
                     break;
                 case ("Annulées"):
                     $query
-                            ->andWhere('orderheader.canceled = :true')
-                            ->setParameter('true', true);
+                        ->andWhere('orderheader.canceled = :true')
+                        ->setParameter('true', true);
                     break;
                 default:
                     break;
@@ -113,7 +113,25 @@ class OrderRepository extends \Doctrine\ORM\EntityRepository
         }
 
         return $query->getQuery()
-                        ->getResult();
+            ->getResult();
+    }
+
+    public function getOrderDetailArray()
+    {
+        $query = $this->createQueryBuilder('orderheader')
+            ->leftjoin('orderheader.details', 'detail')
+            ->leftjoin('detail.photo', 'photo')
+            ->leftjoin('detail.quantities', 'quantity')
+            ->leftjoin('quantity.format', 'format')
+            ->leftjoin('orderheader.user', 'user')
+            ->select('orderheader.created, user.firstname, user.lastname, user.email, user.location, orderheader.grossTotal, orderheader.discountTitle, orderheader.discountValue, orderheader.discountSaving, orderheader.total, orderheader.payed, orderheader.printed, orderheader.canceled, photo.title AS picture, format.size, quantity.quantity')
+            ->addOrderBy('orderheader.created', 'ASC')
+            ->addOrderBy('photo.created', 'ASC')
+            ->addOrderBy('format.created', 'ASC')
+        ;
+
+        return $query->getQuery()
+            ->getScalarResult();
     }
 
 }
