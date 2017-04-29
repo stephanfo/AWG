@@ -27,8 +27,9 @@ class OrderController extends Controller
             return $this->redirectToRoute('user_add');
 
         $confirmationForm = $this->getCheckoutForm();
-
-        if ($confirmationForm->handleRequest($request)->isValid())
+        $confirmationForm->handleRequest($request);
+        
+        if ($confirmationForm->isSubmitted() && $confirmationForm->isValid())
         {
             $total = $this->get('price_calculator')->getPricing($user);
             $totalCalculated = (float) $total['overall']['total'];

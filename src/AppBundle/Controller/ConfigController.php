@@ -22,8 +22,9 @@ class ConfigController extends Controller {
             throw $this->createNotFoundException("La configuration est morte. Il faut recharger les fixtures");
 
         $form = $this->createForm(ConfigType::class, $config);
-
-        if ($form->handleRequest($request)->isValid())
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid())
         {
             $em->flush();
 

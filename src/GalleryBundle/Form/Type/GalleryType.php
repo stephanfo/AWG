@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use GalleryBundle\Entity\Gallery;
 
 class GalleryType extends AbstractType
 {
@@ -36,7 +37,7 @@ class GalleryType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'GalleryBundle\Entity\Gallery'
+            'data_class' => Gallery::class
         ));
     }
 

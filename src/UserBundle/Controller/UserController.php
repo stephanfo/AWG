@@ -32,12 +32,12 @@ class UserController extends Controller
     public function addUserAction(Request $request)
     {
         $user = new User();
-
-        $form = $this->createForm(UserType::class, $user);
-
         $user->setSession($this->get('user_profile')->getUserSession());
 
-        if ($form->handleRequest($request)->isValid())
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
         {
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
@@ -66,8 +66,9 @@ class UserController extends Controller
             return $this->redirectToRoute('user_add');
 
         $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
 
-        if ($form->handleRequest($request)->isValid())
+        if ($form->isSubmitted() && $form->isValid())
         {
             $em->flush();
 

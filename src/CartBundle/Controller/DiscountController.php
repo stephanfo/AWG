@@ -22,8 +22,9 @@ class DiscountController extends Controller
         $discount->setStopTime(new \DateTime('now + 1 hour'));
 
         $form = $this->createForm(DiscountType::class, $discount);
-
-        if ($form->handleRequest($request)->isValid())
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid())
         {
             $em = $this->getDoctrine()->getManager();
             $em->persist($discount);
@@ -46,8 +47,9 @@ class DiscountController extends Controller
     public function editAction(Discount $discount, Request $request)
     {
         $form = $this->createForm(DiscountType::class, $discount);
+        $form->handleRequest($request);
 
-        if ($form->handleRequest($request)->isValid())
+        if ($form->isSubmitted() && $form->isValid())
         {
             $em = $this->getDoctrine()->getManager();
             $em->flush();

@@ -5,173 +5,188 @@
 {% endblock %}
 
 {% block body %}
-    <h4 class="page-header">Commande pour {{ orderHeader.user.firstname }} {{ orderHeader.user.lastname }} ({{ orderHeader.user.location }})</h4>
+    <h3 class="page-header">Commande N°{{ order.id }}</h3>
+    <h4 class="page-header">Information sur l'utilisateur</h4>
     <p>
-        {% if orderHeader.canceled %}
-            <span class="order-canceled-intro">Cette commande  a été annulée.</span>
-        {% elseif orderHeader.printed or orderHeader.payed %}
-            Status de la commande :<br/>
-            {% if orderHeader.printed %}
-                -> La commande est en cours d'impression ou est déjà imprimée.<br/>
+        Prénom : {{ order.user.firstname }}<br/>
+        Nom : {{ order.user.lastname }}<br/>
+        Email : {{ order.user.email }}<br/>
+        Localisation : {{ order.user.location }}<br/>
+        Création : {{ order.user.created | date('H:i:s Y-m-d') }}<br/>
+    </p>
+    <div class="bottom-block">
+        <div class="bottom-block-left">
+            <button type="button" class="btn btn-primary bottom-button" data-toggle="modal" data-target="#userEditModal"><i class="glyphicon glyphicon-edit"></i> Editer l'utilisateur</button>
+            <button type="button" class="btn btn-primary bottom-button" data-toggle="modal" data-target="#userSwitchModal"><i class="glyphicon glyphicon-retweet"></i> Changer d'utilisateur</button>
+        </div>
+    </div>
+    <h4 class="page-header">Status de la commande</h4>
+    <p>
+        {% if order.canceled %}
+            <span class="order-canceled-intro">Cette commande a été annulée.</span>
+        {% elseif order.printed or order.payed %}
+            {% if order.printed %}
+                -> La commande est imprimée.<br/>
             {% endif %}
-            {% if orderHeader.payed %}
+            {% if order.payed %}
                 -> La commande est payée.<br/>
             {% endif %}
         {% else %}
-            Status de la commande :<br/>
             -> La commande est en attente de traitement.<br/>
         {% endif %}
     </p>
-    {% if not (orderHeader.payed and orderHeader.printed) %}
+    {% if not (order.payed and order.printed) %}
         <div class="bottom-block">
-            <div class="bottom-block-right">
-                {% if not orderHeader.canceled %}
-                    <a href="{{ path('admin_order_cancel', {'id': orderHeader.id}) }}"><button type="button" class="btn btn-default bottom-button"><i class="glyphicon glyphicon-remove"></i> Annuler la commande</button></a>
+            <div class="bottom-block-left">
+                {% if not order.canceled %}
+                    <a href="{{ path('admin_order_cancel', {'id': order.id}) }}"><button type="button" class="btn btn-primary bottom-button"><i class="glyphicon glyphicon-remove"></i> Annuler la commande</button></a>
                 {% else %}
                     <button type="button" class="btn btn-danger disabled bottom-button"><i class="glyphicon glyphicon-remove"></i> Commande annulée</button>
                 {% endif %}
             </div>
         </div>
     {% endif %}
-    <h5 class="page-header">Detail des impressions</h5>
+    <h4 class="page-header">Detail des impressions</h4>
     <table class="table table-striped">
         <thead>
-            <tr>
-                <th>Format</th>
-                <th>Image</th>
-                <th class="table-detail">Quantity</th>
-                <th class="table-detail">Imprimer</th>
-            </tr>
+        <tr>
+            <th>Format</th>
+            <th>Image</th>
+            <th class="table-detail">Quantity</th>
+            <th class="table-detail">Imprimer</th>
+        </tr>
         </thead>
         <tbody>
-            {% set quantityTotal = 0 %}
-            {% set NbImages = 0 %}
-            {% set PrintCommands = "" %}
-            {% for format in orderDetails %}
-                {% set quantityFormat = 0 %}
-                <tr>
-                    <th rowspan="{{ format.orderQuantities | length + 1 }}">{{ format.size }}</th>
-                        {% for quantity in format.orderQuantities %}
-                            {% set quantityFormat = quantityFormat + quantity.quantity %}
-                            {% if not loop.first %}
-                        <tr>
-                        {% endif %}
-                        <td>
-                            <a href="{{ vich_uploader_asset(quantity.detail.photo, 'imageFile') }}" data-lightbox="gallery" data-title="Photo {{ quantity.detail.photo.title }}, Taille {{ quantity.detail.photo.imageWidth }}x{{ quantity.detail.photo.imageHeight }}">
-                                <img class="img-responsive img-thumbnail cart-img" src="{{ vich_uploader_asset(quantity.detail.photo, 'imageFile') | imagine_filter('gallery_thumb') }}"/></a>
-                            {{ quantity.detail.photo.title }}
-                        </td>
-                        <td class="table-detail">
-                            {{ quantity.quantity }}
-                        </td>
-                        <td class="table-detail">
-                            {% if quantity.detail.photo.doNotCrop %}
-                                <a href="{{ path('photo_toogle_crop', { 'id': quantity.detail.photo.id }) }}"><button type="button" class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Autoriser le recadrage"><i class="glyphicon glyphicon-fullscreen"></i></button></a>
-                            {%  else %}
-                                <a href="{{ path('photo_toogle_crop', { 'id': quantity.detail.photo.id }) }}"><button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Interdire le recadrage"><i class="glyphicon glyphicon-fullscreen"></i></button></a>
-                            {%  endif %}
-                            {%  if format.print is not empty %}
-                                <a href="{{ path('admin_print_single', { 'photo_id': quantity.detail.photo.id, 'format_id': format.id }) }}">
-                                    <button class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="imprimer un tirage au format {{ format.size }}"><li class="glyphicon glyphicon-print"></li> x1</button>
-                                </a>
-                            {% endif %}
-                        </td>
-                        {% if not loop.last %}
-                        </tr>
-                    {% endif %}
-                {% endfor %}
-                </tr>
-                <tr>
-                    <th>
-                        {{ format.orderQuantities | length }} images
-                        {% set NbImages = NbImages + format.orderQuantities | length %}
-                    </th>
-                    <th class="table-detail">
-                        {{ quantityFormat }}
-                        {% set quantityTotal = quantityTotal + quantityFormat %}
-                    </th>
-                    <td></td>
-                <tr>
-                {% endfor %}
+        {% set quantityTotal = 0 %}
+        {% set NbImages = 0 %}
+        {% set PrintCommands = "" %}
+        {% for format in orderDetails %}
+        {% set quantityFormat = 0 %}
+        <tr>
+            <th rowspan="{{ format.orderQuantities | length + 1 }}">{{ format.size }}</th>
+            {% for quantity in format.orderQuantities %}
+            {% set quantityFormat = quantityFormat + quantity.quantity %}
+            {% if not loop.first %}
+            <tr>
+            {% endif %}
+        <td>
+            <a href="{{ vich_uploader_asset(quantity.detail.photo, 'imageFile') }}" data-lightbox="gallery" data-title="Photo {{ quantity.detail.photo.title }}, Taille {{ quantity.detail.photo.imageWidth }}x{{ quantity.detail.photo.imageHeight }}">
+                <img class="img-responsive img-thumbnail cart-img" src="{{ vich_uploader_asset(quantity.detail.photo, 'imageFile') | imagine_filter('gallery_thumb') }}"/></a>
+            {{ quantity.detail.photo.title }}
+        </td>
+        <td class="table-detail">
+            {{ quantity.quantity }}
+        </td>
+        <td class="table-detail">
+            {% if quantity.detail.photo.doNotCrop %}
+                <a href="{{ path('photo_toogle_crop', { 'id': quantity.detail.photo.id }) }}"><button type="button" class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Autoriser le recadrage"><i class="glyphicon glyphicon-fullscreen"></i></button></a>
+            {%  else %}
+                <a href="{{ path('photo_toogle_crop', { 'id': quantity.detail.photo.id }) }}"><button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Interdire le recadrage"><i class="glyphicon glyphicon-fullscreen"></i></button></a>
+            {%  endif %}
+            {%  if format.print is not empty %}
+                <a href="{{ path('admin_print_single', { 'photo_id': quantity.detail.photo.id, 'format_id': format.id }) }}">
+                    <button class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="imprimer un tirage au format {{ format.size }}"><li class="glyphicon glyphicon-print"></li> x1</button>
+                </a>
+            {% endif %}
+        </td>
+        {% if not loop.last %}
+            </tr>
+        {% endif %}
+        {% endfor %}
+        </tr>
+        <tr>
+            <th>
+                {{ format.orderQuantities | length }} images
+                {% set NbImages = NbImages + format.orderQuantities | length %}
+            </th>
+            <th class="table-detail">
+                {{ quantityFormat }}
+                {% set quantityTotal = quantityTotal + quantityFormat %}
+            </th>
+            <td></td>
+        <tr>
+            {% endfor %}
         </tbody>
         <tfoot>
-            <tr>
-                <th>
-                    Total
-                </th>
-                <th>
-                    {{ NbImages }} images
-                </th>
-                <th class="table-detail">
-                    {{ quantityTotal }}
-                </th>
-                <td class="table-detail">
-                    <a href="{{ path('admin_print_order', { 'id': orderHeader.id }) }}">
-                        <button class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" title="Imprimer toutes les photos"><li class="glyphicon glyphicon-print"></li> tout</button>
-                    </a>
-                </td>
-            </tr>
+        <tr>
+            <th>
+                Total
+            </th>
+            <th>
+                {{ NbImages }} images
+            </th>
+            <th class="table-detail">
+                {{ quantityTotal }}
+            </th>
+            <td class="table-detail">
+                <a href="{{ path('admin_print_order', { 'id': order.id }) }}">
+                    <button class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="Imprimer toutes les photos"><li class="glyphicon glyphicon-print"></li> tout</button>
+                </a>
+            </td>
+        </tr>
         </tfoot>
     </table>
-    {% if not orderHeader.canceled %}
+    {% if not order.canceled %}
         <div class="bottom-block">
             <div class="bottom-block-right">
                 {% if appConfig.applicationSellFiles %}
-                    <a href="{{ path('admin_email_order', { 'order_id': orderHeader.id }) }}"><button type="button" class="btn btn-info " data-toggle="tooltip" data-placement="top" title="Envoyer les photos par email"><i class="glyphicon glyphicon-envelope"></i> Envoyer les photos par email</button></a>
+                    <a href="{{ path('admin_email_order', { 'order_id': order.id }) }}"><button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-envelope"></i> Envoyer les photos par email</button></a>
                 {% endif %}
-                {% if not orderHeader.printed %}
-                    <a href="{{ path('admin_order_printed', {'id': orderHeader.id}) }}"><button type="button" class="btn btn-default bottom-button"><i class="glyphicon glyphicon-print"></i> Confirmer l'impression</button></a>
+                {% if not order.printed %}
+                    <a href="{{ path('admin_order_printed', {'id': order.id}) }}"><button type="button" class="btn btn-primary bottom-button"><i class="glyphicon glyphicon-print"></i> Confirmer l'impression</button></a>
                 {% else %}
                     <button type="button" class="btn btn-success disabled bottom-button"><i class="glyphicon glyphicon-print"></i> Impression confirmée</button>
                 {% endif %}
             </div>
         </div>
     {% endif %}
-    <h5 class="page-header">Detail de la commande</h5>
+    <h4 class="page-header">Detail de la commande</h4>
     <table class="table table-striped">
         <thead>
-            <tr>
-                <th></th>
-                <th></th>
-                <th class="table-detail">Montant</th>
-            </tr>
+        <tr>
+            <th></th>
+            <th></th>
+            <th class="table-detail">Montant</th>
+        </tr>
         </thead>
         <tbody>
-            <tr class="info">
-                <td>Total</td>
-                <td class="table-detail">{{ orderHeader.quantity }}</td>
-                <td class="table-detail">{{ orderHeader.grossTotal | number_format(2, ",", " ")  }}€</td>
+        <tr class="info">
+            <td>Total</td>
+            <td class="table-detail">{{ order.quantity }}</td>
+            <td class="table-detail">{{ order.grossTotal | number_format(2, ",", " ")  }}€</td>
+        </tr>
+        {% if order.discountValue > 0 %}
+            <tr class="warning">
+                <td>Remise (€)</td>
+                <td class="table-detail">{{ order.discountValue }}%</td>
+                <td class="table-detail">-{{ order.discountSaving | number_format(2, ",", " ") }}€</td>
             </tr>
-            {% if orderHeader.discountValue > 0 %}
-                <tr class="warning">
-                    <td>Remise (€)</td>
-                    <td class="table-detail">{{ orderHeader.discountValue }}%</td>
-                    <td class="table-detail">-{{ orderHeader.discountSaving | number_format(2, ",", " ") }}€</td>
-                </tr>
-            {% endif %}
+        {% endif %}
         </tbody>
         <tfoot>
-            <tr class="success">
-                <th colspan="2">A payer</th>
-                <th class="table-detail">{{ orderHeader.total | number_format(2, ",", " ") }}€</th>
-            </tr>
+        <tr class="success">
+            <th colspan="2">A payer</th>
+            <th class="table-detail">{{ order.total | number_format(2, ",", " ") }}€</th>
+        </tr>
         </tfoot>
     </table>
-    {% if not orderHeader.canceled %}
+    {% if not order.canceled %}
         <div class="bottom-block">
             <div class="bottom-block-right">
-                {% if not orderHeader.payed %}
-                    <a href="{{ path('admin_order_payed', {'id': orderHeader.id}) }}"><button type="button" class="btn btn-default bottom-button"><i class="glyphicon glyphicon-eur"></i> Confirmer le paiement</button></a>
+                {% if not order.payed %}
+                    <a href="{{ path('admin_order_payed', {'id': order.id}) }}"><button type="button" class="btn btn-primary bottom-button"><i class="glyphicon glyphicon-eur"></i> Confirmer le paiement</button></a>
                 {% else %}
                     <button type="button" class="btn btn-success disabled bottom-button"><i class="glyphicon glyphicon-eur"></i> Paiement confirmée</button>
                 {% endif %}
             </div>
         </div>
     {% endif %}
-    {% if orderHeader.quantity != quantityTotal %}
+    {{ include("CartBundle:Order:userFormModal.html.twig") }}
+    {{ include("CartBundle:Order:reassignFormModal.html.twig") }}
+    {% if order.quantity != quantityTotal %}
         <script type="text/javascript">
             $(function () {
-                alert('Il y a une erreur entre la quantité enregistrée à la commande ({{orderHeader.quantity}} photos) et maintenant ({{quantityTotal}} photos). Cela peut être dû à un changement de tarification, de format, ou à la suppression d\'une photo.');
+                alert('Il y a une erreur entre la quantité enregistrée à la commande ({{order.quantity}} photos) et maintenant ({{quantityTotal}} photos). Cela peut être dû à un changement de tarification, de format, ou à la suppression d\'une photo.');
             });
         </script>
     {% endif %}

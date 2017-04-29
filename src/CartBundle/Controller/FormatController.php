@@ -22,8 +22,9 @@ class FormatController extends Controller
         $format = new Format();
 
         $form = $this->createForm(FormatType::class, $format);
+        $form->handleRequest($request);
 
-        if ($form->handleRequest($request)->isValid())
+        if ($form->isSubmitted() && $form->isValid())
         {
             $em = $this->getDoctrine()->getManager();
             $em->persist($format);
@@ -47,8 +48,9 @@ class FormatController extends Controller
     public function editAction(Format $format, Request $request)
     {
         $form = $this->createForm(FormatType::class, $format);
+        $form->handleRequest($request);
 
-        if ($form->handleRequest($request)->isValid())
+        if ($form->isSubmitted() && $form->isValid())
         {
             $em = $this->getDoctrine()->getManager();
             $em->flush();

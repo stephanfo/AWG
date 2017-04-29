@@ -10,6 +10,8 @@ use CartBundle\Entity\Order;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use CartBundle\Form\Type\ReassignType;
+use UserBundle\Form\Type\UserType;
 
 class OrderController extends Controller
 {
@@ -71,14 +73,40 @@ class OrderController extends Controller
     /**
      * @Route("/order/view/{id}", requirements={"id": "\d*"}, name="admin_order_view")
      */
-    public function viewAction($id)
+    public function viewAction($id, Request $request)
     {
-        $orderHeader = $this->getDoctrine()->getRepository('CartBundle:Order')->getOrderUser($id);
+        $order = $this->getDoctrine()->getRepository('CartBundle:Order')->getOrderUser($id);
+
+        if (is_null($order))
+        {
+            $request->getSession()->getFlashBag()->add('warning', "Cette commande n'existe pas");
+            return $this->redirectToRoute('admin_order_list');
+        }
+        
+        $reassignForm = $this->createForm(ReassignType::class, $order);
+        $reassignForm->handleRequest($request);
+
+        $userForm = $this->createForm(UserType::class, $order->getUser());
+        $userForm->handleRequest($request);
+
+        if ($reassignForm->isSubmitted() && $reassignForm->isValid())
+        {
+            $request->getSession()->getFlashBag()->add('success', 'L\'utilisateur a été changé');
+            $this->getDoctrine()->getEntityManager()->flush();
+        }
+        elseif ($userForm->isSubmitted() && $userForm->isValid())
+        {
+            $request->getSession()->getFlashBag()->add('success', 'Les données de l\'utilisateur ont été mises à jour');
+            $this->getDoctrine()->getEntityManager()->flush();
+        }
+
         $orderDetails = $this->getDoctrine()->getRepository('CartBundle:Format')->getOrderDetail($id);
 
         return $this->render('CartBundle:Order:view.html.twig', array(
-            'orderHeader' => $orderHeader,
-            'orderDetails' => $orderDetails
+            'order' => $order,
+            'orderDetails' => $orderDetails,
+            'reassignForm' => $reassignForm->createView(),
+            'userForm' => $userForm->createView(),
         ));
     }
 

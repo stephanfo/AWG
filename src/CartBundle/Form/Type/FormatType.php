@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use CartBundle\Entity\Format;
 
 class FormatType extends AbstractType
 {
@@ -31,7 +32,7 @@ class FormatType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'CartBundle\Entity\Format'
+            'data_class' => Format::class
         ));
     }
 

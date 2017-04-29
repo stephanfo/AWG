@@ -23,8 +23,9 @@ class PriceController extends Controller
         $price->setFormat($format);
 
         $form = $this->createForm(PriceType::class, $price);
+        $form->handleRequest($request);
 
-        if ($form->handleRequest($request)->isValid())
+        if ($form->isSubmitted() && $form->isValid())
         {
             $em = $this->getDoctrine()->getManager();
             $em->persist($price);
@@ -47,8 +48,9 @@ class PriceController extends Controller
     public function editAction(Price $price, Request $request)
     {
         $form = $this->createForm(PriceType::class, $price);
+        $form->handleRequest($request);
 
-        if ($form->handleRequest($request)->isValid())
+        if ($form->isSubmitted() && $form->isValid())
         {
             $em = $this->getDoctrine()->getManager();
             $em->flush();

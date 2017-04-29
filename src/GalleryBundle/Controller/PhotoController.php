@@ -64,8 +64,9 @@ class PhotoController extends Controller
     public function clearAction(Gallery $gallery, Request $request)
     {
         $form = $this->createFormBuilder()->getForm();
+        $form->handleRequest($request);
 
-        if ($form->handleRequest($request)->isValid())
+        if ($form->isSubmitted() && $form->isValid())
         {
             $em = $this->getDoctrine()->getManager();
 

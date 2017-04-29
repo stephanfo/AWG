@@ -1,0 +1,36 @@
+{{ form_start(reassignForm) }}
+<div class="modal fade" id="userSwitchModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                Changer l'utilisateur de la commande
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        {{ form_errors(reassignForm) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            {{ form_label(reassignForm.user, "Réasigner la commande a un autre utilisateur :") }}
+                            {{ form_errors(reassignForm.user) }}
+                            {{ form_widget(reassignForm.user, {'attr': {'class': 'form-control', 'onchange': "this.form.submit()" }}) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    {{ form_widget(reassignForm.save, {'attr': {'class': 'btn btn-primary'}, 'label': 'Changer'}) }}
+                    {{ form_rest(reassignForm) }}
+                    {{ form_end(reassignForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{{ form_rest(reassignForm) }}
+{{ form_end(reassignForm) }}

@@ -73,8 +73,9 @@ class GalleryController extends Controller
         $gallery->setDate(new \DateTime('now'));
 
         $form = $this->createForm(GalleryType::class, $gallery);
+        $form->handleRequest($request);
 
-        if ($form->handleRequest($request)->isValid())
+        if ($form->isSubmitted() && $form->isValid())
         {
             $em = $this->getDoctrine()->getManager();
             $em->persist($gallery);
@@ -99,8 +100,9 @@ class GalleryController extends Controller
             throw $this->createNotFoundException("La galerie " . $gallery->getId() . " n'existe pas.");
 
         $form = $this->createForm(GalleryType::class, $gallery);
+        $form->handleRequest($request);
 
-        if ($form->handleRequest($request)->isValid())
+        if ($form->isSubmitted() && $form->isValid())
         {
             $this->getDoctrine()->getManager()->flush();
 
@@ -120,8 +122,9 @@ class GalleryController extends Controller
     public function deleteAction(Gallery $gallery, Request $request)
     {
         $form = $this->createFormBuilder()->getForm();
+        $form->handleRequest($request);
 
-        if ($form->handleRequest($request)->isValid())
+        if ($form->isSubmitted() && $form->isValid())
         {
             $em = $this->getDoctrine()->getManager();
             $em->remove($gallery);

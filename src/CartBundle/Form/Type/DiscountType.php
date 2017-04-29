@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use CartBundle\Entity\Discount;
 
 class DiscountType extends AbstractType
 {
@@ -44,7 +45,7 @@ class DiscountType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'CartBundle\Entity\Discount'
+            'data_class' => Discount::class
         ));
     }
 

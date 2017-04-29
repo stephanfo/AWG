@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use CartBundle\Entity\Price;
 
 class PriceType extends AbstractType
 {
@@ -38,7 +39,7 @@ class PriceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'CartBundle\Entity\Price'
+            'data_class' => Price::class
         ));
     }
 
