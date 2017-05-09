@@ -13,7 +13,14 @@
         {% for cart in userCarts.carts %}
             <div class="row well">
                 <div class="col-sm-5 cart-header">
-                    <img class="img-responsive img-thumbnail cart-img" src="{{ vich_uploader_asset(cart.photo, 'imageFile') | imagine_filter('gallery_thumb') }}"/>
+                    {% if is_granted('ROLE_BIGPICTURE') %}
+                        <a href="{{ vich_uploader_asset(cart.photo, 'imageFile') }}" data-lightbox="gallery" data-title="Photo {{ cart.photo.title }}, Taille {{ cart.photo.imageWidth }}x{{ cart.photo.imageHeight }}">
+                            <img class="img-responsive img-thumbnail cart-img" src="{{ vich_uploader_asset(cart.photo, 'imageFile') | imagine_filter('gallery_thumb') }}" alt="{{ cart.photo.title }}"/>
+                        </a>
+                    {% else %}
+                        <img class="img-responsive img-thumbnail cart-img" src="{{ vich_uploader_asset(cart.photo, 'imageFile') | imagine_filter('gallery_thumb') }}" alt="{{ cart.photo.title }}"/>
+                    {% endif %}
+
                     {{ cart.photo.title }}
                     <div style="float: right;"><a href="{{ path('cart_delete', { 'id': cart.photo.id }) }}"><button class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i></button></a></div>
                 </div>
@@ -99,5 +106,14 @@
                 });
             }
         </script>
+    {% endif %}
+    {% if is_granted('ROLE_BIGPICTURE') %}
+        <script src="/resources/lightbox/js/lightbox.min.js"></script>
+    {% endif %}
+{% endblock %}
+
+{% block stylesheets %}
+    {% if is_granted('ROLE_BIGPICTURE') %}
+        <link href="/resources/lightbox/css/lightbox.min.css" rel="stylesheet">
     {% endif %}
 {% endblock %}

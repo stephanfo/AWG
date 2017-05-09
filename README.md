@@ -1,4 +1,4 @@
-# AWG - Ephemeral Wedding Gallery
+# EWG - Ephemeral Wedding Gallery
 
 AWG is a web gallery app, easy-to-use, responsive, that allows a photographer to show his photos and take orders for prints during the wedding events.
 

@@ -32,28 +32,43 @@ class OrderExportController extends Controller
 
         $sheet = $phpExcelObject->setActiveSheetIndex(0)->setTitle('Full orders details');
 
-        $sheet->fromArray(array_keys($orders[0]), NULL, 'A1');
-        $sheet->fromArray($orders, NULL, 'A2');
+        if(!is_null($orders))
+        {
+            $sheet->fromArray(array_keys($orders[0]), NULL, 'A1');
+            $sheet->fromArray($orders, NULL, 'A2');
+        }
 
         $sheet = $phpExcelObject->createSheet()->setTitle('Users list');
 
-        $sheet->fromArray(array_keys($users[0]), NULL, 'A1');
-        $sheet->fromArray($users, NULL, 'A2');
+        if(!is_null($users))
+        {
+            $sheet->fromArray(array_keys($users[0]), NULL, 'A1');
+            $sheet->fromArray($users, NULL, 'A2');
+        }
 
         $sheet = $phpExcelObject->createSheet()->setTitle('Galleries Photos list');
 
-        $sheet->fromArray(array_keys($galleries[0]), NULL, 'A1');
-        $sheet->fromArray($galleries, NULL, 'A2');
+        if(!is_null($galleries))
+        {
+            $sheet->fromArray(array_keys($galleries[0]), NULL, 'A1');
+            $sheet->fromArray($galleries, NULL, 'A2');
+        }
 
         $sheet = $phpExcelObject->createSheet()->setTitle('Format list');
 
-        $sheet->fromArray(array_keys($formats[0]), NULL, 'A1');
-        $sheet->fromArray($formats, NULL, 'A2');
+        if(!is_null($formats))
+        {
+            $sheet->fromArray(array_keys($formats[0]), NULL, 'A1');
+            $sheet->fromArray($formats, NULL, 'A2');
+        }
 
         $sheet = $phpExcelObject->createSheet()->setTitle('Price list');
 
-        $sheet->fromArray(array_keys($prices[0]), NULL, 'A1');
-        $sheet->fromArray($prices, NULL, 'A2');
+        if(!is_null($prices))
+        {
+            $sheet->fromArray(array_keys($prices[0]), NULL, 'A1');
+            $sheet->fromArray($prices, NULL, 'A2');
+        }
 
         $phpExcelObject->setActiveSheetIndex(0);
 
