@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-    <h4 class="page-header">Maintenance de l'application</h4>
+    <h4 class="page-header">Gestion du contenu</h4>
     <p>
         <a href="{{ path('app_print_index') }}"><button class="btn btn-primary"><i class="glyphicon glyphicon-print"></i> Travaux d'impression</button></a>
         &nbsp;&nbsp;-&nbsp;&nbsp;
@@ -16,7 +16,7 @@
         &nbsp;&nbsp;-&nbsp;&nbsp;
         Exporter tout le contenu de l'application au format Excel.<br/>
     </p>
-    <hr>
+    <h4 class="page-header">Maintenance du serveur</h4>
     <p>
         <a href="{{ path('app_maintenance_halt') }}"><button type="button" class="btn btn-info"><i class="glyphicon glyphicon-flash"></i> Arrêter le système</button></a>
         &nbsp;&nbsp;-&nbsp;&nbsp;
@@ -27,7 +27,7 @@
         &nbsp;&nbsp;-&nbsp;&nbsp;
         Redémarre le serveur. Les données ne seront pas perdues.<br/>
     </p>
-    <hr>
+    <h4 class="page-header">Maintenance de l'application</h4>
     <p>
         <a href="{{ path('app_maintenance_thumbs_clear') }}"><button class="btn btn-warning"><i class="glyphicon glyphicon-trash"></i> Supprimer les images en cache</button></a>
         &nbsp;&nbsp;-&nbsp;&nbsp;
