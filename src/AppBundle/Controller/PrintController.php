@@ -113,7 +113,7 @@ class PrintController extends Controller
         }
         else
         {
-            $request->getSession()->getFlashBag()->add('success', 'Le serveur d\impression CUPS est redémarré');
+            $request->getSession()->getFlashBag()->add('success', 'Le serveur d\'impression CUPS est redémarré');
         }
 
         return $this->redirect($request->headers->get('referer'));
