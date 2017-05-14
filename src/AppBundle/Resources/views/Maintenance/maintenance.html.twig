@@ -16,6 +16,18 @@
         &nbsp;&nbsp;-&nbsp;&nbsp;
         Exporter tout le contenu de l'application au format Excel.<br/>
     </p>
+    <hr>
+    <p>
+        <a href="{{ path('app_maintenance_halt') }}"><button type="button" class="btn btn-info"><i class="glyphicon glyphicon-flash"></i> Arrêter le système</button></a>
+        &nbsp;&nbsp;-&nbsp;&nbsp;
+        Arrête le serveur, afin de pouvoir le débrancher en toute sécurité.<br/>
+    </p>
+    <p>
+        <a href="{{ path('app_maintenance_reboot') }}"><button type="button" class="btn btn-info"><i class="glyphicon glyphicon-repeat"></i> Rebooter le système</button></a>
+        &nbsp;&nbsp;-&nbsp;&nbsp;
+        Redémarre le serveur. Les données ne seront pas perdues.<br/>
+    </p>
+    <hr>
     <p>
         <a href="{{ path('app_maintenance_thumbs_clear') }}"><button class="btn btn-warning"><i class="glyphicon glyphicon-trash"></i> Supprimer les images en cache</button></a>
         &nbsp;&nbsp;-&nbsp;&nbsp;

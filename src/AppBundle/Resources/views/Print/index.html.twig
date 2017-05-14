@@ -36,11 +36,19 @@
             </div>
         </div>
         <div class="bottom-block">
+            <div class="bottom-block-left">
+                <a href="{{ path('app_print_restart') }}"><button class="btn btn-info bottom-button">Redémarrer le serveur d'impression</button></a>
+            </div>
             <div class="bottom-block-right">
                 <a href="{{ path('app_print_delete_all') }}"><button class="btn btn-danger bottom-button">Supprimer tous les travaux en attente</button></a>
             </div>
         </div>
     {%  else %}
         <p>Il n'y a pas d'impression en attente.</p>
+        <div class="bottom-block">
+            <div class="bottom-block-left">
+                <a href="{{ path('app_print_restart') }}"><button class="btn btn-info bottom-button">Redémarrer le serveur d'impression</button></a>
+            </div>
+        </div>
     {% endif %}
 {% endblock %}

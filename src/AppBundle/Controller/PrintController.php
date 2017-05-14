@@ -97,5 +97,25 @@ class PrintController extends Controller
 
         return $this->redirect($request->headers->get('referer'));
     }
-    
+
+    /**
+     * @Route("/print/restart", name="app_print_restart")
+     */
+    public function restartAction(Request $request)
+    {
+        $command = "/usr/bin/sudo /etc/init.d/cups restart";
+
+        $jobProcess = new Process($command);
+        $jobProcess->run();
+
+        if (!$jobProcess->isSuccessful()) {
+            $request->getSession()->getFlashBag()->add('danger', 'Le commande : ' . $command . ' a échouée (message d\'erreur : '. $jobProcess->getErrorOutput() . ').');
+        }
+        else
+        {
+            $request->getSession()->getFlashBag()->add('success', 'Le serveur d\impression CUPS est redémarré');
+        }
+
+        return $this->redirect($request->headers->get('referer'));
+    }
 }

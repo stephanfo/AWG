@@ -18,13 +18,55 @@ class MaintenanceController extends Controller {
     }
 
     /**
+     * @Route("/maintenance/halt", name="app_maintenance_halt")
+     */
+    public function haltAction(Request $request)
+    {
+        $command = "/usr/bin/sudo /sbin/halt";
+
+        $printProcess = new Process($command);
+        $printProcess->run();
+
+        if ($printProcess->isSuccessful()) {
+            $request->getSession()->getFlashBag()->add('success', 'Le système va s\'arrêter.');
+        }
+        else
+        {
+            $request->getSession()->getFlashBag()->add('danger', 'La commande : ' . $command . ' a échouée (message d\'erreur : '. $printProcess->getErrorOutput() . ').');
+        }
+
+        return $this->redirectToRoute('app_maintenance');
+    }
+
+    /**
+     * @Route("/maintenance/reboot", name="app_maintenance_reboot")
+     */
+    public function rebootAction(Request $request)
+    {
+        $command = "/usr/bin/sudo /sbin/reboot";
+
+        $printProcess = new Process($command);
+        $printProcess->run();
+
+        if ($printProcess->isSuccessful()) {
+            $request->getSession()->getFlashBag()->add('success', 'Le système va redémarrer.');
+        }
+        else
+        {
+            $request->getSession()->getFlashBag()->add('danger', 'La commande : ' . $command . ' a échouée (message d\'erreur : '. $printProcess->getErrorOutput() . ').');
+        }
+
+        return $this->redirectToRoute('app_maintenance');
+    }
+
+    /**
      * @Route("/maintenance/thumbs/clear", name="app_maintenance_thumbs_clear")
      */
     public function thumbsClearAction(Request $request)
     {
         $appPath = $this->container->getParameter('kernel.root_dir');
         $binPath = realpath($appPath . '/../bin');
-        
+
         $command = "/usr/bin/php " . $binPath . "/console liip:imagine:cache:remove";
 
 
@@ -41,7 +83,7 @@ class MaintenanceController extends Controller {
 
         return $this->redirectToRoute('app_maintenance');
     }
-
+    
     /**
      * @Route("/maintenance/cache/clear", name="app_maintenance_cache_clear")
      */
