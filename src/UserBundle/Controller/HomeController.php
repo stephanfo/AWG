@@ -10,8 +10,9 @@ class HomeController extends Controller
 
     /**
      * @Route("/", name="home")
+     * @Route("/{oneGallery}", name="home_one_gallery")
      */
-    public function viewAction()
+    public function viewAction($oneGallery = null)
     {
         $user = $this->get('user_profile')->getUser();
 
@@ -37,7 +38,8 @@ class HomeController extends Controller
         return $this->render('UserBundle:Home:view.salvatorre.html.twig', array(
             'galleries' => $galleries,
             'likes' => $likesArray,
-            'carts' => $cartArray
+            'carts' => $cartArray,
+            'oneGallery' => $oneGallery
         ));
     }
 

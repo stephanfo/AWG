@@ -33,6 +33,11 @@ class EmailController extends Controller
             ->setBody($config->getApplicationSellFilesEmailBody(), 'text/html')
             ->addPart(strip_tags($config->getApplicationSellFilesEmailBody()), 'text/plain');
 
+        if($config->getApplicationSellFilesEmailSenderInCc())
+        {
+            $message->setCc($config->getApplicationSellFilesEmailSender());
+        }
+
         $appPath = $this->container->getParameter('kernel.root_dir');
         $webPath = realpath($appPath . '/../web');
 

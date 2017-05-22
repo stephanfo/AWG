@@ -5,8 +5,8 @@
 {% endblock %}
 
 {% block body %}
-    <h3 class="page-header">Commande N°{{ order.id }}</h3>
-    <h4 class="page-header">Information sur l'utilisateur</h4>
+    <h1 class="page-header">Commande N°{{ order.id }}</h1>
+    <h2 class="page-header">Information sur l'utilisateur</h2>
     <p>
         Prénom : {{ order.user.firstname }}<br/>
         Nom : {{ order.user.lastname }}<br/>
@@ -20,7 +20,7 @@
             <button type="button" class="btn btn-primary bottom-button" data-toggle="modal" data-target="#userSwitchModal"><i class="glyphicon glyphicon-retweet"></i> Changer d'utilisateur</button>
         </div>
     </div>
-    <h4 class="page-header">Status de la commande</h4>
+    <h2 class="page-header">Status de la commande</h2>
     <p>
         {% if order.canceled %}
             <span class="order-canceled-intro">Cette commande a été annulée.</span>
@@ -46,7 +46,7 @@
             </div>
         </div>
     {% endif %}
-    <h4 class="page-header">Detail des impressions</h4>
+    <h2 class="page-header">Detail des impressions</h2>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -140,7 +140,7 @@
             </div>
         </div>
     {% endif %}
-    <h4 class="page-header">Detail de la commande</h4>
+    <h2 class="page-header">Detail de la commande</h2>
     <table class="table table-striped">
         <thead>
         <tr>

@@ -5,9 +5,9 @@
 {% endblock %}
 
 {% block body %}
-    <h4 class="page-header">Liste des tarifs</h4>
+    <h1 class="page-header">Liste des tarifs</h1>
 
-    <h5 class="page-header">Formats</h5>
+    <h2 class="page-header">Formats</h2>
     {% if not formats is empty %}
         <div class="row">
             <div class="col-md-12">
@@ -81,7 +81,7 @@
             <a href="{{ path('format_add') }}"><button class="btn btn-success bottom-button"><i class="glyphicon glyphicon-plus"></i> Ajouter un format</button></a>
         </div>
     </div>
-    <h5 class="page-header">Discounts</h5>
+    <h2 class="page-header">Discounts</h2>
     {% if not discounts is empty %}
         <div class="row">
             <div class="col-md-12">

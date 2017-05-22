@@ -9,10 +9,10 @@ class SlideshowController extends Controller
 {
 
     /**
-     * @Route("/slideshow/{page}/{delay}/{imageX}/{imageY}/{imageH}/{endPage}/{sort}", requirements={"page": "\d*", "delay": "\d*", "imageX": "\d*", "imageY": "\d*", "imageH": "\d*", "endPage": "\d*"}, defaults={"page": 1, "delay": 10, "imageX": 4, "imageY": 3, "imageH": 320, "endPage": 0, "sort": "gallery"}, name="slideshow_launcher")
+     * @Route("/slideshow/{page}/{delay}/{imageX}/{imageY}/{imageH}/{endPage}/{sort}/{gallery}", requirements={"page": "\d*", "delay": "\d*", "imageX": "\d*", "imageY": "\d*", "imageH": "\d*", "endPage": "\d*", "gallery": "\d+"}, name="slideshow_launcher")
      * @Route("/slideshow/", name="slideshow_launcher_empty")
      */
-    public function launcherAction($page, $delay, $imageX, $imageY, $imageH, $endPage, $sort)
+    public function launcherAction($page, $delay, $imageX, $imageY, $imageH, $endPage, $sort, $gallery)
     {
 
         if ($page < 1)
@@ -22,19 +22,24 @@ class SlideshowController extends Controller
 
         $nbPerPage = $imageX * $imageY;
 
+        if($gallery == 0)
+            $galleryId = null;
+        else
+            $galleryId = $gallery;
+
         switch ($sort) {
             case "gallery":
                 $photos = $this
                     ->getDoctrine()
                     ->getRepository('GalleryBundle:Photo')
-                    ->getActivePhotos($page, $nbPerPage, false)
+                    ->getActivePhotos($page, $nbPerPage, false, $galleryId)
                 ;
                 break;
             case "like":
                 $photos = $this
                     ->getDoctrine()
                     ->getRepository('GalleryBundle:Photo')
-                    ->getActivePhotos($page, $nbPerPage, true)
+                    ->getActivePhotos($page, $nbPerPage, true, $galleryId)
                 ;
                 break;
             default:
@@ -54,7 +59,10 @@ class SlideshowController extends Controller
         }
 
         if ($endPage > 0)
-            $nbPages = $endPage;
+            if ($endPage > $nbPages)
+                $endPage = $nbPages;
+            else
+                $nbPages = $endPage;
 
         if ($page < $nbPages)
             $nextPage = $page + 1;
@@ -72,6 +80,7 @@ class SlideshowController extends Controller
             'imageH' => $imageH,
             'endPage' => $endPage,
             'sort' => $sort,
+            'gallery' => $gallery,
             'nextPage' => $nextPage,
         ));
     }
@@ -81,6 +90,10 @@ class SlideshowController extends Controller
      */
     public function configAction()
     {
-        return $this->render('GalleryBundle:Slideshow:config.html.twig');
+        $listGalleries = $this->getDoctrine()->getRepository('GalleryBundle:Gallery')->findAll(array(), array('date' => "DESC"));
+
+        return $this->render('GalleryBundle:Slideshow:config.html.twig', array(
+            'listGalleries' => $listGalleries,
+        ));
     }
 }

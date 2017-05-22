@@ -48,7 +48,9 @@ class AppConfig
 <p>Je vous remercie pour votre commande de photos. Vous trouverez vos fichiers&nbsp;dans les pi&egrave;ces jointes de cet email.</p>
 <p>Cordialement.</p>");
         $config->setApplicationSellFilesEmailSender("your.email@domain.com");
+        $config->setApplicationSellFilesEmailSenderInCc(true);
         $config->setGalleryQuickLink(true);
+        $config->setGallerySingleGallery(false);
 
         $this->em->persist($config);
         $this->em->flush();

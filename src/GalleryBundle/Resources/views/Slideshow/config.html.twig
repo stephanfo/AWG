@@ -58,6 +58,19 @@
                 </select>
             </div>
         </div>
+        {%  if listGalleries is not empty %}
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="select-gallery" class="required">Galerie à afficher</label>
+                    <select id="select-gallery" class="form-control">
+                        <option value="0" selected>Toutes les galeries</option>
+                        {% for gallery in listGalleries %}
+                            <option value="{{ gallery.id }}">{{ gallery.title }} ({{ gallery.id }})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        {% endif %}
     </div>
     <div class="row">
         <div class="col-lg-12">
@@ -75,7 +88,7 @@
             $('#input-endPage').change(calculImageSize);
 
             $('#button-launch').click(function() {
-                location.href = "{{ path('slideshow_launcher_empty') }}1/" + $('#input-delay').val() + "/" + $('#select-imageX').val() + "/" + $('#select-imageY').val() + "/" + $('#input-imageH').val() + "/" + $('#input-endPage').val() + "/" + $('#select-sort').val();
+                location.href = "{{ path('slideshow_launcher_empty') }}1/" + $('#input-delay').val() + "/" + $('#select-imageX').val() + "/" + $('#select-imageY').val() + "/" + $('#input-imageH').val() + "/" + $('#input-endPage').val() + "/" + $('#select-sort').val() + "/" + $('#select-gallery').val();
             });
 
         });
@@ -93,7 +106,7 @@
             if($('#input-endPage').val() == 1)
                 viewportHeight = viewportHeight + 30;
 
-            var imageH = Math.round(((viewportHeight - 154) / imageY) - 87);
+            var imageH = Math.round(((viewportHeight - 94) / imageY) - 87);
 
             $('#viewportWidth').text(viewportWidth);
             $('#viewportHeight').text(viewportHeight);

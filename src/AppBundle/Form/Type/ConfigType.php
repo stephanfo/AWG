@@ -62,9 +62,21 @@ class ConfigType extends AbstractType
                 ),
             ))
             ->add('applicationSellFilesEmailSender')
+            ->add('applicationSellFilesEmailSenderInCc', ChoiceType::class, array(
+                'choices'  => array(
+                    'Oui' => true,
+                    'Non' => false,
+                ),
+            ))
             ->add('applicationSellFilesEmailSubject')
             ->add('applicationSellFilesEmailBody')
             ->add('galleryQuickLink', ChoiceType::class, array(
+                'choices'  => array(
+                    'Oui' => true,
+                    'Non' => false,
+                ),
+            ))
+            ->add('gallerySingleGallery', ChoiceType::class, array(
                 'choices'  => array(
                     'Oui' => true,
                     'Non' => false,

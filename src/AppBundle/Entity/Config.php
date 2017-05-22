@@ -94,6 +94,15 @@ class Config
     private $applicationSellFilesEmailSender;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean")
+     *
+     * @Assert\Type(type="bool")
+     */
+    private $applicationSellFilesEmailSenderInCc;
+
+    /**
      * @var string
      *
      * @ORM\Column(type="string", length=255)
@@ -119,6 +128,15 @@ class Config
      * @Assert\Type(type="bool")
      */
     private $galleryQuickLink;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean")
+     *
+     * @Assert\Type(type="bool")
+     */
+    private $gallerySingleGallery;
 
     /**
      * Get id
@@ -392,5 +410,53 @@ class Config
     public function getApplicationSellFilesAllowDownload()
     {
         return $this->applicationSellFilesAllowDownload;
+    }
+
+    /**
+     * Set applicationSellFilesEmailSenderInCc
+     *
+     * @param boolean $applicationSellFilesEmailSenderInCc
+     *
+     * @return Config
+     */
+    public function setApplicationSellFilesEmailSenderInCc($applicationSellFilesEmailSenderInCc)
+    {
+        $this->applicationSellFilesEmailSenderInCc = $applicationSellFilesEmailSenderInCc;
+
+        return $this;
+    }
+
+    /**
+     * Get applicationSellFilesEmailSenderInCc
+     *
+     * @return boolean
+     */
+    public function getApplicationSellFilesEmailSenderInCc()
+    {
+        return $this->applicationSellFilesEmailSenderInCc;
+    }
+
+    /**
+     * Set gallerySingleGallery
+     *
+     * @param boolean $gallerySingleGallery
+     *
+     * @return Config
+     */
+    public function setGallerySingleGallery($gallerySingleGallery)
+    {
+        $this->gallerySingleGallery = $gallerySingleGallery;
+
+        return $this;
+    }
+
+    /**
+     * Get gallerySingleGallery
+     *
+     * @return boolean
+     */
+    public function getGallerySingleGallery()
+    {
+        return $this->gallerySingleGallery;
     }
 }
