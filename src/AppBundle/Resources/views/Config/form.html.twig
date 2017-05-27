@@ -15,14 +15,14 @@
         </div>
         <div class="text-center"><img id="theme-preview" class="hide" src="#" height="300px"></div>
         <div class="form-group">
-            {{ form_label(form.galleryQuickLink, "Ajout du menu d'accès rapide aux galeries") }}
-            {{ form_errors(form.galleryQuickLink) }}
-            {{ form_widget(form.galleryQuickLink, {'attr': {'class': 'form-control'}}) }}
-        </div>
-        <div class="form-group">
-            {{ form_label(form.gallerySingleGallery, "Présentation des galeries par pages uniques") }}
+            {{ form_label(form.gallerySingleGallery, "Présentation des galeries une par une") }}
             {{ form_errors(form.gallerySingleGallery) }}
             {{ form_widget(form.gallerySingleGallery, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.galleryQuickLink, "Ajout du menu déroulant pour rapide aux galeries") }}
+            {{ form_errors(form.galleryQuickLink) }}
+            {{ form_widget(form.galleryQuickLink, {'attr': {'class': 'form-control'}}) }}
         </div>
     </div>
 </div>

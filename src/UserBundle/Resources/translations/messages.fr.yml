@@ -29,7 +29,6 @@ Confirmer: Confirmer
 secondes.: secondes.
 'Tarifs et Offres': 'Tarifs et Offres'
 Tarifs: Tarifs
-Quantité: Quantité
 Expire: Expire
 'Tarification unitaire': 'Tarification unitaire'
 'Tarification total': 'Tarification total'
@@ -88,3 +87,7 @@ Editer: Editer
 'Nom :': 'Nom :'
 'Email :': 'Email :'
 'Localisation :': 'Localisation :'
+'Liste des galeries': 'Liste des galeries'
+Photos: Photos
+Ouvrir: Ouvrir
+'Nom de la galerie': 'Nom de la galerie'

@@ -16,15 +16,17 @@ class GalleryRepository extends \Doctrine\ORM\EntityRepository
     public function getGalleriesPaginator($page = null, $nbPerPage = null)
     {
         $query = $this->createQueryBuilder("gallery")
-                ->leftjoin("gallery.photos", "photo")
-                ->addSelect("photo")
-                ->orderBy("gallery.date", "DESC")
+            ->select("gallery AS galleryEntity")
+            ->leftjoin("gallery.photos", "photo")
+            ->addSelect("COUNT(photo.id) AS photoCount")
+            ->groupBy("gallery")
+            ->orderBy("gallery.date", "DESC")
         ;
 
         if (!is_null($page) && !is_null($nbPerPage))
             $query
-                    ->setFirstResult(($page - 1) * $nbPerPage)
-                    ->setMaxResults($nbPerPage);
+                ->setFirstResult(($page - 1) * $nbPerPage)
+                ->setMaxResults($nbPerPage);
 
         return new Paginator($query, true);
     }
@@ -32,29 +34,71 @@ class GalleryRepository extends \Doctrine\ORM\EntityRepository
     public function getGalleryDetail($id)
     {
         return $this->createQueryBuilder("gallery")
-                        ->leftjoin("gallery.photos", "photo")
-                        ->addSelect("photo")
-                        ->where("gallery.id = :id")
-                        ->setParameter("id", $id)
-                        ->orderBy("photo.id", "ASC")
-                        ->getQuery()
-                        ->getSingleResult()
-        ;
+            ->leftjoin("gallery.photos", "photo")
+            ->addSelect("photo")
+            ->where("gallery.id = :id")
+            ->setParameter("id", $id)
+            ->orderBy("photo.id", "ASC")
+            ->getQuery()
+            ->getSingleResult()
+            ;
     }
 
-    public function getActiveGalleries()
+    public function getActiveGalleriesAndPhotoCount()
     {
         return $this->createQueryBuilder("gallery")
-            ->join("gallery.photos", "photo")
-            ->addSelect("photo")
+            ->select("gallery AS galleryEntity")
+            ->leftjoin("gallery.photos", "photo")
+            ->addSelect("COUNT(photo.id) AS photoCount")
             ->where('gallery.active = :active')
             ->setParameter('active', true)
+            ->groupBy("gallery")
             ->orderBy("gallery.date", "ASC")
-            ->addOrderBy("photo.id", "ASC")
             ->getQuery()
             ->getResult()
             ;
     }
+
+    public function getActiveGalleriesDetail($galleryId = null)
+    {
+        $query = $this->createQueryBuilder("gallery")
+            ->join("gallery.photos", "photo")
+            ->addSelect("photo")
+            ->where('gallery.active = :active')
+            ->setParameter('active', true)
+        ;
+
+        if(!is_null($galleryId))
+        {
+            $query
+                ->andWhere('gallery.id = :galleryId')
+                ->setParameter('galleryId', $galleryId)
+            ;
+        }
+
+        $query
+            ->orderBy("gallery.date", "ASC")
+            ->addOrderBy("photo.id", "ASC")
+        ;
+
+        return $query
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function getLastActiveGalleries()
+    {
+        return $this->createQueryBuilder("gallery")
+            ->where('gallery.active = :active')
+            ->setParameter('active', true)
+            ->orderBy("gallery.date", "DESC")
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
+
 
     public function getGalleriesArray()
     {

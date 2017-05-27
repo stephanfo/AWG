@@ -19,7 +19,37 @@ class HomeController extends Controller
         if (is_null($user))
             return $this->redirectToRoute('user_add');
 
-        $galleries = $this->getDoctrine()->getRepository('GalleryBundle:Gallery')->getActiveGalleries();
+        $config = $this->get('app_config')->getConfig();
+
+        if($config->getGallerySingleGallery())
+        {
+            if (is_null($oneGallery))
+            {
+                $lastGallery = $this->getDoctrine()->getRepository('GalleryBundle:Gallery')->getLastActiveGalleries();
+
+                if(!is_null($lastGallery))
+                {
+                    $oneGallery = $lastGallery->getId();
+                    $galleries = $this->getDoctrine()->getRepository('GalleryBundle:Gallery')->getActiveGalleriesDetail($oneGallery);
+                }
+                else
+                {
+                    $galleries = null;
+                }
+            }
+            else
+            {
+                $galleries = $this->getDoctrine()->getRepository('GalleryBundle:Gallery')->getActiveGalleriesDetail($oneGallery);
+
+            }
+            $listGalleriesAndCount = $this->getDoctrine()->getRepository('GalleryBundle:Gallery')->getActiveGalleriesAndPhotoCount();
+        }
+        else
+        {
+            $galleries = $this->getDoctrine()->getRepository('GalleryBundle:Gallery')->getActiveGalleriesDetail();
+            $listGalleriesAndCount = null;
+        }
+        
         $likes = $this->getDoctrine()->getRepository('UserBundle:User')->getUserLikes($user);
         $carts = $this->getDoctrine()->getRepository('UserBundle:User')->getUserCart($user);
 
@@ -39,6 +69,7 @@ class HomeController extends Controller
             'galleries' => $galleries,
             'likes' => $likesArray,
             'carts' => $cartArray,
+            'listGalleriesAndCount' => $listGalleriesAndCount,
             'oneGallery' => $oneGallery
         ));
     }

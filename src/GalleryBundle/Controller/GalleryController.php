@@ -24,9 +24,9 @@ class GalleryController extends Controller
         $nbPerPage = 25;
 
         $listGalleries = $this->getDoctrine()
-                ->getManager()
-                ->getRepository('GalleryBundle:Gallery')
-                ->getGalleriesPaginator($page, $nbPerPage)
+            ->getManager()
+            ->getRepository('GalleryBundle:Gallery')
+            ->getGalleriesPaginator($page, $nbPerPage)
         ;
 
         $nbPages = ceil(count($listGalleries) / $nbPerPage);
@@ -37,10 +37,10 @@ class GalleryController extends Controller
         }
 
         return $this->render('GalleryBundle:Gallery:index.html.twig', array(
-                    'listGalleries' => $listGalleries->getIterator(),
-                    'totalListGalleries' => count($listGalleries),
-                    'nbPages' => $nbPages,
-                    'page' => $page
+            'listGalleries' => $listGalleries->getIterator(),
+            'totalListGalleries' => count($listGalleries),
+            'nbPages' => $nbPages,
+            'page' => $page
         ));
     }
 
@@ -50,17 +50,17 @@ class GalleryController extends Controller
     public function viewAction($id)
     {
         $gallery = $this
-                ->getDoctrine()
-                ->getManager()
-                ->getRepository("GalleryBundle:Gallery")
-                ->getGalleryDetail($id)
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository("GalleryBundle:Gallery")
+            ->getGalleryDetail($id)
         ;
 
         if (is_null($gallery))
             throw $this->createNotFoundException("La galerie " . $id . " n'existe pas.");
 
         return $this->render('GalleryBundle:Gallery:view.salvatorre.html.twig', array(
-                    'gallery' => $gallery,
+            'gallery' => $gallery,
         ));
     }
 
@@ -87,7 +87,7 @@ class GalleryController extends Controller
         }
 
         return $this->render('GalleryBundle:Gallery:add.html.twig', array(
-                    'form' => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -112,7 +112,7 @@ class GalleryController extends Controller
         }
 
         return $this->render('GalleryBundle:Gallery:edit.html.twig', array(
-                    'form' => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -136,8 +136,8 @@ class GalleryController extends Controller
         }
 
         return $this->render('GalleryBundle:Gallery:delete.html.twig', array(
-                    'form' => $form->createView(),
-                    'gallery' => $gallery
+            'form' => $form->createView(),
+            'gallery' => $gallery
         ));
     }
 
@@ -159,6 +159,10 @@ class GalleryController extends Controller
         }
 
         $this->getDoctrine()->getManager()->flush();
+
+
+        if (is_null($request->headers->get('referer')))
+            return $this->redirectToRoute('gallery_index');
 
         return $this->redirect($request->headers->get('referer'));
     }

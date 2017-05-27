@@ -21,7 +21,7 @@
                             </div>
                             <div class="caption">
                                 <p class="image-caption">
-                                    <nobr>{{ photo.gallery.title }} - {{ photo.title }}</nobr>
+                                    <nobr>{{ (photo.title ~ ' - ' ~ photo.gallery.title) | truncate(40) }}</nobr>
                                 </p>
                             </div>
                         </div>

@@ -28,15 +28,14 @@ Confirmer: Confirm
 'se termine dans': 'is finishing in'
 secondes.: secondes.
 'Tarifs et Offres': 'Price list and Offers'
-Tarifs: Price list
-Quantité: Quantity
+Tarifs: 'Price list'
 Expire: Expire
 'Tarification unitaire': 'Unit price'
 'Tarification total': 'Total price'
 Remises: Discounts
 'Une seule remise s''applique sur la commande, par ordre des lignes ci-dessous. La remise peut s''appliquer en bas de commande et/ou activer des tarifs spéciaux par quantités (voir tableau ci-dessus).': 'Only one discount is possible per order, by order of the lines hereafter. The discount can be applied at the bottom of the order and/ or activate special price list by quantity (see table hereafter).'
 Dès: from
-'Jusqu''à': 'to'
+'Jusqu''à': to
 Remise: Discount
 'Aucune tarification n''est disponible.': 'No price is available.'
 Galerie: Gallery
@@ -88,3 +87,7 @@ Editer: Edit
 'Nom :': 'Last name:'
 'Email :': 'Email:'
 'Localisation :': 'Location:'
+'Liste des galeries': 'List of galleries'
+Photos: Pictures
+Ouvrir: Access
+'Nom de la galerie': 'Gallery name'

@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-    <h1 class="page-header">Liste des galeries</h1>
+    <h1 class="page-header">Liste des galeries ({{ totalListGalleries }})</h1>
     <div class="row">
         <div class="col-md-12">
             <table class="table table-striped">
@@ -23,29 +23,29 @@
                         {% for gallery in listGalleries %}
                             <tr>
                                 <td style="vertical-align: middle;">
-                                    <a href="{{ path('gallery_view', { 'id': gallery.id }) }}">
-                                        {{ gallery.title}}
+                                    <a href="{{ path('gallery_view', { 'id': gallery.galleryEntity.id }) }}">
+                                        {{ gallery.galleryEntity.title}}
                                     </a>
                                 </td>
                                 <td style="vertical-align: middle;">
-                                    {{ gallery.date | date('d-m-Y H:m') }}
+                                    {{ gallery.galleryEntity.date | date('d-m-Y H:m') }}
                                 </td>
                                 <td style="vertical-align: middle;">
-                                    <a href="{{ path('photo_loader', { 'id': gallery.id }) }}"><button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Ajouter des photos"><i class="glyphicon glyphicon glyphicon-plus"></i></button></a>
-                                    <a href="{{ path('photo_clear', { 'id': gallery.id }) }}"><button type="button" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Supprimer toutes les photos"><i class="glyphicon glyphicon glyphicon-trash"></i></button></a>
-                                    - {{ gallery.photos | length }} photos
+                                    <a href="{{ path('photo_loader', { 'id': gallery.galleryEntity.id }) }}"><button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Ajouter des photos"><i class="glyphicon glyphicon glyphicon-plus"></i></button></a>
+                                    <a href="{{ path('photo_clear', { 'id': gallery.galleryEntity.id }) }}"><button type="button" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Supprimer toutes les photos"><i class="glyphicon glyphicon glyphicon-trash"></i></button></a>
+                                    - {{ gallery.photoCount }} photos
                                 </td>
                                 <td style="vertical-align: middle; white-space: nowrap;">
-                                    {% if gallery.active %}
-                                        <a href="{{ path('gallery_toggle', { 'id': gallery.id }) }}"><button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Desactiver"><i class="glyphicon glyphicon-eye-open"></i></button></a>
+                                    {% if gallery.galleryEntity.active %}
+                                        <a href="{{ path('gallery_toggle', { 'id': gallery.galleryEntity.id }) }}"><button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Desactiver"><i class="glyphicon glyphicon-eye-open"></i></button></a>
                                             {% else %}
-                                        <a href="{{ path('gallery_toggle', { 'id': gallery.id }) }}"><button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Activer"><i class="glyphicon glyphicon-eye-close"></i></button></a>
+                                        <a href="{{ path('gallery_toggle', { 'id': gallery.galleryEntity.id }) }}"><button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Activer"><i class="glyphicon glyphicon-eye-close"></i></button></a>
                                             {% endif %}
                                 </td>
                                 <td style="vertical-align: middle; white-space: nowrap;">
-                                    <a href="#" data-toggle="modal" data-target="#modal_part_{{ gallery.id }}" id="button_part_{{ gallery.id }}"><button type="button" class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="Détail de la galerie"><i class="glyphicon glyphicon-list"></i></button></a>
-                                    <a href="{{ path('gallery_edit', { 'id': gallery.id }) }}"><button type="button" class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editer la galerie"><i class="glyphicon glyphicon-edit"></i></button></a>
-                                    <a href="{{ path('gallery_delete', { 'id': gallery.id }) }}"><button type="button" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Supprimer la galerie"><i class="glyphicon glyphicon-remove"></i></button></a>
+                                    <a href="#" data-toggle="modal" data-target="#modal_part_{{ gallery.galleryEntity.id }}" id="button_part_{{ gallery.galleryEntity.id }}"><button type="button" class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="Détail de la galerie"><i class="glyphicon glyphicon-list"></i></button></a>
+                                    <a href="{{ path('gallery_edit', { 'id': gallery.galleryEntity.id }) }}"><button type="button" class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Editer la galerie"><i class="glyphicon glyphicon-edit"></i></button></a>
+                                    <a href="{{ path('gallery_delete', { 'id': gallery.galleryEntity.id }) }}"><button type="button" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Supprimer la galerie"><i class="glyphicon glyphicon-remove"></i></button></a>
                                 </td>
                             </tr>
                         {% endfor %}
@@ -83,12 +83,12 @@
         </div>
     </div>
     {% for gallery in listGalleries %}
-        <div class="modal fade" id="modal_part_{{ gallery.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal fade" id="modal_part_{{ gallery.galleryEntity.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title" id="myModalLabel">Détail de la galerie {{ gallery.title }}</h4>
+                        <h4 class="modal-title" id="myModalLabel">Détail de la galerie {{ gallery.galleryEntity.title }}</h4>
                     </div>
                     <div class="modal-body">
                         <div class="row">
@@ -96,23 +96,23 @@
                                 <dl class="dl-horizontal">
                                     <dt>Nom :</dt>
                                     <dd>
-                                        {{ gallery.title }}
+                                        {{ gallery.galleryEntity.title }}
                                     </dd>
                                     <dt>Date :</dt>
                                     <dd>
-                                        {{ gallery.date | date('d-m-Y') }}
+                                        {{ gallery.galleryEntity.date | date('d-m-Y') }}
                                     </dd>
                                     <dt>Détail :</dt>
                                     <dd>
-                                        {{ gallery.detail | raw }}
+                                        {{ gallery.galleryEntity.detail | raw }}
                                     </dd>
                                     <dt>Commentaire :</dt>
                                     <dd>
-                                        {{ gallery.comment }}
+                                        {{ gallery.galleryEntity.comment }}
                                     </dd>
                                     <dt>Active :</dt>
                                     <dd>
-                                        {% if gallery.active %}
+                                        {% if gallery.galleryEntity.active %}
                                             Oui
                                         {% else %}
                                             Non
@@ -120,7 +120,7 @@
                                     </dd>
                                     <dt>Nb de photos :</dt>
                                     <dd>
-                                        {{ gallery.photos | length }} photos
+                                        {{ gallery.photoCount }} photos
                                     </dd>
                                 </dl>
                             </div>
