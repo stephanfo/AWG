@@ -1,11 +1,11 @@
 {% extends "UserBundle::layout.html.twig" %}
 
 {% block title %}
-    {{ 'Confirmation de votre impression' | trans }} - {{ parent() }}
+    {{ 'Confirmation de ma commande' | trans }} - {{ parent() }}
 {% endblock %}
 
 {% block body %}
-    <h4 class="page-header">{{ 'Confirmation de votre impression' | trans }}</h4>
+    <h4 class="page-header">{{ 'Confirmation de ma commande' | trans }}</h4>
     {% if total.details is not empty %}
         <p>
             <br/>
@@ -61,8 +61,8 @@
                     </p>
                 </div>
                 <div class="bottom-block-right">
-                    <a href="{{ path('cart') }}"><button type="button" class="btn btn-default bottom-button"><i class="glyphicon glyphicon-backward"></i> {{ 'Modifier ma sélection' | trans }}</button></a>
-                    <a href="{{ path('order_add_current') }}"><button type="submit" class="btn btn-success bottom-button"><i class="glyphicon glyphicon-print"></i> {{ 'Confirmer' | trans }}</button></a>
+                    <a href="{{ path('cart') }}"><button type="button" class="btn btn-default bottom-button"><i class="glyphicon glyphicon-backward"></i> {{ 'Modifier mon panier' | trans }}</button></a>
+                    <a href="{{ path('order_add_current') }}"><button type="submit" class="btn btn-success bottom-button"><i class="glyphicon glyphicon-ok"></i> {{ 'Confirmer' | trans }}</button></a>
                 </div>
             </div>
         </div>

@@ -1,0 +1,99 @@
+{% extends "GalleryBundle::layout.html.twig" %}
+
+{% block title %}
+    Génération des miniatures - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h1>Génération des miniatures</h1>
+    <h2 class="page-header">{{ gallery.title }} <small>(<i>{{ gallery.photos | length }} photos)</i></small></h2>
+    <p>
+        {{ gallery.detail | raw }}
+    </p>
+    <p>&nbsp;</p>
+    {% if not gallery.photos is empty %}
+        <div class="row">
+            <div class="col-lg-12">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <td>Photos</td>
+                        <td style="text-align: center">Taille</td>
+                        <td style="text-align: center">Petit miniature client</td>
+                        <td style="text-align: center">Moyen miniature client</td>
+                        <td style="text-align: center">Miniature diaporama</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for photo in gallery.photos %}
+                        <tr>
+                            <td>
+                                <a href="{{ vich_uploader_asset(photo, 'imageFile') }}" data-lightbox="gallery-{{ photo.title }}" data-title="Photo {{ photo.title }}, Taille {{ photo.imageWidth }}x{{ photo.imageHeight }}">
+                                    {{ photo.title }}
+                                </a>
+                            </td>
+                            <td style="text-align: center">{{ photo.imageWidth }}x{{ photo.imageHeight }}</td>
+                            <td style="text-align: center">
+                                <a href="{{ vich_uploader_asset(photo, 'imageFile') | imagine_filter('gallery_thumb') }}" data-lightbox="gallery-{{ photo.title }}" data-title="Photo {{ photo.title }}, Petit miniature client">
+                                    <img src="/resources/loading.gif" thumb-link="{{ vich_uploader_asset(photo, 'imageFile') | imagine_filter('gallery_thumb') }}" height="50"></img>
+                                </a>
+                            </td>
+                            <td style="text-align: center">
+                                <a href="{{ vich_uploader_asset(photo, 'imageFile') | imagine_filter('watermark_thumb') }}" data-lightbox="gallery-{{ photo.title }}" data-title="Photo {{ photo.title }}, Moyen miniature client">
+                                    <img src="/resources/loading.gif" thumb-link="{{ vich_uploader_asset(photo, 'imageFile') | imagine_filter('watermark_thumb') }}" height="50"></img>
+                                </a>
+                            </td>
+                            <td style="text-align: center">
+                                <a href="{{ vich_uploader_asset(photo, 'imageFile') | imagine_filter('slideshow_thumb') }}" data-lightbox="gallery-{{ photo.title }}" data-title="Photo {{ photo.title }}, Miniature diaporama">
+                                    <img src="/resources/loading.gif" thumb-link="{{ vich_uploader_asset(photo, 'imageFile') | imagine_filter('slideshow_thumb') }}" height="50"></img>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+    <div>
+        <div class="bottom-block-right">
+            <a href="{{ path('gallery_view', { 'id': gallery.id }) }}"><button type="button" class="btn btn-primary bottom-button"><i class="glyphicon glyphicon-list"></i> Voir la galerie</button></a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/resources/lightbox/js/lightbox.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(
+            function() {
+                var images = $('[thumb-link]');
+                var imagesLength = images.length;
+
+                if(imagesLength > 0)
+                {
+                    generateThumb(0);
+                }
+
+                function generateThumb(index) {
+                    var image = $(images[index]);
+                    $.ajax({
+                        method: 'GET',
+                        url: image.attr('thumb-link'),
+                        async: true
+                    }).done(function() {
+                        image.attr("src", image.attr('thumb-link'));
+                        if(index < imagesLength)
+                        {
+                            generateThumb(index + 1);
+                        }
+                    });
+                };
+            }
+        );
+    </script>
+{% endblock %}
+
+{% block stylesheets %}
+    <link href="/resources/lightbox/css/lightbox.min.css" rel="stylesheet">
+{% endblock %}

@@ -1,11 +1,11 @@
 {% extends "UserBundle::layout.html.twig" %}
 
 {% block title %}
-    {{ 'Ma sélection' | trans }} - {{ parent() }}
+    {{ 'Mon panier' | trans }} - {{ parent() }}
 {% endblock %}
 
 {% block body %}
-    <h4 class="page-header">{{ 'Ma sélection' | trans }}</h4>
+    <h4 class="page-header">{{ 'Mon panier' | trans }}</h4>
     {% if userCarts.carts is not empty %}
         <p>
             &nbsp;
@@ -18,9 +18,10 @@
                             <img class="img-responsive img-thumbnail cart-img" src="{{ vich_uploader_asset(cart.photo, 'imageFile') | imagine_filter('gallery_thumb') }}" alt="{{ cart.photo.title }}"/>
                         </a>
                     {% else %}
-                        <img class="img-responsive img-thumbnail cart-img" src="{{ vich_uploader_asset(cart.photo, 'imageFile') | imagine_filter('gallery_thumb') }}" alt="{{ cart.photo.title }}"/>
+                        <a href="{{ vich_uploader_asset(cart.photo, 'imageFile') | imagine_filter('watermark_thumb') }}" data-lightbox="gallery" data-title="Photo {{ cart.photo.title }}, Taille {{ cart.photo.imageWidth }}x{{ cart.photo.imageHeight }}">
+                            <img class="img-responsive img-thumbnail cart-img" src="{{ vich_uploader_asset(cart.photo, 'imageFile') | imagine_filter('gallery_thumb') }}" alt="{{ cart.photo.title }}"/>
+                        </a>
                     {% endif %}
-
                     {{ cart.photo.title }}
                     <div style="float: right;"><a href="{{ path('cart_delete', { 'id': cart.photo.id }) }}"><button class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i></button></a></div>
                 </div>
@@ -57,8 +58,8 @@
                     <h4>Total: <span cart-total>{{ total.overall.total | number_format(2, ',', ' ') }}</span>€</h4>
                 </div>
                 <div class="bottom-block-right">
-                    <a href="{{ path('cart_delete_all') }}"><button type="button" class="btn btn-warning bottom-button"><i class="glyphicon glyphicon-trash"></i> {{ 'Vider ma sélection' | trans }}</button></a>
-                    <a href="{{ path('checkout') }}"><button type="button" class="btn btn-success bottom-button"><i class="glyphicon glyphicon-print"></i> {{ 'Demander l\'impression' | trans }}</button></a>
+                    <a href="{{ path('cart_delete_all') }}"><button type="button" class="btn btn-warning bottom-button"><i class="glyphicon glyphicon-trash"></i> {{ 'Vider mon panier' | trans }}</button></a>
+                    <a href="{{ path('checkout') }}"><button type="button" class="btn btn-success bottom-button"><i class="glyphicon glyphicon-shopping-cart"></i> {{ 'Passer la commande' | trans }}</button></a>
                 </div>
             </div>
         </div>
@@ -67,7 +68,7 @@
             &nbsp;
         </p>
         <p>
-            {% trans %}Votre panier sélection est vide. Rendez-vous dans la{% endtrans %} <a href="{{ path('home') }}">{{ 'Galerie photos' | trans }}</a> {% trans %}pour composer votre panier.{% endtrans %}
+            {% trans %}Votre panier est vide. Rendez-vous dans la{% endtrans %} <a href="{{ path('home') }}">{{ 'Galerie photos' | trans }}</a> {% trans %}pour composer votre panier.{% endtrans %}
         </p>
     {% endif %}
     {{ render(controller('UserBundle:Discount:bottomBar')) }}
@@ -107,13 +108,9 @@
             }
         </script>
     {% endif %}
-    {% if is_granted('ROLE_BIGPICTURE') %}
-        <script src="/resources/lightbox/js/lightbox.min.js"></script>
-    {% endif %}
+    <script src="/resources/lightbox/js/lightbox.min.js"></script>
 {% endblock %}
 
 {% block stylesheets %}
-    {% if is_granted('ROLE_BIGPICTURE') %}
-        <link href="/resources/lightbox/css/lightbox.min.css" rel="stylesheet">
-    {% endif %}
+    <link href="/resources/lightbox/css/lightbox.min.css" rel="stylesheet">
 {% endblock %}

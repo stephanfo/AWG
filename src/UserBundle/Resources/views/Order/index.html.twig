@@ -1,11 +1,11 @@
 {% extends "UserBundle::layout.html.twig" %}
 
 {% block title %}
-    {{ 'Mes impressions' | trans }} - {{ parent() }}
+    {{ 'Mes commandes' | trans }} - {{ parent() }}
 {% endblock %}
 
 {% block body %}
-    <h4 class="page-header">{{ 'Mes impressions' | trans }}</h4>
+    <h4 class="page-header">{{ 'Mes commandes' | trans }}</h4>
     {% if not orders is empty %}
         <div class="row">
             <div class="col-md-12">

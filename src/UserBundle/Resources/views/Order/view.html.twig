@@ -22,7 +22,7 @@
             -> {{ 'Votre commande est en attente, patience.' | trans }}<br/>
         {% endif %}
     </p>
-    <h4 class="page-header">{{ 'Detail des impressions' | trans }}</h4>
+    <h4 class="page-header">{{ 'Detail de la commande' | trans }}</h4>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -44,7 +44,9 @@
                                     <img class="img-responsive img-thumbnail cart-img" src="{{ vich_uploader_asset(detail.photo, 'imageFile') | imagine_filter('gallery_thumb') }}" alt="{{ detail.photo.title }}"/>
                                 </a>
                             {% else %}
-                                <img class="img-responsive img-thumbnail cart-img" src="{{ vich_uploader_asset(detail.photo, 'imageFile') | imagine_filter('gallery_thumb') }}" alt="{{ detail.photo.title }}"/>
+                                <a href="{{ vich_uploader_asset(detail.photo, 'imageFile') | imagine_filter('watermark_thumb') }}" data-lightbox="gallery" data-title="Photo {{ detail.photo.title }}, Taille {{ detail.photo.imageWidth }}x{{ detail.photo.imageHeight }}">
+                                    <img class="img-responsive img-thumbnail cart-img" src="{{ vich_uploader_asset(detail.photo, 'imageFile') | imagine_filter('gallery_thumb') }}" alt="{{ detail.photo.title }}"/>
+                                </a>
                             {% endif %}
                         </td>
                         <td class="table-detail">{{ quantity.quantity }}</td>
@@ -84,7 +86,7 @@
         <div class="row bottom-block">
             <div class="col-lg-12">
                 <p>
-                    <a href="{{ path("order_cancel", {'id': order.id} ) }}"><button type="button" class="btn btn-danger bottom-button"{% if order.printed == true %} disabled="disabled"{% endif %}><i class="glyphicon glyphicon-trash"></i> {{ 'Annuler mes impressions' | trans }}</button></a>
+                    <a href="{{ path("order_cancel", {'id': order.id} ) }}"><button type="button" class="btn btn-danger bottom-button"{% if order.printed == true %} disabled="disabled"{% endif %}><i class="glyphicon glyphicon-trash"></i> {{ 'Annuler ma commande' | trans }}</button></a>
                 </p>
             </div>
         </div>
@@ -92,13 +94,9 @@
 {% endblock %}
 
 {% block javascripts %}
-    {% if is_granted('ROLE_BIGPICTURE') %}
-        <script src="/resources/lightbox/js/lightbox.min.js"></script>
-    {% endif %}
+    <script src="/resources/lightbox/js/lightbox.min.js"></script>
 {% endblock %}
 
 {% block stylesheets %}
-    {% if is_granted('ROLE_BIGPICTURE') %}
-        <link href="/resources/lightbox/css/lightbox.min.css" rel="stylesheet">
-    {% endif %}
+    <link href="/resources/lightbox/css/lightbox.min.css" rel="stylesheet">
 {% endblock %}

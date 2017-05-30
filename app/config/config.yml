@@ -122,10 +122,19 @@ liip_imagine:
     filter_sets:
         cache: ~
         gallery_thumb:
-            quality: 70
+            quality: 80
             filters:
                 relative_resize:
                   widen: 255
+        watermark_thumb:
+            quality: 80
+            filters:
+                relative_resize:
+                    heighten: 800
+                watermark:
+                    image: Resources/data/watermark.png
+                    size: 0.8
+                    position: center
         slideshow_thumb:
             quality: 80
             filters:

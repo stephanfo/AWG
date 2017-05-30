@@ -65,6 +65,26 @@ class GalleryController extends Controller
     }
 
     /**
+     * @Route("/thumbs/{id}", requirements={"id": "\d*"}, name="gallery_thumbs")
+     */
+    public function thumbsAction($id)
+    {
+        $gallery = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository("GalleryBundle:Gallery")
+            ->getGalleryDetail($id)
+        ;
+
+        if (is_null($gallery))
+            throw $this->createNotFoundException("La galerie " . $id . " n'existe pas.");
+
+        return $this->render('GalleryBundle:Gallery:thumbs.html.twig', array(
+            'gallery' => $gallery,
+        ));
+    }
+
+    /**
      * @Route("/add", name="gallery_add")
      */
     public function addAction(Request $request)

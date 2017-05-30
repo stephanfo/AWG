@@ -32,6 +32,7 @@
                                 </td>
                                 <td style="vertical-align: middle;">
                                     <a href="{{ path('photo_loader', { 'id': gallery.galleryEntity.id }) }}"><button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Ajouter des photos"><i class="glyphicon glyphicon glyphicon-plus"></i></button></a>
+                                    <a href="{{ path('gallery_thumbs', { 'id': gallery.galleryEntity.id }) }}"><button type="button" class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="Générer les miniatures"><i class="glyphicon glyphicon-picture"></i></button></a>
                                     <a href="{{ path('photo_clear', { 'id': gallery.galleryEntity.id }) }}"><button type="button" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Supprimer toutes les photos"><i class="glyphicon glyphicon glyphicon-trash"></i></button></a>
                                     - {{ gallery.photoCount }} photos
                                 </td>

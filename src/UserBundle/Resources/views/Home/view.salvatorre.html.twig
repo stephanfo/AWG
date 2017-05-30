@@ -42,7 +42,9 @@
                                             <img class="img-responsive" src="{{ vich_uploader_asset(photo, 'imageFile') | imagine_filter('gallery_thumb') }}" alt="{{ photo.title }}"/>
                                         </a>
                                     {% else %}
-                                        <img class="img-responsive" src="{{ vich_uploader_asset(photo, 'imageFile') | imagine_filter('gallery_thumb') }}" alt="{{ photo.title }}"/>
+                                        <a href="{{ vich_uploader_asset(photo, 'imageFile') | imagine_filter('watermark_thumb')  }}" data-lightbox="gallery" data-title="Photo {{ photo.title }}, Taille {{ photo.imageWidth }}x{{ photo.imageHeight }}">
+                                            <img class="img-responsive" src="{{ vich_uploader_asset(photo, 'imageFile') | imagine_filter('gallery_thumb') }}" alt="{{ photo.title }}"/>
+                                        </a>
                                     {% endif %}
                                     <div class="caption">
                                         <p class="image-caption">
@@ -51,7 +53,7 @@
                                         <p class="image-caption">
                                             <button type="button" photo-like="{{ photo.id }}" class="btn {% if attribute(likes, photo.id) is defined %}btn-success{% else %}btn-default{% endif %} btn-xs"><i class="glyphicon glyphicon-thumbs-up"></i> <span photo-like-count="{{ photo.id }}">{{ photo.likeCount }}</span></button>
                                             &nbsp;
-                                            <button type="button" photo-cart="{{ photo.id }}" class="btn {% if attribute(carts, photo.id) is defined %}btn-primary{% else %}btn-default{% endif %} btn-xs"><i class="glyphicon glyphicon-print"></i></button>
+                                            <button type="button" photo-cart="{{ photo.id }}" class="btn {% if attribute(carts, photo.id) is defined %}btn-primary{% else %}btn-default{% endif %} btn-xs"><i class="glyphicon glyphicon-shopping-cart"></i></button>
                                         </p>
                                     </div>
                                 </div>
@@ -62,7 +64,7 @@
             {% endif %}
             <div class="bottom-block">
                 <div class="bottom-block-right">
-                    <a href="{{ path('cart') }}"><button type="button" class="btn btn-success bottom-button"><i class="glyphicon glyphicon-print"></i> {{ 'Définir les formats' | trans }}</button></a>
+                    <a href="{{ path('cart') }}"><button type="button" class="btn btn-success bottom-button"><i class="glyphicon glyphicon-shopping-cart"></i> {{ 'Mon panier' | trans }}</button></a>
                 </div>
             </div>
             {% if not loop.last and appConfig.gallerySingleGallery == false %}
@@ -144,13 +146,9 @@
         });
         {% endif %}
     </script>
-    {% if is_granted('ROLE_BIGPICTURE') %}
-        <script src="/resources/lightbox/js/lightbox.min.js"></script>
-    {% endif %}
+    <script src="/resources/lightbox/js/lightbox.min.js"></script>
 {% endblock %}
 
 {% block stylesheets %}
-    {% if is_granted('ROLE_BIGPICTURE') %}
-        <link href="/resources/lightbox/css/lightbox.min.css" rel="stylesheet">
-    {% endif %}
+    <link href="/resources/lightbox/css/lightbox.min.css" rel="stylesheet">
 {% endblock %}

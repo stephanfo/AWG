@@ -7,7 +7,6 @@ Email: Email
 Localisation: Location
 'Nom de table, Emplacement, ...': 'Table name, location, ...'
 Sauvegarder: Save
-'Confirmation de votre impression': 'Confirmation of your printing'
 'Vous trouverez ci-dessous la synthèse des tirages que vous allez commander. Merci de bien contrôler le montant total avant de valider l''impression.': 'You will find hereafter the sum-up of the prints you are ordering. Please carefully check the total amount before validating the printing.'
 Format: Size
 Quantité: Quantity
@@ -15,15 +14,10 @@ Montant: Amount
 Total: Total
 'A payer': 'To pay'
 'En cliquant sur le bouton "Confirmer", vous vous engagez à payer la commande dans son intégralité à la remise des tirages.': 'By cliquing "Confirm", you agree to pay the total order upon delivery of the prints.'
-'Modifier ma sélection': 'Modify my selection'
-Confirmer: Confirm
 'Votre panier est vide. Rendez-vous dans la': 'Your cart is empty. Please go to the'
 'Galerie photos': 'photo gallery'
 'pour composer votre panier.': 'to compose your cart.'
-'Ma sélection': 'My selection'
 'Aucun format d''impression n''a été définit.': '__Aucun format d''impression n''a été définit.'
-'Vider ma sélection': 'Empty my selection'
-'Demander l''impression': 'Request printing'
 'Votre panier sélection est vide. Rendez-vous dans la': 'Your selection cart is empty. Please got to the'
 'se termine dans': 'is finishing in'
 secondes.: secondes.
@@ -41,9 +35,7 @@ Remise: Discount
 Galerie: Gallery
 'Accès rapide': 'Quick access'
 photos: pictures
-'Définir les formats': 'Define the sizes'
 'Aucune galerie accessible': 'No accessible gallery'
-'Mes impressions': 'My prints'
 Heure: Hour
 Statut: Status
 Détail: Detail
@@ -60,11 +52,9 @@ Détail: Detail
 'Votre commande est en cours d''impression ou est déjà imprimée.': 'Your order is printing or already printed.'
 'Votre commande est payée.': 'Your order is paid.'
 'Votre commande est en attente, patience.': 'Your order is awaiting, please wait.'
-'Detail des impressions': 'Detail of the printings'
 Image: Image
 Action: Action
 'Télécharger le fichier original': 'Download the original file'
-'Annuler mes impressions': 'Cancel all the printings'
 'Créer mon profil': 'Create my profile'
 'Editer mon profil': 'Edit my profile'
 'Mon profil': 'My profile'
@@ -91,3 +81,12 @@ Editer: Edit
 Photos: Pictures
 Ouvrir: Access
 'Nom de la galerie': 'Gallery name'
+'Confirmation de ma commande': 'Confirm my order'
+'Modifier mon panier': 'Update my cart'
+Confirmer: Confirm
+'Mon panier': 'My cart'
+'Vider mon panier': 'Empty my cart'
+'Passer la commande': 'Checkout'
+'Mes commandes': 'My orders'
+'Detail de la commande': 'Order details'
+'Annuler ma commande': 'Cancel my order'

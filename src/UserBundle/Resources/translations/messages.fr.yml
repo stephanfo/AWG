@@ -7,7 +7,6 @@ Email: Email
 Localisation: Localisation
 'Nom de table, Emplacement, ...': 'Nom de table, Emplacement, ...'
 Sauvegarder: Sauvegarder
-'Confirmation de votre impression': 'Confirmation de votre impression'
 'Vous trouverez ci-dessous la synthèse des tirages que vous allez commander. Merci de bien contrôler le montant total avant de valider l''impression.': 'Vous trouverez ci-dessous la synthèse des tirages que vous allez commander. Merci de bien contrôler le montant total avant de valider l''impression.'
 Format: Format
 Quantité: Quantité
@@ -15,15 +14,10 @@ Montant: Montant
 Total: Total
 'A payer': 'A payer'
 'En cliquant sur le bouton "Confirmer", vous vous engagez à payer la commande dans son intégralité à la remise des tirages.': 'En cliquant sur le bouton "Confirmer", vous vous engagez à payer la commande dans son intégralité à la remise des tirages.'
-'Modifier ma sélection': 'Modifier ma sélection'
-Confirmer: Confirmer
 'Votre panier est vide. Rendez-vous dans la': 'Votre panier est vide. Rendez-vous dans la'
 'Galerie photos': 'Galerie photos'
 'pour composer votre panier.': 'pour composer votre panier.'
-'Ma sélection': 'Ma sélection'
 'Aucun format d''impression n''a été définit.': 'Aucun format d''impression n''a été définit.'
-'Vider ma sélection': 'Vider ma sélection'
-'Demander l''impression': 'Demander l''impression'
 'Votre panier sélection est vide. Rendez-vous dans la': 'Votre panier sélection est vide. Rendez-vous dans la'
 'se termine dans': 'se termine dans'
 secondes.: secondes.
@@ -41,9 +35,7 @@ Remise: Remise
 Galerie: Galerie
 'Accès rapide': 'Accès rapide'
 photos: photos
-'Définir les formats': 'Définir les formats'
 'Aucune galerie accessible': 'Aucune galerie accessible'
-'Mes impressions': 'Mes impressions'
 Heure: Heure
 Statut: Statut
 Détail: Détail
@@ -60,11 +52,9 @@ Détail: Détail
 'Votre commande est en cours d''impression ou est déjà imprimée.': 'Votre commande est en cours d''impression ou est déjà imprimée.'
 'Votre commande est payée.': 'Votre commande est payée.'
 'Votre commande est en attente, patience.': 'Votre commande est en attente, patience.'
-'Detail des impressions': 'Detail des impressions'
 Image: Image
 Action: Action
 'Télécharger le fichier original': 'Télécharger le fichier original'
-'Annuler mes impressions': 'Annuler mes impressions'
 'Créer mon profil': 'Créer mon profil'
 'Editer mon profil': 'Editer mon profil'
 'Mon profil': 'Mon profil'
@@ -91,3 +81,12 @@ Editer: Editer
 Photos: Photos
 Ouvrir: Ouvrir
 'Nom de la galerie': 'Nom de la galerie'
+'Confirmation de ma commande': 'Confirmation de ma commande'
+'Modifier mon panier': 'Modifier mon panier'
+Confirmer: Confirmer
+'Mon panier': 'Mon panier'
+'Vider mon panier': 'Vider mon panier'
+'Passer la commande': 'Passer la commande'
+'Mes commandes': 'Mes commandes'
+'Detail de la commande': 'Detail de la commande'
+'Annuler ma commande': 'Annuler ma commande'
