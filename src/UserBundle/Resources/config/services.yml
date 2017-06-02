@@ -1,4 +1,1 @@
 services:
-    user_profile:
-        class: UserBundle\Classes\UserProfile
-        arguments: [ "@doctrine.orm.entity_manager", "@request_stack"]

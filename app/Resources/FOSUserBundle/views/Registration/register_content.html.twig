@@ -1,0 +1,69 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        {{ form_errors(form) }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <div class="login-panel panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title pull-left">{{ 'Enregistrez-vous' | trans }}</h3>
+                <div class="panel-title pull-right">
+                    {% if app.request.locale != 'fr' %}
+                        <a href="{{ path(app.request.get('_route'), app.request.get('_route_params') | merge({'_locale': 'fr'})) }}"><img src="/resources/flags/fr.png" height="18"></a>
+                    {%  endif %}
+                    {% if app.request.locale != 'en' %}
+                        <a href="{{ path(app.request.get('_route'), app.request.get('_route_params') | merge({'_locale': 'en'})) }}"><img src="/resources/flags/en.png" height="18"></a>
+                    {%  endif %}
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="panel-body">
+                <fieldset>
+                    <div class="form-group">
+                        {{ form_errors(form.email) }}
+                        {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'form.email' | trans }}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_errors(form.firstname) }}
+                        {{ form_widget(form.firstname, {'attr': {'class': 'form-control', 'placeholder': 'Votre prénom'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_errors(form.lastname) }}
+                        {{ form_widget(form.lastname, {'attr': {'class': 'form-control', 'placeholder': 'Votre nom'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_errors(form.location) }}
+                        {{ form_widget(form.location, {'attr': {'class': 'form-control', 'placeholder': 'Localisation'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_errors(form.plainPassword.first) }}
+                        {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control', 'placeholder': 'form.password' | trans }}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_errors(form.plainPassword.second) }}
+                        {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control', 'placeholder': 'form.password_confirmation' | trans }}) }}
+                    </div>
+                    <input type="submit" class="btn btn-lg btn-success btn-block" id="_submit" name="_submit" value="{{ 'registration.submit'|trans }}" />
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>
+{{ form_rest(form) }}
+{{ form_end(form) }}
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <div class="login-panel panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ 'Vous avez déjà un compte ?' | trans }}</h3>
+            </div>
+            <div class="panel-body">
+                <a href="{{ path('fos_user_security_login') }}"><button type="button" class="btn btn-lg btn-default btn-block"/>{{ 'Connectez-vous' | trans }}</button></a>
+            </div>
+        </div>
+    </div>
+</div>

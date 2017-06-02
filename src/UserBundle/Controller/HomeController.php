@@ -4,20 +4,21 @@ namespace UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Response;
 
 class HomeController extends Controller
 {
 
     /**
      * @Route("/", name="home")
-     * @Route("/{oneGallery}", name="home_one_gallery")
+     * @Route("/{oneGallery}", requirements={"oneGallery": "\d*"}, name="home_one_gallery")
      */
     public function viewAction($oneGallery = null)
     {
-        $user = $this->get('user_profile')->getUser();
+        //$user = $this->get('user_profile')->getUser();
 
-        if (is_null($user))
-            return $this->redirectToRoute('user_add');
+        //if (is_null($user))
+        //    return $this->redirectToRoute('user_add');
 
         $config = $this->get('app_config')->getConfig();
 
@@ -50,7 +51,7 @@ class HomeController extends Controller
             $listGalleriesAndCount = null;
         }
         
-        $likes = $this->getDoctrine()->getRepository('UserBundle:User')->getUserLikes($user);
+/*        $likes = $this->getDoctrine()->getRepository('UserBundle:User')->getUserLikes($user);
         $carts = $this->getDoctrine()->getRepository('UserBundle:User')->getUserCart($user);
 
         $likesArray = array();
@@ -64,7 +65,10 @@ class HomeController extends Controller
         {
             $cartArray[$cart->getPhoto()->getId()] = true;
         }
-
+*/
+        $likesArray = null;
+        $cartArray = null;
+        
         return $this->render('UserBundle:Home:view.salvatorre.html.twig', array(
             'galleries' => $galleries,
             'likes' => $likesArray,

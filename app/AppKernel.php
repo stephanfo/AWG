@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
             new Liuggio\ExcelBundle\LiuggioExcelBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

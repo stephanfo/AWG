@@ -2,43 +2,29 @@
 
 namespace UserBundle\Entity;
 
+use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * User
- *
- * @ORM\Table(name="user")
+ * @ORM\Entity
+ * @ORM\Table(name="fos_user")
  * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
- *
- * @Gedmo\SoftDeleteable(fieldName="deleted", timeAware=false)
  */
-class User
+class User extends BaseUser
 {
-
     /**
-     * @var int
-     *
-     * @ORM\Column(type="integer")
      * @ORM\Id
+     * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255, unique=true)
-     * @Assert\NotBlank
-     * @Assert\Type(type="string")
-     */
-    private $session;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=false)
      * @Assert\NotBlank
      * @Assert\Type(type="string")
      */
@@ -47,7 +33,7 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=false)
      * @Assert\NotBlank
      * @Assert\Type(type="string")
      */
@@ -56,17 +42,8 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
-     * @Assert\Email
-     * @Assert\Type(type="string")
-     */
-    private $email;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Type(type="string")
      */
     private $location;
 
@@ -74,12 +51,12 @@ class User
      * @ORM\OneToMany(targetEntity="CartBundle\Entity\Cart", mappedBy="user", cascade={"remove"})
      */
     private $carts;
-
+    
     /**
      * @ORM\OneToMany(targetEntity="CartBundle\Entity\Order", mappedBy="user", cascade={"remove"})
      */
     private $orders;
-
+    
     /**
      * @ORM\ManyToMany(targetEntity="GalleryBundle\Entity\Photo", mappedBy="likeUsers")
      */
@@ -113,43 +90,11 @@ class User
      */
     public function __construct()
     {
+        parent::__construct();
+        
         $this->carts = new \Doctrine\Common\Collections\ArrayCollection();
         $this->orders = new \Doctrine\Common\Collections\ArrayCollection();
         $this->likePhotos = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set session
-     *
-     * @param string $session
-     *
-     * @return User
-     */
-    public function setSession($session)
-    {
-        $this->session = $session;
-
-        return $this;
-    }
-
-    /**
-     * Get session
-     *
-     * @return string
-     */
-    public function getSession()
-    {
-        return $this->session;
     }
 
     /**
@@ -198,30 +143,6 @@ class User
     public function getLastname()
     {
         return $this->lastname;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     *
-     * @return User
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
     }
 
     /**
@@ -357,11 +278,11 @@ class User
     /**
      * Add order
      *
-     * @param \CartBundle\Entity\Cart $order
+     * @param \CartBundle\Entity\Order $order
      *
      * @return User
      */
-    public function addOrder(\CartBundle\Entity\Cart $order)
+    public function addOrder(\CartBundle\Entity\Order $order)
     {
         $this->orders[] = $order;
 
@@ -371,9 +292,9 @@ class User
     /**
      * Remove order
      *
-     * @param \CartBundle\Entity\Cart $order
+     * @param \CartBundle\Entity\Order $order
      */
-    public function removeOrder(\CartBundle\Entity\Cart $order)
+    public function removeOrder(\CartBundle\Entity\Order $order)
     {
         $this->orders->removeElement($order);
     }
