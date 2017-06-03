@@ -19,12 +19,17 @@
     </p>
     <h2 class="page-header">Gestion du serveur</h2>
     <p>
-        <a href="{{ path('app_maintenance_halt') }}"><button type="button" class="btn btn-info"><i class="glyphicon glyphicon-flash"></i> Arrêter le système</button></a>
+        <a href="#" data-toggle="modal" data-target="#form-datetime"><button type="button" class="btn btn-warning"><i class="glyphicon glyphicon-time"></i> Changer la date et l'heure</button></a>
+        &nbsp;&nbsp;-&nbsp;&nbsp;
+        Mettre à jour la date et l'heure du système. Actuelement, l'horloge système indique : {{ currentDate | date("d-m-Y H:i:s", "Europe/Paris")}}<br/>
+    </p>
+    <p>
+        <a href="{{ path('app_maintenance_halt') }}"><button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-flash"></i> Arrêter le système</button></a>
         &nbsp;&nbsp;-&nbsp;&nbsp;
         Arrête le serveur, afin de pouvoir le débrancher en toute sécurité.<br/>
     </p>
     <p>
-        <a href="{{ path('app_maintenance_reboot') }}"><button type="button" class="btn btn-info"><i class="glyphicon glyphicon-repeat"></i> Rebooter le système</button></a>
+        <a href="{{ path('app_maintenance_reboot') }}"><button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-repeat"></i> Rebooter le système</button></a>
         &nbsp;&nbsp;-&nbsp;&nbsp;
         Redémarre le serveur. Les données ne seront pas perdues.<br/>
     </p>
@@ -66,4 +71,50 @@
             </div>
         </div>
     </div>
+    {{ form_start(formDate) }}
+    <div class="modal fade" id="form-datetime" tabindex="-1" role="dialog" aria-labelledby="update_datetime" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="warning-reset">Mettre à jour l'horloge système</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        {{ form_label(formDate.date, "Nouvelle date et heure du système") }}
+                        {{ form_errors(formDate.date) }}
+                        {{ form_widget(formDate.date, {'attr': {'class': 'form-control form_datetime'}}) }}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <input type="submit" class="btn btn-primary" value="Mettre à jour"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ form_rest(formDate) }}
+    {{ form_end(formDate) }}
+{% endblock %}
+
+{% block stylesheets %}
+    <link href="/resources/datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/resources/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="/resources/datetimepicker/js/locales/bootstrap-datetimepicker.fr.js"></script>
+    <script type="text/javascript">
+        $('.form_datetime').datetimepicker({
+            format: 'dd-mm-yyyy hh:ii:ss',
+            language: 'fr',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            forceParse: 0,
+            showMeridian: 0,
+            minuteStep: 1
+        });
+    </script>
 {% endblock %}

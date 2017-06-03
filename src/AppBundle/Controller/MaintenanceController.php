@@ -6,15 +6,53 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Process\Process;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class MaintenanceController extends Controller {
 
     /**
      * @Route("/maintenance", name="app_maintenance")
      */
-    public function maintenanceAction()
+    public function maintenanceAction(Request $request)
     {
-        return $this->render('AppBundle:Maintenance:maintenance.html.twig');
+        $currentDate = new \DateTime('now');
+        
+        $formDate = $this->createFormBuilder()
+            ->add('date', DateTimeType::class, array(
+                'widget' => 'single_text',
+                'format' => 'dd-MM-yyyy HH:mm:ss',
+                'placeholder' => 'Permanent',
+                'data' => $currentDate,
+            ))
+            ->getForm()
+            ;
+
+        $formDate->handleRequest($request);
+        
+        if($formDate->isSubmitted() && $formDate->isValid())
+        {
+            $resultArray = $formDate->getData();
+            $newDate = $resultArray['date'];
+
+            $command = "/usr/bin/sudo /bin/date -u -s \"@" . $newDate->getTimestamp() . "\"";
+
+            $printProcess = new Process($command);
+            $printProcess->run();
+
+            if ($printProcess->isSuccessful())
+            {
+                $request->getSession()->getFlashBag()->add('success', 'L\horloge système a été mise à jour.');
+            }
+            else
+            {
+                $request->getSession()->getFlashBag()->add('danger', 'La commande : ' . $command . ' a échouée (message d\'erreur : '. $printProcess->getErrorOutput() . ').');
+            }
+        }
+        
+        return $this->render('AppBundle:Maintenance:maintenance.html.twig', array (
+            'currentDate' => $currentDate,
+            'formDate' => $formDate-> createView(),
+        ));
     }
 
     /**
