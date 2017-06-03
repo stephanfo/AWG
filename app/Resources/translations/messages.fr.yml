@@ -1,5 +1,5 @@
 'La galerie photos': 'La galerie photos'
-'Les offres': 'Les offres'
+Tarifs: Tarifs
 Editer: Editer
 Déconnecter: Déconnecter
 Administration: Administration
@@ -15,3 +15,6 @@ Diaporama: Diaporama
 'Galerie de mariage éphémère': 'Galerie de mariage éphémère'
 'Mon panier': 'Mon panier'
 'Mes commandes': 'Mes commandes'
+'Changer le mot de passe': 'Changer le mot de passe'
+'Se connecter': 'Se connecter'
+'Connecté en tant que %username%': 'Connecté en tant que %username%'

@@ -115,7 +115,7 @@ class MaintenanceController extends Controller {
     public function appResetRestartAction(Request $request)
     {
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $em->getFilters()->disable('softdeleteable');
 
         $em->createQuery('DELETE FROM CartBundle\Entity\CartQuantity')->execute();

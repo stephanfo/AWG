@@ -82,6 +82,12 @@ class ConfigType extends AbstractType
                     'Non' => false,
                 ),
             ))
+            ->add('galleryAnonymousAccess', ChoiceType::class, array(
+                'choices'  => array(
+                    'Oui' => true,
+                    'Non' => false,
+                ),
+            ))
             ->add('save', SubmitType::class)
         ;
     }

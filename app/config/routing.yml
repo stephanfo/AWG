@@ -6,7 +6,7 @@ homeredirect:
         permanent: true
 
 adminredirect:
-    path: /admin
+    path: /{_locale}/admin
     defaults:
         _controller: FrameworkBundle:Redirect:redirect
         route: gallery_index

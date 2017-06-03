@@ -51,9 +51,15 @@
                                             {{ photo.title | truncate(14) }}
                                         </p>
                                         <p class="image-caption">
-                                            <button type="button" photo-like="{{ photo.id }}" class="btn {% if attribute(likes, photo.id) is defined %}btn-success{% else %}btn-default{% endif %} btn-xs"><i class="glyphicon glyphicon-thumbs-up"></i> <span photo-like-count="{{ photo.id }}">{{ photo.likeCount }}</span></button>
-                                            &nbsp;
-                                            <button type="button" photo-cart="{{ photo.id }}" class="btn {% if attribute(carts, photo.id) is defined %}btn-primary{% else %}btn-default{% endif %} btn-xs"><i class="glyphicon glyphicon-shopping-cart"></i></button>
+                                            {% if is_granted('IS_AUTHENTICATED_REMEMBERED')  %}
+                                                <button type="button" photo-like="{{ photo.id }}" class="btn {% if attribute(likes, photo.id) is defined %}btn-success{% else %}btn-default{% endif %} btn-xs"><i class="glyphicon glyphicon-thumbs-up"></i> <span photo-like-count="{{ photo.id }}">{{ photo.likeCount }}</span></button>
+                                                &nbsp;
+                                                <button type="button" photo-cart="{{ photo.id }}" class="btn {% if attribute(carts, photo.id) is defined %}btn-primary{% else %}btn-default{% endif %} btn-xs"><i class="glyphicon glyphicon-shopping-cart"></i></button>
+                                            {% else %}
+                                                <a href="{{ path('fos_user_registration_register') }}"><button type="button" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-thumbs-up"></i> <span photo-like-count="{{ photo.id }}">{{ photo.likeCount }}</span></button></a>
+                                                &nbsp;
+                                                <a href="{{ path('fos_user_registration_register') }}"><button type="button" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-shopping-cart"></i></button></a>
+                                            {% endif %}
                                         </p>
                                     </div>
                                 </div>
@@ -101,6 +107,7 @@
 
 {% block javascripts %}
     <script src="/resources/salvattore/salvattore.min.js"></script>
+    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
     <script type="text/javascript">
         $('[photo-cart]').click(function () {
             $.get('{{ path('cart_toggle_empty_link') }}' + $(this).attr('photo-cart'), function (data) {
@@ -130,19 +137,20 @@
                 $('[photo-like-count="' + data['id'] + '"]').text(data['count']);
             });
         });
+        {% endif %}
         {% if appConfig.galleryQuickLink and galleries | length > 1 %}
-            $('[quickScroll-select]').on('change', function () {
-                if (this.value != 0)
-                {
-                    var target = this.value;
-                    this.value = 0;
-                    $('html, body').animate({scrollTop: $('#' + target).offset().top }, 1000);
-                }
-            });
+        $('[quickScroll-select]').on('change', function () {
+            if (this.value != 0)
+            {
+                var target = this.value;
+                this.value = 0;
+                $('html, body').animate({scrollTop: $('#' + target).offset().top }, 1000);
+            }
+        });
         {% endif %}
         {% if appConfig.gallerySingleGallery and appConfig.galleryQuickLink %}
         $('[quickLink-select]').on('change', function () {
-             location.href = "{{ path('home') }}" + this.value;
+            location.href = "{{ path('home') }}" + this.value;
         });
         {% endif %}
     </script>

@@ -21,10 +21,7 @@ class OrderController extends Controller
     public function addAction(Request $request)
     {
 
-        $user = $this->get('user_profile')->getUser();
-
-        if (is_null($user))
-            return $this->redirectToRoute('user_add');
+        $user = $this->getUser();
 
         $confirmationForm = $this->getCheckoutForm();
         $confirmationForm->handleRequest($request);
@@ -109,10 +106,7 @@ class OrderController extends Controller
      */
     public function listAction()
     {
-        $user = $this->get('user_profile')->getUser();
-
-        if (is_null($user))
-            return $this->redirectToRoute('user_add');
+        $user = $this->getUser();
 
         $orders = $this->getDoctrine()->getRepository('CartBundle:Order')->findBy(
                 array(
@@ -132,10 +126,7 @@ class OrderController extends Controller
      */
     public function viewAction(Request $request, $id)
     {
-        $user = $this->get('user_profile')->getUser();
-
-        if (is_null($user))
-            return $this->redirectToRoute('user_add');
+        $user = $this->getUser();
 
         $order = $this->getDoctrine()->getRepository('CartBundle:Order')->getOrderDetail($id);
 
@@ -161,10 +152,7 @@ class OrderController extends Controller
      */
     public function canceledAction(Request $request, $id)
     {
-        $user = $this->get('user_profile')->getUser();
-
-        if (is_null($user))
-            return $this->redirectToRoute('user_add');
+        $user = $this->getUser();
 
         $order = $this->getDoctrine()->getRepository('CartBundle:Order')->getOrderUser($id);
 
@@ -189,10 +177,7 @@ class OrderController extends Controller
     {
         $config = $this->get('app_config')->getConfig();
 
-        $user = $this->get('user_profile')->getUser();
-
-        if (is_null($user))
-            return $this->redirectToRoute('user_add');
+        $user = $this->getUser();
 
         $detail = $this->getDoctrine()->getRepository('CartBundle:Detail')->getDetailPhotoUser($id);
 

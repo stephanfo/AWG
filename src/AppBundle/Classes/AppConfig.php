@@ -51,6 +51,7 @@ class AppConfig
         $config->setApplicationSellFilesEmailSenderInCc(true);
         $config->setGalleryQuickLink(true);
         $config->setGallerySingleGallery(false);
+        $config->setGalleryAnonymousAccess(false);
 
         $this->em->persist($config);
         $this->em->flush();

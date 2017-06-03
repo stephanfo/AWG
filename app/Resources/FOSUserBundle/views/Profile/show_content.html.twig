@@ -1,0 +1,13 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<h4 class="page-header">{{ 'Mon profil' | trans }}</h4>
+
+<div class="fos_user_user_show">
+    <p>{{ 'profile.show.username'|trans }} : {{ user.username }}</p>
+    <p>{{ 'profile.show.email'|trans }} : {{ user.email }}</p>
+    <p>{{ 'Prénom'|trans }} : {{ user.firstname }}</p>
+    <p>{{ 'Nom'|trans }} : {{ user.lastname }}</p>
+    <p>{{ 'Localisation'|trans }} : {{ user.location }}</p>
+    <p>{{ 'Créer le'|trans }} : {{ user.created | date('d-m-Y H:i') }}</p>
+    <p>{{ 'Mis à jour le'|trans }} : {{ user.updated | date('d-m-Y H:i') }}</p>
+</div>

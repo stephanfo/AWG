@@ -1,5 +1,5 @@
 'La galerie photos': 'The pictures gallery'
-'Les offres': 'The offers'
+Tarifs: Prices
 'Mon profil': 'My profile'
 Editer: Edit
 Déconnecter: 'Log out'
@@ -15,3 +15,6 @@ Diaporama: Slideshow
 'Galerie de mariage éphémère': 'Ephemeral Wedding Gallery'
 'Mon panier': 'My cart'
 'Mes commandes': 'My orders'
+'Changer le mot de passe': 'Change the password'
+'Se connecter': 'Sign in'
+'Connecté en tant que %username%': 'Logged in as %username%'

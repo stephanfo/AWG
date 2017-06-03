@@ -86,18 +86,32 @@ class OrderController extends Controller
         $reassignForm = $this->createForm(ReassignType::class, $order);
         $reassignForm->handleRequest($request);
 
-        $userForm = $this->createForm(UserType::class, $order->getUser());
+        $userManager = $this->get('fos_user.user_manager');
+        $user = $order->getUser();
+
+        $currentEmail = $user->getEmail();
+
+        $userForm = $this->createForm(UserType::class, $user);
         $userForm->handleRequest($request);
 
         if ($reassignForm->isSubmitted() && $reassignForm->isValid())
         {
             $request->getSession()->getFlashBag()->add('success', 'L\'utilisateur a été changé');
-            $this->getDoctrine()->getEntityManager()->flush();
+            $this->getDoctrine()->getManager()->flush();
         }
         elseif ($userForm->isSubmitted() && $userForm->isValid())
         {
-            $request->getSession()->getFlashBag()->add('success', 'Les données de l\'utilisateur ont été mises à jour');
-            $this->getDoctrine()->getEntityManager()->flush();
+            if($user->getEmail() != $currentEmail && !is_null($userManager->findUserByEmail($user->getEmail())))
+            {
+                $request->getSession()->getFlashBag()->add('danger', 'L\'adresse e-mail est déjà utilisée par un autre utilisateur');
+                $user->setEmail($currentEmail);
+            }
+            else
+            {
+                $request->getSession()->getFlashBag()->add('success', 'Les données de l\'utilisateur ont été mises à jour');
+            }
+            
+            $userManager->updateUser($user);
         }
 
         $orderDetails = $this->getDoctrine()->getRepository('CartBundle:Format')->getOrderDetail($id);

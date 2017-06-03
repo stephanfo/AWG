@@ -151,3 +151,6 @@ fos_user:
     registration:
         form:
             type: UserBundle\Form\Type\RegistrationType
+    profile:
+        form:
+            type: UserBundle\Form\Type\ProfileType

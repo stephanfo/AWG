@@ -20,10 +20,7 @@ class CartController extends Controller
      */
     public function cartAction()
     {
-        $user = $this->get('user_profile')->getUser();
-
-        if (is_null($user))
-            return $this->redirectToRoute('user_add');
+        $user = $this->getUser();
 
         $em = $this->getDoctrine()->getManager();
 
@@ -59,7 +56,7 @@ class CartController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $user = $this->get('user_profile')->getUser();
+        $user = $this->getUser();
 
         $cart = $em->getRepository('CartBundle:Cart')->findOneBy(array(
             'photo' => $photo,
@@ -96,7 +93,7 @@ class CartController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $user = $this->get('user_profile')->getUser();
+        $user = $this->getUser();
 
         $cart = $em->getRepository('CartBundle:Cart')->findOneBy(array(
             'photo' => $photo,
@@ -124,7 +121,7 @@ class CartController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $user = $this->get('user_profile')->getUser();
+        $user = $this->getUser();
 
         $carts = $em->getRepository('CartBundle:Cart')->findBy(array(
             'user' => $user
@@ -149,7 +146,7 @@ class CartController extends Controller
      */
     public function updateCartAction(Photo $photo, Format $format, $quantity)
     {
-        $user = $this->get('user_profile')->getUser();
+        $user = $this->getUser();
 
         $em = $this->getDoctrine()->getManager();
 
@@ -194,10 +191,7 @@ class CartController extends Controller
      */
     public function checkoutAction()
     {
-        $user = $this->get('user_profile')->getUser();
-
-        if (is_null($user))
-            return $this->redirectToRoute('user_add');
+        $user = $this->getUser();
 
         $total = $this->get('price_calculator')->getPricing($user);
 

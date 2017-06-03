@@ -15,12 +15,39 @@ class HomeController extends Controller
      */
     public function viewAction($oneGallery = null)
     {
-        //$user = $this->get('user_profile')->getUser();
-
-        //if (is_null($user))
-        //    return $this->redirectToRoute('user_add');
-
         $config = $this->get('app_config')->getConfig();
+
+        if($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED'))
+        {
+            $user = $this->getUser();
+
+            $likes = $this->getDoctrine()->getRepository('UserBundle:User')->getUserLikes($user);
+            $carts = $this->getDoctrine()->getRepository('UserBundle:User')->getUserCart($user);
+
+            $likesArray = array();
+            foreach ($likes->getlikePhotos() as $photo)
+            {
+                $likesArray[$photo->getId()] = true;
+            }
+
+            $cartArray = array();
+            foreach ($carts->getcarts() as $cart)
+            {
+                $cartArray[$cart->getPhoto()->getId()] = true;
+            }
+        }
+        else
+        {
+            if($config->getGalleryAnonymousAccess())
+            {
+                $likesArray = null;
+                $cartArray = null;
+            }
+            else
+            {
+                return $this->redirectToRoute('fos_user_registration_register');
+            }
+        }
 
         if($config->getGallerySingleGallery())
         {
@@ -50,25 +77,7 @@ class HomeController extends Controller
             $galleries = $this->getDoctrine()->getRepository('GalleryBundle:Gallery')->getActiveGalleriesDetail();
             $listGalleriesAndCount = null;
         }
-        
-/*        $likes = $this->getDoctrine()->getRepository('UserBundle:User')->getUserLikes($user);
-        $carts = $this->getDoctrine()->getRepository('UserBundle:User')->getUserCart($user);
 
-        $likesArray = array();
-        foreach ($likes->getlikePhotos() as $photo)
-        {
-            $likesArray[$photo->getId()] = true;
-        }
-
-        $cartArray = array();
-        foreach ($carts->getcarts() as $cart)
-        {
-            $cartArray[$cart->getPhoto()->getId()] = true;
-        }
-*/
-        $likesArray = null;
-        $cartArray = null;
-        
         return $this->render('UserBundle:Home:view.salvatorre.html.twig', array(
             'galleries' => $galleries,
             'likes' => $likesArray,

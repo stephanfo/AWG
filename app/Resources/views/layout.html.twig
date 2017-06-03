@@ -49,49 +49,62 @@
                     <a href="{{ path('order_list') }}">{{ 'Mes commandes' | trans }}</a>
                 </li>
                 <li>
-                    <a href="{{ path('offers') }}">{{ 'Les offres' | trans }}</a>
+                    <a href="{{ path('offers') }}">{{ 'Tarifs' | trans }}</a>
                 </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">{{ 'Mon profil' | trans }} <span class="caret"></span></a>
-                    <ul class="dropdown-menu" aria-labelledby="profil">
-                        <li>
-                            <a href="{{ path('user_edit') }}">{{ 'Editer' | trans }}</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('fos_user_security_logout') }}">{{ 'Déconnecter' | trans }}</a>
-                        </li>
-                    </ul>
-                </li>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false"><i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;{{ 'Mon profil' | trans }} <span class="caret"></span></a>
+                        <ul class="dropdown-menu" aria-labelledby="profil">
+                            <li>
+                                <a href="{{ path('fos_user_profile_show') }}">{{ 'Connecté en tant que %username%'| trans({'%username%': app.user.firstname}) }}</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="{{ path('fos_user_profile_edit') }}"><i class="glyphicon glyphicon-edit"></i>&nbsp;&nbsp;{{ 'Editer' | trans }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('fos_user_change_password') }}"><i class="glyphicon glyphicon-lock"></i>&nbsp;&nbsp;{{ 'Changer le mot de passe' | trans }}
+                                </a>
+                            <li>
+                                <a href="{{ path('fos_user_security_logout') }}"><i class="glyphicon glyphicon-log-out"></i>&nbsp;&nbsp;{{ 'Déconnecter' | trans }}</a>
+                            </li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{{ path('fos_user_registration_register') }}"><i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;{{ 'Se connecter' | trans }}</a>
+                    </li>
+                {% endif %}
                 {% if is_granted('ROLE_ADMIN') %}
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">{{ 'Administration' | trans }} <span class="caret"></span></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false"><i class="glyphicon glyphicon-cog"></i>&nbsp;&nbsp;{{ 'Administration' | trans }} <span class="caret"></span></a>
                         <ul class="dropdown-menu" aria-labelledby="admin">
                             <li>
-                                <a href="{{ path('app_config_edit') }}">{{ 'Configuration' | trans }}</a>
+                                <a href="{{ path('app_config_edit') }}"><i class="glyphicon glyphicon-list-alt"></i>&nbsp;&nbsp;{{ 'Configuration' | trans }}</a>
                             </li>
                             <li>
-                                <a href="{{ path('app_maintenance') }}">{{ 'Maintenance' | trans }}</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="{{ path('gallery_index') }}">{{ 'Galeries' | trans }}</a>
-                            </li>
-                            <li>
-                                <a href="{{ path('tarif_index') }}">{{ 'Formats et Tarifs' | trans }}</a>
+                                <a href="{{ path('app_maintenance') }}"><i class="glyphicon glyphicon-refresh"></i>&nbsp;&nbsp;{{ 'Maintenance' | trans }}</a>
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="{{ path('app_intro') }}" target="_blank">{{ 'Instructions' | trans }}</a>
+                                <a href="{{ path('gallery_index') }}"><i class="glyphicon glyphicon-picture"></i>&nbsp;&nbsp;{{ 'Galeries' | trans }}</a>
                             </li>
                             <li>
-                                <a href="{{ path('slideshow_config') }}">{{ 'Diaporama' | trans }}</a>
+                                <a href="{{ path('tarif_index') }}"><i class="glyphicon glyphicon-euro"></i>&nbsp;&nbsp;{{ 'Formats et Tarifs' | trans }}</a>
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="{{ path('admin_cart_current') }}">{{ 'Selections' | trans }}</a>
+                                <a href="{{ path('app_intro') }}" target="_blank"><i class="glyphicon glyphicon-book"></i>&nbsp;&nbsp;{{ 'Instructions' | trans }}</a>
                             </li>
                             <li>
-                                <a href="{{ path('admin_order_list') }}">{{ 'Commandes' | trans }}</a>
+                                <a href="{{ path('slideshow_config') }}"><i class="glyphicon glyphicon-play"></i>&nbsp;&nbsp;{{ 'Diaporama' | trans }}</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="{{ path('admin_cart_current') }}"><i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;&nbsp;{{ 'Selections' | trans }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('admin_order_list') }}"><i class="glyphicon glyphicon-list"></i>&nbsp;&nbsp;{{ 'Commandes' | trans }}</a>
                             </li>
                         </ul>
                     </li>

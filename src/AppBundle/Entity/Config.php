@@ -139,6 +139,15 @@ class Config
     private $gallerySingleGallery;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean")
+     *
+     * @Assert\Type(type="bool")
+     */
+    private $galleryAnonymousAccess;
+
+    /**
      * Get id
      *
      * @return integer
@@ -458,5 +467,29 @@ class Config
     public function getGallerySingleGallery()
     {
         return $this->gallerySingleGallery;
+    }
+
+    /**
+     * Set galleryAnonymousAccess
+     *
+     * @param boolean $galleryAnonymousAccess
+     *
+     * @return Config
+     */
+    public function setGalleryAnonymousAccess($galleryAnonymousAccess)
+    {
+        $this->galleryAnonymousAccess = $galleryAnonymousAccess;
+
+        return $this;
+    }
+
+    /**
+     * Get galleryAnonymousAccess
+     *
+     * @return boolean
+     */
+    public function getGalleryAnonymousAccess()
+    {
+        return $this->galleryAnonymousAccess;
     }
 }

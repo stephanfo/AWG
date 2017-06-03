@@ -26,6 +26,16 @@
         </div>
     </div>
 </div>
+<h2>Comportement</h2>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="form-group">
+            {{ form_label(form.galleryAnonymousAccess, "Autoriser les anonymes à accéder à la galerie photos et au tarifs") }}
+            {{ form_errors(form.galleryAnonymousAccess) }}
+            {{ form_widget(form.galleryAnonymousAccess, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+</div>
 <h2>Emails</h2>
 <div class="row">
     <div class="col-lg-12">
