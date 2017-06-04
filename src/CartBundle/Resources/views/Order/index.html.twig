@@ -70,7 +70,7 @@
                                 {{ order.created | date('d-m-Y H:i') }}
                             </td>
                             <td style="vertical-align: middle;" class="table-detail">
-                                {{ order.user.firstname }} {{ order.user.lastname }} ({{ order.user.location }})
+                                {{ order.user.firstname }} {{ order.user.lastname }}{%  if order.user.location is not empty %} ({{ order.user.location }}){% endif %}
                             </td>
                             <td style="vertical-align: middle;" class="table-detail">
                                 {{ order.quantity }}

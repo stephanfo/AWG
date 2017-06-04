@@ -25,7 +25,7 @@
                     {% for userPrice in usersPrice %}
                         <tr>
                             <td style="vertical-align: middle;">
-                                {{ userPrice.user.firstname }} {{ userPrice.user.lastname }} ({{ userPrice.user.location }})
+                                {{ userPrice.user.firstname }} {{ userPrice.user.lastname }}{%  if userPrice.user.location is not empty %} ({{ userPrice.user.location }}){% endif %}
                             </td>
                             <td style="vertical-align: middle;" class="table-detail">
                                 {{ userPrice.user.created | date('d-m-Y H:i') }}
