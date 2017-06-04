@@ -14,7 +14,8 @@ class OrderExportController extends Controller
      */
     public function listAction()
     {
-        $orders = $this->getDoctrine()->getRepository('CartBundle:Order')->getOrderDetailArray();
+        $orderHeaders = $this->getDoctrine()->getRepository('CartBundle:Order')->getOrderArray();
+        $orderDetails = $this->getDoctrine()->getRepository('CartBundle:Order')->getOrderDetailArray();
         $users = $this->getDoctrine()->getRepository('UserBundle:User')->getAllUserArray();
         $galleries = $this->getDoctrine()->getRepository('GalleryBundle:Gallery')->getGalleriesArray();
         $formats = $this->getDoctrine()->getRepository('CartBundle:Format')->getFormatArray();
@@ -30,12 +31,20 @@ class OrderExportController extends Controller
             ->setKeywords("awg data")
             ->setCategory("AWG");
 
-        $sheet = $phpExcelObject->setActiveSheetIndex(0)->setTitle('Full orders details');
+        $sheet = $phpExcelObject->setActiveSheetIndex(0)->setTitle('Order headers');
 
-        if(!is_null($orders))
+        if(!is_null($orderHeaders))
         {
-            $sheet->fromArray(array_keys($orders[0]), NULL, 'A1');
-            $sheet->fromArray($orders, NULL, 'A2');
+            $sheet->fromArray(array_keys($orderHeaders[0]), NULL, 'A1');
+            $sheet->fromArray($orderHeaders, NULL, 'A2');
+        }
+
+        $sheet = $phpExcelObject->createSheet()->setTitle('Order details');
+
+        if(!is_null($orderDetails))
+        {
+            $sheet->fromArray(array_keys($orderDetails[0]), NULL, 'A1');
+            $sheet->fromArray($orderDetails, NULL, 'A2');
         }
 
         $sheet = $phpExcelObject->createSheet()->setTitle('Users list');

@@ -54,7 +54,7 @@
                                             {% if is_granted('IS_AUTHENTICATED_REMEMBERED')  %}
                                                 <button type="button" photo-like="{{ photo.id }}" class="btn {% if attribute(likes, photo.id) is defined %}btn-success{% else %}btn-default{% endif %} btn-xs"><i class="glyphicon glyphicon-thumbs-up"></i> <span photo-like-count="{{ photo.id }}">{{ photo.likeCount }}</span></button>
                                                 &nbsp;
-                                                <button type="button" photo-cart="{{ photo.id }}" class="btn {% if attribute(carts, photo.id) is defined %}btn-primary{% else %}btn-default{% endif %} btn-xs"><i class="glyphicon glyphicon-shopping-cart"></i></button>
+                                                <button type="button" photo-cart="{{ photo.id }}" class="btn {% if attribute(carts, photo.id) is defined %}btn-info{% else %}btn-default{% endif %} btn-xs"><i class="glyphicon glyphicon-shopping-cart"></i></button>
                                             {% else %}
                                                 <a href="{{ path('fos_user_registration_register') }}"><button type="button" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-thumbs-up"></i> <span photo-like-count="{{ photo.id }}">{{ photo.likeCount }}</span></button></a>
                                                 &nbsp;

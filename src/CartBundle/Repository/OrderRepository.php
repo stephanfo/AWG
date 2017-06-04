@@ -116,6 +116,17 @@ class OrderRepository extends \Doctrine\ORM\EntityRepository
             ->getResult();
     }
 
+    public function getOrderArray()
+    {
+        $query = $this->createQueryBuilder('orderheader')
+            ->select('orderheader.created, orderheader.grossTotal, orderheader.discountTitle, orderheader.discountValue, orderheader.discountSaving, orderheader.total, orderheader.payed, orderheader.printed, orderheader.canceled')
+            ->addOrderBy('orderheader.created', 'ASC')
+        ;
+
+        return $query->getQuery()
+            ->getScalarResult();
+    }
+
     public function getOrderDetailArray()
     {
         $query = $this->createQueryBuilder('orderheader')
