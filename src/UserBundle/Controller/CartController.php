@@ -105,7 +105,7 @@ class CartController extends Controller
             $em->remove($cart);
             $em->flush();
 
-            $request->getSession()->getFlashBag()->add('success', $this->get('translator')->trans('La photo %title% a bien été retiré du panier.', array('%title%' => $photo->getTitle())));
+            $request->getSession()->getFlashBag()->add('success', $this->get('translator')->trans('La photo %title% a bien été retirée du panier.', array('%title%' => $photo->getTitle())));
         }
         else
             $request->getSession()->getFlashBag()->add('danger', $this->get('translator')->trans('La photo %title% est introuvable dans votre panier', array('%title%' => $photo->getTitle())));

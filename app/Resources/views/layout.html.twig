@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>{% block title %}{{ 'Galerie de mariage éphémère' | trans }}{% endblock %}</title>
+    <title>{% block title %}{{ 'Galerie éphémère' | trans }}{% endblock %}</title>
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
@@ -101,7 +101,7 @@
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="{{ path('admin_cart_current') }}"><i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;&nbsp;{{ 'Selections' | trans }}</a>
+                                <a href="{{ path('admin_cart_current') }}"><i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;&nbsp;{{ 'Paniers clients' | trans }}</a>
                             </li>
                             <li>
                                 <a href="{{ path('admin_order_list') }}"><i class="glyphicon glyphicon-list"></i>&nbsp;&nbsp;{{ 'Commandes' | trans }}</a>

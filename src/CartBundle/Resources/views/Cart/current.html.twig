@@ -1,11 +1,11 @@
 {% extends "CartBundle::layout.html.twig" %}
 
 {% block title %}
-    Selections actives - {{ parent() }}
+    Paniers clients - {{ parent() }}
 {% endblock %}
 
 {% block body %}
-    <h1 class="page-header">Selections actives</h1>
+    <h1 class="page-header">Contenu des paniers des clients</h1>
 
     {% if not usersPrice is empty %}
         <div class="row">

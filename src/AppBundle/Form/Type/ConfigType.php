@@ -40,7 +40,7 @@ class ConfigType extends AbstractType
                 ),
                 'required' => false,
                 'empty_data' => null,
-                'placeholder' => 'Sélectionez un theme'
+                'placeholder' => 'Sélectionez un thème'
             ))
             ->add('applicationIntroMessage')
             ->add('applicationSellFiles', ChoiceType::class, array(

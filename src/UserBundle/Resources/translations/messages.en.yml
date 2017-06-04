@@ -59,7 +59,7 @@ Action: Action
 'Editer mon profil': 'Edit my profile'
 'Mon profil': 'My profile'
 Editer: Edit
-'La photo %title% a bien été retiré du panier.': 'The picture %title% has been successfully removed from your cart.'
+'La photo %title% a bien été retirée du panier.': 'The picture %title% has been successfully removed from your cart.'
 'La photo %title% est introuvable dans votre panier': 'The picture %title% is not found in your cart'
 'Votre panier a bien été vidé.': 'Your cart has been successfully emptied.'
 'Votre commande a echoué (la tarification a expiré). Merci de contrôler le total avant de reconfirmer la commande.': 'Your order has failed (the price has expire). Please check the total amount before confirming the order.'
@@ -68,7 +68,7 @@ Editer: Edit
 'Vous n''êtes pas autorisé à acceder à cette commande': 'You are not allowed to access this order'
 'Vous n''êtes pas autorisé à modifier cette commande': 'You are not allowed to modify this order'
 'Votre commande a bien été annulée.': 'Your order has been successfully cancelled.'
-'Le detail de la commande n''existe pas': 'The detail of your order does not exist'
+'Le détail de la commande n''existe pas': 'The detail of your order does not exist'
 'Vous n''êtes pas autorisé à télécharger cette photo': 'You are not allowed to download this picture'
 'Votre profil a été créé.': 'Your profile has been created.'
 'Votre profil est mis à jour.': 'Your profile is updated.'
@@ -88,5 +88,5 @@ Confirmer: Confirm
 'Vider mon panier': 'Empty my cart'
 'Passer la commande': Checkout
 'Mes commandes': 'My orders'
-'Detail de la commande': 'Order details'
+'Détail de la commande': 'Order details'
 'Annuler ma commande': 'Cancel my order'

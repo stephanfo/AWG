@@ -183,7 +183,7 @@ class OrderController extends Controller
 
         if (is_null($detail))
         {
-            $request->getSession()->getFlashBag()->add('warning', $this->get('translator')->trans("Le detail de la commande n'existe pas"));
+            $request->getSession()->getFlashBag()->add('warning', $this->get('translator')->trans("Le détail de la commande n'existe pas"));
             return $this->redirectToRoute('order_list');
         }
 
