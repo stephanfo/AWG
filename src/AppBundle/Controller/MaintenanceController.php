@@ -177,7 +177,7 @@ class MaintenanceController extends Controller {
         
         $em->createQuery('DELETE FROM GalleryBundle\Entity\Gallery')->execute();
         $em->createQuery('DELETE FROM CartBundle\Entity\Order')->execute();
-        $em->createQuery('DELETE FROM UserBundle\Entity\User')->execute();
+        $em->createQuery("DELETE FROM UserBundle\Entity\User u WHERE u.roles ='a:0:{}'")->execute();
 
         $request->getSession()->getFlashBag()->add('success', 'L\'application a été remise à zéro.');
 

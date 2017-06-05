@@ -1,0 +1,63 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}
+    Gestion des utilisateurs - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h4 class="page-header">Gestion des utilisateurs</h4>
+    {% if not userList is empty %}
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th class="table-detail">Nom (Localisation)</th>
+                        <th class="table-detail">Email</th>
+                        <th class="table-detail">Création du compte</th>
+                        <th class="table-detail">Dernière connexion</th>
+                        <th class="table-detail">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in userList %}
+                        <tr{% if not user.enabled %} class="order-canceled"{% endif %}>
+                            <td style="vertical-align: middle;">
+                                {{ loop.index0 }}
+                            </td>
+                            <td style="vertical-align: middle;" class="table-detail">
+                                {{ user.firstname }} {{ user.lastname }}{%  if user.location is not empty %} ({{ user.location }}){% endif %}
+                            </td>
+                            <td style="vertical-align: middle;" class="table-detail">
+                                {{ user.email }}
+                            </td>
+                            <td style="vertical-align: middle;" class="table-detail">
+                                {{ user.created | date('d-m-Y H:i') }}
+                            </td>
+                            <td style="vertical-align: middle;" class="table-detail">
+                                {{ user.lastLogin | date('d-m-Y H:i') }}
+                            </td>
+                            <td style="vertical-align: middle; white-space: nowrap;" class="table-detail">
+                                <a href="{{ path('app_user_edit', { 'id': user.id }) }}"><button type="button" class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="Editer l'utilisateur"><i class="glyphicon glyphicon-edit"></i></button></a>
+                                {% if user.enabled %}
+                                    <a href="{{ path('app_user_toggle_enable', { 'id': user.id }) }}"><button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Désactiver"><i class="glyphicon glyphicon-eye-open"></i></button></a>
+                                {% else %}
+                                    <a href="{{ path('app_user_toggle_enable', { 'id': user.id }) }}"><button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Activer"><i class="glyphicon glyphicon-eye-close"></i></button></a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% else %}
+        <p>
+            &nbsp;
+        </p>
+        <p>
+            Il n'y a pas d'utilisateurs enregistrés.
+        </p>
+    {% endif %}
+{% endblock %}

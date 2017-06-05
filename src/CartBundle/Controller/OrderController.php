@@ -104,14 +104,13 @@ class OrderController extends Controller
             if($user->getEmail() != $currentEmail && !is_null($userManager->findUserByEmail($user->getEmail())))
             {
                 $request->getSession()->getFlashBag()->add('danger', 'L\'adresse e-mail est déjà utilisée par un autre utilisateur');
-                $user->setEmail($currentEmail);
             }
             else
             {
                 $request->getSession()->getFlashBag()->add('success', 'Les données de l\'utilisateur ont été mises à jour');
+                $userManager->updateUser($user);
             }
-            
-            $userManager->updateUser($user);
+           
         }
 
         $orderDetails = $this->getDoctrine()->getRepository('CartBundle:Format')->getOrderDetail($id);

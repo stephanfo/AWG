@@ -1,0 +1,10 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}
+    Editer l'utilisateur - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h1 class="page-header">Editer l'utilisateur</h1>
+    {{ include("AppBundle:User:form.html.twig") }}
+{% endblock %}

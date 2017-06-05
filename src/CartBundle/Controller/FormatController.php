@@ -67,7 +67,7 @@ class FormatController extends Controller
     }
 
     /**
-     * @Route("/formats/delete{id}", requirements={"id": "\d*"}, name="format_delete")
+     * @Route("/formats/delete/{id}", requirements={"id": "\d*"}, name="format_delete")
      * @ParamConverter("format", class="CartBundle:Format", options={"id" = "id"})
      */
     public function deleteAction(Format $format, Request $request)

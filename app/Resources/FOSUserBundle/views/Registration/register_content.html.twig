@@ -10,7 +10,7 @@
     <div class="col-sm-6 col-sm-offset-3">
         <div class="login-panel panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title pull-left">{{ 'Enregistrez-vous' | trans }}</h3>
+                <h3 class="panel-title pull-left">{{ 'Créer un compte' | trans }}</h3>
                 <div class="panel-title pull-right">
                     {% if app.request.locale != 'fr' %}
                         <a href="{{ path(app.request.get('_route'), app.request.get('_route_params') | merge({'_locale': 'fr'})) }}"><img src="/resources/flags/fr.png" height="18"></a>

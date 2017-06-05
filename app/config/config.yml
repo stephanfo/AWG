@@ -98,7 +98,7 @@ vich_uploader:
             namer:              vich_uploader.namer_uniqid
 
 stfalcon_tinymce:
-    language: %locale%
+    language: "%locale%"
     theme:
         # Simple theme: same as default theme
         simple:

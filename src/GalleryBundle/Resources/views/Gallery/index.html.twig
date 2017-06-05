@@ -38,7 +38,7 @@
                                 </td>
                                 <td style="vertical-align: middle; white-space: nowrap;">
                                     {% if gallery.galleryEntity.active %}
-                                        <a href="{{ path('gallery_toggle', { 'id': gallery.galleryEntity.id }) }}"><button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Desactiver"><i class="glyphicon glyphicon-eye-open"></i></button></a>
+                                        <a href="{{ path('gallery_toggle', { 'id': gallery.galleryEntity.id }) }}"><button type="button" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Désactiver"><i class="glyphicon glyphicon-eye-open"></i></button></a>
                                             {% else %}
                                         <a href="{{ path('gallery_toggle', { 'id': gallery.galleryEntity.id }) }}"><button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Activer"><i class="glyphicon glyphicon-eye-close"></i></button></a>
                                             {% endif %}
