@@ -25,6 +25,12 @@ class OrderExportController extends Controller
         $excelSheets["Format list"] = $this->getDoctrine()->getRepository('CartBundle:Format')->getFormatArray();
         $excelSheets["Price list"] = $this->getDoctrine()->getRepository('CartBundle:Price')->getPricesArray();
 
+        return $this->generateExcelFile($excelSheets);
+
+    }
+
+    private function generateExcelFile($excelSheets)
+    {
         $phpExcelObject = $this->get('phpexcel')->createPHPExcelObject();
 
         $phpExcelObject->getProperties()->setCreator("Stéphane RATELET (Life in Pix)")
@@ -36,7 +42,7 @@ class OrderExportController extends Controller
             ->setCategory("AWG");
 
         $sheet = $phpExcelObject->setActiveSheetIndex(0)->setTitle('Resume');
-            $sheet->setCellValue('A1', "Please select on of the sheets below to get the details");
+        $sheet->setCellValue('A1', "Please select on of the sheets below to get the details");
 
         foreach ($excelSheets as $sheetName => $excelSheet)
         {
