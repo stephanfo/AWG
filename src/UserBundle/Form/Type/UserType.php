@@ -6,7 +6,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use UserBundle\Entity\User;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 class UserType extends AbstractType
 {
