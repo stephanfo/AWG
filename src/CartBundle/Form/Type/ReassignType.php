@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Doctrine\ORM\EntityRepository;
 use CartBundle\Entity\Order;
+use UserBundle\Entity\User;
 
 class ReassignType extends AbstractType
 {
@@ -26,7 +27,7 @@ class ReassignType extends AbstractType
                     return $er->createQueryBuilder('user')
                         ->orderBy('user.created', 'ASC');
                 },
-                'choice_label' => function ($user) {
+                'choice_label' => function (User $user) {
                     return $user->getFirstname() . " " . $user->getLastname() . ", " . $user->getEmail() . " (" . $user->getCreated()->format('H:i:s Y-m-d') . ")";
                 },
                 'required' => true,
