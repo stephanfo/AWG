@@ -11,16 +11,17 @@ use CartBundle\Entity\Order;
 use CartBundle\Entity\Detail;
 use CartBundle\Entity\OrderQuantity;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class OrderController extends Controller
 {
 
     /**
      * @Route("/order/add", name="order_add_current")
+     * @Method({"POST"})
      */
     public function addAction(Request $request)
     {
-
         $user = $this->getUser();
 
         $confirmationForm = $this->getCheckoutForm();
@@ -103,6 +104,7 @@ class OrderController extends Controller
 
     /**
      * @Route("/order/list", name="order_list")
+     * @Method({"GET"})
      */
     public function listAction()
     {
@@ -123,6 +125,7 @@ class OrderController extends Controller
 
     /**
      * @Route("/order/view/{id}", requirements={"id": "\d*"}, name="order_view")
+     * @Method({"GET"})
      */
     public function viewAction(Request $request, $id)
     {
@@ -149,6 +152,7 @@ class OrderController extends Controller
 
     /**
      * @Route("/order/canceled/{id}", requirements={"id": "\d*"}, name="order_cancel")
+     * @Method({"GET"})
      */
     public function canceledAction(Request $request, $id)
     {
@@ -172,6 +176,7 @@ class OrderController extends Controller
 
     /**
      * @Route("/order/download/detail/{id}", requirements={"id": "\d*"}, name="order_download_detail")
+     * @Method({"GET"})
      */
     public function downloadPhotoAction(Request $request, $id)
     {

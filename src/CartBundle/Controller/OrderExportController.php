@@ -5,21 +5,25 @@ namespace CartBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class OrderExportController extends Controller
 {
 
     /**
      * @Route("/order/export", name="admin_order_export")
+     * @Method({"GET"})
      */
     public function listAction()
     {
-        $orderHeaders = $this->getDoctrine()->getRepository('CartBundle:Order')->getOrderArray();
-        $orderDetails = $this->getDoctrine()->getRepository('CartBundle:Order')->getOrderDetailArray();
-        $users = $this->getDoctrine()->getRepository('UserBundle:User')->getAllUserArray();
-        $galleries = $this->getDoctrine()->getRepository('GalleryBundle:Gallery')->getGalleriesArray();
-        $formats = $this->getDoctrine()->getRepository('CartBundle:Format')->getFormatArray();
-        $prices = $this->getDoctrine()->getRepository('CartBundle:Price')->getPricesArray();
+        $excelSheets = array();
+
+        $excelSheets["Order headers"] = $this->getDoctrine()->getRepository('CartBundle:Order')->getOrderArray();
+        $excelSheets["Order details"] = $this->getDoctrine()->getRepository('CartBundle:Order')->getOrderDetailArray();
+        $excelSheets["Users list"] = $this->getDoctrine()->getRepository('UserBundle:User')->getAllUserArray();
+        $excelSheets["Galleries Photos list"] = $this->getDoctrine()->getRepository('GalleryBundle:Gallery')->getGalleriesArray();
+        $excelSheets["Format list"] = $this->getDoctrine()->getRepository('CartBundle:Format')->getFormatArray();
+        $excelSheets["Price list"] = $this->getDoctrine()->getRepository('CartBundle:Price')->getPricesArray();
 
         $phpExcelObject = $this->get('phpexcel')->createPHPExcelObject();
 
@@ -31,52 +35,18 @@ class OrderExportController extends Controller
             ->setKeywords("awg data")
             ->setCategory("AWG");
 
-        $sheet = $phpExcelObject->setActiveSheetIndex(0)->setTitle('Order headers');
+        $sheet = $phpExcelObject->setActiveSheetIndex(0)->setTitle('Resume');
+            $sheet->setCellValue('A1', "Please select on of the sheets below to get the details");
 
-        if(!is_null($orderHeaders))
+        foreach ($excelSheets as $sheetName => $excelSheet)
         {
-            $sheet->fromArray(array_keys($orderHeaders[0]), NULL, 'A1');
-            $sheet->fromArray($orderHeaders, NULL, 'A2');
-        }
+            $sheet = $phpExcelObject->createSheet()->setTitle($sheetName);
 
-        $sheet = $phpExcelObject->createSheet()->setTitle('Order details');
-
-        if(!is_null($orderDetails))
-        {
-            $sheet->fromArray(array_keys($orderDetails[0]), NULL, 'A1');
-            $sheet->fromArray($orderDetails, NULL, 'A2');
-        }
-
-        $sheet = $phpExcelObject->createSheet()->setTitle('Users list');
-
-        if(!is_null($users))
-        {
-            $sheet->fromArray(array_keys($users[0]), NULL, 'A1');
-            $sheet->fromArray($users, NULL, 'A2');
-        }
-
-        $sheet = $phpExcelObject->createSheet()->setTitle('Galleries Photos list');
-
-        if(!is_null($galleries))
-        {
-            $sheet->fromArray(array_keys($galleries[0]), NULL, 'A1');
-            $sheet->fromArray($galleries, NULL, 'A2');
-        }
-
-        $sheet = $phpExcelObject->createSheet()->setTitle('Format list');
-
-        if(!is_null($formats))
-        {
-            $sheet->fromArray(array_keys($formats[0]), NULL, 'A1');
-            $sheet->fromArray($formats, NULL, 'A2');
-        }
-
-        $sheet = $phpExcelObject->createSheet()->setTitle('Price list');
-
-        if(!is_null($prices))
-        {
-            $sheet->fromArray(array_keys($prices[0]), NULL, 'A1');
-            $sheet->fromArray($prices, NULL, 'A2');
+            if(!is_null($excelSheet))
+            {
+                $sheet->fromArray(array_keys($excelSheet[0]), NULL, 'A1');
+                $sheet->fromArray($excelSheet, NULL, 'A2');
+            }
         }
 
         $phpExcelObject->setActiveSheetIndex(0);

@@ -4,12 +4,13 @@ namespace CartBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class CartController extends Controller {
 
     /**
      * @Route("/cart/current", name="admin_cart_current")
+     * @Method({"GET"})
      */
     public function currentAction()
     {

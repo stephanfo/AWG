@@ -5,12 +5,14 @@ namespace CartBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class EmailController extends Controller
 {
 
     /**
      * @Route("/email/photo/order/{order_id}", name="admin_email_order")
+     * @Method({"GET"})
      */
     public function emailPhotoOrderAction(Request $request, $order_id)
     {

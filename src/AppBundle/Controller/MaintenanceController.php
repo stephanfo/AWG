@@ -7,11 +7,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class MaintenanceController extends Controller {
 
     /**
      * @Route("/maintenance", name="app_maintenance")
+     * @Method({"GET", "POST"})
      */
     public function maintenanceAction(Request $request)
     {
@@ -57,6 +59,7 @@ class MaintenanceController extends Controller {
 
     /**
      * @Route("/maintenance/halt", name="app_maintenance_halt")
+     * @Method({"GET"})
      */
     public function haltAction(Request $request)
     {
@@ -78,6 +81,7 @@ class MaintenanceController extends Controller {
 
     /**
      * @Route("/maintenance/reboot", name="app_maintenance_reboot")
+     * @Method({"GET"})
      */
     public function rebootAction(Request $request)
     {
@@ -99,6 +103,7 @@ class MaintenanceController extends Controller {
 
     /**
      * @Route("/maintenance/thumbs/clear", name="app_maintenance_thumbs_clear")
+     * @Method({"GET"})
      */
     public function thumbsClearAction(Request $request)
     {
@@ -124,6 +129,7 @@ class MaintenanceController extends Controller {
     
     /**
      * @Route("/maintenance/cache/clear", name="app_maintenance_cache_clear")
+     * @Method({"GET"})
      */
     public function cacheClearRestartAction(Request $request)
     {
@@ -149,6 +155,7 @@ class MaintenanceController extends Controller {
 
     /**
      * @Route("/maintenance/app/reset", name="app_maintenance_reset_app")
+     * @Method({"GET"})
      */
     public function appResetRestartAction(Request $request)
     {

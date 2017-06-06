@@ -6,11 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Form\Type\ConfigType;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class ConfigController extends Controller {
 
     /**
      * @Route("/config/edit", name="app_config_edit")
+     * @Method({"GET", "POST"})
      */
     public function editAction(Request $request)
     {

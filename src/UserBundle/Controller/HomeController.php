@@ -5,6 +5,7 @@ namespace UserBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class HomeController extends Controller
 {
@@ -12,6 +13,7 @@ class HomeController extends Controller
     /**
      * @Route("/", name="home")
      * @Route("/{oneGallery}", requirements={"oneGallery": "\d*"}, name="home_one_gallery")
+     * @Method({"GET"})
      */
     public function viewAction($oneGallery = null)
     {

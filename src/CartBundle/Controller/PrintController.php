@@ -9,12 +9,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use GalleryBundle\Entity\Photo;
 use CartBundle\Entity\Format;
 use Symfony\Component\Process\Process;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class PrintController extends Controller
 {
 
     /**
      * @Route("/print/single/{photo_id}/{format_id}", name="admin_print_single")
+     * @Method({"GET"})
      * @ParamConverter("photo", class="GalleryBundle:Photo", options={"id" = "photo_id"})
      * @ParamConverter("format", class="CartBundle:Format", options={"id" = "format_id"})
      */
@@ -51,6 +53,7 @@ class PrintController extends Controller
 
     /**
      * @Route("/print/order/{id}", name="admin_print_order")
+     * @Method({"GET"})
      */
     public function printOrderAction(Request $request, $id)
     {

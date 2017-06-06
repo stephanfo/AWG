@@ -9,12 +9,14 @@ use CartBundle\Entity\Price;
 use CartBundle\Entity\Format;
 use CartBundle\Form\Type\PriceType;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class PriceController extends Controller
 {
 
     /**
      * @Route("/prices/add/format/{id}", requirements={"id": "\d*"}, name="price_add")
+     * @Method({"GET", "POST"})
      * @ParamConverter("format", class="CartBundle:Format", options={"id" = "id"})
      */
     public function addAction(Format $format, Request $request)
@@ -43,6 +45,7 @@ class PriceController extends Controller
 
     /**
      * @Route("/prices/edit/{id}", requirements={"id": "\d*"}, name="price_edit")
+     * @Method({"GET", "POST"})
      * @ParamConverter("price", class="CartBundle:Price", options={"id" = "id"})
      */
     public function editAction(Price $price, Request $request)
@@ -67,6 +70,7 @@ class PriceController extends Controller
 
     /**
      * @Route("/prices/delete/{id}", requirements={"id": "\d*"}, name="price_delete")
+     * @Method({"GET"})
      * @ParamConverter("price", class="CartBundle:Price", options={"id" = "id"})
      */
     public function deleteAction(Price $price, Request $request)

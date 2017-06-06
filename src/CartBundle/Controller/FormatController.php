@@ -9,13 +9,14 @@ use CartBundle\Entity\Format;
 use CartBundle\Form\Type\FormatType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Process\Process;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class FormatController extends Controller
 {
 
     /**
      * @Route("/formats/add", name="format_add")
+     * @Method({"GET", "POST"})
      */
     public function addAction(Request $request)
     {
@@ -43,6 +44,7 @@ class FormatController extends Controller
 
     /**
      * @Route("/formats/edit/{id}", requirements={"id": "\d*"}, name="format_edit")
+     * @Method({"GET", "POST"})
      * @ParamConverter("format", class="CartBundle:Format", options={"id" = "id"})
      */
     public function editAction(Format $format, Request $request)
@@ -68,6 +70,7 @@ class FormatController extends Controller
 
     /**
      * @Route("/formats/delete/{id}", requirements={"id": "\d*"}, name="format_delete")
+     * @Method({"GET"})
      * @ParamConverter("format", class="CartBundle:Format", options={"id" = "id"})
      */
     public function deleteAction(Format $format, Request $request)

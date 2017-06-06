@@ -6,12 +6,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use UserBundle\Form\Type\UserType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class UserController extends Controller
 {
 
     /**
      * @Route("/user/list", name="app_user_list")
+     * @Method({"GET"})
      */
     public function indexAction()
     {
@@ -31,6 +33,7 @@ class UserController extends Controller
 
     /**
      * @Route("/user/edit/{id}", requirements={"id": "\d*"}, name="app_user_edit")
+     * @Method({"GET", "POST"})
      */
     public function editAction($id, Request $request)
     {
@@ -65,6 +68,7 @@ class UserController extends Controller
 
     /**
      * @Route("/user/toggle/enable/{id}", requirements={"id": "\d*"}, name="app_user_toggle_enable")
+     * @Method({"GET"})
      */
     public function toggleEnableAction($id, Request $request)
     {

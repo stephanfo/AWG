@@ -12,12 +12,14 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use CartBundle\Form\Type\ReassignType;
 use UserBundle\Form\Type\UserType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class OrderController extends Controller
 {
 
     /**
      * @Route("/order/list", name="admin_order_list")
+     * @Method({"GET", "POST"})
      */
     public function listAction(Request $request)
     {
@@ -72,6 +74,7 @@ class OrderController extends Controller
 
     /**
      * @Route("/order/view/{id}", requirements={"id": "\d*"}, name="admin_order_view")
+     * @Method({"GET", "POST"})
      */
     public function viewAction($id, Request $request)
     {
@@ -125,6 +128,7 @@ class OrderController extends Controller
 
     /**
      * @Route("/order/canceled/{id}", requirements={"id": "\d*"}, name="admin_order_cancel")
+     * @Method({"GET"})
      * @ParamConverter("order", class="CartBundle:Order", options={"id" = "id"})
      */
     public function canceledAction(Request $request, Order $order)
@@ -137,6 +141,7 @@ class OrderController extends Controller
 
     /**
      * @Route("/order/activate/{id}", requirements={"id": "\d*"}, name="admin_order_activate")
+     * @Method({"GET"})
      * @ParamConverter("order", class="CartBundle:Order", options={"id" = "id"})
      */
     public function activateAction(Request $request, Order $order)
@@ -149,6 +154,7 @@ class OrderController extends Controller
 
     /**
      * @Route("/order/printed/{id}", requirements={"id": "\d*"}, name="admin_order_printed")
+     * @Method({"GET"})
      * @ParamConverter("order", class="CartBundle:Order", options={"id" = "id"})
      */
     public function printedAction(Request $request, Order $order)
@@ -161,6 +167,7 @@ class OrderController extends Controller
 
     /**
      * @Route("/order/payed/{id}", requirements={"id": "\d*"}, name="admin_order_payed")
+     * @Method({"GET"})
      * @ParamConverter("order", class="CartBundle:Order", options={"id" = "id"})
      */
     public function payedAction(Request $request, Order $order)

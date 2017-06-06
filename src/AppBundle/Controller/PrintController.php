@@ -6,12 +6,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Process\Process;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class PrintController extends Controller
 {
 
     /**
      * @Route("/print/list", name="app_print_index")
+     * @Method({"GET"})
      */
     public function indexAction(Request $request)
     {
@@ -44,6 +46,7 @@ class PrintController extends Controller
     
     /**
      * @Route("/print/delete/all", name="app_print_delete_all")
+     * @Method({"GET"})
      */
     public function deleteAllAction(Request $request)
     {
@@ -79,6 +82,7 @@ class PrintController extends Controller
 
     /**
      * @Route("/print/delete/{job}", requirements={"job": "[\w-]+"}, name="app_print_delete")
+     * @Method({"GET"})
      */
     public function deleteAction(Request $request, $job)
     {
@@ -100,6 +104,7 @@ class PrintController extends Controller
 
     /**
      * @Route("/print/restart", name="app_print_restart")
+     * @Method({"GET"})
      */
     public function restartAction(Request $request)
     {

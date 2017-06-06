@@ -8,12 +8,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use CartBundle\Entity\Discount;
 use CartBundle\Form\Type\DiscountType;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class DiscountController extends Controller
 {
 
     /**
      * @Route("/discounts/add", name="discount_add")
+     * @Method({"GET", "POST"})
      */
     public function addAction(Request $request)
     {
@@ -42,6 +44,7 @@ class DiscountController extends Controller
 
     /**
      * @Route("/discounts/edit/{id}", requirements={"id": "\d*"}, name="discount_edit")
+     * @Method({"GET", "POST"})
      * @ParamConverter("discount", class="CartBundle:Discount", options={"id" = "id"})
      */
     public function editAction(Discount $discount, Request $request)
@@ -66,6 +69,7 @@ class DiscountController extends Controller
 
     /**
      * @Route("/discounts/delete/{id}", requirements={"id": "\d*"}, name="discount_delete")
+     * @Method({"GET"})
      * @ParamConverter("discount", class="CartBundle:Discount", options={"id" = "id"})
      */
     public function deleteAction(Discount $discount, Request $request)
@@ -82,6 +86,7 @@ class DiscountController extends Controller
 
     /**
      * @Route("/discounts/active/toggle/{id}", requirements={"id": "\d*"}, name="discount_active_toggle")
+     * @Method({"GET"})
      * @ParamConverter("discount", class="CartBundle:Discount", options={"id" = "id"})
      */
     public function activeToggleAction(Discount $discount, Request $request)

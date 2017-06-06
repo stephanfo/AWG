@@ -4,6 +4,7 @@ namespace GalleryBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class SlideshowController extends Controller
 {
@@ -11,6 +12,7 @@ class SlideshowController extends Controller
     /**
      * @Route("/slideshow/{page}/{delay}/{imageX}/{imageY}/{imageH}/{endPage}/{sort}/{gallery}", requirements={"page": "\d*", "delay": "\d*", "imageX": "\d*", "imageY": "\d*", "imageH": "\d*", "endPage": "\d*", "gallery": "\d+"}, name="slideshow_launcher")
      * @Route("/slideshow/", name="slideshow_launcher_empty")
+     * @Method({"GET"})
      */
     public function launcherAction($page, $delay, $imageX, $imageY, $imageH, $endPage, $sort, $gallery)
     {
@@ -87,6 +89,7 @@ class SlideshowController extends Controller
 
     /**
      * @Route("/slideshow/config", name="slideshow_config")
+     * @Method({"GET"})
      */
     public function configAction()
     {

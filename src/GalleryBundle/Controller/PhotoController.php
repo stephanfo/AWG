@@ -8,12 +8,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use GalleryBundle\Entity\Gallery;
 use GalleryBundle\Entity\Photo;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class PhotoController extends Controller
 {
 
     /**
      * @Route("/photo/loader/{id}", requirements={"id": "\d*"}, name="photo_loader")
+     * @Method({"GET"})
      */
     public function addAction(Gallery $gallery)
     {
@@ -26,6 +28,7 @@ class PhotoController extends Controller
 
     /**
      * @Route("/photo/add/{id}", requirements={"id": "\d*"}, name="photo_add")
+     * @Method({"POST"})
      */
     public function loaderAction(Request $request, Gallery $gallery)
     {
@@ -60,6 +63,7 @@ class PhotoController extends Controller
 
     /**
      * @Route("/photo/clear/{id}", requirements={"id": "\d*"}, name="photo_clear")
+     * @Method({"GET", "POST"})
      */
     public function clearAction(Gallery $gallery, Request $request)
     {
@@ -90,6 +94,7 @@ class PhotoController extends Controller
 
     /**
      * @Route("/photo/delete/{id}", requirements={"id": "\d*"}, name="photo_delete")
+     * @Method({"GET"})
      */
     public function deleteAction(Photo $photo)
     {
@@ -102,6 +107,7 @@ class PhotoController extends Controller
 
     /**
      * @Route("/photo/crop/toggle/{id}", requirements={"id": "\d*"}, name="photo_toogle_crop")
+     * @Method({"GET"})
      */
     public function cropToggleAction(Photo $photo, Request $request)
     {

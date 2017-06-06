@@ -11,12 +11,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use CartBundle\Entity\CartQuantity;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class CartController extends Controller
 {
 
     /**
      * @Route("/cart", name="cart")
+     * @Method({"GET"})
      */
     public function cartAction()
     {
@@ -51,6 +53,7 @@ class CartController extends Controller
     /**
      * @Route("/cart/ajax/toggle/{id}", requirements={"id": "\d*"}, name="cart_toggle")
      * @Route("/cart/ajax/toggle/", name="cart_toggle_empty_link")
+     * @Method({"GET"})
      */
     public function toogleCartAction(Photo $photo)
     {
@@ -88,6 +91,7 @@ class CartController extends Controller
 
     /**
      * @Route("/cart/ajax/delete/{id}", requirements={"id": "\d*"}, name="cart_delete")
+     * @Method({"GET"})
      */
     public function deleteCartAction(Photo $photo, Request $request)
     {
@@ -116,6 +120,7 @@ class CartController extends Controller
 
     /**
      * @Route("/cart/ajax/delete/all", name="cart_delete_all")
+     * @Method({"GET"})
      */
     public function deleteAllCartAction(Request $request)
     {
@@ -141,6 +146,7 @@ class CartController extends Controller
     /**
      * @Route("/cart/ajax/update/{photo}/{format}/{quantity}", requirements={"photo": "\d*", "format": "\d*", "quantity": "\d*"}, name="cart_update")
      * @Route("/cart/ajax/update/", name="cart_update_empty_link")
+     * @Method({"GET"})
      * @ParamConverter("photo", class="GalleryBundle:Photo", options={"id" = "photo"})
      * @ParamConverter("format", class="CartBundle:Format", options={"id" = "format"})
      */
@@ -188,6 +194,7 @@ class CartController extends Controller
 
     /**
      * @Route("/cart/checkout", name="checkout")
+     * @Method({"GET"})
      */
     public function checkoutAction()
     {

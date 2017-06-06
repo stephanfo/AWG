@@ -7,12 +7,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use GalleryBundle\Entity\Gallery;
 use Symfony\Component\HttpFoundation\Request;
 use GalleryBundle\Form\Type\GalleryType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class GalleryController extends Controller
 {
 
     /**
      * @Route("/list/{page}", requirements={"page": "\d*"}, defaults={"page": 1}, name="gallery_index")
+     * @Method({"GET"})
      */
     public function indexAction($page)
     {
@@ -46,6 +48,7 @@ class GalleryController extends Controller
 
     /**
      * @Route("/view/{id}", requirements={"id": "\d*"}, name="gallery_view")
+     * @Method({"GET"})
      */
     public function viewAction($id)
     {
@@ -66,6 +69,7 @@ class GalleryController extends Controller
 
     /**
      * @Route("/thumbs/{id}", requirements={"id": "\d*"}, name="gallery_thumbs")
+     * @Method({"GET"})
      */
     public function thumbsAction($id)
     {
@@ -86,6 +90,7 @@ class GalleryController extends Controller
 
     /**
      * @Route("/add", name="gallery_add")
+     * @Method({"GET", "POST"})
      */
     public function addAction(Request $request)
     {
@@ -113,6 +118,7 @@ class GalleryController extends Controller
 
     /**
      * @Route("/edit/{id}", requirements={"id": "\d*"}, name="gallery_edit")
+     * @Method({"GET", "POST"})
      */
     public function editAction(Gallery $gallery, Request $request)
     {
@@ -138,6 +144,7 @@ class GalleryController extends Controller
 
     /**
      * @Route("/delete/{id}", requirements={"id": "\d*"}, name="gallery_delete")
+     * @Method({"GET", "POST"})
      */
     public function deleteAction(Gallery $gallery, Request $request)
     {
@@ -163,6 +170,7 @@ class GalleryController extends Controller
 
     /**
      * @Route("/toggle/{id}", requirements={"id": "\d*"}, name="gallery_toggle")
+     * @Method({"GET"})
      */
     public function toggleAction(Gallery $gallery, Request $request)
     {

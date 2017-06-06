@@ -5,6 +5,7 @@ namespace UserBundle\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class DiscountController extends Controller
 {
@@ -30,6 +31,7 @@ class DiscountController extends Controller
 
     /**
      * @Route("/offers", name="offers")
+     * @Method({"GET"})
      */
     public function indexAction()
     {

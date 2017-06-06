@@ -6,12 +6,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use CartBundle\Form\Type\FormatType;
 use CartBundle\Entity\Format;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class TarifController extends Controller
 {
 
     /**
      * @Route("/tarifs/list", name="tarif_index")
+     * @Method({"GET"})
      */
     public function indexAction()
     {
