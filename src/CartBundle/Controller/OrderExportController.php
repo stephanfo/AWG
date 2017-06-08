@@ -48,7 +48,7 @@ class OrderExportController extends Controller
         {
             $sheet = $phpExcelObject->createSheet()->setTitle($sheetName);
 
-            if(!is_null($excelSheet))
+            if(count($excelSheet) > 0)
             {
                 $sheet->fromArray(array_keys($excelSheet[0]), NULL, 'A1');
                 $sheet->fromArray($excelSheet, NULL, 'A2');
