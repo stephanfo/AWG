@@ -1,48 +1,46 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<form action="{{ path("fos_user_security_check") }}" method="post">
-    <div class="row">
-        <div class="col-sm-6 col-sm-offset-3">
-            <div class="login-panel panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title pull-left">{{ 'Connectez-vous' | trans }}</h3>
-                    <div class="panel-title pull-right">
-                        {% if app.request.locale != 'fr' %}
-                            <a href="{{ path(app.request.get('_route'), app.request.get('_route_params') | merge({'_locale': 'fr'})) }}"><img src="/resources/flags/fr.png" height="18"></a>
-                        {%  endif %}
-                        {% if app.request.locale != 'en' %}
-                            <a href="{{ path(app.request.get('_route'), app.request.get('_route_params') | merge({'_locale': 'en'})) }}"><img src="/resources/flags/en.png" height="18"></a>
-                        {%  endif %}
-                    </div>
-                    <div class="clearfix"></div>
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+        <div class="login-panel panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title pull-left">{{ 'Connectez-vous' | trans }}</h3>
+                <div class="panel-title pull-right">
+                    {% if app.request.locale != 'fr' %}
+                        <a href="{{ path(app.request.get('_route'), app.request.get('_route_params') | merge({'_locale': 'fr'})) }}"><img src="/resources/flags/fr.png" height="18"></a>
+                    {%  endif %}
+                    {% if app.request.locale != 'en' %}
+                        <a href="{{ path(app.request.get('_route'), app.request.get('_route_params') | merge({'_locale': 'en'})) }}"><img src="/resources/flags/en.png" height="18"></a>
+                    {%  endif %}
                 </div>
-                <div class="panel-body">
-                    {% if error %}
-                        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                    {% endif %}
-                    <form action="{{ path("fos_user_security_check") }}" method="post" role="form">
-                        <fieldset>
-                            <div class="form-group">
-                                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-                                <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" placeholder="{{ 'form.email'|trans }}" required="required" />
-                            </div>
-                            <div class="form-group">
-                                <input type="password" id="password" name="_password" class="form-control" placeholder="{{ 'security.login.password'|trans }}" required="required" />
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-                                    <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
-                                </label>
-                            </div>
-                            <input type="submit" class="btn btn-success btn-block" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
-                        </fieldset>
-                    </form>
-                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="panel-body">
+                {% if error %}
+                    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+                <form action="{{ path("fos_user_security_check") }}" method="post" role="form">
+                    <fieldset>
+                        <div class="form-group">
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                            <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" placeholder="{{ 'form.email'|trans }}" required="required" />
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="password" name="_password" class="form-control" placeholder="{{ 'security.login.password'|trans }}" required="required" />
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                                <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+                            </label>
+                        </div>
+                        <input type="submit" class="btn btn-success btn-block" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+                    </fieldset>
+                </form>
             </div>
         </div>
     </div>
-</form>
+</div>
 <div class="row">
     <div class="col-sm-6 col-sm-offset-3">
         <div class="login-panel panel panel-default">
