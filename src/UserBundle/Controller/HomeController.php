@@ -79,12 +79,15 @@ class HomeController extends Controller
             $listGalleriesAndCount = null;
         }
 
+        $formats = $this->getDoctrine()->getRepository('CartBundle:Format')->findAll();
+
         return $this->render('UserBundle:Home:view.salvatorre.html.twig', array(
             'galleries' => $galleries,
             'likes' => $likesArray,
             'carts' => $cartArray,
             'listGalleriesAndCount' => $listGalleriesAndCount,
-            'oneGallery' => $oneGallery
+            'oneGallery' => $oneGallery,
+            'formats' => $formats
         ));
     }
 

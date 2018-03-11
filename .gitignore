@@ -4,6 +4,7 @@
 # Remove Symfony directory unuseful
 /build/
 /phpunit.xml
+/node_modules/
 /var/*
 !/var/cache
 /var/cache/*

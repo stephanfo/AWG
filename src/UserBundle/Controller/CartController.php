@@ -43,10 +43,10 @@ class CartController extends Controller
         $total = $this->get('price_calculator')->getPricing($user);
 
         return $this->render('UserBundle:Cart:view.html.twig', array(
-                    'userCarts' => $cart,
-                    'formats' => $formats,
-                    'cartFormat' => $cartFormatArray,
-                    'total' => $total
+            'userCarts' => $cart,
+            'formats' => $formats,
+            'cartFormat' => $cartFormatArray,
+            'total' => $total
         ));
     }
 
@@ -74,8 +74,8 @@ class CartController extends Controller
             $em->persist($cart);
             $em->flush();
             return $this->json(array(
-                        "id" => $photo->getId(),
-                        "cart" => true
+                "id" => $photo->getId(),
+                "cart" => true
             ));
         }
         else
@@ -83,8 +83,8 @@ class CartController extends Controller
             $em->remove($cart);
             $em->flush();
             return $this->json(array(
-                        "id" => $photo->getId(),
-                        "cart" => false
+                "id" => $photo->getId(),
+                "cart" => false
             ));
         }
     }
@@ -111,9 +111,6 @@ class CartController extends Controller
 
             $request->getSession()->getFlashBag()->add('success', $this->get('translator')->trans('La photo %title% a bien été retirée du panier.', array('%title%' => $photo->getTitle())));
         }
-        else
-            $request->getSession()->getFlashBag()->add('danger', $this->get('translator')->trans('La photo %title% est introuvable dans votre panier', array('%title%' => $photo->getTitle())));
-
 
         return $this->redirectToRoute('cart');
     }
@@ -144,6 +141,38 @@ class CartController extends Controller
     }
 
     /**
+     * @Route("/cart/ajax/quantities/{photo}", requirements={"photo": "\d*"}, name="cart_quantities")
+     * @Route("/cart/ajax/quantities/", name="cart_quantities_empty_link")
+     * @Method({"GET"})
+     * @ParamConverter("photo", class="GalleryBundle:Photo", options={"id" = "photo"})
+     */
+    public function formatsQuantityAction(Photo $photo)
+    {
+        $user = $this->getUser();
+
+        $em = $this->getDoctrine()->getManager();
+
+        $cartLine = $em->getRepository('CartBundle:Cart')->findOneBy(array(
+            'photo' => $photo,
+            'user' => $user
+        ));
+
+        $formatsQuantities = array();
+        if (count($cartLine) > 0)
+        {
+            foreach ($cartLine->getQuantities() as $quantity){
+                $formatsQuantities[$quantity->getFormat()->getId()] = $quantity->getQuantity();
+            }
+
+        }
+
+        return $this->json(array(
+            "photo" => $photo->getId(),
+            "formatsQuantities" => $formatsQuantities,
+        ));
+    }
+
+    /**
      * @Route("/cart/ajax/update/{photo}/{format}/{quantity}", requirements={"photo": "\d*", "format": "\d*", "quantity": "\d*"}, name="cart_update")
      * @Route("/cart/ajax/update/", name="cart_update_empty_link")
      * @Method({"GET"})
@@ -161,6 +190,15 @@ class CartController extends Controller
             'user' => $user
         ));
 
+        if (is_null($cartLine))
+        {
+            $cartLine = new Cart();
+            $cartLine->setUser($user);
+            $cartLine->setPhoto($photo);
+            $em->persist($cartLine);
+            $em->flush();
+        }
+
         $quantityLine = $em->getRepository('CartBundle:CartQuantity')->findOneBy(array(
             'cart' => $cartLine,
             'format' => $format
@@ -168,16 +206,36 @@ class CartController extends Controller
 
         if (is_null($quantityLine))
         {
-            $quantityLine = new CartQuantity;
-            $quantityLine->setFormat($format);
-            $quantityLine->setCart($cartLine);
-            $quantityLine->setQuantity($quantity);
-            $em->persist($quantityLine);
-            $em->flush();
+            if ($quantity > 0)
+            {
+                $quantityLine = new CartQuantity;
+                $quantityLine->setFormat($format);
+                $quantityLine->setQuantity($quantity);
+                $quantityLine->setCart($cartLine);
+                $em->persist($quantityLine);
+                $em->flush();
+
+                $cartLine->addQuantity($quantityLine);
+            }
         }
         else
         {
-            $quantityLine->setQuantity($quantity);
+            if ($quantity > 0)
+            {
+                $quantityLine->setQuantity($quantity);
+            }
+            else
+            {
+                $em->remove($quantityLine);
+            }
+            $em->flush();
+        }
+
+        $inCart = true;
+        if (count($cartLine->getQuantities()) === 0)
+        {
+            $inCart = false;
+            $em->remove($cartLine);
             $em->flush();
         }
 
@@ -185,10 +243,11 @@ class CartController extends Controller
         $total = $pricing["overall"]["total"];
 
         return $this->json(array(
-                    "photo" => $photo->getId(),
-                    "format" => $format->getId(),
-                    "quantity" => $quantityLine->getQuantity(),
-                    "total" => $total
+            "photo" => $photo->getId(),
+            "format" => $format->getId(),
+            "quantity" => $quantity,
+            "total" => $total,
+            "inCart" => $inCart
         ));
     }
 
@@ -205,20 +264,20 @@ class CartController extends Controller
         $confirmationForm = $this->getCheckoutForm($total['overall']['total']);
 
         return $this->render('UserBundle:Cart:checkout.html.twig', array(
-                    'total' => $total,
-                    'form' => $confirmationForm->createView()
+            'total' => $total,
+            'form' => $confirmationForm->createView()
         ));
     }
 
     private function getCheckoutForm($total)
     {
         return $this->createFormBuilder()
-                        ->setAction($this->generateUrl('order_add_current'))
-                        ->add("total", HiddenType::class, array(
-                            'data' => $total,
-                        ))
-                        ->getForm()
-        ;
+            ->setAction($this->generateUrl('order_add_current'))
+            ->add("total", HiddenType::class, array(
+                'data' => $total,
+            ))
+            ->getForm()
+            ;
     }
 
 }
